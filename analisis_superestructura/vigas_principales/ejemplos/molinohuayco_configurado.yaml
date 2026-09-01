@@ -1,0 +1,65 @@
+proyecto:
+  id: puente-molinohuayco
+  nombre: Puente Molinohuayco - piloto de vigas principales
+  revision: FINAL-R00
+  responsable: Ing. Paolo De la calle
+  sistema_unidades: SI
+geometria:
+  luz: 50.0
+  numero_vigas: 3
+  separacion_vigas: 2.0
+  ancho_calzada: 4.0
+  ancho_veredas_total: 2.0
+  ancho_tablero: 6.0
+  voladizo_exterior: 1.0
+  distancia_borde_calzada_viga_exterior: 0.0
+  numero_carriles: 1
+losa: {espesor: 0.20, haunch: 0.05, ancho_haunch: 0.45, factor_largo_plazo: 3.0}
+materiales:
+  concreto: {fc: 27.46, peso_unitario: 24.0}
+  acero_estructural: {fy: 345.0, fu: 450.0, es: 200000.0, peso_unitario: 77.0, grado: ASTM A709 Gr. 50}
+  acero_refuerzo: {fy: 420.0, es: 200000.0}
+viga:
+  categoria_fatiga: C
+  alma_rigidizada: true
+  separacion_rigidizadores: 1.5
+  segmentos:
+    - {nombre: A-I, x_inicio: 0.0, x_fin: 8.0, altura_alma: 1755, espesor_alma: 14, ancho_ala_superior: 450, espesor_ala_superior: 20, ancho_ala_inferior: 600, espesor_ala_inferior: 25}
+    - {nombre: B-I, x_inicio: 8.0, x_fin: 16.5, altura_alma: 1755, espesor_alma: 14, ancho_ala_superior: 450, espesor_ala_superior: 20, ancho_ala_inferior: 600, espesor_ala_inferior: 32}
+    - {nombre: C-I, x_inicio: 16.5, x_fin: 25.0, altura_alma: 1755, espesor_alma: 14, ancho_ala_superior: 450, espesor_ala_superior: 20, ancho_ala_inferior: 600, espesor_ala_inferior: 50}
+    - {nombre: C-D, x_inicio: 25.0, x_fin: 33.5, altura_alma: 1755, espesor_alma: 14, ancho_ala_superior: 450, espesor_ala_superior: 20, ancho_ala_inferior: 600, espesor_ala_inferior: 50}
+    - {nombre: B-D, x_inicio: 33.5, x_fin: 42.0, altura_alma: 1755, espesor_alma: 14, ancho_ala_superior: 450, espesor_ala_superior: 20, ancho_ala_inferior: 600, espesor_ala_inferior: 32}
+    - {nombre: A-D, x_inicio: 42.0, x_fin: 50.0, altura_alma: 1755, espesor_alma: 14, ancho_ala_superior: 450, espesor_ala_superior: 20, ancho_ala_inferior: 600, espesor_ala_inferior: 25}
+arriostramiento:
+  posiciones: [0, 6.25, 12.5, 18.75, 25, 31.25, 37.5, 43.75, 50]
+  confirmado: true
+construccion:
+  apuntalada: true
+  carga_construccion: 0.0
+  incluir_losa_fresca: true
+  incluir_peso_propio_viga: true
+cargas:
+  dc_no_compuesta_adicional: {interior: 1.24, exterior: 0.94}
+  dc_compuesta: {interior: 0.0, exterior: 7.74}
+  dw: {interior: 3.38, exterior: 1.69}
+  pl: {interior: 0.0, exterior: 3.63}
+trafico:
+  camion: {eje_frontal: 35, eje_posterior: 145, separacion_frontal: 4.3, separacion_posterior_min: 4.3, separacion_posterior_max: 9.0}
+  tandem_eje: 110
+  separacion_tandem: 1.2
+  carga_carril: 9.3
+  incremento_dinamico: 0.33
+  incremento_dinamico_fatiga: 0.15
+  adtt_carril: 500
+analisis: {numero_estaciones: 101, paso_vehiculo: 0.25, paso_separacion_ejes: 0.30, tolerancia_equilibrio: 1.0e-8, limite_deflexion_divisor: 800}
+busqueda: {habilitada: false}
+validaciones_externas: {conectores_confirmados: true, rigidizadores_confirmados: true, arriostramiento_confirmado: true}
+fuentes:
+  geometria: metrado_cargas/registro_verificacion_datos_3.1_a_3.4.md
+  seccion: memoria_estructuras/4 Anexo 2 MEMORIA DE CALCULO ESTRUCTURAL DE VIGAS METALICAS.pdf
+  cargas_vigas: analisis_superestructura/vigas_principales/memoria_metrado_manual_cargas_molinohuayco.md
+  normativa: normativa/manual_puentes_MTC_2018.pdf
+estados_datos:
+  geometria: verificado
+  secciones: verificado
+  cargas: calculado
