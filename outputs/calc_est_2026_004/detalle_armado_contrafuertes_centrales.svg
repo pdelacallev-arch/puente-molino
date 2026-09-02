@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1020" viewBox="0 0 1500 1020">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#17212b}.t{font-size:22px;font-weight:700}.s{font-size:15px}.n{font-size:13px}.dim{stroke:#536170;stroke-width:1.5;fill:none}.bar{stroke:#b51f2e;stroke-width:8;fill:none}.mesh{stroke:#3f78a8;stroke-width:1.2;opacity:.72}.outline{stroke:#1c2733;stroke-width:3;fill:none}.call{stroke:#333;stroke-width:1.5;fill:none}</style>
+<text x="60" y="42" class="t">DETALLE COMÚN CF-C1 / CF-C2 / CF-C3 — CONTRAFUERTE TRAPEZOIDAL</text>
+<text x="60" y="70" class="s">Esquema de armado STM · cotas en m salvo indicación · verificar interferencias en planos IFC</text>
+<polygon points="110.0,850.0 1025.0,850.0 778.5,614.8 110.0,614.8" fill="#e8f1fb"/>
+<polygon points="110.0,614.8 778.5,614.8 532.0,379.6 110.0,379.6" fill="#f4eadb"/>
+<polygon points="110.0,379.6 532.0,379.6 285.5,144.4 110.0,144.4" fill="#e5f3e8"/>
+<line x1="122.0" y1="817.6" x2="979.0" y2="817.6" class="mesh"/>
+<line x1="122.0" y1="785.2" x2="945.1" y2="785.2" class="mesh"/>
+<line x1="122.0" y1="752.8" x2="911.1" y2="752.8" class="mesh"/>
+<line x1="122.0" y1="720.4" x2="877.2" y2="720.4" class="mesh"/>
+<line x1="122.0" y1="688.0" x2="843.2" y2="688.0" class="mesh"/>
+<line x1="122.0" y1="655.6" x2="809.3" y2="655.6" class="mesh"/>
+<line x1="122.0" y1="623.2" x2="775.3" y2="623.2" class="mesh"/>
+<line x1="122.0" y1="590.8" x2="741.3" y2="590.8" class="mesh"/>
+<line x1="122.0" y1="558.4" x2="707.4" y2="558.4" class="mesh"/>
+<line x1="122.0" y1="526.0" x2="673.4" y2="526.0" class="mesh"/>
+<line x1="122.0" y1="493.6" x2="639.5" y2="493.6" class="mesh"/>
+<line x1="122.0" y1="461.2" x2="605.5" y2="461.2" class="mesh"/>
+<line x1="122.0" y1="428.8" x2="571.6" y2="428.8" class="mesh"/>
+<line x1="122.0" y1="396.4" x2="537.6" y2="396.4" class="mesh"/>
+<line x1="122.0" y1="364.0" x2="503.7" y2="364.0" class="mesh"/>
+<line x1="122.0" y1="331.6" x2="469.7" y2="331.6" class="mesh"/>
+<line x1="122.0" y1="299.2" x2="435.7" y2="299.2" class="mesh"/>
+<line x1="122.0" y1="266.8" x2="401.8" y2="266.8" class="mesh"/>
+<line x1="122.0" y1="234.4" x2="367.8" y2="234.4" class="mesh"/>
+<line x1="122.0" y1="202.0" x2="333.9" y2="202.0" class="mesh"/>
+<line x1="122.0" y1="169.6" x2="299.9" y2="169.6" class="mesh"/>
+<line x1="147.5" y1="847.1" x2="147.5" y2="147.3" class="mesh"/>
+<line x1="210.5" y1="847.1" x2="210.5" y2="147.3" class="mesh"/>
+<line x1="273.5" y1="847.1" x2="273.5" y2="147.3" class="mesh"/>
+<line x1="336.5" y1="847.1" x2="336.5" y2="195.9" class="mesh"/>
+<line x1="399.5" y1="847.1" x2="399.5" y2="256.1" class="mesh"/>
+<line x1="462.5" y1="847.1" x2="462.5" y2="316.2" class="mesh"/>
+<line x1="525.5" y1="847.1" x2="525.5" y2="376.3" class="mesh"/>
+<line x1="588.5" y1="847.1" x2="588.5" y2="436.4" class="mesh"/>
+<line x1="651.5" y1="847.1" x2="651.5" y2="496.5" class="mesh"/>
+<line x1="714.5" y1="847.1" x2="714.5" y2="556.6" class="mesh"/>
+<line x1="777.5" y1="847.1" x2="777.5" y2="616.7" class="mesh"/>
+<line x1="840.5" y1="847.1" x2="840.5" y2="676.8" class="mesh"/>
+<line x1="903.5" y1="847.1" x2="903.5" y2="736.9" class="mesh"/>
+<line x1="966.5" y1="847.1" x2="966.5" y2="797.1" class="mesh"/>
+<polygon points="110,850 1025.0,850 285.5,144.39999999999998 110,144.39999999999998" class="outline"/>
+<rect x="60" y="850" width="1135.0" height="92" fill="#dedede" stroke="#1c2733" stroke-width="3"/>
+<rect x="92" y="114.39999999999998" width="36" height="735.6" fill="#e6e6e6" stroke="#1c2733" stroke-width="2"/>
+<path d="M1012.0,846.0 L272.5,152.4" class="bar"/>
+<path d="M1012.0,846.0 L1012.0,914.0" class="bar"/>
+<text x="624.2" y="499.2" class="n" text-anchor="end">2 continuas</text>
+<path d="M992.0,846.0 L434.3,317.9" class="bar"/>
+<path d="M992.0,846.0 L992.0,914.0" class="bar"/>
+<text x="695.1" y="581.9" class="n" text-anchor="end">1 adicionales</text>
+<path d="M972.0,846.0 L660.8,553.1" class="bar"/>
+<path d="M972.0,846.0 L972.0,914.0" class="bar"/>
+<text x="798.4" y="699.5" class="n" text-anchor="end">3 adicionales</text>
+<line x1="110.0" y1="614.8" x2="778.5" y2="614.8" stroke="#777" stroke-width="2" stroke-dasharray="9 7"/>
+<line x1="110.0" y1="379.6" x2="532.0" y2="379.6" stroke="#777" stroke-width="2" stroke-dasharray="9 7"/>
+<text x="442.5" y="732.4" class="s" text-anchor="middle">ZONA 1: 6–1&quot;</text>
+<text x="339.0" y="497.2" class="s" text-anchor="middle">ZONA 2: 3–1&quot;</text>
+<text x="235.5" y="262.0" class="s" text-anchor="middle">ZONA 3: 2–1&quot;</text>
+<line x1="55" y1="850" x2="55" y2="144.39999999999998" class="dim"/>
+<line x1="46" y1="850" x2="64" y2="850" class="dim"/>
+<line x1="46" y1="144.39999999999998" x2="64" y2="144.39999999999998" class="dim"/>
+<text x="41" y="497.2" class="s" text-anchor="middle" transform="rotate(-90 41 497.2)">9.80</text>
+<line x1="110" y1="975" x2="1025.0" y2="975" class="dim"/>
+<text x="567.5" y="1001" class="s" text-anchor="middle">6.10</text>
+<line x1="110" y1="89.39999999999998" x2="285.5" y2="89.39999999999998" class="dim"/>
+<text x="197.8" y="78.39999999999998" class="s" text-anchor="middle">1.17</text>
+<rect x="1055" y="95" width="380" height="520" rx="8" fill="#f7f8fa" stroke="#9aa5b1"/>
+<text x="1080" y="130" class="s" font-weight="700">ARMADO PRINCIPAL DEL LOMO</text>
+<text x="1080" y="160" class="n">Barra común: 1&quot; (db=25.4 mm)</text>
+<text x="1080" y="190" class="n">Distribución: Z1: 6 ([3, 3]) / Z2: 3 ([3]) / Z3: 2 ([2])</text>
+<text x="1080" y="220" class="n">Continuas a corona: 2</text>
+<text x="1080" y="250" class="n"></text>
+<text x="1080" y="267" class="s" font-weight="700">MALLA EN AMBAS CARAS</text>
+<text x="1080" y="297" class="n">H + V: 1/2&quot; @ 210 mm</text>
+<text x="1080" y="327" class="n">Recubrimiento nominal: 75 mm</text>
+<text x="1080" y="357" class="n"></text>
+<text x="1080" y="374" class="s" font-weight="700">ANCLAJES</text>
+<text x="1080" y="404" class="n">Base: recto</text>
+<text x="1080" y="434" class="n">Corona: recto</text>
+<text x="1080" y="464" class="n">Empalme B: 1236 mm</text>
+<text x="1080" y="494" class="n"></text>
+<text x="1080" y="511" class="n">NOTA: espesor perpendicular al dibujo = 0.40 m</text>
+<text x="1080" y="541" class="n">Detalle esquemático; coordinar con pantalla y zapata.</text>
+<text x="1080" y="690" class="s" font-weight="700">SIMBOLOGÍA</text>
+<line x1="1080" y1="720" x2="1150" y2="720" class="bar"/><text x="1165" y="726" class="n">barras del lomo</text>
+<line x1="1080" y1="752" x2="1150" y2="752" class="mesh"/><text x="1165" y="758" class="n">malla por cara</text>
+<rect x="1080" y="805" width="250" height="70" fill="none" stroke="#1c2733" stroke-width="2"/>
+<text x="1080" y="795" class="n">SECCIÓN DEL LOMO (e = 0.40 m)</text>
+<text x="60" y="995" class="n">Manual de Puentes MTC 2018 §2.7.2.3 · Complemento NTE E.060 · NO ESCALAR</text>
+<circle cx="1100.0" cy="813.5" r="8" fill="#b51f2e" stroke="#72131d"/>
+<circle cx="1205.0" cy="813.5" r="8" fill="#b51f2e" stroke="#72131d"/>
+<circle cx="1310.0" cy="813.5" r="8" fill="#b51f2e" stroke="#72131d"/>
+<circle cx="1100.0" cy="840.5" r="8" fill="#b51f2e" stroke="#72131d"/>
+<circle cx="1205.0" cy="840.5" r="8" fill="#b51f2e" stroke="#72131d"/>
+<circle cx="1310.0" cy="840.5" r="8" fill="#b51f2e" stroke="#72131d"/>
+<text x="1345" y="845" class="n">zona 1: [3, 3]</text>
+</svg>

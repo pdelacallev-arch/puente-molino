@@ -1,0 +1,161 @@
+{
+  "parametros": {
+    "altura_m": 3.4,
+    "espesor_m": 0.4,
+    "ancho_franja_m": 1.0,
+    "recubrimiento_frontal_mm": 50.0,
+    "recubrimiento_relleno_mm": 75.0,
+    "diametro_mm": 15.875,
+    "espaciamiento_vertical_mm": 150.0,
+    "espaciamiento_horizontal_mm": 150.0,
+    "fc_kgf_cm2": 280.0,
+    "fy_kgf_cm2": 4200.0,
+    "gamma_relleno_tf_m3": 1.8,
+    "gamma_concreto_tf_m3": 2.4,
+    "phi_relleno_grados": 39.8,
+    "delta_grados": 19.9,
+    "dc_tf_m": 25.98,
+    "dw_tf_m": 2.88,
+    "pl_tf_m": 3.08,
+    "ll_im_tf_m": 12.95,
+    "br_tf_m": 1.63,
+    "h_sobrecarga_m": 0.61,
+    "kh": 0.125,
+    "kv": 0.05,
+    "porcentaje_sismico_superestructura": 0.0,
+    "altura_carga_puente_m": 3.4,
+    "phi_flexion": 0.9,
+    "phi_cortante_e060": 0.85,
+    "phi_cortante_mtc": 0.9
+  },
+  "fuente": "CALC-EST-2026-002-R00.md",
+  "coeficientes": {
+    "Ka_resultante": 0.20113013886289738,
+    "Kae_resultante": 0.27404422957199676,
+    "Ka_normal": 0.18912028155673924,
+    "Kae_normal": 0.2576805353422661,
+    "angulo_sismico_grados": 7.49585763972986
+  },
+  "casos": [
+    {
+      "nombre": "Servicio I",
+      "E_tri_tf_m": 1.967607409316315,
+      "E_uni_tf_m": 0.7060238351076189,
+      "P_puente_tf_m": 1.63,
+      "V_tf_m": 4.303631244423934,
+      "M_tf_m_m": 8.972195583574775,
+      "axial_tf_m": 44.89,
+      "descripcion": "EH + LS + BR"
+    },
+    {
+      "nombre": "Resistencia I-a",
+      "E_tri_tf_m": 2.9514111139744723,
+      "E_uni_tf_m": 1.2355417114383331,
+      "P_puente_tf_m": 2.8525,
+      "V_tf_m": 7.0394528254128055,
+      "M_tf_m_m": 15.1438535052829,
+      "axial_tf_m": 53.3065,
+      "descripcion": "1.50 EH + 1.75 LS + 1.75 BR"
+    },
+    {
+      "nombre": "Resistencia I-b",
+      "E_tri_tf_m": 2.9514111139744723,
+      "E_uni_tf_m": 1.2355417114383331,
+      "P_puente_tf_m": 2.8525,
+      "V_tf_m": 7.0394528254128055,
+      "M_tf_m_m": 15.1438535052829,
+      "axial_tf_m": 64.8475,
+      "descripcion": "1.50 EH + 1.75 LS + 1.75 BR"
+    },
+    {
+      "nombre": "Evento Extremo I-A",
+      "E_tri_tf_m": 2.5468628752158895,
+      "E_uni_tf_m": 0.204,
+      "P_puente_tf_m": 0.0,
+      "V_tf_m": 2.7508628752158897,
+      "M_tf_m_m": 3.2332445919113417,
+      "axial_tf_m": 25.254,
+      "descripcion": "100% PAE + 50% PIR + EQ-super"
+    },
+    {
+      "nombre": "Evento Extremo I-B",
+      "E_tri_tf_m": 1.967607409316315,
+      "E_uni_tf_m": 0.408,
+      "P_puente_tf_m": 0.0,
+      "V_tf_m": 2.375607409316315,
+      "M_tf_m_m": 2.9235550638918233,
+      "axial_tf_m": 25.254,
+      "descripcion": "max(50% PAE, PA) + 100% PIR + EQ-super"
+    }
+  ],
+  "caso_gobernante": "Resistencia I-a",
+  "momento_gobernante_tf_m_m": 15.1438535052829,
+  "cortante_gobernante_tf_m": 7.0394528254128055,
+  "caras_verticales": [
+    {
+      "cara": "frontal/no relleno",
+      "recubrimiento_mm": 50.0,
+      "d_mm": 342.0625,
+      "As_flexion_requerido_cm2_m": 12.089210168733137,
+      "temperatura_E060_cm2_m": 3.5999999999999996,
+      "min_flexion_E060_cm2_m": 9.539667344210407,
+      "temperatura_MTC_cm2_m": 2.328333333333333,
+      "As_requerido_cm2_m": 12.089210168733137,
+      "As_provisto_cm2_m": 13.195507268164002,
+      "DCR_area": 0.9161610783921919,
+      "phi_Mn_tf_m_m": 16.48099529316978,
+      "DCR_flexion": 0.9188676554964473,
+      "fs_servicio_MPa": 216.59346174752795,
+      "limite_fs_MPa": 247.12758,
+      "limite_separacion_fisuracion_mm": 339.8420946652213,
+      "fisuracion_cumple": true
+    },
+    {
+      "cara": "posterior/relleno",
+      "recubrimiento_mm": 75.0,
+      "d_mm": 317.0625,
+      "As_flexion_requerido_cm2_m": 13.114330819325854,
+      "temperatura_E060_cm2_m": 3.5999999999999996,
+      "min_flexion_E060_cm2_m": 8.842450655432012,
+      "temperatura_MTC_cm2_m": 2.328333333333333,
+      "As_requerido_cm2_m": 13.114330819325854,
+      "As_provisto_cm2_m": 13.195507268164002,
+      "DCR_area": 0.9938481752017221,
+      "phi_Mn_tf_m_m": 15.23401985632828,
+      "DCR_flexion": 0.9940812502612091,
+      "fs_servicio_MPa": 233.67159789951123,
+      "limite_fs_MPa": 247.12758,
+      "limite_separacion_fisuracion_mm": 216.03146877867215,
+      "fisuracion_cumple": true
+    }
+  ],
+  "horizontal": {
+    "As_requerido_cm2_m": 3.5999999999999996,
+    "As_provisto_cm2_m": 13.195507268164002,
+    "DCR_area": 0.27282012936975153,
+    "cumple": true
+  },
+  "cortante": {
+    "E060_tf": 24.48112687347928,
+    "MTC_tf": 22.99120655095684,
+    "adoptada_tf": 22.99120655095684,
+    "Vu_tf_m": 7.0394528254128055,
+    "DCR": 0.306180226331786
+  },
+  "axial": {
+    "Pu_tf_m": 53.3065,
+    "esfuerzo_promedio_MPa": 1.3068954705624998,
+    "relacion_P_Ag_fc": 0.04759508928571428,
+    "nota": "No se acredita aumento de capacidad a flexion por compresion axial."
+  },
+  "desplazamiento_servicio": {
+    "Ig_mm": 2.238254555932315,
+    "0.35Ig_mm": 6.395013016949472,
+    "Ec_MPa": 24628.457438499878
+  },
+  "cumple_vertical": true,
+  "cumple_cortante": true,
+  "cumple_global": true,
+  "separacion_maxima_vertical_5_8_mm": 150.0,
+  "separacion_maxima_horizontal_5_8_mm": 400.0
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renderizar memoria de cálculo"
+  short_description: "Genera y verifica memorias de cálculo DOCX"
+  default_prompt: "Usa $renderizar-memoria-calculo-docx para convertir esta memoria Markdown a DOCX y verificar imágenes, ecuaciones y maquetación."

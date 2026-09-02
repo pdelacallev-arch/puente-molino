@@ -1,0 +1,10 @@
+direccion,accion,descripcion,estribo_izquierdo_tf,estribo_derecho_tf,observacion
+Vertical,DC,Peso propio metrado,155.902,155.902,Reaccion simetrica
+Vertical,DW,Carpeta asfaltica,17.250,17.250,Reaccion simetrica
+Vertical,PL,Carga peatonal,18.500,18.500,Reaccion simetrica
+Vertical,LL+IM,HL-93 maximo por reaccion,77.707,77.707,Maximos no simultaneos; camion controla
+Vertical,WSv,Viento vertical ascendente,-15.000,-15.000,Usar solo en combinaciones aplicables
+Longitudinal,BR,Frenado normativo para una via,9.798,0.000,Asignacion preliminar: izquierdo fijo y derecho movil
+Transversal,WS,Viento sobre estructura,11.217,11.217,Controla carga lineal minima de 4.4 kN/m
+Transversal,WL,Viento sobre vehiculos,3.720,3.720,Accion interrumpible
+Horizontal,EQ,Sismo equivalente sobre DC+DW,41.556,41.556,Preliminar C=0.24; verificar con reacciones del modelo espectral

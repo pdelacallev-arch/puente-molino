@@ -1,0 +1,73 @@
+• Tamaño de papel: A4.
+• Orientación: Vertical (Horizontal únicamente para tablas o figuras de gran tamaño).
+• Márgenes:
+  - Superior: 2.5 cm
+  - Inferior: 2.5 cm
+  - Izquierdo: 2.5 cm
+  - Derecho: 2.5 cm
+
+• Fuente:
+  - Calibri 11 pt (preferible) o Arial 11 pt.
+  - Color negro.
+
+• Interlineado:
+  - 1.15 líneas.
+
+• Espaciado entre párrafos:
+  - Antes: 0 pt.
+  - Después: 6 pt.
+
+• Alineación:
+  - Texto justificado.
+  - Títulos alineados a la izquierda.
+
+• Sangría:
+  - Sin sangría en la primera línea de cada párrafo.
+
+• Títulos
+  - Nivel 1: 16 pt, negrita.
+  - Nivel 2: 14 pt, negrita.
+  - Nivel 3: 12 pt, negrita.
+  - Mantener numeración jerárquica (1, 1.1, 1.1.1).
+
+• Numeración
+  - Utilizar listas numeradas para procedimientos.
+  - Utilizar viñetas para enumeraciones no secuenciales.
+  - Mantener una numeración consistente en todo el documento.
+
+• Tablas
+  - Bordes finos color gris.
+  - Encabezado con fondo gris claro y texto en negrita.
+  - Filas en blanco (sin colores alternados).
+  - Texto centrado verticalmente.
+  - Encabezados centrados.
+  - Contenido alineado a la izquierda, salvo valores numéricos que pueden ir centrados o alineados a la derecha.
+  - Ajustar automáticamente el ancho de las columnas al contenido.
+  - No dividir tablas entre páginas cuando sea posible.
+  - Incluir un título encima de cada tabla (Ej.: "Tabla 3. Estado de los elementos estructurales").
+  - Ajustar las tablas al contenido.
+
+• Figuras e imágenes
+  - Centrar todas las imágenes.
+  - Mantener una resolución adecuada.
+  - Agregar un título debajo de cada figura (Ej.: "Figura 5. Vista del estribo izquierdo").
+  - Mantener la figura junto al texto que la describe.
+  - Evitar imágenes partidas entre páginas.
+
+• Separación de secciones
+  - Dejar un espacio adecuado antes de cada título.
+  - Evitar títulos aislados al final de una página.
+  - Mantener el título junto con el primer párrafo de la sección.
+
+• Saltos de página
+  - Iniciar capítulos principales en una nueva página cuando corresponda.
+  - Evitar páginas con grandes espacios en blanco.
+  - Evitar que una tabla o figura quede separada de su explicación.
+
+• Presentación general
+  - Mantener un diseño limpio, uniforme y profesional.
+  - Conservar una jerarquía visual clara entre títulos, texto, tablas y figuras.
+  - Evitar el uso innecesario de colores, resaltados o elementos decorativos.
+  - Utilizar negrita únicamente para títulos, subtítulos y encabezados de tablas.
+  - Mantener un espaciado uniforme en todo el documento.
+  - Respetar íntegramente el contenido original sin modificar una sola palabra.

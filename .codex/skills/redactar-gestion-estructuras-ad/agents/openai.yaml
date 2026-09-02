@@ -1,0 +1,6 @@
+interface:
+  display_name: "Gestión estructural por administración directa"
+  short_description: "Redacta gestión estructural con trazabilidad"
+  default_prompt: "Usa $redactar-gestion-estructuras-ad para redactar un documento de gestión estructural del proyecto conforme al régimen de administración directa."
+policy:
+  allow_implicit_invocation: true

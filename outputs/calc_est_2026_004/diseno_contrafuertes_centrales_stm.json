@@ -1,0 +1,1924 @@
+{
+  "identificacion": "Diseño STM del armado común de contrafuertes centrales",
+  "estado": "CUMPLE",
+  "normativa": {
+    "principal": "Manual de Puentes MTC 2018, 2.7.2.3.2–2.7.2.3.6",
+    "complementaria": "NTE E.060, DS 010-2009-VIVIENDA",
+    "nota": "Los factores se mantienen separados de las demandas factorizadas."
+  },
+  "fuente_acciones": "D:\\TRABAJOS\\PUENTE AYACUCHO\\VIDECOD PUENTE MOLINO\\outputs\\calc_est_2026_004\\analisis_contrafuertes_centrales_2d.json",
+  "parametros": {
+    "altura_m": 9.8,
+    "longitud_base_m": 6.1,
+    "longitud_corona_m": 1.17,
+    "espesor_m": 0.4,
+    "recubrimiento_mm": 75.0,
+    "fc_kg_cm2": 280.0,
+    "fy_kg_cm2": 4200.0,
+    "es_mpa": 200000.0,
+    "espesor_pantalla_m": 0.4,
+    "espesor_zapata_m": 1.5,
+    "anclaje_recto_base_disponible_mm": null,
+    "anclaje_corona_disponible_mm": null,
+    "longitud_empalme_disponible_mm": 2000.0,
+    "barras_principales": [
+      "1\""
+    ],
+    "barras_malla": [
+      "1/2\"",
+      "5/8\"",
+      "3/4\""
+    ],
+    "barra_principal_forzada": null,
+    "barra_malla_forzada": null,
+    "paso_espaciamiento_mm": 10.0,
+    "espaciamiento_minimo_mm": 100.0,
+    "tamano_agregado_mm": 19.0,
+    "maximo_capas_principales": 2,
+    "phi_tirante": 0.9,
+    "phi_compresion_stm": 0.7,
+    "phi_cortante": 0.9,
+    "phi_corte_friccion": 0.9,
+    "mu_corte_friccion": 1.0,
+    "factor_nodo_ccc": 0.85,
+    "factor_nodo_cct": 0.75,
+    "factor_nodo_ctt": 0.65,
+    "rho_fisuracion_mtc_total": 0.003,
+    "rho_temp_e060_total": 0.0018
+  },
+  "envolventes": {
+    "niveles_m": [
+      0.0,
+      0.466667,
+      0.933333,
+      1.4,
+      1.866667,
+      2.333333,
+      2.8,
+      3.266667,
+      3.733333,
+      4.2,
+      4.666667,
+      5.133333,
+      5.6,
+      6.066667,
+      6.533333,
+      7.0,
+      7.466667,
+      7.933333,
+      8.4,
+      8.866667,
+      9.333333,
+      9.8
+    ],
+    "comun_resistencia_evento": [
+      {
+        "z_m": 0.0,
+        "V_u_kN": 1045.496494,
+        "M_u_kN_m": 5013.558135,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 0.466667,
+        "V_u_kN": 1023.047544,
+        "M_u_kN_m": 4525.659771,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 0.933333,
+        "V_u_kN": 975.372181,
+        "M_u_kN_m": 4048.237584,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 1.4,
+        "V_u_kN": 914.437727,
+        "M_u_kN_m": 3593.063899,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 1.866667,
+        "V_u_kN": 849.373365,
+        "M_u_kN_m": 3166.326294,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 2.333333,
+        "V_u_kN": 784.397204,
+        "M_u_kN_m": 2769.952057,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 2.8,
+        "V_u_kN": 721.068771,
+        "M_u_kN_m": 2403.900028,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 3.266667,
+        "V_u_kN": 659.781851,
+        "M_u_kN_m": 2067.401268,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 3.733333,
+        "V_u_kN": 600.475807,
+        "M_u_kN_m": 1759.503071,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 4.2,
+        "V_u_kN": 542.97724,
+        "M_u_kN_m": 1479.281027,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 4.666667,
+        "V_u_kN": 487.136659,
+        "M_u_kN_m": 1225.891649,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 5.133333,
+        "V_u_kN": 432.864874,
+        "M_u_kN_m": 998.561208,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 5.6,
+        "V_u_kN": 380.128733,
+        "M_u_kN_m": 796.5576,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 6.066667,
+        "V_u_kN": 328.935844,
+        "M_u_kN_m": 619.164191,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 6.533333,
+        "V_u_kN": 279.32038,
+        "M_u_kN_m": 465.660797,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 7.0,
+        "V_u_kN": 231.333703,
+        "M_u_kN_m": 335.311287,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 7.466667,
+        "V_u_kN": 185.037712,
+        "M_u_kN_m": 227.355559,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 7.933333,
+        "V_u_kN": 140.484198,
+        "M_u_kN_m": 141.004626,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 8.4,
+        "V_u_kN": 97.358714,
+        "M_u_kN_m": 75.445334,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 8.866667,
+        "V_u_kN": 54.287372,
+        "M_u_kN_m": 30.011267,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 9.333333,
+        "V_u_kN": 10.022486,
+        "M_u_kN_m": 4.67716,
+        "gobierna_V": "CF-C3 / Resistencia I-a",
+        "gobierna_M": "CF-C3 / Resistencia I-a"
+      },
+      {
+        "z_m": 9.8,
+        "V_u_kN": 0.0,
+        "M_u_kN_m": 0.0,
+        "gobierna_V": "CF-C1 / Resistencia I-a",
+        "gobierna_M": "CF-C1 / Resistencia I-a"
+      }
+    ],
+    "comun_servicio": [
+      {
+        "z_m": 0.0,
+        "V_u_kN": 688.533858,
+        "M_u_kN_m": 3295.762176,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 0.466667,
+        "V_u_kN": 673.679391,
+        "M_u_kN_m": 2974.446376,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 0.933333,
+        "V_u_kN": 642.151301,
+        "M_u_kN_m": 2660.06266,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 1.4,
+        "V_u_kN": 601.868429,
+        "M_u_kN_m": 2360.392053,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 1.866667,
+        "V_u_kN": 558.869483,
+        "M_u_kN_m": 2079.52012,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 2.333333,
+        "V_u_kN": 515.944892,
+        "M_u_kN_m": 1818.714361,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 2.8,
+        "V_u_kN": 474.126363,
+        "M_u_kN_m": 1577.940078,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 3.266667,
+        "V_u_kN": 433.674373,
+        "M_u_kN_m": 1356.681109,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 3.733333,
+        "V_u_kN": 394.548788,
+        "M_u_kN_m": 1154.299734,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 4.2,
+        "V_u_kN": 356.634881,
+        "M_u_kN_m": 970.176967,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 4.666667,
+        "V_u_kN": 319.833739,
+        "M_u_kN_m": 803.747356,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 5.133333,
+        "V_u_kN": 284.086328,
+        "M_u_kN_m": 654.491611,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 5.6,
+        "V_u_kN": 249.37067,
+        "M_u_kN_m": 521.917991,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 6.066667,
+        "V_u_kN": 215.691727,
+        "M_u_kN_m": 405.545012,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 6.533333,
+        "V_u_kN": 183.071997,
+        "M_u_kN_m": 304.888873,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 7.0,
+        "V_u_kN": 151.545272,
+        "M_u_kN_m": 219.455274,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 7.466667,
+        "V_u_kN": 121.15215,
+        "M_u_kN_m": 148.734147,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 7.933333,
+        "V_u_kN": 91.926307,
+        "M_u_kN_m": 92.196477,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 8.4,
+        "V_u_kN": 63.661284,
+        "M_u_kN_m": 49.297534,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 8.866667,
+        "V_u_kN": 35.459586,
+        "M_u_kN_m": 19.588935,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 9.333333,
+        "V_u_kN": 6.516702,
+        "M_u_kN_m": 3.041128,
+        "gobierna_V": "CF-C3 / Servicio I",
+        "gobierna_M": "CF-C3 / Servicio I"
+      },
+      {
+        "z_m": 9.8,
+        "V_u_kN": 0.0,
+        "M_u_kN_m": 0.0,
+        "gobierna_V": "CF-C1 / Servicio I",
+        "gobierna_M": "CF-C1 / Servicio I"
+      }
+    ],
+    "por_contrafuerte": {
+      "CF-C1": [
+        {
+          "z_m": 0.0,
+          "V_u_kN": 1045.496494,
+          "M_u_kN_m": 5013.558135,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 0.466667,
+          "V_u_kN": 1023.047544,
+          "M_u_kN_m": 4525.659771,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 0.933333,
+          "V_u_kN": 975.372181,
+          "M_u_kN_m": 4048.237584,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 1.4,
+          "V_u_kN": 914.437727,
+          "M_u_kN_m": 3593.063899,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 1.866667,
+          "V_u_kN": 849.373365,
+          "M_u_kN_m": 3166.326294,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 2.333333,
+          "V_u_kN": 784.397204,
+          "M_u_kN_m": 2769.952057,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 2.8,
+          "V_u_kN": 721.068771,
+          "M_u_kN_m": 2403.900028,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 3.266667,
+          "V_u_kN": 659.781851,
+          "M_u_kN_m": 2067.401268,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 3.733333,
+          "V_u_kN": 600.475807,
+          "M_u_kN_m": 1759.503071,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 4.2,
+          "V_u_kN": 542.97724,
+          "M_u_kN_m": 1479.281027,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 4.666667,
+          "V_u_kN": 487.136659,
+          "M_u_kN_m": 1225.891649,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 5.133333,
+          "V_u_kN": 432.864874,
+          "M_u_kN_m": 998.561208,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 5.6,
+          "V_u_kN": 380.128733,
+          "M_u_kN_m": 796.5576,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 6.066667,
+          "V_u_kN": 328.935844,
+          "M_u_kN_m": 619.164191,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 6.533333,
+          "V_u_kN": 279.32038,
+          "M_u_kN_m": 465.660797,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.0,
+          "V_u_kN": 231.333703,
+          "M_u_kN_m": 335.311287,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.466667,
+          "V_u_kN": 185.037712,
+          "M_u_kN_m": 227.355559,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.933333,
+          "V_u_kN": 140.484198,
+          "M_u_kN_m": 141.004626,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 8.4,
+          "V_u_kN": 97.358714,
+          "M_u_kN_m": 75.445334,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 8.866667,
+          "V_u_kN": 54.287372,
+          "M_u_kN_m": 30.011267,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 9.333333,
+          "V_u_kN": 10.022486,
+          "M_u_kN_m": 4.67716,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        },
+        {
+          "z_m": 9.8,
+          "V_u_kN": 0.0,
+          "M_u_kN_m": 0.0,
+          "gobierna_V": "CF-C1 / Resistencia I-a",
+          "gobierna_M": "CF-C1 / Resistencia I-a"
+        }
+      ],
+      "CF-C2": [
+        {
+          "z_m": 0.0,
+          "V_u_kN": 963.351955,
+          "M_u_kN_m": 4035.76922,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 0.466667,
+          "V_u_kN": 934.522111,
+          "M_u_kN_m": 3586.204974,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 0.933333,
+          "V_u_kN": 876.531161,
+          "M_u_kN_m": 3150.094655,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 1.4,
+          "V_u_kN": 803.642745,
+          "M_u_kN_m": 2741.04678,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 1.866667,
+          "V_u_kN": 727.429239,
+          "M_u_kN_m": 2366.013499,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 2.333333,
+          "V_u_kN": 653.629953,
+          "M_u_kN_m": 2026.546521,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 2.8,
+          "V_u_kN": 584.263425,
+          "M_u_kN_m": 1721.519209,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 3.266667,
+          "V_u_kN": 519.674513,
+          "M_u_kN_m": 1448.862944,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 3.733333,
+          "V_u_kN": 459.596107,
+          "M_u_kN_m": 1206.348172,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 4.2,
+          "V_u_kN": 403.632762,
+          "M_u_kN_m": 991.869988,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 4.666667,
+          "V_u_kN": 351.440913,
+          "M_u_kN_m": 803.508033,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 5.133333,
+          "V_u_kN": 302.771716,
+          "M_u_kN_m": 639.502273,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 5.6,
+          "V_u_kN": 257.461904,
+          "M_u_kN_m": 498.208806,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 6.066667,
+          "V_u_kN": 215.411383,
+          "M_u_kN_m": 378.059917,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 6.533333,
+          "V_u_kN": 176.560556,
+          "M_u_kN_m": 277.534605,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.0,
+          "V_u_kN": 140.869258,
+          "M_u_kN_m": 195.139679,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.466667,
+          "V_u_kN": 108.302009,
+          "M_u_kN_m": 129.400692,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.933333,
+          "V_u_kN": 78.834296,
+          "M_u_kN_m": 78.859754,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 8.4,
+          "V_u_kN": 52.465655,
+          "M_u_kN_m": 42.070416,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 8.866667,
+          "V_u_kN": 29.184926,
+          "M_u_kN_m": 17.586444,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 9.333333,
+          "V_u_kN": 8.500311,
+          "M_u_kN_m": 3.966812,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        },
+        {
+          "z_m": 9.8,
+          "V_u_kN": 0.0,
+          "M_u_kN_m": 0.0,
+          "gobierna_V": "CF-C2 / Resistencia I-a",
+          "gobierna_M": "CF-C2 / Resistencia I-a"
+        }
+      ],
+      "CF-C3": [
+        {
+          "z_m": 0.0,
+          "V_u_kN": 1045.496494,
+          "M_u_kN_m": 5013.558135,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 0.466667,
+          "V_u_kN": 1023.047544,
+          "M_u_kN_m": 4525.659771,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 0.933333,
+          "V_u_kN": 975.372181,
+          "M_u_kN_m": 4048.237584,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 1.4,
+          "V_u_kN": 914.437727,
+          "M_u_kN_m": 3593.063899,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 1.866667,
+          "V_u_kN": 849.373365,
+          "M_u_kN_m": 3166.326294,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 2.333333,
+          "V_u_kN": 784.397204,
+          "M_u_kN_m": 2769.952057,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 2.8,
+          "V_u_kN": 721.068771,
+          "M_u_kN_m": 2403.900028,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 3.266667,
+          "V_u_kN": 659.781851,
+          "M_u_kN_m": 2067.401268,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 3.733333,
+          "V_u_kN": 600.475807,
+          "M_u_kN_m": 1759.503071,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 4.2,
+          "V_u_kN": 542.97724,
+          "M_u_kN_m": 1479.281027,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 4.666667,
+          "V_u_kN": 487.136659,
+          "M_u_kN_m": 1225.891649,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 5.133333,
+          "V_u_kN": 432.864874,
+          "M_u_kN_m": 998.561208,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 5.6,
+          "V_u_kN": 380.128733,
+          "M_u_kN_m": 796.5576,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 6.066667,
+          "V_u_kN": 328.935844,
+          "M_u_kN_m": 619.164191,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 6.533333,
+          "V_u_kN": 279.32038,
+          "M_u_kN_m": 465.660797,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.0,
+          "V_u_kN": 231.333703,
+          "M_u_kN_m": 335.311287,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.466667,
+          "V_u_kN": 185.037712,
+          "M_u_kN_m": 227.355559,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 7.933333,
+          "V_u_kN": 140.484198,
+          "M_u_kN_m": 141.004626,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 8.4,
+          "V_u_kN": 97.358714,
+          "M_u_kN_m": 75.445334,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 8.866667,
+          "V_u_kN": 54.287372,
+          "M_u_kN_m": 30.011267,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 9.333333,
+          "V_u_kN": 10.022486,
+          "M_u_kN_m": 4.67716,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        },
+        {
+          "z_m": 9.8,
+          "V_u_kN": 0.0,
+          "M_u_kN_m": 0.0,
+          "gobierna_V": "CF-C3 / Resistencia I-a",
+          "gobierna_M": "CF-C3 / Resistencia I-a"
+        }
+      ]
+    },
+    "servicio_por_contrafuerte": {
+      "CF-C1": [
+        {
+          "z_m": 0.0,
+          "V_u_kN": 688.533858,
+          "M_u_kN_m": 3295.762176,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 0.466667,
+          "V_u_kN": 673.679391,
+          "M_u_kN_m": 2974.446376,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 0.933333,
+          "V_u_kN": 642.151301,
+          "M_u_kN_m": 2660.06266,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 1.4,
+          "V_u_kN": 601.868429,
+          "M_u_kN_m": 2360.392053,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 1.866667,
+          "V_u_kN": 558.869483,
+          "M_u_kN_m": 2079.52012,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 2.333333,
+          "V_u_kN": 515.944892,
+          "M_u_kN_m": 1818.714361,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 2.8,
+          "V_u_kN": 474.126363,
+          "M_u_kN_m": 1577.940078,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 3.266667,
+          "V_u_kN": 433.674373,
+          "M_u_kN_m": 1356.681109,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 3.733333,
+          "V_u_kN": 394.548788,
+          "M_u_kN_m": 1154.299734,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 4.2,
+          "V_u_kN": 356.634881,
+          "M_u_kN_m": 970.176967,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 4.666667,
+          "V_u_kN": 319.833739,
+          "M_u_kN_m": 803.747356,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 5.133333,
+          "V_u_kN": 284.086328,
+          "M_u_kN_m": 654.491611,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 5.6,
+          "V_u_kN": 249.37067,
+          "M_u_kN_m": 521.917991,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 6.066667,
+          "V_u_kN": 215.691727,
+          "M_u_kN_m": 405.545012,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 6.533333,
+          "V_u_kN": 183.071997,
+          "M_u_kN_m": 304.888873,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 7.0,
+          "V_u_kN": 151.545272,
+          "M_u_kN_m": 219.455274,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 7.466667,
+          "V_u_kN": 121.15215,
+          "M_u_kN_m": 148.734147,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 7.933333,
+          "V_u_kN": 91.926307,
+          "M_u_kN_m": 92.196477,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 8.4,
+          "V_u_kN": 63.661284,
+          "M_u_kN_m": 49.297534,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 8.866667,
+          "V_u_kN": 35.459586,
+          "M_u_kN_m": 19.588935,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 9.333333,
+          "V_u_kN": 6.516702,
+          "M_u_kN_m": 3.041128,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        },
+        {
+          "z_m": 9.8,
+          "V_u_kN": 0.0,
+          "M_u_kN_m": 0.0,
+          "gobierna_V": "CF-C1 / Servicio I",
+          "gobierna_M": "CF-C1 / Servicio I"
+        }
+      ],
+      "CF-C2": [
+        {
+          "z_m": 0.0,
+          "V_u_kN": 634.826464,
+          "M_u_kN_m": 2653.09135,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 0.466667,
+          "V_u_kN": 615.754099,
+          "M_u_kN_m": 2356.839,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 0.933333,
+          "V_u_kN": 577.398537,
+          "M_u_kN_m": 2069.487087,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 1.4,
+          "V_u_kN": 529.199247,
+          "M_u_kN_m": 1800.034437,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 1.866667,
+          "V_u_kN": 478.813004,
+          "M_u_kN_m": 1553.074788,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 2.333333,
+          "V_u_kN": 430.036929,
+          "M_u_kN_m": 1329.62872,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 2.8,
+          "V_u_kN": 384.206391,
+          "M_u_kN_m": 1128.94482,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 3.266667,
+          "V_u_kN": 341.54944,
+          "M_u_kN_m": 949.648504,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 3.733333,
+          "V_u_kN": 301.889279,
+          "M_u_kN_m": 790.258765,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 4.2,
+          "V_u_kN": 264.964255,
+          "M_u_kN_m": 649.377102,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 4.666667,
+          "V_u_kN": 230.547083,
+          "M_u_kN_m": 525.727116,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 5.133333,
+          "V_u_kN": 198.473178,
+          "M_u_kN_m": 418.138478,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 5.6,
+          "V_u_kN": 168.634595,
+          "M_u_kN_m": 325.517661,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 6.066667,
+          "V_u_kN": 140.965198,
+          "M_u_kN_m": 246.821517,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 6.533333,
+          "V_u_kN": 115.425663,
+          "M_u_kN_m": 181.037758,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 7.0,
+          "V_u_kN": 91.989541,
+          "M_u_kN_m": 127.172448,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 7.466667,
+          "V_u_kN": 70.633443,
+          "M_u_kN_m": 84.243996,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 7.933333,
+          "V_u_kN": 51.340885,
+          "M_u_kN_m": 51.281722,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 8.4,
+          "V_u_kN": 34.110669,
+          "M_u_kN_m": 27.322642,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 8.866667,
+          "V_u_kN": 18.935584,
+          "M_u_kN_m": 11.40433,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 9.333333,
+          "V_u_kN": 5.502267,
+          "M_u_kN_m": 2.567724,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        },
+        {
+          "z_m": 9.8,
+          "V_u_kN": 0.0,
+          "M_u_kN_m": 0.0,
+          "gobierna_V": "CF-C2 / Servicio I",
+          "gobierna_M": "CF-C2 / Servicio I"
+        }
+      ],
+      "CF-C3": [
+        {
+          "z_m": 0.0,
+          "V_u_kN": 688.533858,
+          "M_u_kN_m": 3295.762176,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 0.466667,
+          "V_u_kN": 673.679391,
+          "M_u_kN_m": 2974.446376,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 0.933333,
+          "V_u_kN": 642.151301,
+          "M_u_kN_m": 2660.06266,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 1.4,
+          "V_u_kN": 601.868429,
+          "M_u_kN_m": 2360.392053,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 1.866667,
+          "V_u_kN": 558.869483,
+          "M_u_kN_m": 2079.52012,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 2.333333,
+          "V_u_kN": 515.944892,
+          "M_u_kN_m": 1818.714361,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 2.8,
+          "V_u_kN": 474.126363,
+          "M_u_kN_m": 1577.940078,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 3.266667,
+          "V_u_kN": 433.674373,
+          "M_u_kN_m": 1356.681109,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 3.733333,
+          "V_u_kN": 394.548788,
+          "M_u_kN_m": 1154.299734,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 4.2,
+          "V_u_kN": 356.634881,
+          "M_u_kN_m": 970.176967,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 4.666667,
+          "V_u_kN": 319.833739,
+          "M_u_kN_m": 803.747356,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 5.133333,
+          "V_u_kN": 284.086328,
+          "M_u_kN_m": 654.491611,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 5.6,
+          "V_u_kN": 249.37067,
+          "M_u_kN_m": 521.917991,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 6.066667,
+          "V_u_kN": 215.691727,
+          "M_u_kN_m": 405.545012,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 6.533333,
+          "V_u_kN": 183.071997,
+          "M_u_kN_m": 304.888873,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 7.0,
+          "V_u_kN": 151.545272,
+          "M_u_kN_m": 219.455274,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 7.466667,
+          "V_u_kN": 121.15215,
+          "M_u_kN_m": 148.734147,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 7.933333,
+          "V_u_kN": 91.926307,
+          "M_u_kN_m": 92.196477,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 8.4,
+          "V_u_kN": 63.661284,
+          "M_u_kN_m": 49.297534,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 8.866667,
+          "V_u_kN": 35.459586,
+          "M_u_kN_m": 19.588935,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 9.333333,
+          "V_u_kN": 6.516702,
+          "M_u_kN_m": 3.041128,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        },
+        {
+          "z_m": 9.8,
+          "V_u_kN": 0.0,
+          "M_u_kN_m": 0.0,
+          "gobierna_V": "CF-C3 / Servicio I",
+          "gobierna_M": "CF-C3 / Servicio I"
+        }
+      ]
+    },
+    "numero_resultados_cubiertos": 15,
+    "cubre_15_resultados": true
+  },
+  "acciones_base_reproducidas": {
+    "V_u_kN": 1045.496494,
+    "M_u_kN_m": 5013.558135
+  },
+  "zonas": [
+    {
+      "zona": 1,
+      "z_inferior_m": 0.0,
+      "z_superior_m": 3.266667,
+      "demanda": {
+        "V_u_kN": 1045.496494,
+        "M_u_kN_m": 5013.558135,
+        "M_servicio_kN_m": 3295.762176
+      },
+      "stm": {
+        "x_compresion_m": 0.0877,
+        "x_tirante_m": 5.973395,
+        "brazo_perpendicular_m": 5.885695,
+        "retiro_normal_lomo_m": 0.1131,
+        "desplazamiento_centroide_capas_mm": 25.4,
+        "angulo_tirante_desde_vertical_grados": 26.705195,
+        "tirante_vector_kN": [
+          428.518065,
+          851.820901
+        ],
+        "fuerza_tirante_kN": 953.533732,
+        "biela_vector_kN": [
+          616.978429,
+          -851.820901
+        ],
+        "fuerza_biela_kN": 1051.789536,
+        "resultante_corte_vector_kN": [
+          1045.496494,
+          0.0
+        ],
+        "angulo_biela_desde_horizontal_grados": 54.083985,
+        "angulo_menor_biela_tirante_grados": 62.62121,
+        "residual_vector_kN": [
+          0.0,
+          0.0
+        ],
+        "error_relativo_equilibrio": 0.0
+      },
+      "tirante": {
+        "barra": "1\"",
+        "diametro_mm": 25.4,
+        "numero_barras": 6,
+        "area_barra_mm2": 506.707479,
+        "As_provisto_mm2": 3040.244875,
+        "separacion_libre_mm": 86.9,
+        "separacion_libre_minima_mm": 25.4,
+        "numero_capas": 2,
+        "barras_por_capa": [
+          3,
+          3
+        ],
+        "separacion_libre_entre_capas_mm": 25.4,
+        "desplazamiento_centroide_normal_mm": 25.4,
+        "constructibilidad_cumple": true,
+        "As_requerido_mm2": 2572.311658,
+        "phi_Tn_kN": 1126.992538,
+        "DCR": 0.846087,
+        "cumple": true
+      },
+      "biela": {
+        "epsilon_tirante": 0.002059,
+        "epsilon_1": 0.003148,
+        "fcu_MPa": 20.565448,
+        "angulo_usado_grados": 62.62121,
+        "ancho_efectivo_disponible_mm": 1000.0,
+        "ancho_efectivo_requerido_mm": 182.655449,
+        "phi_Cn_kN": 5758.325529,
+        "DCR": 0.182655,
+        "cumple": true
+      },
+      "nodo_cct": {
+        "factor_limite": 0.75,
+        "ancho_disponible_mm": 600.0,
+        "ancho_requerido_mm": 182.402524,
+        "phi_Nn_kN": 3459.78612,
+        "DCR": 0.304004,
+        "cumple": true
+      },
+      "corte_convencional": {
+        "d_efectivo_mm": 5885.695141,
+        "bw_mm": 400.0,
+        "phi_Vc_kN": 1887.506861,
+        "V_u_kN": 1045.496494,
+        "DCR": 0.553903,
+        "cumple": true
+      },
+      "servicio": {
+        "f_s_MPa": 206.175619,
+        "limite_0_60_fy_MPa": 247.12758,
+        "DCR": 0.834288,
+        "cumple": true
+      }
+    },
+    {
+      "zona": 2,
+      "z_inferior_m": 3.266667,
+      "z_superior_m": 6.533333,
+      "demanda": {
+        "V_u_kN": 659.781851,
+        "M_u_kN_m": 2067.401268,
+        "M_servicio_kN_m": 1356.681109
+      },
+      "stm": {
+        "x_compresion_m": 0.0877,
+        "x_tirante_m": 4.358495,
+        "brazo_perpendicular_m": 4.270795,
+        "retiro_normal_lomo_m": 0.0877,
+        "desplazamiento_centroide_capas_mm": 0.0,
+        "angulo_tirante_desde_vertical_grados": 26.705195,
+        "tirante_vector_kN": [
+          243.521283,
+          484.078819
+        ],
+        "fuerza_tirante_kN": 541.880908,
+        "biela_vector_kN": [
+          416.260568,
+          -484.078819
+        ],
+        "fuerza_biela_kN": 638.439632,
+        "resultante_corte_vector_kN": [
+          659.781851,
+          0.0
+        ],
+        "angulo_biela_desde_horizontal_grados": 49.307682,
+        "angulo_menor_biela_tirante_grados": 67.397514,
+        "residual_vector_kN": [
+          0.0,
+          0.0
+        ],
+        "error_relativo_equilibrio": 0.0
+      },
+      "tirante": {
+        "barra": "1\"",
+        "diametro_mm": 25.4,
+        "numero_barras": 3,
+        "area_barra_mm2": 506.707479,
+        "As_provisto_mm2": 1520.122437,
+        "separacion_libre_mm": 86.9,
+        "separacion_libre_minima_mm": 25.4,
+        "numero_capas": 1,
+        "barras_por_capa": [
+          3
+        ],
+        "separacion_libre_entre_capas_mm": null,
+        "desplazamiento_centroide_normal_mm": 0.0,
+        "constructibilidad_cumple": true,
+        "As_requerido_mm2": 1461.811501,
+        "phi_Tn_kN": 563.496269,
+        "DCR": 0.961641,
+        "cumple": true
+      },
+      "biela": {
+        "epsilon_tirante": 0.002059,
+        "epsilon_1": 0.002763,
+        "fcu_MPa": 21.626046,
+        "angulo_usado_grados": 67.397514,
+        "ancho_efectivo_disponible_mm": 1000.0,
+        "ancho_efectivo_requerido_mm": 105.434973,
+        "phi_Cn_kN": 6055.292778,
+        "DCR": 0.105435,
+        "cumple": true
+      },
+      "nodo_cct": {
+        "factor_limite": 0.75,
+        "ancho_disponible_mm": 600.0,
+        "ancho_requerido_mm": 110.718919,
+        "phi_Nn_kN": 3459.78612,
+        "DCR": 0.184532,
+        "cumple": true
+      },
+      "corte_convencional": {
+        "d_efectivo_mm": 4270.794729,
+        "bw_mm": 400.0,
+        "phi_Vc_kN": 1369.618059,
+        "V_u_kN": 659.781851,
+        "DCR": 0.481727,
+        "cumple": true
+      },
+      "servicio": {
+        "f_s_MPa": 233.925884,
+        "limite_0_60_fy_MPa": 247.12758,
+        "DCR": 0.946579,
+        "cumple": true
+      }
+    },
+    {
+      "zona": 3,
+      "z_inferior_m": 6.533333,
+      "z_superior_m": 9.8,
+      "demanda": {
+        "V_u_kN": 279.32038,
+        "M_u_kN_m": 465.660797,
+        "M_servicio_kN_m": 304.888873
+      },
+      "stm": {
+        "x_compresion_m": 0.0877,
+        "x_tirante_m": 2.715161,
+        "brazo_perpendicular_m": 2.627461,
+        "retiro_normal_lomo_m": 0.0877,
+        "desplazamiento_centroide_capas_mm": 0.0,
+        "angulo_tirante_desde_vertical_grados": 26.705195,
+        "tirante_vector_kN": [
+          89.156739,
+          177.228407
+        ],
+        "fuerza_tirante_kN": 198.390606,
+        "biela_vector_kN": [
+          190.163641,
+          -177.228407
+        ],
+        "fuerza_biela_kN": 259.946376,
+        "resultante_corte_vector_kN": [
+          279.32038,
+          0.0
+        ],
+        "angulo_biela_desde_horizontal_grados": 42.983548,
+        "angulo_menor_biela_tirante_grados": 73.721647,
+        "residual_vector_kN": [
+          0.0,
+          0.0
+        ],
+        "error_relativo_equilibrio": 0.0
+      },
+      "tirante": {
+        "barra": "1\"",
+        "diametro_mm": 25.4,
+        "numero_barras": 2,
+        "area_barra_mm2": 506.707479,
+        "As_provisto_mm2": 1013.414958,
+        "separacion_libre_mm": 199.2,
+        "separacion_libre_minima_mm": 25.4,
+        "numero_capas": 1,
+        "barras_por_capa": [
+          2
+        ],
+        "separacion_libre_entre_capas_mm": null,
+        "desplazamiento_centroide_normal_mm": 0.0,
+        "constructibilidad_cumple": true,
+        "As_requerido_mm2": 535.190786,
+        "phi_Tn_kN": 375.664179,
+        "DCR": 0.528106,
+        "cumple": true
+      },
+      "biela": {
+        "epsilon_tirante": 0.002059,
+        "epsilon_1": 0.002406,
+        "fcu_MPa": 22.712933,
+        "angulo_usado_grados": 73.721647,
+        "ancho_efectivo_disponible_mm": 1000.0,
+        "ancho_efectivo_requerido_mm": 40.874506,
+        "phi_Cn_kN": 6359.621254,
+        "DCR": 0.040875,
+        "cumple": true
+      },
+      "nodo_cct": {
+        "factor_limite": 0.75,
+        "ancho_disponible_mm": 600.0,
+        "ancho_requerido_mm": 45.080193,
+        "phi_Nn_kN": 3459.78612,
+        "DCR": 0.075134,
+        "cumple": true
+      },
+      "corte_convencional": {
+        "d_efectivo_mm": 2627.461396,
+        "bw_mm": 400.0,
+        "phi_Vc_kN": 842.61099,
+        "V_u_kN": 279.32038,
+        "DCR": 0.331494,
+        "cumple": true
+      },
+      "servicio": {
+        "f_s_MPa": 128.175698,
+        "limite_0_60_fy_MPa": 247.12758,
+        "DCR": 0.518662,
+        "cumple": true
+      }
+    }
+  ],
+  "armado_principal_comun": {
+    "barra": "1\"",
+    "diametro_mm": 25.4,
+    "barras_continuas_corona": 2,
+    "distribucion_por_zona": [
+      {
+        "zona": 1,
+        "numero_barras": 6,
+        "numero_capas": 2,
+        "barras_por_capa": [
+          3,
+          3
+        ],
+        "As_provisto_mm2": 3040.244875
+      },
+      {
+        "zona": 2,
+        "numero_barras": 3,
+        "numero_capas": 1,
+        "barras_por_capa": [
+          3
+        ],
+        "As_provisto_mm2": 1520.122437
+      },
+      {
+        "zona": 3,
+        "numero_barras": 2,
+        "numero_capas": 1,
+        "barras_por_capa": [
+          2
+        ],
+        "As_provisto_mm2": 1013.414958
+      }
+    ]
+  },
+  "malla_fisuracion": {
+    "barra": "1/2\"",
+    "diametro_mm": 12.7,
+    "espaciamiento_mm": 210.0,
+    "As_requerido_por_cara_mm2_m": 600.0,
+    "As_provisto_por_cara_mm2_m": 603.223189,
+    "rho_total_requerida": 0.003,
+    "separacion_maxima_mtc_mm": 300.0,
+    "caras": 2,
+    "direcciones": [
+      "horizontal",
+      "vertical"
+    ]
+  },
+  "zonas_nodales": [
+    {
+      "ubicacion": "pantalla–alma / zona 1",
+      "tipo": "CCT: ancla tirante en una dirección",
+      "fuerza_demanda_kN": 1051.789536,
+      "factor_tension_limite": 0.75,
+      "ancho_efectivo_mm": 600.0,
+      "phi_Nn_kN": 3459.78612,
+      "DCR": 0.304004,
+      "cumple": true
+    },
+    {
+      "ubicacion": "pantalla–alma / zona 2",
+      "tipo": "CCT: ancla tirante en una dirección",
+      "fuerza_demanda_kN": 638.439632,
+      "factor_tension_limite": 0.75,
+      "ancho_efectivo_mm": 600.0,
+      "phi_Nn_kN": 3459.78612,
+      "DCR": 0.184532,
+      "cumple": true
+    },
+    {
+      "ubicacion": "pantalla–alma / zona 3",
+      "tipo": "CCT: ancla tirante en una dirección",
+      "fuerza_demanda_kN": 259.946376,
+      "factor_tension_limite": 0.75,
+      "ancho_efectivo_mm": 600.0,
+      "phi_Nn_kN": 3459.78612,
+      "DCR": 0.075134,
+      "cumple": true
+    },
+    {
+      "ubicacion": "contrafuerte–zapata",
+      "tipo": "CCT: anclaje del tirante principal",
+      "fuerza_demanda_kN": 1051.789536,
+      "factor_tension_limite": 0.75,
+      "ancho_efectivo_mm": 600.0,
+      "phi_Nn_kN": 3459.78612,
+      "DCR": 0.304004,
+      "cumple": true
+    },
+    {
+      "ubicacion": "corona",
+      "tipo": "CCT: anclaje del tirante principal",
+      "fuerza_demanda_kN": 259.946376,
+      "factor_tension_limite": 0.75,
+      "ancho_efectivo_mm": 600.0,
+      "phi_Nn_kN": 3459.78612,
+      "DCR": 0.075134,
+      "cumple": true
+    }
+  ],
+  "corte_friccion": {
+    "interfaz": "contrafuerte–zapata monolítica",
+    "V_u_kN": 1045.496494,
+    "As_principal_normal_equivalente_mm2": 2715.943903,
+    "As_malla_vertical_cruza_interfaz_mm2": 7359.322911,
+    "As_total_normal_mm2": 10075.266814,
+    "mu": 1.0,
+    "phi_Vn_kN": 3734.814458,
+    "DCR": 0.279933,
+    "cumple": true,
+    "anclaje_requerido_ambos_lados": true
+  },
+  "desarrollo": {
+    "ld_recto_mm": 950.703372,
+    "ld_gancho_90_mm": 335.40815,
+    "extension_gancho_mm": 304.8,
+    "diametro_interior_doblado_mm": 152.4,
+    "traslape_clase_b_mm": 1235.914384
+  },
+  "anclajes": [
+    {
+      "ubicacion": "contrafuerte–zapata",
+      "longitud_disponible_mm": 1425.0,
+      "tipo_adoptado": "recto",
+      "longitud_requerida_control_mm": 950.703372,
+      "DCR": 0.66716,
+      "cumple": true,
+      "ld_recto_mm": 950.703372,
+      "ld_gancho_90_mm": 335.40815,
+      "extension_gancho_mm": 304.8,
+      "diametro_interior_doblado_mm": 152.4,
+      "traslape_clase_b_mm": 1235.914384
+    },
+    {
+      "ubicacion": "corona",
+      "longitud_disponible_mm": 1020.0,
+      "tipo_adoptado": "recto",
+      "longitud_requerida_control_mm": 950.703372,
+      "DCR": 0.932062,
+      "cumple": true,
+      "ld_recto_mm": 950.703372,
+      "ld_gancho_90_mm": 335.40815,
+      "extension_gancho_mm": 304.8,
+      "diametro_interior_doblado_mm": 152.4,
+      "traslape_clase_b_mm": 1235.914384
+    }
+  ],
+  "empalme": {
+    "tipo": "Clase B; máximo 50% de barras en una sección",
+    "longitud_requerida_mm": 1235.914384,
+    "longitud_disponible_mm": 2000.0,
+    "DCR": 0.617957,
+    "cumple": true,
+    "ubicacion_recomendada": "tercio superior, fuera de nodos y cortes teóricos"
+  },
+  "cortes_barras": [
+    {
+      "numero_barras_adicionales": 3,
+      "z_corte_teorico_m": 3.266667,
+      "ld_medido_sobre_lomo_mm": 950.703372,
+      "z_fin_barra_m": 4.124264,
+      "longitud_provista_sobre_lomo_mm": 960.0,
+      "DCR": 0.990316,
+      "cumple": true
+    },
+    {
+      "numero_barras_adicionales": 1,
+      "z_corte_teorico_m": 6.533333,
+      "ld_medido_sobre_lomo_mm": 950.703372,
+      "z_fin_barra_m": 7.390931,
+      "longitud_provista_sobre_lomo_mm": 960.0,
+      "DCR": 0.990316,
+      "cumple": true
+    }
+  ],
+  "dcr_individuales": {
+    "CF-C1": [
+      {
+        "zona": 1,
+        "V_u_kN": 1045.496494,
+        "M_u_kN_m": 5013.558135,
+        "T_u_kN": 953.533732,
+        "DCR_tirante": 0.846087,
+        "DCR_biela": 0.182655,
+        "DCR_nodo": 0.304004,
+        "DCR_corte": 0.553903,
+        "DCR_corte_friccion_base": 0.279933
+      },
+      {
+        "zona": 2,
+        "V_u_kN": 659.781851,
+        "M_u_kN_m": 2067.401268,
+        "T_u_kN": 541.880908,
+        "DCR_tirante": 0.961641,
+        "DCR_biela": 0.105435,
+        "DCR_nodo": 0.184532,
+        "DCR_corte": 0.481727,
+        "DCR_corte_friccion_base": null
+      },
+      {
+        "zona": 3,
+        "V_u_kN": 279.32038,
+        "M_u_kN_m": 465.660797,
+        "T_u_kN": 198.390606,
+        "DCR_tirante": 0.528106,
+        "DCR_biela": 0.040875,
+        "DCR_nodo": 0.075134,
+        "DCR_corte": 0.331494,
+        "DCR_corte_friccion_base": null
+      }
+    ],
+    "CF-C2": [
+      {
+        "zona": 1,
+        "V_u_kN": 963.351955,
+        "M_u_kN_m": 4035.76922,
+        "T_u_kN": 767.567062,
+        "DCR_tirante": 0.681076,
+        "DCR_biela": 0.160353,
+        "DCR_nodo": 0.266885,
+        "DCR_corte": 0.510383,
+        "DCR_corte_friccion_base": 0.257938
+      },
+      {
+        "zona": 2,
+        "V_u_kN": 519.674513,
+        "M_u_kN_m": 1448.862944,
+        "T_u_kN": 379.757515,
+        "DCR_tirante": 0.673931,
+        "DCR_biela": 0.08038,
+        "DCR_nodo": 0.14068,
+        "DCR_corte": 0.37943,
+        "DCR_corte_friccion_base": null
+      },
+      {
+        "zona": 3,
+        "V_u_kN": 176.560556,
+        "M_u_kN_m": 277.534605,
+        "T_u_kN": 118.241129,
+        "DCR_tirante": 0.314752,
+        "DCR_biela": 0.025544,
+        "DCR_nodo": 0.046954,
+        "DCR_corte": 0.20954,
+        "DCR_corte_friccion_base": null
+      }
+    ],
+    "CF-C3": [
+      {
+        "zona": 1,
+        "V_u_kN": 1045.496494,
+        "M_u_kN_m": 5013.558135,
+        "T_u_kN": 953.533732,
+        "DCR_tirante": 0.846087,
+        "DCR_biela": 0.182655,
+        "DCR_nodo": 0.304004,
+        "DCR_corte": 0.553903,
+        "DCR_corte_friccion_base": 0.279933
+      },
+      {
+        "zona": 2,
+        "V_u_kN": 659.781851,
+        "M_u_kN_m": 2067.401268,
+        "T_u_kN": 541.880908,
+        "DCR_tirante": 0.961641,
+        "DCR_biela": 0.105435,
+        "DCR_nodo": 0.184532,
+        "DCR_corte": 0.481727,
+        "DCR_corte_friccion_base": null
+      },
+      {
+        "zona": 3,
+        "V_u_kN": 279.32038,
+        "M_u_kN_m": 465.660797,
+        "T_u_kN": 198.390606,
+        "DCR_tirante": 0.528106,
+        "DCR_biela": 0.040875,
+        "DCR_nodo": 0.075134,
+        "DCR_corte": 0.331494,
+        "DCR_corte_friccion_base": null
+      }
+    ]
+  },
+  "demandas_locales_elementos_adyacentes": {
+    "zapata": {
+      "V_u_interfaz_kN": 1045.496494,
+      "T_u_anclaje_kN": 953.533732,
+      "C_u_nodal_kN": 1051.789536,
+      "alcance": "demanda transferida; la zapata no se rediseña"
+    },
+    "pantalla": {
+      "reaccion_horizontal_base_kN": 1045.496494,
+      "momento_base_kN_m": 5013.558135,
+      "alcance": "demanda transferida; la pantalla no se rediseña"
+    }
+  },
+  "validaciones": {
+    "acciones_base_exactas": true,
+    "equilibrio_max_error_relativo": 0.0,
+    "equilibrio_cumple_1e_6": true,
+    "envolvente_cubre_15_resultados": true,
+    "simetria_C1_C3": true,
+    "constructibilidad_0_40_m": true,
+    "dcr_maximo": 0.990316,
+    "todos_los_mecanismos_cumplen": true
+  },
+  "limitaciones": [
+    "El catálogo principal se limita a barras comerciales de diámetro máximo 1 pulgada.",
+    "La zapata y la pantalla no se rediseñan; deben aceptar las demandas locales reportadas.",
+    "El ancho efectivo de bielas y nodos debe confirmarse con el detalle definitivo y secuencia de vaciado.",
+    "El diseño requiere revisión y firma del ingeniero responsable del proyecto."
+  ]
+}

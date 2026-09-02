@@ -1,0 +1,6 @@
+interface:
+  display_name: "Renderizar RFI DOCX"
+  short_description: "Genera y verifica RFI DOCX de dos paginas"
+  default_prompt: "Usa $renderizar-rfi-docx para convertir un RFI Markdown en un DOCX verificado de dos paginas."
+policy:
+  allow_implicit_invocation: true
