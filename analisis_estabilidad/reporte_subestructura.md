@@ -2,7 +2,7 @@
 
 **Puente:** Puente Carrozable Molinohuaico
 **Ubicacion:** Chilcas, La Mar, Ayacucho
-**Tipo:** Estribo Izquierdo C°A° Cantilever (H=17.65m)
+**Tipo:** Estribo Izquierdo C°A° Cantilever (H=12.39m)
 **Luz:** 50.0 m
 
 > Reporte generado por `agente_subestructura.py`. Debe incorporarse a la memoria viva solo despues de revisar supuestos y datos de entrada.
@@ -16,42 +16,42 @@
 | Kas | 0.274 | - |
 | h_s/c | 0.61 | m |
 | theta sismico | 7.5 | grados |
-| Ea | 56.39 | t |
-| M_Ea | 331.77 | t-m |
-| Es | 3.9 | t |
-| M_Es | 34.4 | t-m |
-| Eas | 72.99 | t |
-| Delta Eas | 16.6 | t |
-| M_Delta Eas | 195.34 | t-m |
+| Ea | 27.79 | t |
+| M_Ea | 114.77 | t-m |
+| Es | 2.74 | t |
+| M_Es | 16.95 | t-m |
+| Eas | 35.97 | t |
+| Delta Eas | 8.18 | t |
+| M_Delta Eas | 67.57 | t-m |
 
 ## Pesos estabilizadores
 
 | Tipo | Descripcion | Peso (t) | Brazo (m) | Momento (t-m) |
 | --- | --- | --- | --- | --- |
-| DC | Zapata | 43.02 | 5.975 | 257.04 |
-| DC | Tronco pantalla | 12.29 | 5.65 | 69.43 |
-| DC | Cajuela (asiento viga) | 6.34 | 6.031 | 38.22 |
-| EV | Relleno sobre talón | 172.5 | 8.974 | 1548.06 |
-| LS | Sobrecarga terreno | 5.82 | 9.3 | 54.12 |
-|  | TOTAL | 239.97 |  | 1966.87 |
+| DC | Zapata | 45.54 | 6.325 | 288.04 |
+| DC | Tronco pantalla | 7.54 | 6.35 | 47.85 |
+| DC | Cajuela (asiento viga) | 4.85 | 6.791 | 32.94 |
+| EV | Relleno sobre talón | 115.47 | 9.695 | 1119.47 |
+| LS | Sobrecarga terreno | 5.87 | 9.975 | 58.6 |
+|  | TOTAL | 179.27 |  | 1546.9 |
 
 ## Reacciones de superestructura
 
 | Tipo | Descripcion | Reaccion (t) | Brazo (m) | Momento (t-m) |
 | --- | --- | --- | --- | --- |
-| DC | Peso Propio | 25.98 | 5.6 | 145.49 |
-| DW | Superf. desgaste | 2.88 | 5.6 | 16.13 |
-| PL | Carga peatonal | 3.08 | 5.6 | 17.25 |
-| LL+IM | Sobrecarga HL-93 | 12.95 | 5.6 | 72.52 |
-| BR | Frenado | 1.63 | 18.55 | 30.24 |
+| DC | Peso Propio | 25.98 | 6.33 | 164.32 |
+| DW | Superf. desgaste | 2.88 | 6.33 | 18.22 |
+| PL | Carga peatonal | 3.08 | 6.33 | 19.48 |
+| LL+IM | Sobrecarga HL-93 | 12.95 | 6.33 | 81.91 |
+| BR | Frenado | 1.63 | 13.29 | 21.66 |
 
 ## Fuerzas sismicas equivalentes
 
 | Componente | Fuerza (t) | Brazo (m) | Momento (t-m) |
 | --- | --- | --- | --- |
-| Superestructura | 6.93 | 14.8 | 102.51 |
-| Estribo | 14.79 | 3.68 | 54.45 |
-| Frenado | 1.63 | 18.55 | 30.24 |
+| Superestructura | 6.93 | 9.7 | 67.19 |
+| Estribo | 13.9 | 2.17 | 30.12 |
+| Frenado | 1.63 | 13.29 | 21.66 |
 
 Porcentaje sismico usado: **24.0%**.
 
@@ -61,23 +61,23 @@ Porcentaje sismico usado: **24.0%**.
 
 | Estado limite | V (t) | Me (t-m) | Fh (t) | Mv (t-m) | Xo (m) | e (m) | qmax (kg/cm2) | qmin (kg/cm2) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Servicio I | 284.86 | 2218.26 | 61.92 | 396.41 | 6.4 | 0.421 | 2.888 | 1.88 |
-| Resistencia I-a | 291.48 | 2269.51 | 94.26 | 610.77 | 5.69 | 0.284 | 2.787 | 2.091 |
-| Resistencia I-b | 384.97 | 3003.61 | 94.26 | 610.77 | 6.22 | 0.241 | 3.611 | 2.832 |
-| Evento Extremo I (Sismo) | 253.24 | 2017.71 | 94.71 | 684.07 | 5.27 | 0.709 | 2.874 | 1.365 |
+| Servicio I | 224.16 | 1830.83 | 32.16 | 153.38 | 7.48 | 1.158 | 2.745 | 0.799 |
+| Resistencia I-a | 231.19 | 1891.13 | 49.33 | 239.72 | 7.14 | 0.818 | 2.537 | 1.118 |
+| Resistencia I-b | 303.42 | 2485.03 | 49.33 | 239.72 | 7.4 | 1.075 | 3.622 | 1.176 |
+| Evento Extremo I (Sismo) | 192.86 | 1611.15 | 56.8 | 279.65 | 6.9 | 0.579 | 1.943 | 1.106 |
 
 ## Verificacion de estabilidad - Servicio I
 
 | Estado limite | V (t) | Me (t-m) | Fh (t) | Mv (t-m) | e (m) | B/6 (m) | Volteo | QR (t) | Deslizamiento | q (kg/cm2) | Capacidad |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Servicio I | 284.86 | 2218.26 | 61.92 | 396.41 | 0.421 | 1.992 | CONFORME | 156.67 | CONFORME | 2.888 | CONFORME |
+| Servicio I | 224.16 | 1830.83 | 32.16 | 153.38 | 1.158 | 2.108 | CONFORME | 123.29 | CONFORME | 2.745 | CONFORME |
 
 ## Analisis de falsa zapata en dos interfaces
 
 | Parametro | Valor | Unidad |
 | --- | --- | --- |
-| Ancho falsa zapata | 11.95 | m |
-| Altura falsa zapata | 3.5 | m |
+| Ancho falsa zapata | 12.65 | m |
+| Altura falsa zapata | 3.6 | m |
 | Peso especifico | 2.3 | t/m3 |
 | f'c falsa zapata | 140.0 | kg/cm2 |
 | mu concreto-concreto | 0.6 | - |
@@ -88,41 +88,41 @@ La flexion, el corte y el punzonamiento de la falsa zapata quedan pendientes de 
 
 ### Zapata estructural / falsa zapata
 
-Altura de empuje analizada: **17.65 m**.
+Altura de empuje analizada: **12.39 m**.
 
 Presiones calculadas para todos los estados limite (sin dictamen de estabilidad):
 
 | Estado limite | V (t) | Me (t-m) | Fh (t) | Mv (t-m) | Xo (m) | e (m) | qmax (kg/cm2) | qmin (kg/cm2) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Servicio I | 284.86 | 2218.26 | 61.92 | 396.41 | 6.4 | 0.421 | 2.888 | 1.88 |
-| Resistencia I-a | 291.48 | 2269.51 | 94.26 | 610.77 | 5.69 | 0.284 | 2.787 | 2.091 |
-| Resistencia I-b | 384.97 | 3003.61 | 94.26 | 610.77 | 6.22 | 0.241 | 3.611 | 2.832 |
-| Evento Extremo I (Sismo) | 253.24 | 2017.71 | 94.71 | 684.07 | 5.27 | 0.709 | 2.874 | 1.365 |
+| Servicio I | 224.16 | 1830.83 | 32.16 | 153.38 | 7.48 | 1.158 | 2.745 | 0.799 |
+| Resistencia I-a | 231.19 | 1891.13 | 49.33 | 239.72 | 7.14 | 0.818 | 2.537 | 1.118 |
+| Resistencia I-b | 303.42 | 2485.03 | 49.33 | 239.72 | 7.4 | 1.075 | 3.622 | 1.176 |
+| Evento Extremo I (Sismo) | 192.86 | 1611.15 | 56.8 | 279.65 | 6.9 | 0.579 | 1.943 | 1.106 |
 
 Verificacion de estabilidad para Servicio I:
 
 | Estado limite | V (t) | Me (t-m) | Fh (t) | Mv (t-m) | e (m) | Limite e (m) | Excentricidad | QR (t) | Deslizamiento | q (kg/cm2) | Capacidad |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Servicio I | 284.86 | 2218.26 | 61.92 | 396.41 | 0.421 | 1.992 | CONFORME | 170.92 | CONFORME | 2.888 | CONFORME |
+| Servicio I | 224.16 | 1830.83 | 32.16 | 153.38 | 1.158 | 2.108 | CONFORME | 134.5 | CONFORME | 2.745 | CONFORME |
 
 ### Falsa zapata / suelo de cimentación
 
-Altura de empuje analizada: **21.15 m**.
+Altura de empuje analizada: **15.99 m**.
 
 Presion equivalente uniforme de Meyerhof sobre el ancho efectivo B' = B - 2e. qmin no aplica a este modelo equivalente; no representa perdida de contacto.
 
 | Estado limite | V (t) | Me (t-m) | Fh (t) | Mv (t-m) | Xo (m) | e (m) | B efectivo (m) | q efectiva (kg/cm2) | qmin (kg/cm2) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Servicio I | 381.06 | 2793.03 | 87.27 | 656.19 | 5.61 | 0.367 | 11.216 | 3.397 | No aplica |
-| Resistencia I-a | 378.05 | 2786.8 | 132.48 | 1005.62 | 4.71 | 1.264 | 9.422 | 4.012 | No aplica |
-| Resistencia I-b | 505.21 | 3722.06 | 132.48 | 1005.62 | 5.38 | 0.598 | 10.754 | 4.698 | No aplica |
-| Evento Extremo I (Sismo) | 339.82 | 2534.99 | 149.62 | 1180.36 | 3.99 | 1.989 | 7.972 | 4.263 | No aplica |
+| Servicio I | 328.9 | 2493.54 | 51.44 | 302.45 | 6.66 | 0.337 | 11.976 | 2.746 | No aplica |
+| Resistencia I-a | 325.45 | 2487.59 | 78.45 | 467.62 | 6.21 | 0.118 | 12.414 | 2.622 | No aplica |
+| Resistencia I-b | 434.34 | 3313.44 | 78.45 | 467.62 | 6.55 | 0.227 | 12.196 | 3.561 | No aplica |
+| Evento Extremo I (Sismo) | 287.13 | 2207.55 | 105.88 | 609.48 | 5.57 | 0.759 | 11.132 | 2.579 | No aplica |
 
 Verificacion de estabilidad para Servicio I:
 
 | Estado limite | V (t) | Me (t-m) | Fh (t) | Mv (t-m) | e (m) | Limite e (m) | Excentricidad | QR (t) | Deslizamiento | q efectiva (kg/cm2) | Capacidad |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Servicio I | 381.06 | 2793.03 | 87.27 | 656.19 | 0.367 | 1.992 | CONFORME | 209.58 | CONFORME | 3.397 | CONFORME |
+| Servicio I | 328.9 | 2493.54 | 51.44 | 302.45 | 0.337 | 2.108 | CONFORME | 180.9 | CONFORME | 2.746 | CONFORME |
 
 ## Pendientes antes de cerrar resultados
 

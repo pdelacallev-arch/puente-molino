@@ -6,7 +6,7 @@ Implementa la metodología de análisis de subestructura según AASHTO LRFD 2005
 y el enfoque seudo-estático de Mononobe-Okabe para cargas sísmicas.
 
 Referencia: analisis_subestructura.md (Sección 3.2.6.6)
-Aplica al: Puente Carrozable Molinohuaycco (H=11.90m, Estribo Izquierdo)
+Aplica al: Puente Carrozable Molinohuaycco (H=11.90m, Estribo derecho)
 """
 
 import argparse
@@ -27,22 +27,22 @@ class AbutmentGeometry:
     Valores confirmados del Puente Molinohuaico.
     """
     # Dimensiones principales
-    H: float = 17.65 #14.64 #11.90                # Altura total del estribo, Figura 3.44 (m)
-    hp: float = 16.15 #13.14 #10.40               # Altura de pantalla, Figura 3.44 (m)
+    H: float = 12.39 #14.64 #11.90                # Altura total del estribo, Figura 3.44 (m)
+    hp: float = 10.89 #13.14 #10.40               # Altura de pantalla, Figura 3.44 (m)
     hz: float = 1.50                # Altura de la zapata (m)
-    B: float = 11.95                # Ancho total de la base (m)
+    B: float = 12.65                # Ancho total de la base (m)
     B1: float = 6.10                # Talón posterior (m) - de canto a cara posterior pantalla
-    B2: float = 5.45                # Punta (m) - de canto a cara anterior pantalla
+    B2: float = 6.15                # Punta (m) - de canto a cara anterior pantalla
     tp1: float = 0.40               # Espesor superior de pantalla (m)
     tp2: float = 0.40 #0.40               # Espesor inferior de pantalla (m)
     ancho_estribo: float = 1.00     # Ancho de análisis (por metro lineal)
     # Cajuela (asiento de viga) - Figura 3.44
-    a_cajuela: float = 1.300        # Ancho libre de asiento de la cajuela (m)
+    a_cajuela: float = 1.150        # Ancho libre de asiento de la cajuela (m)
     b_cajuela: float = 0.400        # Espesor de pared vertical de cajuela (m)
-    c_cajuela: float = 2.350        # Altura de pared vertical de cajuela (m)
-    d_cajuela: float = 1.000        # Altura de base de cajuela (m)
-    e_cajuela: float = 0.800        # Vuelo posterior de base hacia el talón B1 (m)
-    f_cajuela: float = 0.500        # Vuelo delantero de base hacia la punta B2 (m)
+    c_cajuela: float = 2.340        # Altura de pared vertical de cajuela (m)
+    d_cajuela: float = 0.700        # Altura de base de cajuela (m)
+    e_cajuela: float = 0.750        # Vuelo posterior de base hacia el talón B1 (m)
+    f_cajuela: float = 0.400        # Vuelo delantero de base hacia la punta B2 (m)
     g_cajuela: float = 0.550        # Holgura/asiento interior de cajuela, no suma área de concreto (m)
     # Inclinación de la cara posterior del muro
     back_face_slope: float = 0.0    # Desplazamiento horizontal por metro de altura (m/m)
@@ -129,8 +129,8 @@ class FalseFootingProperties:
     no centrada; si es ``None`` se adopta centrada bajo la zapata estructural.
     """
     enabled: bool = True
-    height: float = 3.50            # Espesor vertical (m), Figuras 4/5
-    width: float = 11.95            # Ancho en la sección analizada (m)
+    height: float = 3.60            # Espesor vertical (m), Figuras 4/5
+    width: float = 12.65            # Ancho en la sección analizada (m)
     gamma: float = 2.30             # Peso específico (Tn/m3), asumido preliminar
     f_c: float = 140.0              # Resistencia del concreto base (kg/cm2)
     # Junta zapata–falsa zapata: concreto nuevo contra concreto endurecido,
