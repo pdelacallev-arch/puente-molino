@@ -30,7 +30,7 @@ MKS: t, m, t-m, kg/cm²
 
 ```
 ├── README.md
-├── analisis_estabilidad/    # Cálculo y diseño de la subestructura
+├── analisis_estabilidad/    # Subsistema autocontenido por elementos estructurales
 ├── metrado_cargas/          # Metrados y cargas de la superestructura
 ├── tests/                   # Pruebas automatizadas de los cálculos
 ├── herramientas/            # Renderizado y verificación de documentos
@@ -48,7 +48,7 @@ MKS: t, m, t-m, kg/cm²
 ├── informes_actividades/    # Informes periódicos de actividades
 ├── informes_rfis/           # Informes de remisión y seguimiento de RFI
 ├── entregables/             # Documentos en preparación o emitidos
-└── outputs/                 # Resultados reproducibles de los cálculos
+└── outputs/                 # Resultados de subsistemas externos a estabilidad
 ```
 
 La carpeta `salidas/` conserva resultados históricos de trabajo. Los cálculos
@@ -59,7 +59,7 @@ nuevos deben escribirse en `outputs/<identificador>/` para mantener trazabilidad
 | Contenido | Ruta |
 |---|---|
 | Registro de fuentes | `fuentes/registro_fuentes.csv` |
-| Análisis de estabilidad existente | `analisis_estabilidad/` |
+| Análisis de estabilidad | `analisis_estabilidad/README.md` |
 | Parámetros de referencia | `analisis_estabilidad/parametros_referencia_analisis_subestructura.txt` |
 | Parámetros sísmicos | `analisis_estabilidad/parametros_sismicos_mtc_2018.md` |
 | Guía de verificación | `analisis_estabilidad/guia_verificacion_estabilidad.md` |
@@ -71,8 +71,8 @@ Desde la raíz del proyecto:
 
 ```bash
 python -m pytest -q
-python analisis_estabilidad/disenar_pantalla_e060_mtc.py
-python analisis_estabilidad/analizar_pantalla_shell_3d.py --help
+python -m analisis_estabilidad validar --caso molinohuayco --revision R00
+python -m analisis_estabilidad ejecutar zapata.longitudinal --caso molinohuayco --revision R00
 ```
 
 Los antiguos comandos `python render_*.py` y `python verificar*.py` se mantienen

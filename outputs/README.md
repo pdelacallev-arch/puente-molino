@@ -1,16 +1,15 @@
-# Índice de resultados
+# Índice de resultados externos a estabilidad
 
-Los resultados están agrupados por expediente o función. Los archivos fuente y las memorias permanecen fuera de `outputs`.
+Los resultados del subsistema de estabilidad fueron trasladados a
+`analisis_estabilidad/casos/` y su histórico a
+`analisis_estabilidad/historico/`. Esta carpeta conserva resultados de otros
+subsistemas, como vigas principales.
 
 ## Estructura
 
 | Carpeta | Contenido |
 |---|---|
-| `calc_est_2026_001/` | Resultados y figuras de la memoria CALC-EST-2026-001-R01 |
-| `calc_est_2026_002/` | Resultados, controles y figuras de la memoria CALC-EST-2026-002-R00 |
-| `falsa_zapata_recalculada/` | Recalculo específico de la falsa zapata y archivo de apoyo |
-| `ies_compatibilidad/` | Textos auxiliares del Informe de Estado Situacional |
-| `qa/` | Registros auxiliares de control de herramientas |
+| `vigas_principales/` | Resultados reproducibles de la superestructura metálica compuesta |
 
 ## Convenciones
 
@@ -19,4 +18,4 @@ Los resultados están agrupados por expediente o función. Los archivos fuente y
 - `*.png` y `*.svg`: figuras y láminas generadas.
 - `*.xlsx`: hoja de apoyo del recálculo de falsa zapata.
 
-Las salidas nuevas deben guardarse dentro de la carpeta del expediente correspondiente; no se recomienda volver a colocar archivos sueltos en la raíz de `outputs`.
+Los programas de `analisis_estabilidad` no deben leer ni escribir aquí.

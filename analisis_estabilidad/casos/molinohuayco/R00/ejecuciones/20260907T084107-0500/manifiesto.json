@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "ejecucion_id": "20260907T084107-0500",
+  "caso": "molinohuayco",
+  "revision": "R00",
+  "configuracion_sha256": "0e22866186ef604674b9b626c3265501f58cf42fb07e5bc2eb5e676dd95b682c",
+  "codigo_sha256": "fd9bdf27499360a82931f985c4f98454d1a78b3bc592d2bf66ca5a8ac291d123",
+  "modulos": {
+    "estribo.estabilidad_global": {
+      "estado": "OK",
+      "entrada": "elementos/estribo/estabilidad_global/entrada.json",
+      "resultado": "elementos/estribo/estabilidad_global/resultado.json",
+      "resultado_sha256": "5c2e6350ff09d523a4a9c12595c9675084c14216355b0d17b85ce490ec8e37f9"
+    },
+    "pantalla.analisis_shell_3d": {
+      "estado": "OK",
+      "entrada": "elementos/pantalla/analisis_shell_3d/entrada.json",
+      "resultado": "elementos/pantalla/analisis_shell_3d/resultado.json",
+      "resultado_sha256": "e142d89a0831f6680fbcbee955334be4b71ad34305bd6656eaa264fd2048209b"
+    },
+    "pantalla.reacciones_contrafuertes": {
+      "estado": "OK",
+      "entrada": "elementos/pantalla/reacciones_contrafuertes/entrada.json",
+      "resultado": "elementos/pantalla/reacciones_contrafuertes/resultado.json",
+      "resultado_sha256": "1468d38241bbbb8c6ef46d3fe6881575e2302da41146dad543ce3f6a5eac58c2"
+    }
+  }
+}

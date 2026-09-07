@@ -14,4 +14,4 @@ dependencies = [
 dev = ["pytest", "scipy>=1.13,<2"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "analisis_estabilidad/pruebas"]

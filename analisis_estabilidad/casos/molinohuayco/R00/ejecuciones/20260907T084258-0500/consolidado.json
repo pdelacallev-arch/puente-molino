@@ -1,0 +1,92 @@
+{
+  "ejecucion_id": "20260907T084258-0500",
+  "configuracion_sha256": "0e22866186ef604674b9b626c3265501f58cf42fb07e5bc2eb5e676dd95b682c",
+  "modulos": [
+    {
+      "objetivo": "estribo.estabilidad_global",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/estribo/estabilidad_global/resultado.json"
+    },
+    {
+      "objetivo": "pantalla.analisis_shell_3d",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/pantalla/analisis_shell_3d/resultado.json"
+    },
+    {
+      "objetivo": "pantalla.reacciones_contrafuertes",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/pantalla/reacciones_contrafuertes/resultado.json"
+    },
+    {
+      "objetivo": "pantalla.diseno_e060_mtc",
+      "estado": "ADVERTENCIA",
+      "advertencias": [
+        "El modelo 1D desplegado no representa torsión ni compatibilidad espacial en los quiebres de las alas.",
+        "Los contrafuertes se consideran apoyos rígidos; las reacciones se reportan, pero no se diseñan.",
+        "La presión se evalúa en el borde inferior de cada tercio, criterio conservador para zonificar el armado.",
+        "El factor de barra superior 1.3 se aplica conservadoramente al desarrollo de todas las barras horizontales.",
+        "La longitud disponible dentro de contrafuertes y anclajes debe verificarse con el plano definitivo.",
+        "El diseño debe ser revisado y aprobado por el ingeniero responsable antes de construcción."
+      ],
+      "resultado": "elementos/pantalla/diseno_e060_mtc/resultado.json"
+    },
+    {
+      "objetivo": "contrafuertes.analisis_2d",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/contrafuertes/analisis_2d/resultado.json"
+    },
+    {
+      "objetivo": "contrafuertes.diseno_stm",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/contrafuertes/diseno_stm/resultado.json"
+    },
+    {
+      "objetivo": "zapata.diseno_longitudinal_e060",
+      "estado": "ADVERTENCIA",
+      "advertencias": [
+        "Las combinaciones de carga factorizadas proceden del análisis de puente; E.060 se usa para la resistencia de la sección de concreto armado.",
+        "El acero mínimo se reparte conservadoramente en ambas caras: rho=0.0012 por cara; la suma supera rho=0.0018 total.",
+        "El peralte efectivo se calculó conservadoramente con una distancia de 137.900 mm desde la cara de tracción hasta el centroide del arreglo longitudinal de control.",
+        "La selección automática adopta el primer arreglo del catálogo que permite cumplir As sin bajar del espaciamiento mínimo constructivo configurado.",
+        "Los arreglos de dos barras se disponen en dos capas con 25 mm de separación libre vertical; el peralte efectivo usa el centroide conjunto.",
+        "Las longitudes de desarrollo suponen barras sin recubrimiento epóxico, concreto normal y separaciones favorables según la Tabla 12.1.",
+        "Los empalmes por traslape se calcularon a tracción según E.060 12.15 y Tabla 12.3, suponiendo como máximo 50% de barras empalmadas dentro de la longitud de traslape requerida.",
+        "La ubicación exacta de los empalmes debe definirse en planos fuera de las secciones de máximo momento y coordinarse con cortes, ganchos y juntas de construcción.",
+        "Confirmar en planos la longitud ingresada del estribo (6.00 m) y la compatibilidad de los ganchos con las demás armaduras.",
+        "Punzonamiento no aplica al modelo de pantalla continua; comprobarlo por separado si existen cargas concentradas o contrafuertes."
+      ],
+      "resultado": "elementos/zapata/diseno_longitudinal_e060/resultado.json"
+    },
+    {
+      "objetivo": "zapata.diseno_transversal_e060_mtc",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/zapata/diseno_transversal_e060_mtc/resultado.json"
+    },
+    {
+      "objetivo": "dentellon.diseno_e060",
+      "estado": "ADVERTENCIA",
+      "advertencias": [
+        "El Manual de Puentes MTC 2018, art. 2.8.1.1.12.6 y Tabla 2.8.1.1.12.6-1, respalda φp = 0.50 para la componente pasiva en Estado Límite de Resistencia; para Evento Extremo I se adopta φp = 1.00 conforme a la regla general del MTC y AASHTO LRFD. No se usa un factor 1.50 para mayorar el empuje en el diseño estructural.",
+        "La ley pasiva se prolonga desde la coronación de la zapata hasta la base adoptada (2.800 m); las cotas del dentellón fueron verificadas en el proyecto.",
+        "El medio pasivo adoptado es el suelo de fundación GW (γ = 1.96 Tn/m³, φ' = 39.8°), según el Estudio de Suelos Informe N.° 001-2026/ING-CON-26-E-008/INGEOTECON-135-26; tanto el agente de subestructura como este diseño usan el peso específico del suelo de fundación para el pasivo.",
+        "El modelo de Rankine solo es válido con suelo granular drenado frente al dentellón; no aplica a una llave embebida en concreto.",
+        "El dentellón y la zapata se consideran vaciados monolíticamente; las barras deben desarrollar fy dentro de la zapata.",
+        "La cuantía mínima total de losa se reparte entre dos caras; la cara traccionada conserva rho = 0.0012 y la opuesta recibe el saldo. El acero horizontal se divide por mitades.",
+        "La cara en contacto con el pasivo es la cara traccionada para el sentido de carga adoptado."
+      ],
+      "resultado": "elementos/dentellon/diseno_e060/resultado.json"
+    },
+    {
+      "objetivo": "cajuela.verificacion_voladizo",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/cajuela/verificacion_voladizo/resultado.json"
+    }
+  ]
+}
