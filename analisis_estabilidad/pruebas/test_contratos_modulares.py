@@ -18,6 +18,7 @@ from analisis_estabilidad.nucleo.motores import ejecutar_entrada
 from analisis_estabilidad.nucleo.orquestador import (
     DEPENDENCIAS,
     _aplicar_override,
+    _huella_overrides,
     _seccion_objetivo,
 )
 from analisis_estabilidad.nucleo.rutas import RAIZ_CASOS, RAIZ_TEMPORAL, asegurar_interna
@@ -76,6 +77,15 @@ def test_override_json_tiene_prioridad_sobre_yaml(carpeta_contrato):
     assert huella == sha256_archivo(ruta_override)
 
 
+def test_override_cambia_huella_de_la_ejecucion(carpeta_contrato):
+    inicial = _huella_overrides(carpeta_contrato)
+    ruta = carpeta_contrato / "entradas" / "pantalla" / "diseno.override.json"
+    ruta.parent.mkdir(parents=True)
+    ruta.write_text('{"espesor_m": 0.45}', encoding="utf-8")
+
+    assert _huella_overrides(carpeta_contrato) != inicial
+
+
 def test_zapata_consume_resultado_sin_recalcular_estabilidad(
     carpeta_contrato, monkeypatch
 ):
@@ -84,7 +94,13 @@ def test_zapata_consume_resultado_sin_recalcular_estabilidad(
     carpeta_est = carpeta_contrato / "estribo"
     ruta_entrada_est = carpeta_est / "entrada.json"
     escribir_json_atomico(ruta_entrada_est, entrada_est)
-    ejecutar_entrada("estribo.estabilidad_global", ruta_entrada_est, carpeta_est)
+    resultado_est = ejecutar_entrada(
+        "estribo.estabilidad_global", ruta_entrada_est, carpeta_est
+    )
+    assert resultado_est.archivos_generados
+    assert all(
+        (carpeta_est / ruta).is_file() for ruta in resultado_est.archivos_generados
+    )
     ruta_resultado_est = carpeta_est / "resultado.json"
 
     from analisis_estabilidad.elementos.zapata import diseno_longitudinal_e060 as zapata
@@ -110,6 +126,10 @@ def test_zapata_consume_resultado_sin_recalcular_estabilidad(
     )
     assert resultado.dependencias_consumidas[0].elemento == "estribo"
     assert resultado.resultados["resultados_por_caso"]
+    assert resultado.archivos_generados
+    assert all(
+        (carpeta_zapata / ruta).is_file() for ruta in resultado.archivos_generados
+    )
 
 
 def test_rechaza_dependencia_alterada(carpeta_contrato):

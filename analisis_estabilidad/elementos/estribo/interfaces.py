@@ -374,11 +374,16 @@ def validate_interface_case(case: dict, interface_number: int,
     }
 
 
-def draw_interface(args: argparse.Namespace, interface_number: int) -> None:
+def draw_interface(
+    args: argparse.Namespace,
+    interface_number: int,
+    results: dict | None = None,
+) -> None:
     """Genera el PNG de una de las superficies de contacto."""
 
-    analysis = SubstructureAnalysis(GEOM, MAT, LOADS, SEISMIC, FALSE_FOOTING)
-    results = analysis.run_full_analysis()
+    if results is None:
+        analysis = SubstructureAnalysis(GEOM, MAT, LOADS, SEISMIC, FALSE_FOOTING)
+        results = analysis.run_full_analysis()
 
     if "interfaces" not in results:
         raise RuntimeError(

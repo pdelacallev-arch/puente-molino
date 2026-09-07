@@ -4,6 +4,9 @@ Subsistema autocontenido para el análisis y diseño del estribo del Puente
 Molinohuayco. Los parámetros se conservan en un YAML maestro y los elementos
 se comunican mediante contratos JSON verificables.
 
+Para una explicación progresiva, ejemplos completos y solución de errores,
+consulte la [guía de uso para estudiantes](GUIA_USO_ESTUDIANTE.md).
+
 ## Organización
 
 | Elemento | Cálculos |
@@ -75,9 +78,15 @@ Cada cálculo produce:
 elementos/<elemento>/<calculo>/
 ├── entrada.json
 ├── resultado.json
-└── reporte.md
+├── reporte.md
+└── figuras/
+    ├── *.png
+    └── *.svg  # cuando el módulo dispone de salida vectorial
 ```
+
+Las figuras son un posprocesamiento del mismo resultado estructural; no repiten
+el análisis. Sus rutas quedan registradas en `resultado.json`, dentro de
+`archivos_generados`.
 
 No se admiten entradas ni salidas fuera de `analisis_estabilidad/`. Los
 resultados históricos anteriores a este sistema se conservan en `historico/`.
-

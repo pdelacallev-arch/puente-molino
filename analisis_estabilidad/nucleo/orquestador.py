@@ -49,6 +49,17 @@ def _huella_codigo() -> str:
     return h.hexdigest()
 
 
+def _huella_overrides(carpeta: Path) -> str:
+    """Identifica el conjunto completo de ajustes particulares del caso."""
+    h = hashlib.sha256()
+    entradas = carpeta / "entradas"
+    if entradas.exists():
+        for ruta in sorted(entradas.rglob("*.override.json")):
+            h.update(str(ruta.relative_to(carpeta)).encode("utf-8"))
+            h.update(ruta.read_bytes())
+    return h.hexdigest()
+
+
 def _id_ejecucion() -> str:
     return datetime.now().astimezone().strftime("%Y%m%dT%H%M%S%z")
 
@@ -70,7 +81,10 @@ def obtener_ejecucion(
     carpeta = carpeta_caso(caso, revision)
     config, huella_config = cargar_configuracion(_config_path(caso, revision))
     huella_codigo = _huella_codigo()
-    huella = hashlib.sha256(f"{huella_config}:{huella_codigo}".encode()).hexdigest()
+    huella_overrides = _huella_overrides(carpeta)
+    huella = hashlib.sha256(
+        f"{huella_config}:{huella_codigo}:{huella_overrides}".encode()
+    ).hexdigest()
     indice = _indice(carpeta)
     existente = indice["ejecuciones"].get(huella)
     if existente and not nueva:
@@ -98,6 +112,7 @@ def obtener_ejecucion(
         "caso": caso,
         "revision": revision.upper(),
         "configuracion_sha256": huella_config,
+        "overrides_sha256": huella_overrides,
         "codigo_sha256": huella_codigo,
         "modulos": {},
     })

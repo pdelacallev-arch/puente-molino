@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from dataclasses import fields
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any, Callable
 
 from .contratos import (
@@ -123,7 +124,7 @@ def _pantalla_shell(entrada: EntradaElemento, dependencias: dict[str, dict]) -> 
     parametros = m.ParametrosShell(
         **_argumentos_dataclass(m.ParametrosShell, entrada.parametros["elemento"])
     )
-    return m._limpiar_para_json(m.calcular(parametros, incluir_convergencia=False))
+    return m.calcular(parametros, incluir_convergencia=False)
 
 
 def _pantalla_diseno(entrada: EntradaElemento, dependencias: dict[str, dict]) -> dict:
@@ -247,7 +248,15 @@ def ejecutar_entrada(
     if objetivo != f"{entrada.elemento}.{entrada.calculo}":
         raise ValueError("El objetivo no coincide con la identidad de entrada.json")
     dependencias = _dependencias(entrada, ruta_entrada)
-    resultado_bruto = _normalizar_json(MOTORES[objetivo](entrada, dependencias))
+    resultado_crudo = MOTORES[objetivo](entrada, dependencias)
+    archivos = _generar_figuras(
+        objetivo, resultado_crudo, entrada, dependencias, carpeta_salida
+    )
+    if objetivo in ("pantalla.analisis_shell_3d", "pantalla.reacciones_contrafuertes"):
+        from analisis_estabilidad.elementos.pantalla.analisis_shell_3d import _limpiar_para_json
+
+        resultado_crudo = _limpiar_para_json(resultado_crudo)
+    resultado_bruto = _normalizar_json(resultado_crudo)
     contrato = ResultadoElemento(
         ejecucion_id=entrada.ejecucion_id,
         elemento=entrada.elemento,
@@ -262,10 +271,159 @@ def ejecutar_entrada(
         estado=_estado(resultado_bruto),
         resultados=resultado_bruto,
         advertencias=[str(x) for x in resultado_bruto.get("advertencias", [])],
+        archivos_generados=[
+            str(x.relative_to(carpeta_salida)).replace("\\", "/") for x in archivos
+        ],
     )
     escribir_json_atomico(carpeta_salida / "resultado.json", contrato)
     _escribir_reporte(objetivo, resultado_bruto, carpeta_salida / "reporte.md")
     return contrato
+
+
+def _generar_figuras(
+    objetivo: str,
+    resultado: dict,
+    entrada: EntradaElemento,
+    dependencias: dict[str, dict],
+    carpeta_salida: Path,
+) -> list[Path]:
+    """Genera figuras como posproceso del resultado, sin repetir el cálculo."""
+    figuras = carpeta_salida / "figuras"
+    figuras.mkdir(parents=True, exist_ok=True)
+    rutas: list[Path] = []
+
+    if objetivo == "estribo.estabilidad_global":
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from analisis_estabilidad.elementos.estribo import geometria as geo
+        from analisis_estabilidad.elementos.estribo import interfaces as inter
+        from analisis_estabilidad.elementos.estribo import estabilidad_global as eg
+
+        p = entrada.parametros
+        g = eg.AbutmentGeometry(**p["geometria"])
+        inter.GEOM = g
+        inter.MAT = eg.MaterialProperties(**p["materiales"])
+        inter.LOADS = eg.SuperstructureLoads(**p["cargas_superestructura"])
+        inter.SEISMIC = eg.SeismicParameters(**p["sismo"])
+        inter.FALSE_FOOTING = eg.FalseFootingProperties(**p["falsa_zapata"])
+        fig, ax = plt.subplots(figsize=(8.4, 12.0))
+        geo.draw_estribo(ax, g)
+        fig.tight_layout(pad=0.3)
+        ruta = figuras / "geometria_estribo.png"
+        fig.savefig(ruta, dpi=300, bbox_inches="tight", facecolor="white")
+        plt.close(fig)
+        rutas.append(ruta)
+        if "interfaces" in resultado:
+            for numero in (1, 2):
+                for caso in (
+                    "servicio-i", "resistencia-ia", "resistencia-ib",
+                    "evento-extremo-i",
+                ):
+                    ruta = figuras / f"presiones_interfaz_{numero}_{caso}.png"
+                    args = SimpleNamespace(caso=caso, dpi=220, salida=ruta)
+                    inter.draw_interface(args, numero, results=resultado)
+                    rutas.append(ruta)
+
+    elif objetivo in ("pantalla.analisis_shell_3d", "pantalla.reacciones_contrafuertes"):
+        from analisis_estabilidad.elementos.pantalla.analisis_shell_3d import generar_graficos
+
+        rutas.extend(generar_graficos(resultado, figuras))
+
+    elif objetivo == "pantalla.diseno_e060_mtc":
+        from analisis_estabilidad.elementos.pantalla.diseno_e060_mtc import generar_grafico_momentos
+
+        rutas.append(generar_grafico_momentos(
+            resultado, figuras / "diagramas_momento_flector_franjas.png"
+        ))
+
+    elif objetivo == "contrafuertes.analisis_2d":
+        from analisis_estabilidad.elementos.contrafuertes.analisis_2d import generar_graficos
+
+        rutas.extend(generar_graficos(resultado, figuras))
+
+    elif objetivo == "contrafuertes.diseno_stm":
+        from analisis_estabilidad.elementos.contrafuertes.diseno_stm import _generar_png_vista_previa
+
+        ruta = figuras / "detalle_armado_contrafuertes_centrales.png"
+        _generar_png_vista_previa(resultado, ruta)
+        rutas.append(ruta)
+
+    elif objetivo == "zapata.diseno_longitudinal_e060":
+        import matplotlib.pyplot as plt
+        from analisis_estabilidad.elementos.zapata.plano_armado import crear_figura
+
+        fig = crear_figura(resultado)
+        for extension in ("png", "svg"):
+            ruta = figuras / f"plano_zapata_e060.{extension}"
+            fig.savefig(ruta, dpi=300 if extension == "png" else None, facecolor="white")
+            rutas.append(ruta)
+        plt.close(fig)
+
+    elif objetivo == "zapata.diseno_transversal_e060_mtc":
+        from analisis_estabilidad.elementos.zapata.diseno_transversal_e060_mtc import (
+            generar_detalle_armado,
+            generar_grafico_cargas,
+            generar_grafico_momentos,
+        )
+
+        rutas.append(generar_grafico_cargas(
+            resultado, figuras / "cargas_zapata_transversal.png"
+        ))
+        rutas.append(generar_grafico_momentos(
+            resultado, figuras / "diagramas_momento_zapata_transversal.png"
+        ))
+        svg, png = generar_detalle_armado(
+            resultado,
+            figuras / "detalle_armado_zapata_transversal.svg",
+            figuras / "detalle_armado_zapata_transversal.png",
+        )
+        rutas.extend((svg, png))
+
+    elif objetivo == "dentellon.diseno_e060":
+        import matplotlib.pyplot as plt
+        from analisis_estabilidad.elementos.dentellon.diagrama_presiones import crear_figura
+
+        fig = crear_figura(resultado, "case_resistance_Ia")
+        for extension in ("png", "svg"):
+            ruta = figuras / f"presiones_dentellon.{extension}"
+            fig.savefig(ruta, dpi=300 if extension == "png" else None, facecolor="white")
+            rutas.append(ruta)
+        plt.close(fig)
+
+    elif objetivo == "cajuela.verificacion_voladizo":
+        from analisis_estabilidad.elementos.cajuela.diagrama_cargas import (
+            dibujar_caso,
+            nombre_archivo,
+        )
+        from analisis_estabilidad.elementos.cajuela.verificacion_voladizo import Caso, Parametros
+
+        comunes = _comunes_desde_estabilidad(dependencias)
+        datos = dict(entrada.parametros["elemento"])
+        mat = comunes["materiales"]
+        cargas = comunes["cargas_superestructura"]
+        sismo = comunes["sismo"]
+        datos.update({
+            "fc_kgf_cm2": mat["f_c"], "fy_kgf_cm2": mat["fy"],
+            "gamma_relleno_tf_m3": mat["gamma_r"],
+            "gamma_concreto_tf_m3": mat["gamma_c"],
+            "phi_relleno_grados": mat["phi_relleno"],
+            "delta_grados": mat["delta"], "dc_tf_m": cargas["DC"],
+            "dw_tf_m": cargas["DW"], "pl_tf_m": cargas["PL"],
+            "ll_im_tf_m": cargas["LL_IM"], "br_tf_m": cargas["BR"],
+            "kh": sismo["Kh"], "kv": sismo["Kv"],
+        })
+        parametros = Parametros(**_argumentos_dataclass(Parametros, datos))
+        claves = (
+            "servicio-i", "resistencia-i-a", "resistencia-i-b",
+            "evento-extremo-i",
+        )
+        for clave, caso_datos in zip(claves, resultado["casos"]):
+            ruta = figuras / nombre_archivo(clave)
+            dibujar_caso(Caso(**caso_datos), parametros, ruta, dpi=220)
+            rutas.append(ruta)
+
+    return rutas
 
 
 def _escribir_reporte(objetivo: str, resultado: dict, ruta: Path) -> None:
