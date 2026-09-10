@@ -1,0 +1,86 @@
+{
+  "version_esquema": "1.0",
+  "ejecucion_id": "20260909T210928-0500",
+  "elemento": "estribo",
+  "calculo": "estabilidad_global",
+  "unidades": "MKS",
+  "parametros": {
+    "geometria": {
+      "H": 15.34,
+      "hp": 13.84,
+      "hz": 1.5,
+      "B": 11.95,
+      "B1": 6.1,
+      "B2": 5.45,
+      "tp1": 0.4,
+      "tp2": 0.4,
+      "ancho_estribo": 1.0,
+      "a_cajuela": 1.15,
+      "b_cajuela": 0.4,
+      "c_cajuela": 2.34,
+      "d_cajuela": 0.7,
+      "e_cajuela": 0.75,
+      "f_cajuela": 0.4,
+      "g_cajuela": 0.55,
+      "back_face_slope": 0.0
+    },
+    "falsa_zapata": {
+      "enabled": true,
+      "height": 3.56,
+      "width": 11.95,
+      "gamma": 2.3,
+      "f_c": 140.0,
+      "concrete_contact_mu": 0.6,
+      "concrete_compression_phi": 1.0,
+      "soil_contact_mu": null,
+      "offset_from_toe": null
+    },
+    "materiales": {
+      "gamma_c": 2.4,
+      "f_c": 280.0,
+      "fy": 4200.0,
+      "gamma_r": 1.8,
+      "phi_relleno": 39.8,
+      "delta": 19.9,
+      "gamma_suelo": 1.96,
+      "phi_base": 39.8,
+      "cohesion": 0.0,
+      "mu": 0.55,
+      "capacidad_portante": 3.67,
+      "capacidad_portante_factorizada": null
+    },
+    "cargas_superestructura": {
+      "L": 50.0,
+      "ancho_distribucion": 1.0,
+      "R_DL_total": 173.15,
+      "R_LL_total": 77.71,
+      "R_BR_total": 9.8,
+      "DC": 25.98,
+      "DW": 2.88,
+      "PL": 3.08,
+      "LL_IM": 12.95,
+      "BR": 1.63,
+      "brazo_super": null,
+      "brazo_BR": null,
+      "brazo_EQ_super": null
+    },
+    "sismo": {
+      "A": 0.25,
+      "S": 1.2,
+      "R": 1.5,
+      "Kh": 0.125,
+      "Kv": 0.05
+    }
+  },
+  "dependencias": [],
+  "trazabilidad": {
+    "configuracion_sha256": "03c49f01d6426d359dfdc0d9d088de30849bce675db6a8f45a51fc873cb19e1d",
+    "fuentes_por_parametro": {
+      "geometria": "memoria_estructuras/expediente_tecnico",
+      "cargas": "metrado_cargas",
+      "suelo": "estudio_suelos",
+      "normativa": "normativa"
+    },
+    "override_sha256": null
+  }
+}
