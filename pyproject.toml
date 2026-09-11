@@ -8,10 +8,11 @@ dependencies = [
     "numpy>=1.26,<3",
     "pydantic>=2.7,<3",
     "pyyaml>=6.0,<7",
+    "scipy>=1.13,<2",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "scipy>=1.13,<2"]
+dev = ["pytest"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests", "analisis_estabilidad/pruebas"]
+testpaths = ["tests", "analisis_estabilidad/pruebas", "analisis_superestructura/pruebas"]

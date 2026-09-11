@@ -24,11 +24,11 @@ import math
 import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Iterable
+from typing import Callable, Iterable
 
 import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
-from scipy.sparse.linalg import spsolve
+from scipy.sparse.linalg import factorized
 
 
 if __package__ in (None, ""):
@@ -169,6 +169,15 @@ class ResultadoCaso:
     error_momento_kn_m: float
     desplazamiento_max_mm: float
     reacciones_contrafuertes: dict[str, dict]
+
+
+@dataclass(frozen=True)
+class SistemaLinealShell:
+    """Sistema restringido y factorizado que comparten los casos de carga."""
+
+    kq: csr_matrix
+    libres: np.ndarray
+    resolver: Callable[[np.ndarray], np.ndarray]
 
 
 def _distancia(a: tuple[float, float], b: tuple[float, float]) -> float:
@@ -443,6 +452,18 @@ def grados_restringidos(malla: MallaShell) -> np.ndarray:
     return np.asarray(sorted(restringidos), dtype=int)
 
 
+def preparar_sistema_lineal(
+    malla: MallaShell, K: csr_matrix, S: csr_matrix
+) -> SistemaLinealShell:
+    """Transforma y factoriza K una sola vez para todos los casos del modelo."""
+    kq = (S.T @ K @ S).tocsr()
+    restringidos = grados_restringidos(malla)
+    todos = np.arange(kq.shape[0])
+    libres = np.setdiff1d(todos, restringidos, assume_unique=True)
+    resolver = factorized(kq[libres][:, libres].tocsc())
+    return SistemaLinealShell(kq=kq, libres=libres, resolver=resolver)
+
+
 def coeficientes_presion(p: ParametrosShell) -> dict:
     ka = coulomb_active_coefficient(MAT.phi_relleno, MAT.delta)
     psi = math.degrees(math.atan2(SEISMIC.Kh, 1-SEISMIC.Kv))
@@ -580,15 +601,15 @@ def _momento_vector_en_origen(nodos: np.ndarray, fuerzas: np.ndarray) -> np.ndar
 
 
 def resolver_caso(malla: MallaShell, p: ParametrosShell, K: csr_matrix,
-                  S: csr_matrix, coef: dict, caso: str) -> ResultadoCaso:
+                  S: csr_matrix, coef: dict, caso: str,
+                  sistema: SistemaLinealShell | None = None) -> ResultadoCaso:
     f_global, escenario = vector_carga(malla, p, caso, coef)
-    kq = (S.T@K@S).tocsr()
+    sistema = sistema or preparar_sistema_lineal(malla, K, S)
+    kq = sistema.kq
     fq = np.asarray(S.T@f_global).ravel()
-    restringidos = grados_restringidos(malla)
-    todos = np.arange(kq.shape[0])
-    libres = np.setdiff1d(todos, restringidos, assume_unique=True)
+    libres = sistema.libres
     q = np.zeros_like(fq)
-    q[libres] = spsolve(kq[libres][:, libres], fq[libres])
+    q[libres] = sistema.resolver(fq[libres])
     if not np.all(np.isfinite(q)):
         raise RuntimeError("La solución FEM contiene valores no finitos")
     rq = np.asarray(kq@q-fq).ravel()
@@ -637,7 +658,10 @@ def analizar_modelo(p: ParametrosShell) -> tuple[MallaShell, dict, list[Resultad
     K = ensamblar_rigidez(malla, p)
     S = matriz_transformacion_apoyos(malla)
     coef = coeficientes_presion(p)
-    resultados = [resolver_caso(malla, p, K, S, coef, caso) for caso in CASOS]
+    sistema = preparar_sistema_lineal(malla, K, S)
+    resultados = [
+        resolver_caso(malla, p, K, S, coef, caso, sistema) for caso in CASOS
+    ]
     return malla, coef, resultados
 
 

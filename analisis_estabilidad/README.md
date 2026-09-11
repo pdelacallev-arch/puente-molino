@@ -26,13 +26,13 @@ motores y representaciones permanecen dentro de la carpeta de su elemento.
 La configuración vigente está en:
 
 ```text
-casos/molinohuayco/R00/entrada.yaml
+casos/molinohuayco/R02/entrada.yaml
 ```
 
 Puede añadirse un ajuste particular en:
 
 ```text
-casos/molinohuayco/R00/entradas/<elemento>/<calculo>.override.json
+casos/molinohuayco/R02/entradas/<elemento>/<calculo>.override.json
 ```
 
 El override JSON tiene prioridad sobre la sección correspondiente del YAML.
@@ -45,16 +45,21 @@ Desde la raíz del proyecto:
 
 ```powershell
 $env:UV_CACHE_DIR='.uv-cache'
-uv run python -m analisis_estabilidad validar --caso molinohuayco --revision R00
-uv run python -m analisis_estabilidad ejecutar zapata.longitudinal --caso molinohuayco --revision R00
-uv run python -m analisis_estabilidad ejecutar contrafuertes.diseno --caso molinohuayco --revision R00
-uv run python -m analisis_estabilidad ejecutar todo --caso molinohuayco --revision R00
-uv run python -m analisis_estabilidad consolidar --caso molinohuayco --revision R00
+uv run python -m analisis_estabilidad validar --caso molinohuayco --revision R02
+uv run python -m analisis_estabilidad ejecutar zapata.longitudinal --caso molinohuayco --revision R02
+uv run python -m analisis_estabilidad ejecutar contrafuertes.diseno --caso molinohuayco --revision R02
+uv run python -m analisis_estabilidad ejecutar todo --caso molinohuayco --revision R02
+uv run python -m analisis_estabilidad consolidar --caso molinohuayco --revision R02
 ```
 
 El orquestador ejecuta automáticamente las dependencias técnicas. Una misma
 huella de configuración y código continúa la ejecución compatible; cualquier
 cambio crea otra carpeta fechada.
+
+El modelo shell factoriza una sola vez la matriz restringida y reutiliza esa
+factorización en todos los casos de carga. El objetivo
+`pantalla.reacciones_contrafuertes` deriva sus datos del resultado
+`pantalla.analisis_shell_3d`, por lo que no repite el FEM ni sus figuras.
 
 ## Ejecución independiente
 
@@ -63,7 +68,7 @@ Cada paquete estructural admite una entrada y salida explícitas:
 ```powershell
 uv run python -m analisis_estabilidad.elementos.zapata `
   diseno_longitudinal_e060 `
-  --entrada analisis_estabilidad/casos/molinohuayco/R00/ejecuciones/<id>/elementos/zapata/diseno_longitudinal_e060/entrada.json `
+  --entrada analisis_estabilidad/casos/molinohuayco/R02/ejecuciones/<id>/elementos/zapata/diseno_longitudinal_e060/entrada.json `
   --salida analisis_estabilidad/.tmp/zapata_independiente
 ```
 

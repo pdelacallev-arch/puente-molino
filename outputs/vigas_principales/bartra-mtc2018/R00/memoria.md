@@ -1,4 +1,4 @@
-# Análisis y diseño de vigas principales - Benchmark Bartra actualizado a MTC 2018
+# Análisis y diseño de vigas principales - Benchmark de Bartra actualizado a MTC 2018
 
 - Revisión: `R00`
 - Norma: Manual de Puentes MTC 2018

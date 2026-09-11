@@ -14,7 +14,7 @@ from analisis_estabilidad.nucleo.contratos import (
     leer_resultado,
     sha256_archivo,
 )
-from analisis_estabilidad.nucleo.motores import ejecutar_entrada
+from analisis_estabilidad.nucleo.motores import _pantalla_reacciones, ejecutar_entrada
 from analisis_estabilidad.nucleo.orquestador import (
     DEPENDENCIAS,
     _aplicar_override,
@@ -24,7 +24,7 @@ from analisis_estabilidad.nucleo.orquestador import (
 from analisis_estabilidad.nucleo.rutas import RAIZ_CASOS, RAIZ_TEMPORAL, asegurar_interna
 
 
-CONFIG = RAIZ_CASOS / "molinohuayco" / "R00" / "entrada.yaml"
+CONFIG = RAIZ_CASOS / "molinohuayco" / "R02" / "entrada.yaml"
 
 
 @pytest.fixture()
@@ -51,6 +51,33 @@ def test_yaml_contiene_configuracion_para_todos_los_motores():
     config, _ = cargar_configuracion(CONFIG)
     for objetivo in DEPENDENCIAS:
         assert _seccion_objetivo(config, objetivo)
+
+
+def test_reacciones_pantalla_reutilizan_resultado_shell():
+    config, huella = cargar_configuracion(CONFIG)
+    entrada = _entrada(
+        config, huella, "pantalla.reacciones_contrafuertes", "prueba"
+    )
+    reacciones = [{"contrafuerte": "CF-C1", "caso": "Servicio I"}]
+    resultado_shell = {
+        "parametros": entrada.parametros["elemento"],
+        "reacciones_nodales_contrafuertes": reacciones,
+        "validaciones": {
+            "equilibrio_cumple": True,
+            "simetria_cumple": True,
+        },
+        "estado": "CUMPLE",
+    }
+
+    resultado = _pantalla_reacciones(
+        entrada, {"pantalla.analisis_shell_3d": resultado_shell}
+    )
+
+    assert DEPENDENCIAS["pantalla.reacciones_contrafuertes"] == (
+        "pantalla.analisis_shell_3d",
+    )
+    assert resultado["reacciones_nodales_contrafuertes"] == reacciones
+    assert resultado["fuente_calculo"] == "pantalla.analisis_shell_3d"
 
 
 def test_override_json_tiene_prioridad_sobre_yaml(carpeta_contrato):

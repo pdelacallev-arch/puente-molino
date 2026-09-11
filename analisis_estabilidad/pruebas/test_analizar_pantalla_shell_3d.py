@@ -3,6 +3,7 @@ import math
 import numpy as np
 import pytest
 
+from analisis_estabilidad.elementos.pantalla import analisis_shell_3d as shell
 from analisis_estabilidad.elementos.pantalla.analisis_shell_3d import (
     ParametrosShell,
     calcular,
@@ -71,6 +72,21 @@ def test_modelo_cierra_equilibrio_simetria_y_casos(resultado_grueso):
     assert {x["caso"] for x in resultado_grueso["casos"]} >= {
         "Evento Extremo I-A", "Evento Extremo I-B",
     }
+
+
+def test_modelo_factoriza_una_sola_vez_para_todos_los_casos(monkeypatch):
+    original = shell.factorized
+    llamadas = 0
+
+    def contar_factorizacion(*args, **kwargs):
+        nonlocal llamadas
+        llamadas += 1
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(shell, "factorized", contar_factorizacion)
+    shell.analizar_modelo(ParametrosShell(tamano_malla_m=1.50))
+
+    assert llamadas == 1
 
 
 def test_diseno_dual_cumple_y_no_disena_contrafuertes(resultado_grueso):

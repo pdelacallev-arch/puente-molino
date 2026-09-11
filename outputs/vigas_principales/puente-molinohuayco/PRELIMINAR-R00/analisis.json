@@ -7,7 +7,7 @@
       "responsable": "Pendiente de conciliación del expediente",
       "sistema_unidades": "SI"
     },
-    "sha256_configuracion_normalizada": "42c3ee21e92da31c8d5120e34df9d7803c87ebdbb5ae7392695dca5c162c1b82",
+    "sha256_configuracion_normalizada": "81df21cdc9b82fcb61513dc68c82224c93f62dda0f474c66ba40f2df1672c9ad",
     "metodo": "Bartra pp. 113-165 actualizado a MTC 2018",
     "alcance": "Viga I recta simplemente apoyada; conectores, rigidizadores y diafragmas excluidos"
   },
@@ -247,7 +247,7 @@
     "fuentes": {
       "geometria": "metrado_cargas/registro_verificacion_datos_3.1_a_3.4.md",
       "seccion": "memoria_estructuras/4 Anexo 2 MEMORIA DE CALCULO ESTRUCTURAL DE VIGAS METALICAS.pdf",
-      "cargas_vigas": "analisis_superestructura/vigas_principales/memoria_metrado_manual_cargas_molinohuayco.md",
+      "cargas_vigas": "analisis_superestructura/documentos/vigas_principales/memoria_metrado_manual_cargas_molinohuayco.md",
       "normativa": "normativa/manual_puentes_MTC_2018.pdf"
     },
     "estados_datos": {

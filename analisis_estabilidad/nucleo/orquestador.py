@@ -28,7 +28,7 @@ from .rutas import RAIZ_ESTABILIDAD, asegurar_interna, carpeta_caso
 DEPENDENCIAS: dict[str, tuple[str, ...]] = {
     "estribo.estabilidad_global": (),
     "pantalla.analisis_shell_3d": ("estribo.estabilidad_global",),
-    "pantalla.reacciones_contrafuertes": ("estribo.estabilidad_global",),
+    "pantalla.reacciones_contrafuertes": ("pantalla.analisis_shell_3d",),
     "pantalla.diseno_e060_mtc": ("estribo.estabilidad_global",),
     "contrafuertes.analisis_2d": ("pantalla.reacciones_contrafuertes",),
     "contrafuertes.diseno_stm": ("contrafuertes.analisis_2d",),
@@ -203,9 +203,13 @@ def ejecutar_objetivo(
     config: ConfiguracionCaso,
     huella_config: str,
     ejecucion: Path,
+    cache: dict[str, Path] | None = None,
 ) -> Path:
+    cache = {} if cache is None else cache
+    if objetivo in cache:
+        return cache[objetivo]
     rutas_dependencias = [
-        ejecutar_objetivo(dep, config, huella_config, ejecucion)
+        ejecutar_objetivo(dep, config, huella_config, ejecucion, cache)
         for dep in DEPENDENCIAS[objetivo]
     ]
     entrada, ruta_entrada = preparar(
@@ -218,6 +222,7 @@ def ejecutar_objetivo(
         if anterior.entrada_sha256 == sha256_datos(entrada) and anterior.estado not in (
             "ERROR", "OBSOLETO"
         ):
+            cache[objetivo] = ruta_resultado
             return ruta_resultado
     resultado = ejecutar_entrada(objetivo, ruta_entrada, carpeta)
     manifiesto_ruta = ejecucion / "manifiesto.json"
@@ -230,6 +235,7 @@ def ejecutar_objetivo(
         "resultado_sha256": sha256_archivo(ruta_resultado),
     }
     escribir_json_atomico(manifiesto_ruta, manifiesto)
+    cache[objetivo] = ruta_resultado
     return ruta_resultado
 
 
@@ -238,7 +244,10 @@ def ejecutar(
 ) -> tuple[Path, list[Path]]:
     config, huella, ejecucion, _ = obtener_ejecucion(caso, revision, nueva)
     objetivos = list(DEPENDENCIAS) if objetivo == "todo" else [objetivo]
-    resultados = [ejecutar_objetivo(x, config, huella, ejecucion) for x in objetivos]
+    cache: dict[str, Path] = {}
+    resultados = [
+        ejecutar_objetivo(x, config, huella, ejecucion, cache) for x in objetivos
+    ]
     return ejecucion, resultados
 
 

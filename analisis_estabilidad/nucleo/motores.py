@@ -127,6 +127,50 @@ def _pantalla_shell(entrada: EntradaElemento, dependencias: dict[str, dict]) -> 
     return m.calcular(parametros, incluir_convergencia=False)
 
 
+def _pantalla_reacciones(
+    entrada: EntradaElemento, dependencias: dict[str, dict]
+) -> dict:
+    """Deriva las reacciones del shell ya resuelto sin repetir el FEM."""
+    shell = dependencias.get("pantalla.analisis_shell_3d")
+    if shell is None:
+        raise ValueError("Falta el resultado pantalla.analisis_shell_3d")
+    parametros_fuente = shell.get("parametros", {})
+    parametros_requeridos = entrada.parametros["elemento"]
+    incompatibles = sorted(
+        clave
+        for clave, valor in parametros_requeridos.items()
+        if clave not in parametros_fuente or parametros_fuente[clave] != valor
+    )
+    if incompatibles:
+        raise ValueError(
+            "Las reacciones requieren la misma configuración del shell; "
+            f"difieren: {incompatibles}"
+        )
+    try:
+        reacciones = shell["reacciones_nodales_contrafuertes"]
+    except KeyError as exc:
+        raise ValueError("El shell no exportó reacciones nodales de contrafuertes") from exc
+    validaciones_shell = shell.get("validaciones", {})
+    return {
+        "identificacion": "Reacciones de contrafuertes derivadas del modelo shell 3D",
+        "fuente_calculo": "pantalla.analisis_shell_3d",
+        "parametros": parametros_fuente,
+        "reacciones_nodales_contrafuertes": reacciones,
+        "validaciones": {
+            clave: validaciones_shell[clave]
+            for clave in (
+                "max_error_fuerza_kn",
+                "max_error_momento_kn_m",
+                "equilibrio_cumple",
+                "simetria_cumple",
+            )
+            if clave in validaciones_shell
+        },
+        "estado": shell.get("estado", "OK"),
+        "advertencias": shell.get("advertencias", []),
+    }
+
+
 def _pantalla_diseno(entrada: EntradaElemento, dependencias: dict[str, dict]) -> dict:
     from analisis_estabilidad.elementos.pantalla import diseno_e060_mtc as m
 
@@ -226,7 +270,7 @@ def _cajuela(entrada: EntradaElemento, dependencias: dict[str, dict]) -> dict:
 MOTORES: dict[str, Callable[[EntradaElemento, dict[str, dict]], dict]] = {
     "estribo.estabilidad_global": _estribo_estabilidad,
     "pantalla.analisis_shell_3d": _pantalla_shell,
-    "pantalla.reacciones_contrafuertes": _pantalla_shell,
+    "pantalla.reacciones_contrafuertes": _pantalla_reacciones,
     "pantalla.diseno_e060_mtc": _pantalla_diseno,
     "contrafuertes.analisis_2d": _contrafuertes_analisis,
     "contrafuertes.diseno_stm": _contrafuertes_diseno,
@@ -325,7 +369,7 @@ def _generar_figuras(
                     inter.draw_interface(args, numero, results=resultado)
                     rutas.append(ruta)
 
-    elif objetivo in ("pantalla.analisis_shell_3d", "pantalla.reacciones_contrafuertes"):
+    elif objetivo == "pantalla.analisis_shell_3d":
         from analisis_estabilidad.elementos.pantalla.analisis_shell_3d import generar_graficos
 
         rutas.extend(generar_graficos(resultado, figuras))
@@ -431,9 +475,11 @@ def _escribir_reporte(objetivo: str, resultado: dict, ruta: Path) -> None:
     if objetivo == "estribo.estabilidad_global":
         from analisis_estabilidad.elementos.estribo.estabilidad_global import generate_markdown_report
         generadores[objetivo] = generate_markdown_report
-    elif objetivo in ("pantalla.analisis_shell_3d", "pantalla.reacciones_contrafuertes"):
+    elif objetivo == "pantalla.analisis_shell_3d":
         from analisis_estabilidad.elementos.pantalla.analisis_shell_3d import generar_markdown
         generadores[objetivo] = generar_markdown
+    elif objetivo == "pantalla.reacciones_contrafuertes":
+        generadores[objetivo] = _reporte_reacciones_pantalla
     elif objetivo == "pantalla.diseno_e060_mtc":
         from analisis_estabilidad.elementos.pantalla.diseno_e060_mtc import generar_resumen_texto
         generadores[objetivo] = generar_resumen_texto
@@ -458,3 +504,20 @@ def _escribir_reporte(objetivo: str, resultado: dict, ruta: Path) -> None:
     generador = generadores.get(objetivo)
     if generador:
         ruta.write_text(generador(resultado), encoding="utf-8")
+
+
+def _reporte_reacciones_pantalla(resultado: dict) -> str:
+    validaciones = resultado.get("validaciones", {})
+    registros = resultado.get("reacciones_nodales_contrafuertes", [])
+    return "\n".join([
+        "# Reacciones de la pantalla hacia los contrafuertes",
+        "",
+        "Las reacciones se derivan del resultado verificado de "
+        "`pantalla.analisis_shell_3d`; no se repite la resolución FEM.",
+        "",
+        f"- Registros exportados: {len(registros)}",
+        f"- Estado de origen: {resultado.get('estado', 'NO DEFINIDO')}",
+        f"- Equilibrio: {'CUMPLE' if validaciones.get('equilibrio_cumple') else 'REVISAR'}",
+        f"- Simetría: {'CUMPLE' if validaciones.get('simetria_cumple') else 'REVISAR'}",
+        "",
+    ])

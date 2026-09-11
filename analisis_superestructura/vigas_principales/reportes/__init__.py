@@ -1,2 +1,0 @@
-"""Exportadores reproducibles de resultados."""
-
