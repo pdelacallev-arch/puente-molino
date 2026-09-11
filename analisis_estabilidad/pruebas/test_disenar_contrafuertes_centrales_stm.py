@@ -22,7 +22,16 @@ def analisis():
 
 @pytest.fixture(scope="module")
 def resultado(analisis):
-    return disenar(analisis)
+    # La geometría de diseño debe coincidir con la del análisis (verificación
+    # interna de `disenar`); se toman explícitamente del JSON de entrada.
+    pg = analisis["parametros"]
+    p = ParametrosDisenoContrafuertes(
+        altura_m=pg["altura_m"],
+        longitud_base_m=pg["longitud_base_m"],
+        longitud_corona_m=pg["longitud_corona_m"],
+        espesor_m=pg["espesor_m"],
+    )
+    return disenar(analisis, p)
 
 
 def test_envolvente_reproduce_acciones_base_y_cubre_15_casos(analisis):

@@ -27,8 +27,8 @@ class AbutmentGeometry:
     Valores confirmados del Puente Molinohuaico.
     """
     # Dimensiones principales
-    H: float = 12.39 #14.64 #11.90                # Altura total del estribo, Figura 3.44 (m)
-    hp: float = 10.89 #13.14 #10.40               # Altura de pantalla, Figura 3.44 (m)
+    H: float = 12.39                # Altura total del estribo, Figura 3.44 (m)
+    hp: float = 10.89               # Altura de pantalla, Figura 3.44 (m)
     hz: float = 1.50                # Altura de la zapata (m)
     B: float = 12.65                # Ancho total de la base (m)
     B1: float = 6.10                # Talón posterior (m) - de canto a cara posterior pantalla

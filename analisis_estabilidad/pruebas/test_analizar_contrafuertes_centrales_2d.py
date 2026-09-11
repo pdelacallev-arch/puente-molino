@@ -28,9 +28,9 @@ def modelo_sintetico():
 
 def test_geometria_trapezoidal_conserva_base_y_corona(modelo_sintetico):
     p, malla, _ = modelo_sintetico
-    assert p.longitud(0.0) == pytest.approx(6.10)
+    assert p.longitud(0.0) == pytest.approx(p.longitud_base_m)
     assert p.longitud(p.altura_m) == pytest.approx(p.longitud_corona_m)
-    assert malla.nodos[malla.nodos_base, 0].max() == pytest.approx(6.10)
+    assert malla.nodos[malla.nodos_base, 0].max() == pytest.approx(p.longitud_base_m)
     assert malla.nodos[-1, 0] == pytest.approx(p.longitud_corona_m)
 
 

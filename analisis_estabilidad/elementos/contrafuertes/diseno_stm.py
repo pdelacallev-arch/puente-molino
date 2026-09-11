@@ -66,8 +66,8 @@ class ParametrosDisenoContrafuertes:
     """Entradas editables del diseño; las acciones permanecen en el JSON."""
 
     altura_m: float = 7.85
-    longitud_base_m: float = 6.10
-    longitud_corona_m: float = 0.50
+    longitud_base_m: float = 6.50
+    longitud_corona_m: float = 0.40
     espesor_m: float = 0.40
     recubrimiento_mm: float = 75.0
     fc_kg_cm2: float = 280.0

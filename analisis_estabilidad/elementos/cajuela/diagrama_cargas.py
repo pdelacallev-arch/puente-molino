@@ -38,6 +38,7 @@ from analisis_estabilidad.elementos.cajuela.verificacion_voladizo import (  # no
     coeficientes,
     construir_casos,
 )
+from analisis_estabilidad.elementos.estribo.estabilidad_global import GEOM  # noqa: E402
 
 
 CONCRETE_FILL = "#e2e8f0"
@@ -394,9 +395,9 @@ def main() -> None:
         ),
         default="todos",
     )
-    parser.add_argument("--altura", type=float, default=3.40)
+    parser.add_argument("--altura", type=float, default=GEOM.c_cajuela + GEOM.d_cajuela)
     parser.add_argument(
-        "--altura-global-empuje", type=float, default=14.65,
+        "--altura-global-empuje", type=float, default=GEOM.H,
         help="Altura global H_g del diagrama de Delta Eas (m)",
     )
     parser.add_argument("--espesor", type=float, default=0.40)

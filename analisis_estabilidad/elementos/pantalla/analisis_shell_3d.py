@@ -7,10 +7,10 @@ Modelo lineal elástico de cascarones planos Q4. Cada elemento combina:
 * placa de Mindlin-Reissner con interpolación MITC4 de cortante;
 * seis grados de libertad globales por nodo.
 
-La poligonal real se extruye 9.80 m sobre la zapata. La base se considera
-empotrada y cada eje de contrafuerte restringe únicamente la traslación
-normal local a la pantalla. Los contrafuertes no se diseñan. La cajuela y las
-cargas transmitidas por ella están fuera del modelo.
+La poligonal real se extruye hasta la altura modelada sobre la zapata. La base
+se considera empotrada y cada eje de contrafuerte restringe únicamente la
+traslación normal local a la pantalla. Los contrafuertes no se diseñan. La
+cajuela y las cargas transmitidas por ella están fuera del modelo.
 
 Unidades internas del FEM: kN, m y kN/m². El diseño se presenta también en
 tf, tf·m y cm²/m para conservar coherencia con el agente de subestructura.
@@ -35,6 +35,7 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from analisis_estabilidad.elementos.estribo.estabilidad_global import (  # noqa: E402
+    GEOM,
     MAT,
     SEISMIC,
     coulomb_active_coefficient,
@@ -77,8 +78,8 @@ CM2_M_POR_IN2_FT = 6.4516/0.3048
 @dataclass(frozen=True)
 class ParametrosShell:
     puntos_planta: tuple[tuple[float, float, str, str], ...] = PUNTOS_PLANTA
-    altura_total_m: float = 13.15
-    altura_modelada_m: float = 9.80
+    altura_total_m: float = GEOM.hp
+    altura_modelada_m: float = GEOM.hp - (GEOM.c_cajuela + GEOM.d_cajuela)
     espesor_m: float = 0.40
     # Recubrimiento nominal por cara: la cara exterior (+n) está en contacto
     # con agua sometida a abrasión; la interior (-n) con el relleno.
@@ -1162,7 +1163,7 @@ def calcular(p: ParametrosShell | None = None, incluir_convergencia: bool = True
             for a, b in zip(p.puntos_planta, reversed(p.puntos_planta))
         ),
         "nueve_lineas_contrafuerte": sum(e.es_contrafuerte for e in malla.estaciones) == 9,
-        "cajuela_excluida": abs(p.altura_total_m-p.altura_modelada_m-3.35) < 1e-9,
+        "cajuela_excluida": abs(p.altura_total_m - p.altura_modelada_m - (GEOM.c_cajuela + GEOM.d_cajuela)) < 1e-9,
         "resistencia_ia_ib_independientes": ia is not ib,
         "resistencia_ia_ib_coinciden": np.allclose(ia.desplazamientos, ib.desplazamientos),
         "max_error_fuerza_kn": max_eq_f,
@@ -1226,7 +1227,7 @@ def generar_markdown(r: dict) -> str:
         lineas.append(f"| {nombre} | {x:.2f} | {y:.2f} | {tipo} |")
     lineas += [
         "", "## 3. Idealización y formulación", "",
-        "La poligonal se extruye verticalmente hasta 9.80 m. Cada elemento Q4 contiene membrana bilineal y placa "
+        f"La poligonal se extruye verticalmente hasta {p['altura_modelada_m']:.2f} m. Cada elemento Q4 contiene membrana bilineal y placa "
         "Mindlin-Reissner; el cortante transversal usa interpolación MITC4. En cada plano el eje local `x` sigue "
         "la pantalla, `y` es vertical y `+n` apunta hacia la cara exterior.", "",
         "Se emplea rigidez elástica bruta uniforme. La fisuración no lineal y una eventual redistribución por "

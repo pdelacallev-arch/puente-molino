@@ -224,8 +224,8 @@ elementos:
 
   cajuela:
     verificacion_voladizo:
-      altura_m: 3.40
-      altura_global_empuje_m: 14.65
+      altura_m: 3.04
+      altura_global_empuje_m: 12.39
       espesor_m: 0.40
       ancho_franja_m: 1.00
       recubrimiento_frontal_mm: 50.0

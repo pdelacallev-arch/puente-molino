@@ -1,0 +1,66 @@
+{
+  "version_esquema": "1.0",
+  "ejecucion_id": "20260911T135353-0500",
+  "elemento": "contrafuertes",
+  "calculo": "diseno_stm",
+  "unidades": "MKS",
+  "parametros": {
+    "elemento": {
+      "altura_m": 7.85,
+      "longitud_base_m": 6.5,
+      "longitud_corona_m": 0.4,
+      "espesor_m": 0.4,
+      "recubrimiento_mm": 75.0,
+      "fc_kg_cm2": 280.0,
+      "fy_kg_cm2": 4200.0,
+      "es_mpa": 200000.0,
+      "espesor_pantalla_m": 0.4,
+      "espesor_zapata_m": 1.5,
+      "anclaje_recto_base_disponible_mm": null,
+      "anclaje_corona_disponible_mm": null,
+      "longitud_empalme_disponible_mm": 2000.0,
+      "barras_principales": [
+        "1\""
+      ],
+      "barras_malla": [
+        "1/2\"",
+        "5/8\"",
+        "3/4\""
+      ],
+      "barra_principal_forzada": null,
+      "barra_malla_forzada": null,
+      "paso_espaciamiento_mm": 10.0,
+      "espaciamiento_minimo_mm": 100.0,
+      "tamano_agregado_mm": 19.0,
+      "maximo_capas_principales": 2,
+      "phi_tirante": 0.9,
+      "phi_compresion_stm": 0.7,
+      "phi_cortante": 0.9,
+      "phi_corte_friccion": 0.9,
+      "mu_corte_friccion": 1.0,
+      "factor_nodo_ccc": 0.85,
+      "factor_nodo_cct": 0.75,
+      "factor_nodo_ctt": 0.65,
+      "rho_fisuracion_mtc_total": 0.003,
+      "rho_temp_e060_total": 0.0018
+    }
+  },
+  "dependencias": [
+    {
+      "elemento": "contrafuertes",
+      "calculo": "analisis_2d",
+      "resultado": "../analisis_2d/resultado.json",
+      "sha256": "9cbb289b3968a359b354202c08732459f9c854953fa373bd284890fc52c59edd"
+    }
+  ],
+  "trazabilidad": {
+    "configuracion_sha256": "432ff9e2b4cb292b4a14637a0604547ae7046deb3ad2ee133caf9cf7b879ff84",
+    "fuentes_por_parametro": {
+      "geometria": "memoria_estructuras/expediente_tecnico",
+      "cargas": "metrado_cargas",
+      "suelo": "estudio_suelos",
+      "normativa": "normativa"
+    },
+    "override_sha256": null
+  }
+}

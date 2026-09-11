@@ -47,8 +47,8 @@ CARPETA_SALIDA = RUTA_PROYECTO/".tmp"/"legacy"/"contrafuertes"/"analisis_2d"
 @dataclass(frozen=True)
 class ParametrosContrafuerte:
     altura_m: float = 7.85
-    longitud_base_m: float = 6.10
-    longitud_corona_m: float = 0.50
+    longitud_base_m: float = 6.50
+    longitud_corona_m: float = 0.40
     espesor_m: float = 0.40
     poisson: float = 0.20
     divisiones_horizontales: int = 14
@@ -461,7 +461,7 @@ def generar_markdown(r: dict) -> str:
         "2×2 y comportamiento lineal elástico no fisurado. El borde basal está "
         "empotramado. `+x` se dirige desde la pantalla hacia el talón y `+z` es vertical.", "",
         "La longitud varía linealmente con la altura:", "",
-        "`L(z) = 6.10 + (1.17 - 6.10) z / 9.80`.", "",
+        f"`L(z) = {p['longitud_base_m']:.2f} + ({p['longitud_corona_m']:.2f} - {p['longitud_base_m']:.2f}) z / {p['altura_m']:.2f}`.", "",
         "## 3. Acciones transferidas y respuesta", "",
         "| Contrafuerte | Caso | R | M base | d máx. | σ1 máx. | σ1 P95 | σ2 mín. | Error F | Error M |",
         "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",

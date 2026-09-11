@@ -33,8 +33,8 @@ También puede emplearse otro entorno Python con las dependencias declaradas en 
 
 El paquete incluye estas configuraciones de referencia:
 
-- `ejemplos/bartra_mtc2018.yaml`: benchmark basado en la secuencia de Bartra, actualizado al MTC 2018.
-- `ejemplos/molinohuayco_preliminar.yaml`: caso preliminar del puente Molinohuayco.
+- `analisis_superestructura/casos/bartra/R00/entrada.yaml`: benchmark basado en la secuencia de Bartra, actualizado al MTC 2018.
+- `analisis_superestructura/casos/molinohuayco/PRELIMINAR-R00/entrada.yaml`: caso preliminar del puente Molinohuayco.
 
 Para ejecutar el análisis paso a paso sin terminal, abra
 `notebooks/analisis_parrilla.ipynb` en JupyterLab, VS Code o cualquier entorno

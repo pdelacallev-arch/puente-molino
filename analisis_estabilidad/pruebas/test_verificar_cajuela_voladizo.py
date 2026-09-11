@@ -76,7 +76,37 @@ def test_resultado_global_con_delta_eas_trapezoidal_no_cumple_a_230_mm():
     assert r["caso_gobernante"].startswith("Evento Extremo")
     assert not r["cumple_global"]
     assert r["cumple_cortante"]
-    assert r["separacion_maxima_vertical_5_8_mm"] == 125.0
+    assert r["separacion_maxima_vertical_5_8_mm"] == 155.0
+
+
+def test_dimensionamiento_por_cara_usa_el_caso_inverso_en_la_frontal():
+    p = Parametros()
+    r = evaluar(p)
+    inv = r["caso_inverso"]
+    caras = {x["cara"]: x for x in r["caras_verticales"]}
+
+    # La cara frontal/no relleno se dimensiona con el caso sismico inverso.
+    assert math.isclose(
+        caras["frontal/no relleno"]["momento_demanda_tf_m_m"],
+        inv["M_inverso_tf_m_m"],
+        rel_tol=1e-12,
+    )
+    # La cara posterior/relleno se dimensiona con el caso directo gobernante.
+    assert math.isclose(
+        caras["posterior/relleno"]["momento_demanda_tf_m_m"],
+        r["momento_gobernante_tf_m_m"],
+        rel_tol=1e-12,
+    )
+    # El caso inverso resulta menor que el directo (el vuelco directo gobierna
+    # la cara del relleno), pero positivo (tracciona la cara frontal).
+    assert 0.0 < inv["M_inverso_tf_m_m"] < r["momento_gobernante_tf_m_m"]
+    # El momento inverso es la inercia menos el empuje estatico.
+    assert math.isclose(
+        inv["M_inverso_tf_m_m"],
+        (inv["M_PIR_tf_m_m"] + inv["M_EQsuper_tf_m_m"])
+        - (inv["M_Ea_tf_m_m"] + inv["M_Es_tf_m_m"]),
+        rel_tol=1e-12,
+    )
 
 
 def test_base_con_peralte_efectivo_1_50_m_cumple_resistencia_pero_no_minimo():

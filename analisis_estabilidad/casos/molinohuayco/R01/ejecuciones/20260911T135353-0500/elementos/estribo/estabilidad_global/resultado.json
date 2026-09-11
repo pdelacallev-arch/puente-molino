@@ -1,0 +1,2799 @@
+{
+  "version_esquema": "1.0",
+  "ejecucion_id": "20260911T135353-0500",
+  "elemento": "estribo",
+  "calculo": "estabilidad_global",
+  "entrada_sha256": "f43c0a29f6826a38ec6d0186550a93a38a27f1f414c8afca34f140777f4e35dd",
+  "dependencias_consumidas": [],
+  "estado": "OK",
+  "resultados": {
+    "bridge": "Puente Carrozable Molinohuaico",
+    "location": "Chilcas, La Mar, Ayacucho",
+    "abutment_type": "Estribo Izquierdo C°A° Cantilever (H=12.39m)",
+    "span": 50.0,
+    "weights": {
+      "total_weight": 179.27,
+      "total_moment": 1546.9,
+      "peso_DC_calculo": 57.9264,
+      "momento_vert_DC_calculo": 125.50120799999999,
+      "y_cg_DC": 2.17,
+      "detail": [
+        {
+          "tipo": "DC",
+          "desc": "Zapata",
+          "peso": 45.54,
+          "brazo": 6.325,
+          "momento": 288.04,
+          "y_cg": 0.75
+        },
+        {
+          "tipo": "DC",
+          "desc": "Tronco pantalla",
+          "peso": 7.54,
+          "brazo": 6.35,
+          "momento": 47.85,
+          "y_cg": 5.425
+        },
+        {
+          "tipo": "DC",
+          "desc": "Cajuela (asiento viga)",
+          "peso": 4.85,
+          "brazo": 6.791,
+          "momento": 32.94,
+          "y_cg": 10.404
+        },
+        {
+          "tipo": "EV",
+          "desc": "Relleno sobre talón",
+          "peso": 115.47,
+          "brazo": 9.695,
+          "momento": 1119.47,
+          "y_cg": 0.0
+        },
+        {
+          "tipo": "LS",
+          "desc": "Sobrecarga terreno",
+          "peso": 5.87,
+          "brazo": 9.975,
+          "momento": 58.6,
+          "y_cg": 0.0
+        }
+      ]
+    },
+    "superstructure": {
+      "reactions": [
+        {
+          "tipo": "DC",
+          "desc": "Peso Propio",
+          "reaccion": 25.98,
+          "brazo": 6.33,
+          "momento": 164.32
+        },
+        {
+          "tipo": "DW",
+          "desc": "Superf. desgaste",
+          "reaccion": 2.88,
+          "brazo": 6.33,
+          "momento": 18.22
+        },
+        {
+          "tipo": "PL",
+          "desc": "Carga peatonal",
+          "reaccion": 3.08,
+          "brazo": 6.33,
+          "momento": 19.48
+        },
+        {
+          "tipo": "LL+IM",
+          "desc": "Sobrecarga HL-93",
+          "reaccion": 12.95,
+          "brazo": 6.33,
+          "momento": 81.91
+        },
+        {
+          "tipo": "BR",
+          "desc": "Frenado",
+          "reaccion": 1.63,
+          "brazo": 13.29,
+          "momento": 21.66
+        }
+      ],
+      "brazo": 6.33
+    },
+    "earth_pressures": {
+      "Ka": 0.201,
+      "Kp": 4.557,
+      "Kas": 0.274,
+      "h_surcharge": 0.61,
+      "psi_deg": 7.5,
+      "analysis_height": 12.39,
+      "Ea": {
+        "valor": 27.79,
+        "brazo": 4.13,
+        "momento": 114.77
+      },
+      "Ep": {
+        "valor": 10.05
+      },
+      "Es": {
+        "valor": 2.74,
+        "brazo": 6.2,
+        "momento": 16.95
+      },
+      "Eas": {
+        "valor": 35.97
+      },
+      "delta_Eas": {
+        "valor": 8.18,
+        "brazo": 8.26,
+        "momento": 67.57
+      }
+    },
+    "seismic_forces": {
+      "porcentaje": 24.0,
+      "superestructura": {
+        "peso": 6.93,
+        "brazo": 9.7,
+        "momento": 67.19
+      },
+      "estribo": {
+        "peso": 13.9,
+        "brazo": 2.17,
+        "momento": 30.12
+      },
+      "frenado": {
+        "peso": 1.63,
+        "brazo": 13.29,
+        "momento": 21.66
+      },
+      "falsa_zapata": null
+    },
+    "case_service_I": {
+      "name": "Servicio I",
+      "Fv": 224.16,
+      "Me": 1830.83,
+      "Fh": 32.16,
+      "Mv": 153.38,
+      "overturning": {
+        "Xo": 7.48,
+        "e": 1.158,
+        "B/6": 2.108,
+        "e < B/6": "CONFORME",
+        "eccentricity_limit": 2.108,
+        "eccentricity_limit_label": "B/6",
+        "eccentricity_check": "CONFORME",
+        "M_estable": 1830.83,
+        "M_volteo": 153.38,
+        "V_total": 224.16
+      },
+      "sliding": {
+        "QR": 123.29,
+        "F_horizontal": 32.16,
+        "phi": 1.0,
+        "mu": 0.55,
+        "QR > Fh": "CONFORME"
+      },
+      "bearing": {
+        "q": 2.745,
+        "q_max": 2.745,
+        "q_min": 0.799,
+        "q_max_t_m2": 27.453,
+        "q_min_t_m2": 7.987,
+        "q_promedio_t_m2": 17.72,
+        "q_talon_t_m2": 27.453,
+        "q_punta_t_m2": 7.987,
+        "q_admisible": 3.67,
+        "lado_q_max": "talon",
+        "contacto": "COMPLETO",
+        "q_min >= 0": "CONFORME",
+        "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+        "q <= q_adm": "CONFORME"
+      },
+      "fv_detail": [
+        {
+          "tipo": "DC",
+          "desc": "Zapata",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 45.54,
+          "valor": 45.54,
+          "brazo": 6.325,
+          "momento_nominal": 288.04,
+          "momento": 288.04
+        },
+        {
+          "tipo": "DC",
+          "desc": "Tronco pantalla",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 7.54,
+          "valor": 7.54,
+          "brazo": 6.35,
+          "momento_nominal": 47.85,
+          "momento": 47.85
+        },
+        {
+          "tipo": "DC",
+          "desc": "Cajuela (asiento viga)",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 4.85,
+          "valor": 4.85,
+          "brazo": 6.791,
+          "momento_nominal": 32.94,
+          "momento": 32.94
+        },
+        {
+          "tipo": "EV",
+          "desc": "Relleno sobre talón",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 115.47,
+          "valor": 115.47,
+          "brazo": 9.695,
+          "momento_nominal": 1119.47,
+          "momento": 1119.47
+        },
+        {
+          "tipo": "LS",
+          "desc": "Sobrecarga terreno",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 5.87,
+          "valor": 5.87,
+          "brazo": 9.975,
+          "momento_nominal": 58.6,
+          "momento": 58.6
+        },
+        {
+          "tipo": "DC",
+          "desc": "Peso Propio",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 25.98,
+          "valor": 25.98,
+          "brazo": 6.33,
+          "momento_nominal": 164.32,
+          "momento": 164.32
+        },
+        {
+          "tipo": "DW",
+          "desc": "Superf. desgaste",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 2.88,
+          "valor": 2.88,
+          "brazo": 6.33,
+          "momento_nominal": 18.22,
+          "momento": 18.22
+        },
+        {
+          "tipo": "PL",
+          "desc": "Carga peatonal",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 3.08,
+          "valor": 3.08,
+          "brazo": 6.33,
+          "momento_nominal": 19.48,
+          "momento": 19.48
+        },
+        {
+          "tipo": "LL+IM",
+          "desc": "Sobrecarga HL-93",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 12.95,
+          "valor": 12.95,
+          "brazo": 6.33,
+          "momento_nominal": 81.91,
+          "momento": 81.91
+        }
+      ],
+      "fh_detail": [
+        {
+          "tipo": "Ea",
+          "desc": "Empuje activo",
+          "origen": "terreno",
+          "distribucion": "triangular_max_base",
+          "factor": 1.0,
+          "nominal": 27.79,
+          "valor": 27.79,
+          "brazo": 4.13,
+          "momento_nominal": 114.77,
+          "momento": 114.77
+        },
+        {
+          "tipo": "Es",
+          "desc": "Empuje por sobrecarga",
+          "origen": "terreno",
+          "distribucion": "uniforme",
+          "factor": 1.0,
+          "nominal": 2.74,
+          "valor": 2.74,
+          "brazo": 6.2,
+          "momento_nominal": 16.95,
+          "momento": 16.95
+        },
+        {
+          "tipo": "BR",
+          "desc": "Frenado",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 1.63,
+          "valor": 1.63,
+          "brazo": 13.29,
+          "momento_nominal": 21.66,
+          "momento": 21.66
+        }
+      ],
+      "interface": "base_zapata_estructural",
+      "support_width": 12.65,
+      "stability_verification": true
+    },
+    "case_resistance_Ia": {
+      "name": "Resistencia I-a",
+      "Fv": 231.19,
+      "Me": 1891.13,
+      "Fh": 49.33,
+      "Mv": 239.72,
+      "overturning": {
+        "Xo": 7.14,
+        "e": 0.818,
+        "B/6": 2.108,
+        "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "eccentricity_limit": 2.108,
+        "eccentricity_limit_label": "B/6",
+        "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "M_estable": 1891.13,
+        "M_volteo": 239.72,
+        "V_total": 231.19
+      },
+      "sliding": {
+        "QR": null,
+        "F_horizontal": 49.33,
+        "phi": null,
+        "mu": null,
+        "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+      },
+      "bearing": {
+        "q": 2.537,
+        "q_max": 2.537,
+        "q_min": 1.118,
+        "q_max_t_m2": 25.366,
+        "q_min_t_m2": 11.185,
+        "q_promedio_t_m2": 18.276,
+        "q_talon_t_m2": 25.366,
+        "q_punta_t_m2": 11.185,
+        "q_admisible": null,
+        "lado_q_max": "talon",
+        "contacto": "COMPLETO",
+        "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+        "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+      },
+      "fv_detail": [
+        {
+          "tipo": "DC",
+          "desc": "Zapata",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 45.54,
+          "valor": 40.986,
+          "brazo": 6.325,
+          "momento_nominal": 288.04,
+          "momento": 259.236
+        },
+        {
+          "tipo": "DC",
+          "desc": "Tronco pantalla",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 7.54,
+          "valor": 6.786,
+          "brazo": 6.35,
+          "momento_nominal": 47.85,
+          "momento": 43.065
+        },
+        {
+          "tipo": "DC",
+          "desc": "Cajuela (asiento viga)",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 4.85,
+          "valor": 4.365,
+          "brazo": 6.791,
+          "momento_nominal": 32.94,
+          "momento": 29.646
+        },
+        {
+          "tipo": "EV",
+          "desc": "Relleno sobre talón",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 115.47,
+          "valor": 115.47,
+          "brazo": 9.695,
+          "momento_nominal": 1119.47,
+          "momento": 1119.47
+        },
+        {
+          "tipo": "LS",
+          "desc": "Sobrecarga terreno",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 5.87,
+          "valor": 10.273,
+          "brazo": 9.975,
+          "momento_nominal": 58.6,
+          "momento": 102.55
+        },
+        {
+          "tipo": "DC",
+          "desc": "Peso Propio",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 25.98,
+          "valor": 23.382,
+          "brazo": 6.33,
+          "momento_nominal": 164.32,
+          "momento": 147.888
+        },
+        {
+          "tipo": "DW",
+          "desc": "Superf. desgaste",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 0.65,
+          "nominal": 2.88,
+          "valor": 1.872,
+          "brazo": 6.33,
+          "momento_nominal": 18.22,
+          "momento": 11.843
+        },
+        {
+          "tipo": "PL",
+          "desc": "Carga peatonal",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 3.08,
+          "valor": 5.39,
+          "brazo": 6.33,
+          "momento_nominal": 19.48,
+          "momento": 34.09
+        },
+        {
+          "tipo": "LL+IM",
+          "desc": "Sobrecarga HL-93",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 12.95,
+          "valor": 22.662,
+          "brazo": 6.33,
+          "momento_nominal": 81.91,
+          "momento": 143.343
+        }
+      ],
+      "fh_detail": [
+        {
+          "tipo": "Ea",
+          "desc": "Empuje activo",
+          "origen": "terreno",
+          "distribucion": "triangular_max_base",
+          "factor": 1.5,
+          "nominal": 27.79,
+          "valor": 41.685,
+          "brazo": 4.13,
+          "momento_nominal": 114.77,
+          "momento": 172.155
+        },
+        {
+          "tipo": "Es",
+          "desc": "Empuje por sobrecarga",
+          "origen": "terreno",
+          "distribucion": "uniforme",
+          "factor": 1.75,
+          "nominal": 2.74,
+          "valor": 4.795,
+          "brazo": 6.2,
+          "momento_nominal": 16.95,
+          "momento": 29.662
+        },
+        {
+          "tipo": "BR",
+          "desc": "Frenado",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 1.63,
+          "valor": 2.853,
+          "brazo": 13.29,
+          "momento_nominal": 21.66,
+          "momento": 37.905
+        }
+      ],
+      "interface": "base_zapata_estructural",
+      "support_width": 12.65,
+      "stability_verification": false
+    },
+    "case_resistance_Ib": {
+      "name": "Resistencia I-b",
+      "Fv": 303.42,
+      "Me": 2485.03,
+      "Fh": 49.33,
+      "Mv": 239.72,
+      "overturning": {
+        "Xo": 7.4,
+        "e": 1.075,
+        "B/6": 2.108,
+        "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "eccentricity_limit": 2.108,
+        "eccentricity_limit_label": "B/6",
+        "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "M_estable": 2485.03,
+        "M_volteo": 239.72,
+        "V_total": 303.42
+      },
+      "sliding": {
+        "QR": null,
+        "F_horizontal": 49.33,
+        "phi": null,
+        "mu": null,
+        "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+      },
+      "bearing": {
+        "q": 3.622,
+        "q_max": 3.622,
+        "q_min": 1.176,
+        "q_max_t_m2": 36.215,
+        "q_min_t_m2": 11.756,
+        "q_promedio_t_m2": 23.986,
+        "q_talon_t_m2": 36.215,
+        "q_punta_t_m2": 11.756,
+        "q_admisible": null,
+        "lado_q_max": "talon",
+        "contacto": "COMPLETO",
+        "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+        "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+      },
+      "fv_detail": [
+        {
+          "tipo": "DC",
+          "desc": "Zapata",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.25,
+          "nominal": 45.54,
+          "valor": 56.925,
+          "brazo": 6.325,
+          "momento_nominal": 288.04,
+          "momento": 360.05
+        },
+        {
+          "tipo": "DC",
+          "desc": "Tronco pantalla",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.25,
+          "nominal": 7.54,
+          "valor": 9.425,
+          "brazo": 6.35,
+          "momento_nominal": 47.85,
+          "momento": 59.812
+        },
+        {
+          "tipo": "DC",
+          "desc": "Cajuela (asiento viga)",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.25,
+          "nominal": 4.85,
+          "valor": 6.062,
+          "brazo": 6.791,
+          "momento_nominal": 32.94,
+          "momento": 41.175
+        },
+        {
+          "tipo": "EV",
+          "desc": "Relleno sobre talón",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.35,
+          "nominal": 115.47,
+          "valor": 155.885,
+          "brazo": 9.695,
+          "momento_nominal": 1119.47,
+          "momento": 1511.285
+        },
+        {
+          "tipo": "LS",
+          "desc": "Sobrecarga terreno",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 5.87,
+          "valor": 10.273,
+          "brazo": 9.975,
+          "momento_nominal": 58.6,
+          "momento": 102.55
+        },
+        {
+          "tipo": "DC",
+          "desc": "Peso Propio",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.25,
+          "nominal": 25.98,
+          "valor": 32.475,
+          "brazo": 6.33,
+          "momento_nominal": 164.32,
+          "momento": 205.4
+        },
+        {
+          "tipo": "DW",
+          "desc": "Superf. desgaste",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.5,
+          "nominal": 2.88,
+          "valor": 4.32,
+          "brazo": 6.33,
+          "momento_nominal": 18.22,
+          "momento": 27.33
+        },
+        {
+          "tipo": "PL",
+          "desc": "Carga peatonal",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 3.08,
+          "valor": 5.39,
+          "brazo": 6.33,
+          "momento_nominal": 19.48,
+          "momento": 34.09
+        },
+        {
+          "tipo": "LL+IM",
+          "desc": "Sobrecarga HL-93",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 12.95,
+          "valor": 22.662,
+          "brazo": 6.33,
+          "momento_nominal": 81.91,
+          "momento": 143.343
+        }
+      ],
+      "fh_detail": [
+        {
+          "tipo": "Ea",
+          "desc": "Empuje activo",
+          "origen": "terreno",
+          "distribucion": "triangular_max_base",
+          "factor": 1.5,
+          "nominal": 27.79,
+          "valor": 41.685,
+          "brazo": 4.13,
+          "momento_nominal": 114.77,
+          "momento": 172.155
+        },
+        {
+          "tipo": "Es",
+          "desc": "Empuje por sobrecarga",
+          "origen": "terreno",
+          "distribucion": "uniforme",
+          "factor": 1.75,
+          "nominal": 2.74,
+          "valor": 4.795,
+          "brazo": 6.2,
+          "momento_nominal": 16.95,
+          "momento": 29.662
+        },
+        {
+          "tipo": "BR",
+          "desc": "Frenado",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.75,
+          "nominal": 1.63,
+          "valor": 2.853,
+          "brazo": 13.29,
+          "momento_nominal": 21.66,
+          "momento": 37.905
+        }
+      ],
+      "interface": "base_zapata_estructural",
+      "support_width": 12.65,
+      "stability_verification": false
+    },
+    "case_extreme_event_I": {
+      "name": "Evento Extremo I (Sismo)",
+      "Fv": 192.86,
+      "Me": 1611.15,
+      "Fh": 56.8,
+      "Mv": 279.65,
+      "overturning": {
+        "Xo": 6.9,
+        "e": 0.579,
+        "B/6": 2.108,
+        "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "eccentricity_limit": 2.108,
+        "eccentricity_limit_label": "B/6",
+        "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "M_estable": 1611.15,
+        "M_volteo": 279.65,
+        "V_total": 192.86
+      },
+      "sliding": {
+        "QR": null,
+        "F_horizontal": 56.8,
+        "phi": null,
+        "mu": null,
+        "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+      },
+      "bearing": {
+        "q": 1.943,
+        "q_max": 1.943,
+        "q_min": 1.106,
+        "q_max_t_m2": 19.433,
+        "q_min_t_m2": 11.059,
+        "q_promedio_t_m2": 15.246,
+        "q_talon_t_m2": 19.433,
+        "q_punta_t_m2": 11.059,
+        "q_admisible": null,
+        "lado_q_max": "talon",
+        "contacto": "COMPLETO",
+        "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+        "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+        "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+      },
+      "fv_detail": [
+        {
+          "tipo": "DC",
+          "desc": "Zapata",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 45.54,
+          "valor": 40.986,
+          "brazo": 6.325,
+          "momento_nominal": 288.04,
+          "momento": 259.236
+        },
+        {
+          "tipo": "DC",
+          "desc": "Tronco pantalla",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 7.54,
+          "valor": 6.786,
+          "brazo": 6.35,
+          "momento_nominal": 47.85,
+          "momento": 43.065
+        },
+        {
+          "tipo": "DC",
+          "desc": "Cajuela (asiento viga)",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 4.85,
+          "valor": 4.365,
+          "brazo": 6.791,
+          "momento_nominal": 32.94,
+          "momento": 29.646
+        },
+        {
+          "tipo": "EV",
+          "desc": "Relleno sobre talón",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 115.47,
+          "valor": 115.47,
+          "brazo": 9.695,
+          "momento_nominal": 1119.47,
+          "momento": 1119.47
+        },
+        {
+          "tipo": "LS",
+          "desc": "Sobrecarga terreno",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 0.0,
+          "nominal": 5.87,
+          "valor": 0.0,
+          "brazo": 9.975,
+          "momento_nominal": 58.6,
+          "momento": 0.0
+        },
+        {
+          "tipo": "DC",
+          "desc": "Peso Propio",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 0.9,
+          "nominal": 25.98,
+          "valor": 23.382,
+          "brazo": 6.33,
+          "momento_nominal": 164.32,
+          "momento": 147.888
+        },
+        {
+          "tipo": "DW",
+          "desc": "Superf. desgaste",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 0.65,
+          "nominal": 2.88,
+          "valor": 1.872,
+          "brazo": 6.33,
+          "momento_nominal": 18.22,
+          "momento": 11.843
+        },
+        {
+          "tipo": "PL",
+          "desc": "Carga peatonal",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 0.0,
+          "nominal": 3.08,
+          "valor": 0.0,
+          "brazo": 6.33,
+          "momento_nominal": 19.48,
+          "momento": 0.0
+        },
+        {
+          "tipo": "LL+IM",
+          "desc": "Sobrecarga HL-93",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 0.0,
+          "nominal": 12.95,
+          "valor": 0.0,
+          "brazo": 6.33,
+          "momento_nominal": 81.91,
+          "momento": 0.0
+        }
+      ],
+      "fh_detail": [
+        {
+          "tipo": "Ea",
+          "desc": "Empuje activo estático",
+          "origen": "terreno",
+          "distribucion": "triangular_max_base",
+          "factor": 1.0,
+          "nominal": 27.79,
+          "valor": 27.79,
+          "brazo": 4.13,
+          "momento_nominal": 114.77,
+          "momento": 114.77
+        },
+        {
+          "tipo": "Delta Eas",
+          "desc": "Incremento sísmico del empuje",
+          "origen": "terreno",
+          "distribucion": "triangular_max_top",
+          "factor": 1.0,
+          "nominal": 8.18,
+          "valor": 8.18,
+          "brazo": 8.26,
+          "momento_nominal": 67.57,
+          "momento": 67.57
+        },
+        {
+          "tipo": "Eq-super",
+          "desc": "Inercia de superestructura",
+          "origen": "superestructura",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 6.93,
+          "valor": 6.93,
+          "brazo": 9.7,
+          "momento_nominal": 67.19,
+          "momento": 67.19
+        },
+        {
+          "tipo": "Eq-estribo",
+          "desc": "Inercia del estribo",
+          "origen": "estribo",
+          "distribucion": "concentrada",
+          "factor": 1.0,
+          "nominal": 13.9,
+          "valor": 13.9,
+          "brazo": 2.17,
+          "momento_nominal": 30.12,
+          "momento": 30.12
+        }
+      ],
+      "interface": "base_zapata_estructural",
+      "support_width": 12.65,
+      "stability_verification": false,
+      "Fq": 20.83,
+      "Mq": 97.31
+    },
+    "false_footing": {
+      "properties": {
+        "height": 3.6,
+        "width": 12.65,
+        "gamma": 2.3,
+        "f_c": 140.0,
+        "offset_from_toe": 0.0,
+        "concrete_contact_mu": 0.6,
+        "soil_contact_mu": 0.55
+      },
+      "weight": {
+        "enabled": true,
+        "weight": 104.74199999999999,
+        "detail": {
+          "tipo": "DC",
+          "desc": "Falsa zapata",
+          "peso": 104.742,
+          "brazo": 6.325,
+          "momento": 662.493,
+          "y_cg": 1.8
+        }
+      },
+      "internal_checks": {
+        "toe_overhang": 0.0,
+        "heel_overhang": 0.0,
+        "height_to_max_overhang": null,
+        "criterion": "difusión geométrica mínima 1V:1H (preliminar)",
+        "status": "NO APLICA - SIN VUELO",
+        "flexure_shear_punching": "PENDIENTE DE VERIFICACION ESTRUCTURAL"
+      }
+    },
+    "interfaces": {
+      "interface_1": {
+        "description": "Zapata estructural / falsa zapata",
+        "earth_pressures": {
+          "Ka": 0.201,
+          "Kp": 4.557,
+          "Kas": 0.274,
+          "h_surcharge": 0.61,
+          "psi_deg": 7.5,
+          "analysis_height": 12.39,
+          "Ea": {
+            "valor": 27.79,
+            "brazo": 4.13,
+            "momento": 114.77
+          },
+          "Ep": {
+            "valor": 10.05
+          },
+          "Es": {
+            "valor": 2.74,
+            "brazo": 6.2,
+            "momento": 16.95
+          },
+          "Eas": {
+            "valor": 35.97
+          },
+          "delta_Eas": {
+            "valor": 8.18,
+            "brazo": 8.26,
+            "momento": 67.57
+          }
+        },
+        "seismic_forces": {
+          "porcentaje": 24.0,
+          "superestructura": {
+            "peso": 6.93,
+            "brazo": 9.7,
+            "momento": 67.19
+          },
+          "estribo": {
+            "peso": 13.9,
+            "brazo": 2.17,
+            "momento": 30.12
+          },
+          "frenado": {
+            "peso": 1.63,
+            "brazo": 13.29,
+            "momento": 21.66
+          },
+          "falsa_zapata": null
+        },
+        "cases": {
+          "case_service_I": {
+            "name": "Servicio I",
+            "Fv": 224.16,
+            "Me": 1830.83,
+            "Fh": 32.16,
+            "Mv": 153.38,
+            "overturning": {
+              "Xo": 7.48,
+              "e": 1.158,
+              "B/6": 2.108,
+              "e < B/6": "CONFORME",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "CONFORME",
+              "M_estable": 1830.83,
+              "M_volteo": 153.38,
+              "V_total": 224.16
+            },
+            "sliding": {
+              "QR": 134.5,
+              "F_horizontal": 32.16,
+              "phi": 1.0,
+              "mu": 0.6,
+              "QR > Fh": "CONFORME"
+            },
+            "bearing": {
+              "q": 2.745,
+              "q_max": 2.745,
+              "q_min": 0.799,
+              "q_max_t_m2": 27.453,
+              "q_min_t_m2": 7.987,
+              "q_promedio_t_m2": 17.72,
+              "q_talon_t_m2": 27.453,
+              "q_punta_t_m2": 7.987,
+              "q_admisible": 119.0,
+              "lado_q_max": "talon",
+              "contacto": "COMPLETO",
+              "q_min >= 0": "CONFORME",
+              "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+              "q <= q_adm": "CONFORME"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 45.54,
+                "valor": 45.54,
+                "brazo": 6.325,
+                "momento_nominal": 288.04,
+                "momento": 288.04
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 7.54,
+                "valor": 7.54,
+                "brazo": 6.35,
+                "momento_nominal": 47.85,
+                "momento": 47.85
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 4.85,
+                "valor": 4.85,
+                "brazo": 6.791,
+                "momento_nominal": 32.94,
+                "momento": 32.94
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 115.47,
+                "valor": 115.47,
+                "brazo": 9.695,
+                "momento_nominal": 1119.47,
+                "momento": 1119.47
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 5.87,
+                "valor": 5.87,
+                "brazo": 9.975,
+                "momento_nominal": 58.6,
+                "momento": 58.6
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 25.98,
+                "valor": 25.98,
+                "brazo": 6.33,
+                "momento_nominal": 164.32,
+                "momento": 164.32
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 2.88,
+                "valor": 2.88,
+                "brazo": 6.33,
+                "momento_nominal": 18.22,
+                "momento": 18.22
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 3.08,
+                "valor": 3.08,
+                "brazo": 6.33,
+                "momento_nominal": 19.48,
+                "momento": 19.48
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 12.95,
+                "valor": 12.95,
+                "brazo": 6.33,
+                "momento_nominal": 81.91,
+                "momento": 81.91
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.0,
+                "nominal": 27.79,
+                "valor": 27.79,
+                "brazo": 4.13,
+                "momento_nominal": 114.77,
+                "momento": 114.77
+              },
+              {
+                "tipo": "Es",
+                "desc": "Empuje por sobrecarga",
+                "origen": "terreno",
+                "distribucion": "uniforme",
+                "factor": 1.0,
+                "nominal": 2.74,
+                "valor": 2.74,
+                "brazo": 6.2,
+                "momento_nominal": 16.95,
+                "momento": 16.95
+              },
+              {
+                "tipo": "BR",
+                "desc": "Frenado",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 1.63,
+                "valor": 1.63,
+                "brazo": 13.29,
+                "momento_nominal": 21.66,
+                "momento": 21.66
+              }
+            ],
+            "interface": "interfaz_1_zapata_falsa_zapata",
+            "support_width": 12.65,
+            "stability_verification": true
+          },
+          "case_resistance_Ia": {
+            "name": "Resistencia I-a",
+            "Fv": 231.19,
+            "Me": 1891.13,
+            "Fh": 49.33,
+            "Mv": 239.72,
+            "overturning": {
+              "Xo": 7.14,
+              "e": 0.818,
+              "B/6": 2.108,
+              "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "M_estable": 1891.13,
+              "M_volteo": 239.72,
+              "V_total": 231.19
+            },
+            "sliding": {
+              "QR": null,
+              "F_horizontal": 49.33,
+              "phi": null,
+              "mu": null,
+              "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "bearing": {
+              "q": 2.537,
+              "q_max": 2.537,
+              "q_min": 1.118,
+              "q_max_t_m2": 25.366,
+              "q_min_t_m2": 11.185,
+              "q_promedio_t_m2": 18.276,
+              "q_talon_t_m2": 25.366,
+              "q_punta_t_m2": 11.185,
+              "q_admisible": null,
+              "lado_q_max": "talon",
+              "contacto": "COMPLETO",
+              "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+              "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 45.54,
+                "valor": 40.986,
+                "brazo": 6.325,
+                "momento_nominal": 288.04,
+                "momento": 259.236
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 7.54,
+                "valor": 6.786,
+                "brazo": 6.35,
+                "momento_nominal": 47.85,
+                "momento": 43.065
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 4.85,
+                "valor": 4.365,
+                "brazo": 6.791,
+                "momento_nominal": 32.94,
+                "momento": 29.646
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 115.47,
+                "valor": 115.47,
+                "brazo": 9.695,
+                "momento_nominal": 1119.47,
+                "momento": 1119.47
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 5.87,
+                "valor": 10.273,
+                "brazo": 9.975,
+                "momento_nominal": 58.6,
+                "momento": 102.55
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 25.98,
+                "valor": 23.382,
+                "brazo": 6.33,
+                "momento_nominal": 164.32,
+                "momento": 147.888
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.65,
+                "nominal": 2.88,
+                "valor": 1.872,
+                "brazo": 6.33,
+                "momento_nominal": 18.22,
+                "momento": 11.843
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 3.08,
+                "valor": 5.39,
+                "brazo": 6.33,
+                "momento_nominal": 19.48,
+                "momento": 34.09
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 12.95,
+                "valor": 22.662,
+                "brazo": 6.33,
+                "momento_nominal": 81.91,
+                "momento": 143.343
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.5,
+                "nominal": 27.79,
+                "valor": 41.685,
+                "brazo": 4.13,
+                "momento_nominal": 114.77,
+                "momento": 172.155
+              },
+              {
+                "tipo": "Es",
+                "desc": "Empuje por sobrecarga",
+                "origen": "terreno",
+                "distribucion": "uniforme",
+                "factor": 1.75,
+                "nominal": 2.74,
+                "valor": 4.795,
+                "brazo": 6.2,
+                "momento_nominal": 16.95,
+                "momento": 29.662
+              },
+              {
+                "tipo": "BR",
+                "desc": "Frenado",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 1.63,
+                "valor": 2.853,
+                "brazo": 13.29,
+                "momento_nominal": 21.66,
+                "momento": 37.905
+              }
+            ],
+            "interface": "interfaz_1_zapata_falsa_zapata",
+            "support_width": 12.65,
+            "stability_verification": false
+          },
+          "case_resistance_Ib": {
+            "name": "Resistencia I-b",
+            "Fv": 303.42,
+            "Me": 2485.03,
+            "Fh": 49.33,
+            "Mv": 239.72,
+            "overturning": {
+              "Xo": 7.4,
+              "e": 1.075,
+              "B/6": 2.108,
+              "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "M_estable": 2485.03,
+              "M_volteo": 239.72,
+              "V_total": 303.42
+            },
+            "sliding": {
+              "QR": null,
+              "F_horizontal": 49.33,
+              "phi": null,
+              "mu": null,
+              "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "bearing": {
+              "q": 3.622,
+              "q_max": 3.622,
+              "q_min": 1.176,
+              "q_max_t_m2": 36.215,
+              "q_min_t_m2": 11.756,
+              "q_promedio_t_m2": 23.986,
+              "q_talon_t_m2": 36.215,
+              "q_punta_t_m2": 11.756,
+              "q_admisible": null,
+              "lado_q_max": "talon",
+              "contacto": "COMPLETO",
+              "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+              "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 45.54,
+                "valor": 56.925,
+                "brazo": 6.325,
+                "momento_nominal": 288.04,
+                "momento": 360.05
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 7.54,
+                "valor": 9.425,
+                "brazo": 6.35,
+                "momento_nominal": 47.85,
+                "momento": 59.812
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 4.85,
+                "valor": 6.062,
+                "brazo": 6.791,
+                "momento_nominal": 32.94,
+                "momento": 41.175
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.35,
+                "nominal": 115.47,
+                "valor": 155.885,
+                "brazo": 9.695,
+                "momento_nominal": 1119.47,
+                "momento": 1511.285
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 5.87,
+                "valor": 10.273,
+                "brazo": 9.975,
+                "momento_nominal": 58.6,
+                "momento": 102.55
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 25.98,
+                "valor": 32.475,
+                "brazo": 6.33,
+                "momento_nominal": 164.32,
+                "momento": 205.4
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.5,
+                "nominal": 2.88,
+                "valor": 4.32,
+                "brazo": 6.33,
+                "momento_nominal": 18.22,
+                "momento": 27.33
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 3.08,
+                "valor": 5.39,
+                "brazo": 6.33,
+                "momento_nominal": 19.48,
+                "momento": 34.09
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 12.95,
+                "valor": 22.662,
+                "brazo": 6.33,
+                "momento_nominal": 81.91,
+                "momento": 143.343
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.5,
+                "nominal": 27.79,
+                "valor": 41.685,
+                "brazo": 4.13,
+                "momento_nominal": 114.77,
+                "momento": 172.155
+              },
+              {
+                "tipo": "Es",
+                "desc": "Empuje por sobrecarga",
+                "origen": "terreno",
+                "distribucion": "uniforme",
+                "factor": 1.75,
+                "nominal": 2.74,
+                "valor": 4.795,
+                "brazo": 6.2,
+                "momento_nominal": 16.95,
+                "momento": 29.662
+              },
+              {
+                "tipo": "BR",
+                "desc": "Frenado",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 1.63,
+                "valor": 2.853,
+                "brazo": 13.29,
+                "momento_nominal": 21.66,
+                "momento": 37.905
+              }
+            ],
+            "interface": "interfaz_1_zapata_falsa_zapata",
+            "support_width": 12.65,
+            "stability_verification": false
+          },
+          "case_extreme_event_I": {
+            "name": "Evento Extremo I (Sismo)",
+            "Fv": 192.86,
+            "Me": 1611.15,
+            "Fh": 56.8,
+            "Mv": 279.65,
+            "overturning": {
+              "Xo": 6.9,
+              "e": 0.579,
+              "B/6": 2.108,
+              "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "M_estable": 1611.15,
+              "M_volteo": 279.65,
+              "V_total": 192.86
+            },
+            "sliding": {
+              "QR": null,
+              "F_horizontal": 56.8,
+              "phi": null,
+              "mu": null,
+              "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "bearing": {
+              "q": 1.943,
+              "q_max": 1.943,
+              "q_min": 1.106,
+              "q_max_t_m2": 19.433,
+              "q_min_t_m2": 11.059,
+              "q_promedio_t_m2": 15.246,
+              "q_talon_t_m2": 19.433,
+              "q_punta_t_m2": 11.059,
+              "q_admisible": null,
+              "lado_q_max": "talon",
+              "contacto": "COMPLETO",
+              "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "metodo": "distribucion lineal elastica q=V/B(1+/-6e/B)",
+              "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 45.54,
+                "valor": 40.986,
+                "brazo": 6.325,
+                "momento_nominal": 288.04,
+                "momento": 259.236
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 7.54,
+                "valor": 6.786,
+                "brazo": 6.35,
+                "momento_nominal": 47.85,
+                "momento": 43.065
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 4.85,
+                "valor": 4.365,
+                "brazo": 6.791,
+                "momento_nominal": 32.94,
+                "momento": 29.646
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 115.47,
+                "valor": 115.47,
+                "brazo": 9.695,
+                "momento_nominal": 1119.47,
+                "momento": 1119.47
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.0,
+                "nominal": 5.87,
+                "valor": 0.0,
+                "brazo": 9.975,
+                "momento_nominal": 58.6,
+                "momento": 0.0
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 25.98,
+                "valor": 23.382,
+                "brazo": 6.33,
+                "momento_nominal": 164.32,
+                "momento": 147.888
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.65,
+                "nominal": 2.88,
+                "valor": 1.872,
+                "brazo": 6.33,
+                "momento_nominal": 18.22,
+                "momento": 11.843
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.0,
+                "nominal": 3.08,
+                "valor": 0.0,
+                "brazo": 6.33,
+                "momento_nominal": 19.48,
+                "momento": 0.0
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.0,
+                "nominal": 12.95,
+                "valor": 0.0,
+                "brazo": 6.33,
+                "momento_nominal": 81.91,
+                "momento": 0.0
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo estático",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.0,
+                "nominal": 27.79,
+                "valor": 27.79,
+                "brazo": 4.13,
+                "momento_nominal": 114.77,
+                "momento": 114.77
+              },
+              {
+                "tipo": "Delta Eas",
+                "desc": "Incremento sísmico del empuje",
+                "origen": "terreno",
+                "distribucion": "triangular_max_top",
+                "factor": 1.0,
+                "nominal": 8.18,
+                "valor": 8.18,
+                "brazo": 8.26,
+                "momento_nominal": 67.57,
+                "momento": 67.57
+              },
+              {
+                "tipo": "Eq-super",
+                "desc": "Inercia de superestructura",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 6.93,
+                "valor": 6.93,
+                "brazo": 9.7,
+                "momento_nominal": 67.19,
+                "momento": 67.19
+              },
+              {
+                "tipo": "Eq-estribo",
+                "desc": "Inercia del estribo",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 13.9,
+                "valor": 13.9,
+                "brazo": 2.17,
+                "momento_nominal": 30.12,
+                "momento": 30.12
+              }
+            ],
+            "interface": "interfaz_1_zapata_falsa_zapata",
+            "support_width": 12.65,
+            "stability_verification": false,
+            "Fq": 20.83,
+            "Mq": 97.31
+          }
+        }
+      },
+      "interface_2": {
+        "description": "Falsa zapata / suelo de cimentación",
+        "earth_pressures": {
+          "Ka": 0.201,
+          "Kp": 4.557,
+          "Kas": 0.274,
+          "h_surcharge": 0.61,
+          "psi_deg": 7.5,
+          "analysis_height": 15.99,
+          "Ea": {
+            "valor": 46.28,
+            "brazo": 5.33,
+            "momento": 246.69
+          },
+          "Ep": {
+            "valor": 10.05
+          },
+          "Es": {
+            "valor": 3.53,
+            "brazo": 8.0,
+            "momento": 28.23
+          },
+          "Eas": {
+            "valor": 59.91
+          },
+          "delta_Eas": {
+            "valor": 13.63,
+            "brazo": 10.66,
+            "momento": 145.25
+          }
+        },
+        "seismic_forces": {
+          "porcentaje": 24.0,
+          "superestructura": {
+            "peso": 6.93,
+            "brazo": 13.3,
+            "momento": 92.12
+          },
+          "estribo": {
+            "peso": 13.9,
+            "brazo": 5.77,
+            "momento": 80.17
+          },
+          "frenado": {
+            "peso": 1.63,
+            "brazo": 16.89,
+            "momento": 27.53
+          },
+          "falsa_zapata": {
+            "peso": 25.14,
+            "brazo": 1.8,
+            "momento": 45.25
+          }
+        },
+        "cases": {
+          "case_service_I": {
+            "name": "Servicio I",
+            "Fv": 328.9,
+            "Me": 2493.54,
+            "Fh": 51.44,
+            "Mv": 302.45,
+            "overturning": {
+              "Xo": 6.66,
+              "e": 0.337,
+              "B/6": 2.108,
+              "e < B/6": "CONFORME",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "CONFORME",
+              "M_estable": 2493.54,
+              "M_volteo": 302.45,
+              "V_total": 328.9
+            },
+            "sliding": {
+              "QR": 180.9,
+              "F_horizontal": 51.44,
+              "phi": 1.0,
+              "mu": 0.55,
+              "QR > Fh": "CONFORME"
+            },
+            "bearing": {
+              "q": 2.746,
+              "q_max": 2.746,
+              "q_min": 0.0,
+              "q_max_t_m2": 27.463,
+              "q_min_t_m2": 0.0,
+              "q_promedio_t_m2": 26.0,
+              "q_talon_t_m2": null,
+              "q_punta_t_m2": null,
+              "q_admisible": 3.67,
+              "lado_q_max": "area efectiva",
+              "contacto": "AREA EFECTIVA",
+              "q_min >= 0": "NO APLICA",
+              "effective_width": 11.976,
+              "metodo": "Meyerhof q=V/[L(B-2e)], con L=1 m",
+              "q <= q_adm": "CONFORME"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 45.54,
+                "valor": 45.54,
+                "brazo": 6.325,
+                "momento_nominal": 288.041,
+                "momento": 288.041
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 7.54,
+                "valor": 7.54,
+                "brazo": 6.35,
+                "momento_nominal": 47.879,
+                "momento": 47.879
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 4.85,
+                "valor": 4.85,
+                "brazo": 6.791,
+                "momento_nominal": 32.936,
+                "momento": 32.936
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 115.47,
+                "valor": 115.47,
+                "brazo": 9.695,
+                "momento_nominal": 1119.482,
+                "momento": 1119.482
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 5.87,
+                "valor": 5.87,
+                "brazo": 9.975,
+                "momento_nominal": 58.553,
+                "momento": 58.553
+              },
+              {
+                "tipo": "DC",
+                "desc": "Falsa zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 104.742,
+                "valor": 104.742,
+                "brazo": 6.325,
+                "momento_nominal": 662.493,
+                "momento": 662.493
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 25.98,
+                "valor": 25.98,
+                "brazo": 6.33,
+                "momento_nominal": 164.453,
+                "momento": 164.453
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 2.88,
+                "valor": 2.88,
+                "brazo": 6.33,
+                "momento_nominal": 18.23,
+                "momento": 18.23
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 3.08,
+                "valor": 3.08,
+                "brazo": 6.33,
+                "momento_nominal": 19.496,
+                "momento": 19.496
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 12.95,
+                "valor": 12.95,
+                "brazo": 6.33,
+                "momento_nominal": 81.974,
+                "momento": 81.974
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.0,
+                "nominal": 46.28,
+                "valor": 46.28,
+                "brazo": 5.33,
+                "momento_nominal": 246.69,
+                "momento": 246.69
+              },
+              {
+                "tipo": "Es",
+                "desc": "Empuje por sobrecarga",
+                "origen": "terreno",
+                "distribucion": "uniforme",
+                "factor": 1.0,
+                "nominal": 3.53,
+                "valor": 3.53,
+                "brazo": 8.0,
+                "momento_nominal": 28.23,
+                "momento": 28.23
+              },
+              {
+                "tipo": "BR",
+                "desc": "Frenado",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 1.63,
+                "valor": 1.63,
+                "brazo": 16.89,
+                "momento_nominal": 27.53,
+                "momento": 27.53
+              }
+            ],
+            "interface": "interfaz_2_falsa_zapata_suelo",
+            "support_width": 12.65,
+            "stability_verification": true
+          },
+          "case_resistance_Ia": {
+            "name": "Resistencia I-a",
+            "Fv": 325.45,
+            "Me": 2487.59,
+            "Fh": 78.45,
+            "Mv": 467.62,
+            "overturning": {
+              "Xo": 6.21,
+              "e": 0.118,
+              "B/6": 2.108,
+              "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "M_estable": 2487.59,
+              "M_volteo": 467.62,
+              "V_total": 325.45
+            },
+            "sliding": {
+              "QR": null,
+              "F_horizontal": 78.45,
+              "phi": null,
+              "mu": null,
+              "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "bearing": {
+              "q": 2.622,
+              "q_max": 2.622,
+              "q_min": 0.0,
+              "q_max_t_m2": 26.217,
+              "q_min_t_m2": 0.0,
+              "q_promedio_t_m2": 25.728,
+              "q_talon_t_m2": null,
+              "q_punta_t_m2": null,
+              "q_admisible": null,
+              "lado_q_max": "area efectiva",
+              "contacto": "AREA EFECTIVA",
+              "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "effective_width": 12.414,
+              "metodo": "Meyerhof q=V/[L(B-2e)], con L=1 m",
+              "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 45.54,
+                "valor": 40.986,
+                "brazo": 6.325,
+                "momento_nominal": 288.041,
+                "momento": 259.237
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 7.54,
+                "valor": 6.786,
+                "brazo": 6.35,
+                "momento_nominal": 47.879,
+                "momento": 43.091
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 4.85,
+                "valor": 4.365,
+                "brazo": 6.791,
+                "momento_nominal": 32.936,
+                "momento": 29.642
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 115.47,
+                "valor": 115.47,
+                "brazo": 9.695,
+                "momento_nominal": 1119.482,
+                "momento": 1119.482
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 5.87,
+                "valor": 10.273,
+                "brazo": 9.975,
+                "momento_nominal": 58.553,
+                "momento": 102.468
+              },
+              {
+                "tipo": "DC",
+                "desc": "Falsa zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 104.742,
+                "valor": 94.268,
+                "brazo": 6.325,
+                "momento_nominal": 662.493,
+                "momento": 596.244
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 25.98,
+                "valor": 23.382,
+                "brazo": 6.33,
+                "momento_nominal": 164.453,
+                "momento": 148.008
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.65,
+                "nominal": 2.88,
+                "valor": 1.872,
+                "brazo": 6.33,
+                "momento_nominal": 18.23,
+                "momento": 11.85
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 3.08,
+                "valor": 5.39,
+                "brazo": 6.33,
+                "momento_nominal": 19.496,
+                "momento": 34.118
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 12.95,
+                "valor": 22.662,
+                "brazo": 6.33,
+                "momento_nominal": 81.974,
+                "momento": 143.454
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.5,
+                "nominal": 46.28,
+                "valor": 69.42,
+                "brazo": 5.33,
+                "momento_nominal": 246.69,
+                "momento": 370.035
+              },
+              {
+                "tipo": "Es",
+                "desc": "Empuje por sobrecarga",
+                "origen": "terreno",
+                "distribucion": "uniforme",
+                "factor": 1.75,
+                "nominal": 3.53,
+                "valor": 6.177,
+                "brazo": 8.0,
+                "momento_nominal": 28.23,
+                "momento": 49.403
+              },
+              {
+                "tipo": "BR",
+                "desc": "Frenado",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 1.63,
+                "valor": 2.853,
+                "brazo": 16.89,
+                "momento_nominal": 27.53,
+                "momento": 48.178
+              }
+            ],
+            "interface": "interfaz_2_falsa_zapata_suelo",
+            "support_width": 12.65,
+            "stability_verification": false
+          },
+          "case_resistance_Ib": {
+            "name": "Resistencia I-b",
+            "Fv": 434.34,
+            "Me": 3313.44,
+            "Fh": 78.45,
+            "Mv": 467.62,
+            "overturning": {
+              "Xo": 6.55,
+              "e": 0.227,
+              "B/6": 2.108,
+              "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "M_estable": 3313.44,
+              "M_volteo": 467.62,
+              "V_total": 434.34
+            },
+            "sliding": {
+              "QR": null,
+              "F_horizontal": 78.45,
+              "phi": null,
+              "mu": null,
+              "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "bearing": {
+              "q": 3.561,
+              "q_max": 3.561,
+              "q_min": 0.0,
+              "q_max_t_m2": 35.614,
+              "q_min_t_m2": 0.0,
+              "q_promedio_t_m2": 34.336,
+              "q_talon_t_m2": null,
+              "q_punta_t_m2": null,
+              "q_admisible": null,
+              "lado_q_max": "area efectiva",
+              "contacto": "AREA EFECTIVA",
+              "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "effective_width": 12.196,
+              "metodo": "Meyerhof q=V/[L(B-2e)], con L=1 m",
+              "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 45.54,
+                "valor": 56.925,
+                "brazo": 6.325,
+                "momento_nominal": 288.041,
+                "momento": 360.051
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 7.54,
+                "valor": 9.425,
+                "brazo": 6.35,
+                "momento_nominal": 47.879,
+                "momento": 59.849
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 4.85,
+                "valor": 6.062,
+                "brazo": 6.791,
+                "momento_nominal": 32.936,
+                "momento": 41.17
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.35,
+                "nominal": 115.47,
+                "valor": 155.885,
+                "brazo": 9.695,
+                "momento_nominal": 1119.482,
+                "momento": 1511.301
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 5.87,
+                "valor": 10.273,
+                "brazo": 9.975,
+                "momento_nominal": 58.553,
+                "momento": 102.468
+              },
+              {
+                "tipo": "DC",
+                "desc": "Falsa zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 104.742,
+                "valor": 130.928,
+                "brazo": 6.325,
+                "momento_nominal": 662.493,
+                "momento": 828.116
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.25,
+                "nominal": 25.98,
+                "valor": 32.475,
+                "brazo": 6.33,
+                "momento_nominal": 164.453,
+                "momento": 205.566
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.5,
+                "nominal": 2.88,
+                "valor": 4.32,
+                "brazo": 6.33,
+                "momento_nominal": 18.23,
+                "momento": 27.345
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 3.08,
+                "valor": 5.39,
+                "brazo": 6.33,
+                "momento_nominal": 19.496,
+                "momento": 34.118
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 12.95,
+                "valor": 22.662,
+                "brazo": 6.33,
+                "momento_nominal": 81.974,
+                "momento": 143.454
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.5,
+                "nominal": 46.28,
+                "valor": 69.42,
+                "brazo": 5.33,
+                "momento_nominal": 246.69,
+                "momento": 370.035
+              },
+              {
+                "tipo": "Es",
+                "desc": "Empuje por sobrecarga",
+                "origen": "terreno",
+                "distribucion": "uniforme",
+                "factor": 1.75,
+                "nominal": 3.53,
+                "valor": 6.177,
+                "brazo": 8.0,
+                "momento_nominal": 28.23,
+                "momento": 49.403
+              },
+              {
+                "tipo": "BR",
+                "desc": "Frenado",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.75,
+                "nominal": 1.63,
+                "valor": 2.853,
+                "brazo": 16.89,
+                "momento_nominal": 27.53,
+                "momento": 48.178
+              }
+            ],
+            "interface": "interfaz_2_falsa_zapata_suelo",
+            "support_width": 12.65,
+            "stability_verification": false
+          },
+          "case_extreme_event_I": {
+            "name": "Evento Extremo I (Sismo)",
+            "Fv": 287.13,
+            "Me": 2207.55,
+            "Fh": 105.88,
+            "Mv": 609.48,
+            "overturning": {
+              "Xo": 5.57,
+              "e": 0.759,
+              "B/6": 2.108,
+              "e < B/6": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "eccentricity_limit": 2.108,
+              "eccentricity_limit_label": "B/6",
+              "eccentricity_check": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "M_estable": 2207.55,
+              "M_volteo": 609.48,
+              "V_total": 287.13
+            },
+            "sliding": {
+              "QR": null,
+              "F_horizontal": 105.88,
+              "phi": null,
+              "mu": null,
+              "QR > Fh": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "bearing": {
+              "q": 2.579,
+              "q_max": 2.579,
+              "q_min": 0.0,
+              "q_max_t_m2": 25.793,
+              "q_min_t_m2": 0.0,
+              "q_promedio_t_m2": 22.698,
+              "q_talon_t_m2": null,
+              "q_punta_t_m2": null,
+              "q_admisible": null,
+              "lado_q_max": "area efectiva",
+              "contacto": "AREA EFECTIVA",
+              "q_min >= 0": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)",
+              "effective_width": 11.132,
+              "metodo": "Meyerhof q=V/[L(B-2e)], con L=1 m",
+              "q <= q_adm": "NO APLICA - VERIFICACION SOLO EN SERVICIO I (MTC)"
+            },
+            "fv_detail": [
+              {
+                "tipo": "DC",
+                "desc": "Zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 45.54,
+                "valor": 40.986,
+                "brazo": 6.325,
+                "momento_nominal": 288.041,
+                "momento": 259.237
+              },
+              {
+                "tipo": "DC",
+                "desc": "Tronco pantalla",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 7.54,
+                "valor": 6.786,
+                "brazo": 6.35,
+                "momento_nominal": 47.879,
+                "momento": 43.091
+              },
+              {
+                "tipo": "DC",
+                "desc": "Cajuela (asiento viga)",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 4.85,
+                "valor": 4.365,
+                "brazo": 6.791,
+                "momento_nominal": 32.936,
+                "momento": 29.642
+              },
+              {
+                "tipo": "EV",
+                "desc": "Relleno sobre talón",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 115.47,
+                "valor": 115.47,
+                "brazo": 9.695,
+                "momento_nominal": 1119.482,
+                "momento": 1119.482
+              },
+              {
+                "tipo": "LS",
+                "desc": "Sobrecarga terreno",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.0,
+                "nominal": 5.87,
+                "valor": 0.0,
+                "brazo": 9.975,
+                "momento_nominal": 58.553,
+                "momento": 0.0
+              },
+              {
+                "tipo": "DC",
+                "desc": "Falsa zapata",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 104.742,
+                "valor": 94.268,
+                "brazo": 6.325,
+                "momento_nominal": 662.493,
+                "momento": 596.244
+              },
+              {
+                "tipo": "DC",
+                "desc": "Peso Propio",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.9,
+                "nominal": 25.98,
+                "valor": 23.382,
+                "brazo": 6.33,
+                "momento_nominal": 164.453,
+                "momento": 148.008
+              },
+              {
+                "tipo": "DW",
+                "desc": "Superf. desgaste",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.65,
+                "nominal": 2.88,
+                "valor": 1.872,
+                "brazo": 6.33,
+                "momento_nominal": 18.23,
+                "momento": 11.85
+              },
+              {
+                "tipo": "PL",
+                "desc": "Carga peatonal",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.0,
+                "nominal": 3.08,
+                "valor": 0.0,
+                "brazo": 6.33,
+                "momento_nominal": 19.496,
+                "momento": 0.0
+              },
+              {
+                "tipo": "LL+IM",
+                "desc": "Sobrecarga HL-93",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 0.0,
+                "nominal": 12.95,
+                "valor": 0.0,
+                "brazo": 6.33,
+                "momento_nominal": 81.974,
+                "momento": 0.0
+              }
+            ],
+            "fh_detail": [
+              {
+                "tipo": "Ea",
+                "desc": "Empuje activo estático",
+                "origen": "terreno",
+                "distribucion": "triangular_max_base",
+                "factor": 1.0,
+                "nominal": 46.28,
+                "valor": 46.28,
+                "brazo": 5.33,
+                "momento_nominal": 246.69,
+                "momento": 246.69
+              },
+              {
+                "tipo": "Delta Eas",
+                "desc": "Incremento sísmico del empuje",
+                "origen": "terreno",
+                "distribucion": "triangular_max_top",
+                "factor": 1.0,
+                "nominal": 13.63,
+                "valor": 13.63,
+                "brazo": 10.66,
+                "momento_nominal": 145.25,
+                "momento": 145.25
+              },
+              {
+                "tipo": "Eq-super",
+                "desc": "Inercia de superestructura",
+                "origen": "superestructura",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 6.93,
+                "valor": 6.93,
+                "brazo": 13.3,
+                "momento_nominal": 92.12,
+                "momento": 92.12
+              },
+              {
+                "tipo": "Eq-estribo",
+                "desc": "Inercia del estribo",
+                "origen": "estribo",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 13.9,
+                "valor": 13.9,
+                "brazo": 5.77,
+                "momento_nominal": 80.17,
+                "momento": 80.17
+              },
+              {
+                "tipo": "Eq-falsa-zapata",
+                "desc": "Inercia de la falsa zapata",
+                "origen": "falsa_zapata",
+                "distribucion": "concentrada",
+                "factor": 1.0,
+                "nominal": 25.14,
+                "valor": 25.14,
+                "brazo": 1.8,
+                "momento_nominal": 45.25,
+                "momento": 45.25
+              }
+            ],
+            "interface": "interfaz_2_falsa_zapata_suelo",
+            "support_width": 12.65,
+            "stability_verification": false,
+            "Fq": 45.97,
+            "Mq": 217.54
+          }
+        }
+      }
+    },
+    "configuracion_resuelta": {
+      "geometria": {
+        "H": 12.39,
+        "hp": 10.89,
+        "hz": 1.5,
+        "B": 12.65,
+        "B1": 6.1,
+        "B2": 6.15,
+        "tp1": 0.4,
+        "tp2": 0.4,
+        "ancho_estribo": 1.0,
+        "a_cajuela": 1.15,
+        "b_cajuela": 0.4,
+        "c_cajuela": 2.34,
+        "d_cajuela": 0.7,
+        "e_cajuela": 0.75,
+        "f_cajuela": 0.4,
+        "g_cajuela": 0.55,
+        "back_face_slope": 0.0
+      },
+      "materiales": {
+        "gamma_c": 2.4,
+        "f_c": 280.0,
+        "fy": 4200.0,
+        "gamma_r": 1.8,
+        "phi_relleno": 39.8,
+        "delta": 19.9,
+        "gamma_suelo": 1.96,
+        "phi_base": 39.8,
+        "cohesion": 0.0,
+        "mu": 0.55,
+        "capacidad_portante": 3.67,
+        "capacidad_portante_factorizada": null
+      },
+      "cargas_superestructura": {
+        "L": 50.0,
+        "ancho_distribucion": 1.0,
+        "R_DL_total": 173.15,
+        "R_LL_total": 77.71,
+        "R_BR_total": 9.8,
+        "DC": 25.98,
+        "DW": 2.88,
+        "PL": 3.08,
+        "LL_IM": 12.95,
+        "BR": 1.63,
+        "brazo_super": null,
+        "brazo_BR": null,
+        "brazo_EQ_super": null
+      },
+      "sismo": {
+        "A": 0.25,
+        "S": 1.2,
+        "R": 1.5,
+        "Kh": 0.125,
+        "Kv": 0.05
+      },
+      "falsa_zapata": {
+        "enabled": true,
+        "height": 3.6,
+        "width": 12.65,
+        "gamma": 2.3,
+        "f_c": 140.0,
+        "concrete_contact_mu": 0.6,
+        "concrete_compression_phi": 1.0,
+        "soil_contact_mu": null,
+        "offset_from_toe": null
+      }
+    }
+  },
+  "validaciones": [],
+  "advertencias": [],
+  "archivos_generados": [
+    "figuras/geometria_estribo.png",
+    "figuras/presiones_interfaz_1_servicio-i.png",
+    "figuras/presiones_interfaz_1_resistencia-ia.png",
+    "figuras/presiones_interfaz_1_resistencia-ib.png",
+    "figuras/presiones_interfaz_1_evento-extremo-i.png",
+    "figuras/presiones_interfaz_2_servicio-i.png",
+    "figuras/presiones_interfaz_2_resistencia-ia.png",
+    "figuras/presiones_interfaz_2_resistencia-ib.png",
+    "figuras/presiones_interfaz_2_evento-extremo-i.png"
+  ],
+  "generado_en": "2026-09-11T13:54:03.370162-05:00"
+}

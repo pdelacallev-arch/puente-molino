@@ -100,8 +100,9 @@ def test_diseno_dual_cumple_y_no_disena_contrafuertes(resultado_grueso):
 def test_lineas_diseno_siguen_tres_niveles_y_coordenada_desarrollada(resultado_grueso):
     lineas = resultado_grueso["lineas_diseno"]
     assert [x["franja"] for x in lineas] == ["Inferior", "Intermedia", "Superior"]
+    h = resultado_grueso["parametros"]["altura_modelada_m"]
     assert [x["z_sobre_zapata_m"] for x in lineas] == pytest.approx([
-        0.0, 9.80/3.0, 2*9.80/3.0,
+        0.0, h/3.0, 2*h/3.0,
     ])
     for linea in lineas:
         puntos = linea["puntos"]

@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "ejecucion_id": "20260911T135353-0500",
+  "caso": "molinohuayco",
+  "revision": "R01",
+  "configuracion_sha256": "432ff9e2b4cb292b4a14637a0604547ae7046deb3ad2ee133caf9cf7b879ff84",
+  "overrides_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "codigo_sha256": "0299fd99db406f28873fc53494d2028ff1469a025c5e75876831e810c3fd0c48",
+  "modulos": {
+    "estribo.estabilidad_global": {
+      "estado": "OK",
+      "entrada": "elementos/estribo/estabilidad_global/entrada.json",
+      "resultado": "elementos/estribo/estabilidad_global/resultado.json",
+      "reporte": "elementos/estribo/estabilidad_global/reporte.md",
+      "resultado_sha256": "aaa43db58ce45131b43a010ace5df618a33bf7b8b92671ba7ae90d2f8b882ce1"
+    },
+    "pantalla.analisis_shell_3d": {
+      "estado": "OK",
+      "entrada": "elementos/pantalla/analisis_shell_3d/entrada.json",
+      "resultado": "elementos/pantalla/analisis_shell_3d/resultado.json",
+      "reporte": "elementos/pantalla/analisis_shell_3d/reporte.md",
+      "resultado_sha256": "08fe0dfafdd9d9c1b53632859a73e8f949d452c1ef977e16f6c9e3c2c5d3b17a"
+    },
+    "pantalla.reacciones_contrafuertes": {
+      "estado": "OK",
+      "entrada": "elementos/pantalla/reacciones_contrafuertes/entrada.json",
+      "resultado": "elementos/pantalla/reacciones_contrafuertes/resultado.json",
+      "reporte": "elementos/pantalla/reacciones_contrafuertes/reporte.md",
+      "resultado_sha256": "e2e423a037dd8dd4a105eb937b6fafc040af0bc3ab16be65a665f8d05fe24555"
+    },
+    "pantalla.diseno_e060_mtc": {
+      "estado": "ADVERTENCIA",
+      "entrada": "elementos/pantalla/diseno_e060_mtc/entrada.json",
+      "resultado": "elementos/pantalla/diseno_e060_mtc/resultado.json",
+      "reporte": "elementos/pantalla/diseno_e060_mtc/reporte.md",
+      "resultado_sha256": "ea5322dc9bfa0343a4d3df67e3c094c87623fa2bbe2debaf1b74e92225335c3c"
+    },
+    "contrafuertes.analisis_2d": {
+      "estado": "OK",
+      "entrada": "elementos/contrafuertes/analisis_2d/entrada.json",
+      "resultado": "elementos/contrafuertes/analisis_2d/resultado.json",
+      "reporte": "elementos/contrafuertes/analisis_2d/reporte.md",
+      "resultado_sha256": "9cbb289b3968a359b354202c08732459f9c854953fa373bd284890fc52c59edd"
+    },
+    "contrafuertes.diseno_stm": {
+      "estado": "NO_CUMPLE",
+      "entrada": "elementos/contrafuertes/diseno_stm/entrada.json",
+      "resultado": "elementos/contrafuertes/diseno_stm/resultado.json",
+      "reporte": "elementos/contrafuertes/diseno_stm/reporte.md",
+      "resultado_sha256": "fa77923f47d419d580088b69a620830f58a4917afa9bdfcbb89fd5cb49ce47d8"
+    },
+    "zapata.diseno_longitudinal_e060": {
+      "estado": "ADVERTENCIA",
+      "entrada": "elementos/zapata/diseno_longitudinal_e060/entrada.json",
+      "resultado": "elementos/zapata/diseno_longitudinal_e060/resultado.json",
+      "reporte": "elementos/zapata/diseno_longitudinal_e060/reporte.md",
+      "resultado_sha256": "85bb7a1bcc41f3834ec6061c1dcfa4b07a29c04ad32fc1ad8eee25e3c251a8c4"
+    },
+    "zapata.diseno_transversal_e060_mtc": {
+      "estado": "OK",
+      "entrada": "elementos/zapata/diseno_transversal_e060_mtc/entrada.json",
+      "resultado": "elementos/zapata/diseno_transversal_e060_mtc/resultado.json",
+      "reporte": "elementos/zapata/diseno_transversal_e060_mtc/reporte.md",
+      "resultado_sha256": "e30453b28169a01cf0e8c4be6c0bd3cc607796974a72b3089ef3ec98710998ae"
+    },
+    "dentellon.diseno_e060": {
+      "estado": "ADVERTENCIA",
+      "entrada": "elementos/dentellon/diseno_e060/entrada.json",
+      "resultado": "elementos/dentellon/diseno_e060/resultado.json",
+      "reporte": "elementos/dentellon/diseno_e060/reporte.md",
+      "resultado_sha256": "9e9b47f60f87d453ade38b897309f4a074527ac9aeee784c530721363d7dce3a"
+    },
+    "cajuela.verificacion_voladizo": {
+      "estado": "OK",
+      "entrada": "elementos/cajuela/verificacion_voladizo/entrada.json",
+      "resultado": "elementos/cajuela/verificacion_voladizo/resultado.json",
+      "reporte": "elementos/cajuela/verificacion_voladizo/reporte.md",
+      "resultado_sha256": "c913acc3d606e7fff472975cd88083f05300587e978c973adce08dd59ea096af"
+    }
+  }
+}

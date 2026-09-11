@@ -3,7 +3,7 @@
 
 El modelo corresponde a una franja de 1.00 m de la pared superior del estribo.
 La base del voladizo se ubica donde termina el contrafuerte y la corona esta
-3.40 m por encima. Las cargas del puente y sus factores proceden de
+la altura local por encima. Las cargas del puente y sus factores proceden de
 CALC-EST-2026-002-R00. El script no reparte cargas concentradas de apoyos en
 la direccion horizontal: para ello se necesitan posiciones y placas de apoyo.
 
@@ -24,6 +24,7 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from analisis_estabilidad.elementos.estribo.estabilidad_global import (  # noqa: E402
+    GEOM,
     coulomb_active_coefficient,
     mononobe_okabe_coefficient,
 )
@@ -39,9 +40,10 @@ CM2_M_POR_IN2_FT = 6.4516 / 0.3048
 
 @dataclass(frozen=True)
 class Parametros:
-    # Geometria indicada por el usuario.
-    altura_m: float = 3.40
-    altura_global_empuje_m: float = 14.65
+    # Geometría derivada del estribo (GEOM): altura local = cajuela (c + d) y
+    # altura global de empuje = altura total del estribo (H).
+    altura_m: float = GEOM.c_cajuela + GEOM.d_cajuela
+    altura_global_empuje_m: float = GEOM.H
     espesor_m: float = 0.40
     ancho_franja_m: float = 1.00
     recubrimiento_frontal_mm: float = 50.0
@@ -112,6 +114,25 @@ class Caso:
     P_puente_tf_m: float
     V_tf_m: float
     M_tf_m_m: float
+    axial_tf_m: float
+    descripcion: str
+
+
+@dataclass(frozen=True)
+class CasoInverso:
+    """Momento con la inercia sísmica invertida (hacia el relleno).
+
+    El empuje estático (Ea + Es) permanece hacia el vacío; la inercia propia
+    (PIR) y la de la superestructura (EQ-super) se invierten. Se desprecia el
+    incremento dinámico Delta Eas, lo que es conservador para la cara frontal.
+    """
+
+    M_Ea_tf_m_m: float
+    M_Es_tf_m_m: float
+    M_PIR_tf_m_m: float
+    M_EQsuper_tf_m_m: float
+    M_inverso_tf_m_m: float
+    V_inverso_tf_m: float
     axial_tf_m: float
     descripcion: str
 
@@ -250,6 +271,39 @@ def construir_casos(p: Parametros, c: dict[str, float]) -> list[Caso]:
     return [servicio, resistencia_ia, resistencia_ib, evento_extremo]
 
 
+def caso_inverso(p: Parametros, c: dict[str, float], axial_tf_m: float) -> CasoInverso:
+    """Caso sísmico inverso: la inercia sísmica actúa hacia el relleno.
+
+    El empuje estático (Ea + Es) permanece hacia el vacío. La inercia propia
+    (PIR) y la de la superestructura (EQ-super) se invierten, de modo que la
+    cara frontal/no relleno queda en tracción. Se desprecia el incremento
+    dinámico Delta Eas, lo que es conservador para esa cara.
+    """
+    h = p.altura_m
+    # Empuje estático hacia el vacío
+    q_ea = p.gamma_relleno_tf_m3 * c["Ka_normal"] * h
+    e_ea = 0.5 * q_ea * h
+    m_ea = e_ea * h / 3.0
+    q_es = p.gamma_relleno_tf_m3 * c["Ka_normal"] * p.h_sobrecarga_m
+    e_es = q_es * h
+    m_es = e_es * h / 2.0
+    # Inercia sísmica hacia el relleno
+    e_pir = p.kh * p.gamma_concreto_tf_m3 * p.espesor_m * h
+    m_pir = e_pir * h / 2.0
+    e_eqs = p.porcentaje_sismico_superestructura * (p.dc_tf_m + p.dw_tf_m)
+    m_eqs = e_eqs * p.altura_carga_puente_m
+    return CasoInverso(
+        M_Ea_tf_m_m=m_ea,
+        M_Es_tf_m_m=m_es,
+        M_PIR_tf_m_m=m_pir,
+        M_EQsuper_tf_m_m=m_eqs,
+        M_inverso_tf_m_m=(m_pir + m_eqs) - (m_ea + m_es),
+        V_inverso_tf_m=(e_pir + e_eqs) - (e_ea + e_es),
+        axial_tf_m=axial_tf_m,
+        descripcion="Inercia sismica hacia el relleno; empuje estatico hacia el vacio",
+    )
+
+
 def capacidad_flexion_tf_m(as_cm2_m: float, d_mm: float, p: Parametros) -> float:
     b_cm = p.ancho_franja_m * 100.0
     d_cm = d_mm / 10.0
@@ -353,6 +407,25 @@ def evaluar(p: Parametros) -> dict:
     as_vertical = acero_provisto_cm2_m(p.diametro_mm, p.espaciamiento_vertical_mm)
     as_horizontal = acero_provisto_cm2_m(p.diametro_mm, p.espaciamiento_horizontal_mm)
 
+    # Caso sísmico inverso: la inercia (PIR + EQ-super) actúa hacia el relleno.
+    # Gobierna la cara frontal/no relleno.
+    axial_inverso = 0.90 * p.dc_tf_m + 0.65 * p.dw_tf_m
+    inverso = caso_inverso(p, c, axial_inverso)
+
+    # Demanda de tracción por cara:
+    #   directo  (hacia el vacío)   -> cara posterior/relleno
+    #   inverso  (hacia el relleno) -> cara frontal/no relleno
+    demanda_por_cara = {
+        "frontal/no relleno": max(inverso.M_inverso_tf_m_m, 0.0),
+        "posterior/relleno": gobernante.M_tf_m_m,
+    }
+    direccion_por_cara = {
+        "frontal/no relleno": "inverso (hacia el relleno)",
+        "posterior/relleno": "directo (hacia el vacio)",
+    }
+    M_base = max(demanda_por_cara.values())
+    V_gobernante = max(max(x.V_tf_m for x in resistentes), inverso.V_inverso_tf_m)
+
     caras = []
     for nombre, rec in (
         ("frontal/no relleno", p.recubrimiento_frontal_mm),
@@ -360,7 +433,8 @@ def evaluar(p: Parametros) -> dict:
     ):
         d = p.espesor_m * 1000.0 - rec - p.diametro_mm / 2.0
         mins = minimos_por_cara(p, d)
-        as_flex = acero_flexion_requerido_cm2_m(gobernante.M_tf_m_m, d, p)
+        mu_cara = demanda_por_cara[nombre]
+        as_flex = acero_flexion_requerido_cm2_m(mu_cara, d, p)
         as_req = max(as_flex, *mins.values())
         phi_mn = capacidad_flexion_tf_m(as_vertical, d, p)
         fs = esfuerzo_acero_servicio_mpa(servicio.M_tf_m_m, as_vertical, d)
@@ -369,13 +443,15 @@ def evaluar(p: Parametros) -> dict:
             "cara": nombre,
             "recubrimiento_mm": rec,
             "d_mm": d,
+            "momento_demanda_tf_m_m": mu_cara,
+            "direccion_demanda": direccion_por_cara[nombre],
             "As_flexion_requerido_cm2_m": as_flex,
             **mins,
             "As_requerido_cm2_m": as_req,
             "As_provisto_cm2_m": as_vertical,
             "DCR_area": as_req / as_vertical,
             "phi_Mn_tf_m_m": phi_mn,
-            "DCR_flexion": gobernante.M_tf_m_m / phi_mn,
+            "DCR_flexion": mu_cara / phi_mn,
             "fs_servicio_MPa": fs,
             "limite_fs_MPa": 0.60 * p.fy_kgf_cm2 * KGF_CM2_A_MPA,
             "limite_separacion_fisuracion_mm": s_fis,
@@ -395,9 +471,10 @@ def evaluar(p: Parametros) -> dict:
         "fuente": "CALC-EST-2026-002-R00.md",
         "coeficientes": c,
         "casos": [asdict(x) for x in casos],
+        "caso_inverso": asdict(inverso),
         "caso_gobernante": gobernante.nombre,
         "momento_gobernante_tf_m_m": gobernante.M_tf_m_m,
-        "cortante_gobernante_tf_m": max(x.V_tf_m for x in resistentes),
+        "cortante_gobernante_tf_m": V_gobernante,
         "caras_verticales": caras,
         "horizontal": {
             "As_requerido_cm2_m": min_horizontal,
@@ -407,8 +484,8 @@ def evaluar(p: Parametros) -> dict:
         },
         "cortante": {
             **vc,
-            "Vu_tf_m": max(x.V_tf_m for x in resistentes),
-            "DCR": max(x.V_tf_m for x in resistentes) / vc["adoptada_tf"],
+            "Vu_tf_m": V_gobernante,
+            "DCR": V_gobernante / vc["adoptada_tf"],
         },
         "axial": {
             "Pu_tf_m": gobernante.axial_tf_m,
@@ -424,7 +501,7 @@ def evaluar(p: Parametros) -> dict:
     d_alt = p.peralte_efectivo_base_alternativo_mm
     mins_alt = minimos_por_cara(p, d_alt)
     as_flex_alt = acero_flexion_requerido_cm2_m(
-        gobernante.M_tf_m_m, d_alt, p
+        M_base, d_alt, p
     )
     as_req_alt = max(as_flex_alt, *mins_alt.values())
     phi_mn_alt = capacidad_flexion_tf_m(as_vertical, d_alt, p)
@@ -439,12 +516,12 @@ def evaluar(p: Parametros) -> dict:
         "As_provisto_cm2_m": as_vertical,
         "DCR_area": as_req_alt / as_vertical,
         "phi_Mn_tf_m_m": phi_mn_alt,
-        "DCR_flexion": gobernante.M_tf_m_m / phi_mn_alt,
+        "DCR_flexion": M_base / phi_mn_alt,
         "cortante_capacidad_tf_m": vc_alt["adoptada_tf"],
-        "DCR_cortante": max(x.V_tf_m for x in resistentes) / vc_alt["adoptada_tf"],
-        "cumple_resistencia_flexion": gobernante.M_tf_m_m <= phi_mn_alt,
+        "DCR_cortante": V_gobernante / vc_alt["adoptada_tf"],
+        "cumple_resistencia_flexion": M_base <= phi_mn_alt,
         "cumple_area": as_vertical >= as_req_alt,
-        "cumple_cortante": max(x.V_tf_m for x in resistentes) <= vc_alt["adoptada_tf"],
+        "cumple_cortante": V_gobernante <= vc_alt["adoptada_tf"],
     }
     resultado["base_alternativa"]["cumple"] = (
         resultado["base_alternativa"]["cumple_resistencia_flexion"]
@@ -475,7 +552,7 @@ def evaluar(p: Parametros) -> dict:
             )
             cumple_s = cumple_s and (
                 as_s >= x["As_requerido_cm2_m"]
-                and gobernante.M_tf_m_m <= phi_mn_s
+                and x["momento_demanda_tf_m_m"] <= phi_mn_s
                 and s_mm <= s_fis_s
                 and fs_s <= 0.60 * p.fy_kgf_cm2 * KGF_CM2_A_MPA
             )
@@ -531,19 +608,35 @@ def reporte_markdown(r: dict) -> str:
         lines.append(
             f"| {c['nombre']} | {c['descripcion']} | {_fmt(c['V_tf_m'])} | {_fmt(c['M_tf_m_m'])} | {_fmt(c['axial_tf_m'])} |"
         )
+    inv = r["caso_inverso"]
     lines += [
         "",
-        f"Gobierna **{r['caso_gobernante']}**, con M_u = {_fmt(r['momento_gobernante_tf_m_m'])} tf·m/m.",
+        f"Gobierna **{r['caso_gobernante']}**, con M_u = {_fmt(r['momento_gobernante_tf_m_m'])} tf·m/m (cara posterior/relleno).",
+        "",
+        "### Caso sísmico inverso (inercia hacia el relleno)",
+        "",
+        "Gobierna la cara frontal/no relleno. El empuje estático (Ea + Es) permanece hacia el vacío y la inercia (PIR + EQ-super) se invierte; se desprecia Delta Eas, lo que es conservador para esa cara.",
+        "",
+        "| Componente | Momento (tf·m/m) |",
+        "|---|---:|",
+        f"| M(Ea) | {_fmt(inv['M_Ea_tf_m_m'])} |",
+        f"| M(Es) | {_fmt(inv['M_Es_tf_m_m'])} |",
+        f"| M(PIR) | {_fmt(inv['M_PIR_tf_m_m'])} |",
+        f"| M(EQ-super) | {_fmt(inv['M_EQsuper_tf_m_m'])} |",
+        f"| **M inverso** | **{_fmt(inv['M_inverso_tf_m_m'])}** |",
+        f"| V inverso | {_fmt(inv['V_inverso_tf_m'])} tf/m |",
         "",
         "## Acero vertical por cara",
         "",
-        "| Cara | d (mm) | As calc. | As norm. gobernante | As req. | As disp. | D/C acero | φMn | D/C flexión | Estado |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+        "Cada cara se dimensiona para su demanda de tracción gobernante: la posterior/relleno con el caso directo y la frontal/no relleno con el caso inverso.",
+        "",
+        "| Cara | d (mm) | M demanda (tf·m/m) | Dirección | As calc. | As norm. gobernante | As req. | As disp. | D/C acero | φMn | D/C flexión | Estado |",
+        "|---|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     for x in r["caras_verticales"]:
         ok = x["DCR_area"] <= 1 and x["DCR_flexion"] <= 1 and x["fisuracion_cumple"]
         lines.append(
-            f"| {x['cara']} | {_fmt(x['d_mm'],1)} | {_fmt(x['As_flexion_requerido_cm2_m'])} cm²/m | {_fmt(max(x['temperatura_E060_cm2_m'], x['min_flexion_E060_cm2_m'], x['temperatura_MTC_cm2_m']))} cm²/m (mín. flexión) | {_fmt(x['As_requerido_cm2_m'])} cm²/m | {_fmt(x['As_provisto_cm2_m'])} cm²/m | {_fmt(x['DCR_area'])} | {_fmt(x['phi_Mn_tf_m_m'])} tf·m/m | {_fmt(x['DCR_flexion'])} | {'Cumple' if ok else 'No cumple'} |"
+            f"| {x['cara']} | {_fmt(x['d_mm'],1)} | {_fmt(x['momento_demanda_tf_m_m'])} | {x['direccion_demanda']} | {_fmt(x['As_flexion_requerido_cm2_m'])} cm²/m | {_fmt(max(x['temperatura_E060_cm2_m'], x['min_flexion_E060_cm2_m'], x['temperatura_MTC_cm2_m']))} cm²/m (mín. flexión) | {_fmt(x['As_requerido_cm2_m'])} cm²/m | {_fmt(x['As_provisto_cm2_m'])} cm²/m | {_fmt(x['DCR_area'])} | {_fmt(x['phi_Mn_tf_m_m'])} tf·m/m | {_fmt(x['DCR_flexion'])} | {'Cumple' if ok else 'No cumple'} |"
         )
     lines += [
         "",
@@ -604,9 +697,9 @@ def main() -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--altura", type=float, default=3.40)
+    parser.add_argument("--altura", type=float, default=GEOM.c_cajuela + GEOM.d_cajuela)
     parser.add_argument(
-        "--altura-global-empuje", type=float, default=14.65,
+        "--altura-global-empuje", type=float, default=GEOM.H,
         help="Altura global H_g del diagrama de Delta Eas (m)",
     )
     parser.add_argument("--espesor", type=float, default=0.40)

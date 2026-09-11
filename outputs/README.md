@@ -2,14 +2,23 @@
 
 Los resultados del subsistema de estabilidad fueron trasladados a
 `analisis_estabilidad/casos/` y su histórico a
-`analisis_estabilidad/historico/`. Esta carpeta conserva resultados de otros
-subsistemas, como vigas principales.
+`analisis_estabilidad/historico/`.
+
+Los resultados de la superestructura (vigas principales) se guardan ahora
+dentro de la carpeta del caso, junto a `entrada.yaml`:
+
+```text
+analisis_superestructura/casos/<caso>/<revision>/ejecuciones/<id>/elementos/vigas_principales/<calculo>/
+```
+
+Esta carpeta conserva únicamente comparaciones y reportes sueltos de apoyo.
 
 ## Estructura
 
-| Carpeta | Contenido |
+| Archivo | Contenido |
 |---|---|
-| `vigas_principales/` | Resultados reproducibles de la superestructura metálica compuesta |
+| `reporte_comparativo_vigas_molinohuayco.md` | Comparación de alternativas de sección de vigas |
+| `comparacion_secciones_vigas.png` | Figura de apoyo del reporte comparativo |
 
 ## Convenciones
 
