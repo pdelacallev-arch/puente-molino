@@ -88,10 +88,64 @@ def _vehiculos(config: Configuracion, fatiga: bool = False):
         yield "tandem", trafico.separacion_tandem * 1000.0, offsets, cargas
 
 
+def posiciones_frente_candidatas(
+    L: float,
+    x: np.ndarray,
+    offsets: np.ndarray,
+    paso: float,
+) -> np.ndarray:
+    """Posiciones de barrido, incluidos todos los quiebres de la respuesta.
+
+    Para una separación de ejes fija, la respuesta en una sección es lineal por
+    tramos respecto del avance del vehículo. Sus extremos ocurren cuando un eje
+    cruza la sección evaluada o un apoyo. Incluir esos eventos evita que el
+    máximo dependa del paso regular configurado.
+    """
+    frente_min = -float(np.max(offsets))
+    regulares = np.arange(frente_min, L + paso / 2.0, paso)
+    sobre_secciones = (x[:, None] - offsets[None, :]).ravel()
+    sobre_apoyos = np.concatenate((-offsets, L - offsets))
+    candidatos = np.concatenate((regulares, sobre_secciones, sobre_apoyos))
+    candidatos = candidatos[(candidatos >= frente_min) & (candidatos <= L)]
+    return np.unique(np.round(candidatos, decimals=9))
+
+
+def _estaciones_criticas_momento(config: Configuracion) -> np.ndarray:
+    """Secciones candidatas al máximo absoluto según Barré.
+
+    Se incluye el efecto de la carga uniforme de carril en la ubicación del
+    máximo. Con ``q=0`` la expresión se reduce exactamente a la regla de Barré:
+    el centro de la luz biseca la distancia entre el eje crítico y la resultante
+    del sistema de cargas concentradas.
+    """
+    L = config.geometria.luz * 1000.0
+    q = config.trafico.carga_carril
+    estaciones: list[float] = []
+    familias = ((_vehiculos(config), q), (_vehiculos(config, fatiga=True), 0.0))
+    for vehiculos, carga_carril in familias:
+        for _, _, offsets, cargas in vehiculos:
+            carga_total = float(np.sum(cargas))
+            resultante = float(np.dot(cargas, offsets) / carga_total)
+            denominador = carga_total + carga_carril * L / 2.0
+            for indice, offset_eje in enumerate(offsets):
+                x_critica = L / 2.0 - (
+                    carga_total * (resultante - offset_eje) / (2.0 * denominador)
+                )
+                frente = x_critica - offsets[indice]
+                posiciones = frente + offsets
+                if np.all((posiciones >= 0.0) & (posiciones <= L)):
+                    estaciones.append(x_critica)
+    return np.asarray(estaciones, dtype=float)
+
+
 def analizar_hl93(config: Configuracion) -> ResultadoMovil:
     L = config.geometria.luz * 1000.0
     n = config.analisis.numero_estaciones
-    x = np.linspace(0.0, L, n)
+    x_base = np.linspace(0.0, L, n)
+    x = np.unique(
+        np.round(np.concatenate((x_base, _estaciones_criticas_momento(config))), decimals=9)
+    )
+    n = len(x)
     paso = config.analisis.paso_vehiculo * 1000.0
     q = config.trafico.carga_carril  # kN/m == N/mm
     m_carril = q * x * (L - x) / 2.0
@@ -103,13 +157,12 @@ def analizar_hl93(config: Configuracion) -> ResultadoMovil:
     max_v = np.full(n, -np.inf)
     min_v = np.full(n, np.inf)
     control = np.full(n, "", dtype=object)
-    centro = n // 2
+    centro = int(np.argmin(np.abs(x - L / 2.0)))
     posicion_centro = 0.0
     separacion_centro = 0.0
     error_max = 0.0
     for nombre, sep, offsets, cargas in _vehiculos(config):
-        frente_min = -float(np.max(offsets))
-        for frente in np.arange(frente_min, L + paso / 2.0, paso):
+        for frente in posiciones_frente_candidatas(L, x, offsets, paso):
             m, v, error = _respuesta_puntual(L, x, frente + offsets, cargas)
             m += m_carril
             mejora = m > max_m
@@ -125,8 +178,7 @@ def analizar_hl93(config: Configuracion) -> ResultadoMovil:
     max_f = np.full(n, -np.inf)
     min_f = np.full(n, np.inf)
     for _, _, offsets, cargas in _vehiculos(config, fatiga=True):
-        frente_min = -float(np.max(offsets))
-        for frente in np.arange(frente_min, L + paso / 2.0, paso):
+        for frente in posiciones_frente_candidatas(L, x, offsets, paso):
             m, _, error = _respuesta_puntual(L, x, frente + offsets, cargas)
             max_f = np.maximum(max_f, m)
             min_f = np.minimum(min_f, m)

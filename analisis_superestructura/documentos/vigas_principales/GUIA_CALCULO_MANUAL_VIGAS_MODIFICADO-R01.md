@@ -496,39 +496,101 @@ El momento por el tren de cargas es $M(x)=\sum_i P_i\,\eta_M(x,z_i)$.
 - **Carga de carril:** $q = 9.3$ kN/m sobre toda la luz.
 - **Incremento dinámico:** $IM = 1.33$ para momento/corte; $1.15$ para fatiga.
 
-El sistema **barre** la posición del vehículo (paso 0.25 m) y la separación
-posterior (paso 0.30 m) tomando el máximo.
+La envolvente considera un barrido regular de la posición del vehículo con
+paso de 0.25 m, complementado con las posiciones exactas en las que cada eje
+cruza una sección evaluada o un apoyo. También incorpora las secciones críticas
+definidas por el criterio de Barré. La separación posterior se evalúa entre
+4.3 y 9.0 m con paso de 0.30 m.
 
 ### 7.3 Cálculo manual del momento por carril
 
-Colocamos el eje trasero sobre el centro de luz (posición que maximiza), con
-separación posterior 4.3 m. Cargas mayoradas por $IM$:
+El máximo por carril, antes de la distribución transversal, es:
+
+$$
+\boxed{M_{LL+IM,\,carril,max}=7797.642\ \text{kN·m}}
+$$
+
+Controla el camión de diseño con separación posterior mínima de 4.3 m y el
+primer eje posterior —eje interior del camión— próximo al centro de la luz. El
+incremento dinámico se aplica únicamente a los ejes del camión:
 
 $$
 P_{frontal}=35(1.33)=46.55\ \text{kN},\qquad
 P_{trasero}=145(1.33)=192.85\ \text{kN}
 $$
 
-Posiciones: 20.7, 25.0 y 29.3 m. Ordenadas:
+La carga concentrada total y la posición de su resultante, medidas desde el eje
+frontal, son:
 
 $$
-\eta(20.7)=10.35,\quad \eta(25.0)=12.50,\quad \eta(29.3)=10.35
-$$
-
-$$
-M_{camion} = 46.55(10.35)+192.85(12.50)+192.85(10.35) = 4888\ \text{kN·m}
+P_\Sigma=46.55+192.85+192.85=432.25\ \text{kN}
 $$
 
 $$
-M_{carril} = \frac{qL^2}{8} = \frac{9.3(50)^2}{8} = 2906\ \text{kN·m}
+a_R=\frac{46.55(0)+192.85(4.3)+192.85(8.6)}{432.25}
+=5.75538\ \text{m}
+$$
+
+Para el eje interior, $a_k=4.3$ m. Considerando conjuntamente el camión y la
+carga uniforme de carril, la sección crítica se obtiene mediante:
+
+$$
+x_{crit}=\frac{L}{2}
+-\frac{P_\Sigma(a_R-a_k)}{2\left(P_\Sigma+qL/2\right)}
 $$
 
 $$
-M_{LL,carril} = 4888 + 2906 = \mathbf{7795\ kN·m}
+x_{crit}=25.0-
+\frac{432.25(5.75538-4.3)}
+{2\left[432.25+9.3(50)/2\right]}
+=24.52682\ \text{m}
 $$
 
-El sistema obtiene $7796$ kN·m (diferencia por el paso de barrido). Este valor
-es **por carril**, antes de distribuir transversalmente.
+Cuando $q=0$, esta expresión se reduce al criterio de Barré: el centro de la
+luz biseca la distancia entre el eje crítico y la resultante de las cargas
+concentradas. La carga de carril desplaza ligeramente la sección crítica hacia
+el centro.
+
+Las posiciones de los tres ejes son 20.22682, 24.52682 y 28.82682 m. Las
+ordenadas de la línea de influencia en $x_{crit}$ resultan:
+
+$$
+\eta(20.22682)=10.30483,\quad
+\eta(24.52682)=12.49552,\quad
+\eta(28.82682)=10.38622
+$$
+
+$$
+M_{camion}=46.55(10.30483)+192.85(12.49552)
++192.85(10.38622)=4892.433\ \text{kN·m}
+$$
+
+$$
+M_{carril}=\frac{q\,x_{crit}(L-x_{crit})}{2}
+=\frac{9.3(24.52682)(50-24.52682)}{2}
+=2905.209\ \text{kN·m}
+$$
+
+$$
+M_{LL+IM,\,carril,max}=4892.433+2905.209
+=\mathbf{7797.642\ \text{kN·m}}
+$$
+
+Como comprobación, al colocar el eje interior exactamente en el centro
+($x=25.0$ m), las posiciones son 20.7, 25.0 y 29.3 m, y se obtiene:
+
+$$
+M_{camion}=4888.415\ \text{kN·m},\qquad
+M_{carril}=2906.250\ \text{kN·m}
+$$
+
+$$
+M_{LL+IM,\,carril}(25.0)=7794.665\ \text{kN·m}
+$$
+
+Por tanto, colocar el eje interior en el centro maximiza el momento en la
+sección central, mientras que el máximo global de la viga ocurre en
+$x=24.52682$ m. La diferencia es 2.977 kN·m, equivalente a 0.038 %.
 
 ---
 
@@ -561,26 +623,28 @@ Luego se aplica el **factor de presencia múltiple** $m=1.20$ a momento y corte
 
 | Factor           |  Valor |
 | ---------------- | -----: |
-| $g_{m,interior}$ | 0.4250 |
-| $g_{m,exterior}$ | 0.4878 |
-| $g_{v,interior}$ | 0.6429 |
-| $g_{v,exterior}$ | 0.4441 |
-| $g_{f,interior}$ | 0.3665 |
+| $g_{m,interior}$ | 0.4251 |
+| $g_{m,exterior}$ | 0.4877 |
+| $g_{v,interior}$ | 0.6441 |
+| $g_{v,exterior}$ | 0.4436 |
+| $g_{f,interior}$ | 0.3666 |
 | $g_{f,exterior}$ | 0.4037 |
 
 **Ejemplo:** momento de carga viva distribuido, viga interior:
 
 $$
-M_{LL+IM} = g_{m,int}\,M_{LL,carril} = 0.4250(7795) = 3313\ \text{kN·m}
+M_{LL+IM,max}=g_{m,int}\,M_{LL+IM,\,carril,max}
+=0.425050(7797.642)=3314.389\ \text{kN·m}
 $$
 
 Viga exterior:
 
 $$
-M_{LL+IM} = 0.4878(7795) = 3803\ \text{kN·m}
+M_{LL+IM,max}=0.487740(7797.642)=3803.218\ \text{kN·m}
 $$
 
-> El programa reporta exactamente 3313 y 3803 kN·m.
+Estos valores corresponden a los máximos de las envolventes longitudinales de
+las vigas interior y exterior.
 
 ---
 
@@ -600,23 +664,26 @@ $$
 \text{Fatiga I} = 1.75\,\Delta(LL)
 $$
 
-**Ejemplo (viga interior, centro de luz):**
+**Ejemplo (viga interior, centro de luz):** en $x=25.0$ m se utiliza
+$M_{LL+IM}=3313.123$ kN·m, obtenido a partir de 7794.665 kN·m por carril.
 
 $$
-M_u = 1.25(5131+0) + 1.50(1056) + 1.75(3313) + 0
-= 6414 + 1584 + 5798 = \mathbf{13\,796\ kN·m}
+M_u=1.25(5131.031+0)+1.50(1056.250)+1.75(3313.123)+0
+\approx\mathbf{13\,796.130\ \text{kN·m}}
 $$
 
-El sistema reporta $13\,794$ kN·m (máximo calculado estación por estación, no en
-un solo punto). ✔
+La envolvente de Resistencia I alcanza
+$M_{u,max}=13\,797.087$ kN·m en $x=24.8328$ m.
 
 **Servicio II:**
 
 $$
-M_{ser} = (5131+0)+1056+1.30(3313)+0 = 10\,493\ \text{kN·m}
+M_{ser}=(5131.031+0)+1056.250+1.30(3313.123)+0
+=10\,494.341\ \text{kN·m}
 $$
 
-El sistema reporta $10\,492.7$ kN·m. ✔
+La envolvente de Servicio II alcanza
+$M_{ser,max}=10\,495.043$ kN·m en $x=24.8328$ m.
 
 ---
 
@@ -810,8 +877,8 @@ $$
 | $I$ acero seg. A        | 2.8902e10 mm⁴ | 2.8902e10 |   ✔   |
 | $I$ compuesto CP seg. A | 6.1948e10 mm⁴ | 6.1948e10 |   ✔   |
 | $M_p$ segmento C        |   26 763 kN·m |    26 763 |   ✔   |
-| $M_{LL}$ por carril     |     7795 kN·m |      7796 |   ✔   |
-| $M_u$ interior          |   13 796 kN·m |    13 794 |   ✔   |
+| $M_{LL+IM}$ por carril  | 7797.642 kN·m |  7797.642 |   ✔   |
+| $M_{u,max}$ interior    | 13 797.1 kN·m |  13 797.1 |   ✔   |
 | $V_n$                   |       2125 kN |      2125 |   ✔   |
 | $\phi M_n$ seg. C       |   20 947 kN·m |    20 947 |   ✔   |
 

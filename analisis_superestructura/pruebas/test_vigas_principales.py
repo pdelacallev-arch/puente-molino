@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from analisis_superestructura.elementos.vigas_principales.analisis.moviles import (
+    analizar_hl93,
     influencia_corte,
     influencia_momento,
 )
@@ -64,6 +65,62 @@ def test_lineas_influencia_viga_simple():
     v = influencia_corte(L, x, z)[0]
     assert m.tolist() == pytest.approx([1250.0, 2500.0, 1250.0])
     assert v.tolist() == pytest.approx([-0.25, -0.5, 0.25])
+
+
+def test_hl93_incluye_maximo_continuo_segun_barre():
+    ejemplo = RAIZ / "analisis_superestructura/casos/molinohuayco/MODIFICADO-R01/entrada.yaml"
+    config = validar_configuracion(ejemplo)
+    resultado = analizar_hl93(config)
+
+    # Camión normal con separación posterior mínima. La carga de carril desplaza
+    # ligeramente hacia el centro la sección de Barré correspondiente al eje
+    # interior (segundo eje).
+    camion = config.trafico.camion
+    im = 1.0 + config.trafico.incremento_dinamico
+    cargas = np.array(
+        [camion.eje_frontal, camion.eje_posterior, camion.eje_posterior]
+    ) * im
+    offsets = np.array(
+        [
+            0.0,
+            camion.separacion_frontal,
+            camion.separacion_frontal + camion.separacion_posterior_min,
+        ]
+    )
+    resultante = float(np.dot(cargas, offsets) / np.sum(cargas))
+    denominador = float(
+        np.sum(cargas) + config.trafico.carga_carril * config.geometria.luz / 2.0
+    )
+    x_barre = config.geometria.luz / 2.0 - float(
+        np.sum(cargas) * (resultante - offsets[1]) / (2.0 * denominador)
+    )
+
+    indice_maximo = int(np.argmax(resultado.momento_nmm))
+    assert resultado.x_mm[indice_maximo] / 1000.0 == pytest.approx(x_barre, abs=1e-9)
+    assert resultado.momento_nmm[indice_maximo] / 1e6 == pytest.approx(
+        7797.6417147649, rel=1e-11
+    )
+
+    centro = int(np.argmin(np.abs(resultado.x_mm - config.geometria.luz * 500.0)))
+    assert resultado.vehiculo_control_momento[centro] == "camion"
+    assert (
+        resultado.posicion_critica_centro_mm
+        + camion.separacion_frontal * 1000.0
+    ) == pytest.approx(config.geometria.luz * 500.0, abs=1e-8)
+
+
+def test_maximo_hl93_no_depende_del_paso_longitudinal():
+    ejemplo = RAIZ / "analisis_superestructura/casos/molinohuayco/MODIFICADO-R01/entrada.yaml"
+    config = validar_configuracion(ejemplo)
+    grueso = config.model_copy(
+        update={"analisis": config.analisis.model_copy(update={"paso_vehiculo": 2.0})}
+    )
+    fino = config.model_copy(
+        update={"analisis": config.analisis.model_copy(update={"paso_vehiculo": 0.05})}
+    )
+    maximo_grueso = float(np.max(analizar_hl93(grueso).momento_nmm))
+    maximo_fino = float(np.max(analizar_hl93(fino).momento_nmm))
+    assert maximo_grueso == pytest.approx(maximo_fino, rel=1e-12)
 
 
 def test_viga_prismatica_carga_uniforme_y_deflexion():

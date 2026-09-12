@@ -17,6 +17,7 @@ import numpy as np
 
 from ..modelos import Configuracion, SegmentoViga
 from .distribucion import FactoresDistribucion
+from .moviles import posiciones_frente_candidatas
 from .secciones import modulo_elasticidad_concreto, propiedades_por_segmento
 
 
@@ -349,10 +350,10 @@ def _caso_critico(config: Configuracion, efecto: str) -> CasoLongitudinal:
     base_carril = q * l**2 / 8.0 if efecto != "corte" else q * l / 2.0
     mejor: tuple[float, str, float, np.ndarray, np.ndarray] | None = None
     for nombre, offsets, cargas in _vehiculos(config, fatiga=efecto == "fatiga"):
-        frente_min = -float(np.max(offsets))
-        posiciones = np.arange(
-            frente_min,
-            l + p.paso_busqueda_longitudinal * 500.0,
+        posiciones = posiciones_frente_candidatas(
+            l,
+            np.array([x_eval]),
+            offsets,
             p.paso_busqueda_longitudinal * 1000.0,
         )
         for frente in posiciones:
