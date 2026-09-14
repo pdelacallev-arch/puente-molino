@@ -97,7 +97,7 @@ def auditar_equilibrio(caso: Caso, p: Parametros) -> Auditoria:
         caso.E_tri_tf_m * p.altura_m / 3.0
         + momento_trap
         + caso.E_uni_tf_m * p.altura_m / 2.0
-        + caso.P_puente_tf_m * p.altura_carga_puente_m
+        + caso.P_puente_tf_m * _brazo_carga_puente(caso, p)
     )
     # La reacción vertical de la base equilibra la carga axial descendente.
     vertical = caso.axial_tf_m - caso.axial_tf_m
@@ -120,6 +120,10 @@ def etiquetas_componentes(caso: Caso) -> tuple[str, str | None, str, str]:
         uni = "Es"
         point = "BR"
     return tri, trapecio, uni, point
+
+
+def _brazo_carga_puente(caso: Caso, p: Parametros) -> float:
+    return p.brazo_eq_super_m if caso.nombre.startswith("Evento Extremo") else p.brazo_br_m
 
 
 def _texto(ax, x, y, text, *, color=TEXT_DARK, size=10, ha="center",
@@ -170,7 +174,7 @@ def dibujar_caso(caso: Caso, p: Parametros, salida: Path, dpi: int = 220) -> Aud
     q_trap_base = caso.q_trap_base_tf_m2
     q_trap_top = caso.q_trap_corona_tf_m2
     q_uni = caso.E_uni_tf_m / h
-    a = p.altura_carga_puente_m
+    a = _brazo_carga_puente(caso, p)
     y_top_plot = max(h, a)
 
     fig = plt.figure(figsize=(16.5, 10.5))
@@ -379,7 +383,12 @@ def _mapa_casos(casos: list[Caso]) -> dict[str, Caso]:
         "servicio-i": next(c for c in casos if c.nombre == "Servicio I"),
         "resistencia-i-a": next(c for c in casos if c.nombre == "Resistencia I-a"),
         "resistencia-i-b": next(c for c in casos if c.nombre == "Resistencia I-b"),
-        "evento-extremo-i": next(c for c in casos if c.nombre == "Evento Extremo I"),
+        "evento-extremo-i-a": next(
+            c for c in casos if c.nombre == "Evento Extremo I-A"
+        ),
+        "evento-extremo-i-b": next(
+            c for c in casos if c.nombre == "Evento Extremo I-B"
+        ),
     }
 
 
@@ -391,7 +400,7 @@ def main() -> None:
         "--caso",
         choices=(
             "todos", "servicio-i", "resistencia-i-a", "resistencia-i-b",
-            "evento-extremo-i",
+            "evento-extremo-i-a", "evento-extremo-i-b",
         ),
         default="todos",
     )
@@ -401,9 +410,11 @@ def main() -> None:
         help="Altura global H_g del diagrama de Delta Eas (m)",
     )
     parser.add_argument("--espesor", type=float, default=0.40)
+    parser.add_argument("--brazo-br", type=float, default=None)
+    parser.add_argument("--brazo-eq-super", type=float, default=None)
     parser.add_argument(
-        "--altura-carga-puente", type=float, default=1.00,
-        help="Cota de la mesa de apoyo sobre el arranque local (m)",
+        "--altura-carga-puente", type=float, default=None,
+        help="Opcion heredada: aplica el mismo brazo a BR y EQ-super",
     )
     parser.add_argument("--porcentaje-sismico-superestructura", type=float, default=0.24)
     parser.add_argument(
@@ -419,7 +430,16 @@ def main() -> None:
         altura_m=args.altura,
         altura_global_empuje_m=args.altura_global_empuje,
         espesor_m=args.espesor,
-        altura_carga_puente_m=args.altura_carga_puente,
+        brazo_br_m=(
+            args.brazo_br if args.brazo_br is not None
+            else args.altura_carga_puente if args.altura_carga_puente is not None
+            else 1.00
+        ),
+        brazo_eq_super_m=(
+            args.brazo_eq_super if args.brazo_eq_super is not None
+            else args.altura_carga_puente if args.altura_carga_puente is not None
+            else 0.70
+        ),
         porcentaje_sismico_superestructura=args.porcentaje_sismico_superestructura,
     )
     p.validar()

@@ -69,6 +69,16 @@ def main(argv: list[str] | None = None) -> int:
                 "sha256": huella,
             }, ensure_ascii=False, indent=2))
             return 0
+        if args.comando == "ejecutar":
+            ejecucion, resultados = ejecutar(
+                args.objetivo, args.caso, args.revision, args.nueva_ejecucion
+            )
+            print(json.dumps({
+                "estado": "EJECUTADO",
+                "ejecucion": str(ejecucion),
+                "resultados": [str(x) for x in resultados],
+            }, ensure_ascii=False, indent=2))
+            return 0
         config, huella, ejecucion, _ = obtener_ejecucion(
             args.caso, args.revision, getattr(args, "nueva_ejecucion", False)
         )
@@ -79,16 +89,6 @@ def main(argv: list[str] | None = None) -> int:
             ]
             _, ruta = preparar(args.objetivo, config, huella, ejecucion, rutas)
             print(json.dumps({"estado": "PREPARADA", "entrada": str(ruta)}, indent=2))
-            return 0
-        if args.comando == "ejecutar":
-            ejecucion, resultados = ejecutar(
-                args.objetivo, args.caso, args.revision, args.nueva_ejecucion
-            )
-            print(json.dumps({
-                "estado": "EJECUTADO",
-                "ejecucion": str(ejecucion),
-                "resultados": [str(x) for x in resultados],
-            }, ensure_ascii=False, indent=2))
             return 0
         if args.comando == "consolidar":
             ruta = consolidar(ejecucion)

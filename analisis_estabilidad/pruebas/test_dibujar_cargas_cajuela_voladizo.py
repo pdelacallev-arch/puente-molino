@@ -18,14 +18,15 @@ def test_todos_los_casos_cierran_equilibrio():
         assert auditar_equilibrio(caso, p).cumple
 
 
-def test_mapa_contiene_cuatro_combinaciones_oficiales():
+def test_mapa_contiene_cinco_combinaciones_de_calculo():
     p = Parametros()
     casos = _mapa_casos(construir_casos(p, coeficientes(p)))
     assert set(casos) == {
         "servicio-i",
         "resistencia-i-a",
         "resistencia-i-b",
-        "evento-extremo-i",
+        "evento-extremo-i-a",
+        "evento-extremo-i-b",
     }
 
 

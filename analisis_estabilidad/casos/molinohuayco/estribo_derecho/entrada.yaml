@@ -249,7 +249,8 @@ elementos:
       kh: 0.125
       kv: 0.05
       porcentaje_sismico_superestructura: 0.24
-      altura_carga_puente_m: 1.00
+      brazo_br_m: 1.00
+      brazo_eq_super_m: 0.70
       phi_flexion: 0.90
       phi_cortante_e060: 0.85
       phi_cortante_mtc: 0.90
@@ -265,4 +266,3 @@ trazabilidad:
     cargas: calculado
     suelo: verificado
     falsa_zapata: preliminar
-

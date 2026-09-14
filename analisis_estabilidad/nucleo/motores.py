@@ -245,6 +245,12 @@ def _cajuela(entrada: EntradaElemento, dependencias: dict[str, dict]) -> dict:
 
     comunes = _comunes_desde_estabilidad(dependencias)
     datos = dict(entrada.parametros["elemento"])
+    # Compatibilidad reproducible con entradas anteriores a la separación de
+    # brazos: el único valor histórico se aplica a ambas acciones.
+    brazo_heredado = datos.pop("altura_carga_puente_m", None)
+    if brazo_heredado is not None:
+        datos.setdefault("brazo_br_m", brazo_heredado)
+        datos.setdefault("brazo_eq_super_m", brazo_heredado)
     mat = comunes["materiales"]
     cargas = comunes["cargas_superestructura"]
     sismo = comunes["sismo"]
@@ -460,7 +466,7 @@ def _generar_figuras(
         parametros = Parametros(**_argumentos_dataclass(Parametros, datos))
         claves = (
             "servicio-i", "resistencia-i-a", "resistencia-i-b",
-            "evento-extremo-i",
+            "evento-extremo-i-a", "evento-extremo-i-b",
         )
         for clave, caso_datos in zip(claves, resultado["casos"]):
             ruta = figuras / nombre_archivo(clave)

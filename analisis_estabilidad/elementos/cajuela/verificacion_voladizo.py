@@ -75,9 +75,11 @@ class Parametros:
     kh: float = 0.125
     kv: float = 0.05
     porcentaje_sismico_superestructura: float = 0.24
-    # La fuerza longitudinal del puente se introduce en la mesa de apoyo,
-    # medida desde el arranque local del voladizo.
-    altura_carga_puente_m: float = 1.00
+    # Brazos independientes medidos desde el arranque local del voladizo.
+    # BR conserva la cota previamente adoptada; EQ-super se ubica en la cara
+    # superior de la mesa de apoyo de 0.70 m.
+    brazo_br_m: float = 1.00
+    brazo_eq_super_m: float = 0.70
 
     phi_flexion: float = 0.90
     phi_cortante_e060: float = 0.85
@@ -86,8 +88,8 @@ class Parametros:
     def validar(self) -> None:
         if self.altura_m <= 0 or self.espesor_m <= 0 or self.ancho_franja_m <= 0:
             raise ValueError("La geometria debe ser positiva")
-        if self.altura_carga_puente_m < 0:
-            raise ValueError("La altura de la carga del puente no puede ser negativa")
+        if min(self.brazo_br_m, self.brazo_eq_super_m) < 0:
+            raise ValueError("Los brazos de BR y EQ-super no pueden ser negativos")
         if self.altura_global_empuje_m < self.altura_m:
             raise ValueError("La altura global de empuje no puede ser menor que la altura local")
         if min(self.espaciamiento_vertical_mm, self.espaciamiento_horizontal_mm) <= 0:
@@ -120,15 +122,20 @@ class Caso:
 
 @dataclass(frozen=True)
 class CasoInverso:
-    """Momento con la inercia sísmica invertida (hacia el relleno).
+    """Respuesta con la inercia sísmica invertida (hacia el relleno).
 
-    El empuje estático (Ea + Es) permanece hacia el vacío; la inercia propia
-    (PIR) y la de la superestructura (EQ-super) se invierten. Se desprecia el
-    incremento dinámico Delta Eas, lo que es conservador para la cara frontal.
+    La presión del terreno permanece hacia el vacío; la inercia propia (PIR)
+    y la de la superestructura (EQ-super) actúan en sentido contrario. Los
+    factores PAE/PIR corresponden a las concurrencias del MTC 2018,
+    Art. 2.8.1.1.14.1.
     """
 
+    nombre: str
+    componente_terreno: str
+    factor_pae: float
+    factor_pir: float
     M_Ea_tf_m_m: float
-    M_Es_tf_m_m: float
+    M_Delta_Eas_tf_m_m: float
     M_PIR_tf_m_m: float
     M_EQsuper_tf_m_m: float
     M_inverso_tf_m_m: float
@@ -221,7 +228,7 @@ def construir_casos(p: Parametros, c: dict[str, float]) -> list[Caso]:
         es,
         p.br_tf_m,
         eh + es + p.br_tf_m,
-        meh + mes + p.br_tf_m * p.altura_carga_puente_m,
+        meh + mes + p.br_tf_m * p.brazo_br_m,
         p.dc_tf_m + p.dw_tf_m + p.pl_tf_m + p.ll_im_tf_m,
         "Ea + Es + BR",
     )
@@ -234,7 +241,7 @@ def construir_casos(p: Parametros, c: dict[str, float]) -> list[Caso]:
         1.75 * es,
         1.75 * p.br_tf_m,
         1.50 * eh + 1.75 * es + 1.75 * p.br_tf_m,
-        1.50 * meh + 1.75 * mes + 1.75 * p.br_tf_m * p.altura_carga_puente_m,
+        1.50 * meh + 1.75 * mes + 1.75 * p.br_tf_m * p.brazo_br_m,
         0.90 * p.dc_tf_m + 0.65 * p.dw_tf_m + 1.75 * (p.pl_tf_m + p.ll_im_tf_m),
         "1.50 Ea + 1.75 Es + 1.75 BR",
     )
@@ -251,57 +258,103 @@ def construir_casos(p: Parametros, c: dict[str, float]) -> list[Caso]:
         1.25 * p.dc_tf_m + 1.50 * p.dw_tf_m + 1.75 * (p.pl_tf_m + p.ll_im_tf_m),
         "1.50 Ea + 1.75 Es + 1.75 BR",
     )
-    # Evento Extremo I oficial del expediente. En el modelo local:
-    # PAE = Ea + Delta Eas. Delta Eas se recorta del triángulo global de H_g,
-    # por lo que sobre los últimos H metros resulta un trapecio;
-    # PIR = inercia propia de la pantalla (Eq-estribo).
-    evento_extremo = Caso(
-        "Evento Extremo I",
+    # Evento Extremo I, MTC 2018 Art. 2.8.1.1.14.1:
+    #   I-A = 100% PAE + 50% PIR
+    #   I-B = max(50% PAE, PA) + 100% PIR
+    # PAE = Ea + Delta Eas. En el tramo local de la cajuela, Delta Eas es el
+    # recorte trapezoidal del diagrama global de altura H_g. EQ-super se
+    # mantiene al 100% en ambas concurrencias mientras su ruta de carga pase
+    # por la pared de cajuela.
+    evento_extremo_ia = Caso(
+        "Evento Extremo I-A",
         eh,
         delta_eas,
         q_delta_base,
         q_delta_corona,
+        0.50 * pir,
+        eq_super,
+        eh + delta_eas + 0.50 * pir + eq_super,
+        meh + m_delta_eas + 0.50 * mpir + eq_super * p.brazo_eq_super_m,
+        0.90 * p.dc_tf_m + 0.65 * p.dw_tf_m,
+        "100% PAE + 50% PIR + 100% EQ-super",
+    )
+
+    # La comparación MTC se efectúa entre fuerzas. Si 50% PAE es menor que
+    # PA se recupera el diagrama estático completo; en caso contrario se
+    # escala el diagrama PAE completo.
+    usa_pa_en_ib = 0.50 * (eh + delta_eas) < eh
+    if usa_pa_en_ib:
+        ib_eh, ib_meh = eh, meh
+        ib_delta, ib_mdelta = 0.0, 0.0
+        ib_qbase, ib_qcorona = 0.0, 0.0
+        seleccion_ib = "PA"
+    else:
+        ib_eh, ib_meh = 0.50 * eh, 0.50 * meh
+        ib_delta, ib_mdelta = 0.50 * delta_eas, 0.50 * m_delta_eas
+        ib_qbase = 0.50 * q_delta_base
+        ib_qcorona = 0.50 * q_delta_corona
+        seleccion_ib = "50% PAE"
+    evento_extremo_ib = Caso(
+        "Evento Extremo I-B",
+        ib_eh,
+        ib_delta,
+        ib_qbase,
+        ib_qcorona,
         pir,
         eq_super,
-        eh + delta_eas + pir + eq_super,
-        meh + m_delta_eas + mpir + eq_super * p.altura_carga_puente_m,
+        ib_eh + ib_delta + pir + eq_super,
+        ib_meh + ib_mdelta + mpir + eq_super * p.brazo_eq_super_m,
         0.90 * p.dc_tf_m + 0.65 * p.dw_tf_m,
-        "Ea + Delta Eas trapezoidal + PIR + EQ-super",
+        f"max(50% PAE, PA) + 100% PIR + 100% EQ-super [{seleccion_ib}]",
     )
-    return [servicio, resistencia_ia, resistencia_ib, evento_extremo]
+    return [
+        servicio, resistencia_ia, resistencia_ib,
+        evento_extremo_ia, evento_extremo_ib,
+    ]
 
 
-def caso_inverso(p: Parametros, c: dict[str, float], axial_tf_m: float) -> CasoInverso:
-    """Caso sísmico inverso: la inercia sísmica actúa hacia el relleno.
-
-    El empuje estático (Ea + Es) permanece hacia el vacío. La inercia propia
-    (PIR) y la de la superestructura (EQ-super) se invierten, de modo que la
-    cara frontal/no relleno queda en tracción. Se desprecia el incremento
-    dinámico Delta Eas, lo que es conservador para esa cara.
-    """
-    h = p.altura_m
-    # Empuje estático hacia el vacío
-    q_ea = p.gamma_relleno_tf_m3 * c["Ka_normal"] * h
-    e_ea = 0.5 * q_ea * h
-    m_ea = e_ea * h / 3.0
-    q_es = p.gamma_relleno_tf_m3 * c["Ka_normal"] * p.h_sobrecarga_m
-    e_es = q_es * h
-    m_es = e_es * h / 2.0
-    # Inercia sísmica hacia el relleno
-    e_pir = p.kh * p.gamma_concreto_tf_m3 * p.espesor_m * h
-    m_pir = e_pir * h / 2.0
+def construir_casos_inversos(
+    p: Parametros, casos: list[Caso], axial_tf_m: float
+) -> list[CasoInverso]:
+    """Evalúa ambas concurrencias MTC con la inercia en sentido inverso."""
     e_eqs = p.porcentaje_sismico_superestructura * (p.dc_tf_m + p.dw_tf_m)
-    m_eqs = e_eqs * p.altura_carga_puente_m
-    return CasoInverso(
-        M_Ea_tf_m_m=m_ea,
-        M_Es_tf_m_m=m_es,
-        M_PIR_tf_m_m=m_pir,
-        M_EQsuper_tf_m_m=m_eqs,
-        M_inverso_tf_m_m=(m_pir + m_eqs) - (m_ea + m_es),
-        V_inverso_tf_m=(e_pir + e_eqs) - (e_ea + e_es),
-        axial_tf_m=axial_tf_m,
-        descripcion="Inercia sismica hacia el relleno; empuje estatico hacia el vacio",
-    )
+    m_eqs = e_eqs * p.brazo_eq_super_m
+    salida: list[CasoInverso] = []
+    for nombre, factor_pir in (
+        ("Evento Extremo I-A inverso", 0.50),
+        ("Evento Extremo I-B inverso", 1.00),
+    ):
+        directo = next(c for c in casos if c.nombre == nombre.removesuffix(" inverso"))
+        e_terreno = directo.E_tri_tf_m + directo.E_trap_tf_m
+        m_ea = directo.E_tri_tf_m * p.altura_m / 3.0
+        m_delta = (
+            directo.q_trap_base_tf_m2 * p.altura_m**2 / 2.0
+            + (directo.q_trap_corona_tf_m2 - directo.q_trap_base_tf_m2)
+            * p.altura_m**2 / 3.0
+        )
+        e_pir = directo.E_uni_tf_m
+        m_pir = e_pir * p.altura_m / 2.0
+        salida.append(CasoInverso(
+            nombre=nombre,
+            componente_terreno=(
+                "100% PAE" if nombre.startswith("Evento Extremo I-A")
+                else directo.descripcion.split(" + 100% PIR", 1)[0]
+            ),
+            factor_pae=1.00 if nombre.startswith("Evento Extremo I-A") else 0.50,
+            factor_pir=factor_pir,
+            M_Ea_tf_m_m=m_ea,
+            M_Delta_Eas_tf_m_m=m_delta,
+            M_PIR_tf_m_m=m_pir,
+            M_EQsuper_tf_m_m=m_eqs,
+            M_inverso_tf_m_m=(m_pir + m_eqs) - (m_ea + m_delta),
+            V_inverso_tf_m=(e_pir + e_eqs) - e_terreno,
+            axial_tf_m=axial_tf_m,
+            descripcion=(
+                "PIR + EQ-super hacia el relleno; componente MTC de terreno "
+                "hacia el vacio"
+            ),
+        ))
+    return salida
 
 
 def capacidad_flexion_tf_m(as_cm2_m: float, d_mm: float, p: Parametros) -> float:
@@ -384,7 +437,7 @@ def desplazamiento_servicio_mm(p: Parametros, c: dict[str, float]) -> dict[str, 
     qtri_n_mm = q_tri_base * TF_A_KN
     quni_n_mm = q_uni * TF_A_KN
     p_n = p.br_tf_m * TF_A_KN * 1000.0
-    a_mm = p.altura_carga_puente_m * 1000.0
+    a_mm = p.brazo_br_m * 1000.0
     # Si la resultante actua por encima de la corona, se representa como una
     # fuerza en el extremo mas el momento P(a-H) transmitido al muro.
     momento_extremo_n_mm = p_n * max(a_mm - h_mm, 0.0)
@@ -407,10 +460,11 @@ def evaluar(p: Parametros) -> dict:
     as_vertical = acero_provisto_cm2_m(p.diametro_mm, p.espaciamiento_vertical_mm)
     as_horizontal = acero_provisto_cm2_m(p.diametro_mm, p.espaciamiento_horizontal_mm)
 
-    # Caso sísmico inverso: la inercia (PIR + EQ-super) actúa hacia el relleno.
-    # Gobierna la cara frontal/no relleno.
+    # Sentido sísmico inverso: se revisan las dos concurrencias MTC, no una
+    # suma ad hoc con 100% PAE y 100% PIR simultáneos.
     axial_inverso = 0.90 * p.dc_tf_m + 0.65 * p.dw_tf_m
-    inverso = caso_inverso(p, c, axial_inverso)
+    inversos = construir_casos_inversos(p, casos, axial_inverso)
+    inverso = max(inversos, key=lambda x: x.M_inverso_tf_m_m)
 
     # Demanda de tracción por cara:
     #   directo  (hacia el vacío)   -> cara posterior/relleno
@@ -424,7 +478,10 @@ def evaluar(p: Parametros) -> dict:
         "posterior/relleno": "directo (hacia el vacio)",
     }
     M_base = max(demanda_por_cara.values())
-    V_gobernante = max(max(x.V_tf_m for x in resistentes), inverso.V_inverso_tf_m)
+    V_gobernante = max(
+        max(abs(x.V_tf_m) for x in resistentes),
+        max(abs(x.V_inverso_tf_m) for x in inversos),
+    )
 
     caras = []
     for nombre, rec in (
@@ -471,9 +528,21 @@ def evaluar(p: Parametros) -> dict:
         "fuente": "CALC-EST-2026-002-R00.md",
         "coeficientes": c,
         "casos": [asdict(x) for x in casos],
+        "criterio_evento_extremo": {
+            "norma": "Manual de Puentes MTC 2018",
+            "articulo": "2.8.1.1.14.1",
+            "concurrencia_I_A": "100% PAE + 50% PIR",
+            "concurrencia_I_B": "max(50% PAE, PA) + 100% PIR",
+            "criterio": "Se adopta la envolvente mas desfavorable",
+            "eq_super": (
+                "100% en ambas concurrencias; sujeto a confirmar la ruta de carga"
+            ),
+        },
+        "casos_inversos": [asdict(x) for x in inversos],
         "caso_inverso": asdict(inverso),
         "caso_gobernante": gobernante.nombre,
         "momento_gobernante_tf_m_m": gobernante.M_tf_m_m,
+        "momento_diseno_envolvente_tf_m_m": M_base,
         "cortante_gobernante_tf_m": V_gobernante,
         "caras_verticales": caras,
         "horizontal": {
@@ -596,8 +665,10 @@ def reporte_markdown(r: dict) -> str:
         f"- Franja: 1.00 m; altura local: {p['altura_m']:.2f} m; altura global de empuje: {p['altura_global_empuje_m']:.2f} m; espesor: {p['espesor_m']:.2f} m.",
         f"- Armado evaluado: Ø5/8\" @ {p['espaciamiento_vertical_mm']:.0f} mm vertical y @ {p['espaciamiento_horizontal_mm']:.0f} mm horizontal, en ambas caras.",
         f"- Escenario complementario en la base: peralte efectivo local d = {p['peralte_efectivo_base_alternativo_mm'] / 1000.0:.2f} m, sin modificar las demandas del voladizo.",
-        f"- La fuerza horizontal del puente se aplica en la mesa de apoyo, a {p['altura_carga_puente_m']:.2f} m sobre el arranque.",
+        f"- BR se aplica con brazo de {p['brazo_br_m']:.2f} m y EQ-super con brazo de {p['brazo_eq_super_m']:.2f} m, medidos desde el arranque local.",
         "- La compresion axial del puente se cuantifica, pero no se acredita para aumentar la capacidad a flexion.",
+        "- Evento Extremo I aplica las dos concurrencias del MTC 2018, Art. 2.8.1.1.14.1; I-A e I-B son etiquetas internas del calculo.",
+        "- EQ-super se conserva al 100% en ambas concurrencias mientras no se demuestre una ruta de carga alternativa.",
         "",
         "## Demandas",
         "",
@@ -608,23 +679,26 @@ def reporte_markdown(r: dict) -> str:
         lines.append(
             f"| {c['nombre']} | {c['descripcion']} | {_fmt(c['V_tf_m'])} | {_fmt(c['M_tf_m_m'])} | {_fmt(c['axial_tf_m'])} |"
         )
-    inv = r["caso_inverso"]
     lines += [
         "",
         f"Gobierna **{r['caso_gobernante']}**, con M_u = {_fmt(r['momento_gobernante_tf_m_m'])} tf·m/m (cara posterior/relleno).",
         "",
-        "### Caso sísmico inverso (inercia hacia el relleno)",
+        "### Casos sísmicos inversos (inercia hacia el relleno)",
         "",
-        "Gobierna la cara frontal/no relleno. El empuje estático (Ea + Es) permanece hacia el vacío y la inercia (PIR + EQ-super) se invierte; se desprecia Delta Eas, lo que es conservador para esa cara.",
+        "Para la cara frontal/no relleno también se evalúan I-A e I-B. La componente de terreno permanece hacia el vacío y las inercias PIR + EQ-super actúan hacia el relleno; un momento inverso positivo tracciona la cara frontal.",
         "",
-        "| Componente | Momento (tf·m/m) |",
-        "|---|---:|",
-        f"| M(Ea) | {_fmt(inv['M_Ea_tf_m_m'])} |",
-        f"| M(Es) | {_fmt(inv['M_Es_tf_m_m'])} |",
-        f"| M(PIR) | {_fmt(inv['M_PIR_tf_m_m'])} |",
-        f"| M(EQ-super) | {_fmt(inv['M_EQsuper_tf_m_m'])} |",
-        f"| **M inverso** | **{_fmt(inv['M_inverso_tf_m_m'])}** |",
-        f"| V inverso | {_fmt(inv['V_inverso_tf_m'])} tf/m |",
+        "| Caso | Terreno opuesto | M terreno | M(PIR) | M(EQ-super) | M inverso | V inverso |",
+        "|---|---|---:|---:|---:|---:|---:|",
+    ]
+    for inv in r["casos_inversos"]:
+        m_terreno = inv["M_Ea_tf_m_m"] + inv["M_Delta_Eas_tf_m_m"]
+        lines.append(
+            f"| {inv['nombre']} | {inv['componente_terreno']} | "
+            f"{_fmt(m_terreno)} | {_fmt(inv['M_PIR_tf_m_m'])} | "
+            f"{_fmt(inv['M_EQsuper_tf_m_m'])} | {_fmt(inv['M_inverso_tf_m_m'])} | "
+            f"{_fmt(inv['V_inverso_tf_m'])} |"
+        )
+    lines += [
         "",
         "## Acero vertical por cara",
         "",
@@ -662,7 +736,7 @@ def reporte_markdown(r: dict) -> str:
         "|---|---:|---:|---:|---|",
         f"| Área por flexión calculada | {_fmt(b_alt['As_flexion_requerido_cm2_m'])} cm²/m | {_fmt(b_alt['As_provisto_cm2_m'])} cm²/m | {_fmt(b_alt['As_flexion_requerido_cm2_m'] / b_alt['As_provisto_cm2_m'])} | {'Cumple' if b_alt['As_provisto_cm2_m'] >= b_alt['As_flexion_requerido_cm2_m'] else 'No cumple'} |",
         f"| Acero mínimo a flexión adoptado | {_fmt(b_alt['min_flexion_E060_cm2_m'])} cm²/m | {_fmt(b_alt['As_provisto_cm2_m'])} cm²/m | {_fmt(b_alt['DCR_area'])} | {'Cumple' if b_alt['cumple_area'] else 'No cumple'} |",
-        f"| Resistencia a flexión | M_u = {_fmt(r['momento_gobernante_tf_m_m'])} tf·m/m | φM_n = {_fmt(b_alt['phi_Mn_tf_m_m'])} tf·m/m | {_fmt(b_alt['DCR_flexion'])} | {'Cumple' if b_alt['cumple_resistencia_flexion'] else 'No cumple'} |",
+        f"| Resistencia a flexión | M_u = {_fmt(r['momento_diseno_envolvente_tf_m_m'])} tf·m/m | φM_n = {_fmt(b_alt['phi_Mn_tf_m_m'])} tf·m/m | {_fmt(b_alt['DCR_flexion'])} | {'Cumple' if b_alt['cumple_resistencia_flexion'] else 'No cumple'} |",
         f"| Cortante | V_u = {_fmt(r['cortante_gobernante_tf_m'])} tf/m | φV_n = {_fmt(b_alt['cortante_capacidad_tf_m'])} tf/m | {_fmt(b_alt['DCR_cortante'])} | {'Cumple' if b_alt['cumple_cortante'] else 'No cumple'} |",
         "",
         f"**Resultado de la sección local con d = 1.50 m: {'CUMPLE' if b_alt['cumple'] else 'NO CUMPLE'}.** La resistencia a flexión y a cortante es suficiente, pero el cumplimiento global exige además satisfacer el acero mínimo asociado al nuevo peralte.",
@@ -709,9 +783,11 @@ def main() -> None:
         "--peralte-efectivo-base", type=float, default=1500.0,
         help="Peralte efectivo de la sección local alternativa en la base (mm)",
     )
+    parser.add_argument("--brazo-br", type=float, default=None)
+    parser.add_argument("--brazo-eq-super", type=float, default=None)
     parser.add_argument(
-        "--altura-carga-puente", type=float, default=1.00,
-        help="Cota de la mesa de apoyo sobre el arranque local (m)",
+        "--altura-carga-puente", type=float, default=None,
+        help="Opcion heredada: aplica el mismo brazo a BR y EQ-super",
     )
     parser.add_argument("--porcentaje-sismico-superestructura", type=float, default=0.24)
     parser.add_argument(
@@ -726,7 +802,16 @@ def main() -> None:
         espaciamiento_vertical_mm=args.separacion_vertical,
         espaciamiento_horizontal_mm=args.separacion_horizontal,
         peralte_efectivo_base_alternativo_mm=args.peralte_efectivo_base,
-        altura_carga_puente_m=args.altura_carga_puente,
+        brazo_br_m=(
+            args.brazo_br if args.brazo_br is not None
+            else args.altura_carga_puente if args.altura_carga_puente is not None
+            else 1.00
+        ),
+        brazo_eq_super_m=(
+            args.brazo_eq_super if args.brazo_eq_super is not None
+            else args.altura_carga_puente if args.altura_carga_puente is not None
+            else 0.70
+        ),
         porcentaje_sismico_superestructura=args.porcentaje_sismico_superestructura,
     )
     resultado = evaluar(p)
