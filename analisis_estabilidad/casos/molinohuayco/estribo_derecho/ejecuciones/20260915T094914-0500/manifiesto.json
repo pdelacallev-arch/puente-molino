@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "ejecucion_id": "20260915T094914-0500",
+  "caso": "molinohuayco",
+  "revision": "ESTRIBO_DERECHO",
+  "configuracion_sha256": "90643d4a2f2500cc5785347f89ca517f6f103dc2bb3b0d647b4fc6d38712a8f6",
+  "overrides_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "codigo_sha256": "ffca161241e0f389e1dd8a04c4a60005c59a62f1551b02920f8f4d385501d5d9",
+  "modulos": {
+    "estribo.estabilidad_global": {
+      "estado": "OK",
+      "entrada": "elementos/estribo/estabilidad_global/entrada.json",
+      "resultado": "elementos/estribo/estabilidad_global/resultado.json",
+      "reporte": "elementos/estribo/estabilidad_global/reporte.md",
+      "resultado_sha256": "2f341cc4cb4a844db8e4a53f43a3ec54c02ee8841019c8f5950905dcad2550ea"
+    },
+    "cajuela.verificacion_voladizo": {
+      "estado": "OK",
+      "entrada": "elementos/cajuela/verificacion_voladizo/entrada.json",
+      "resultado": "elementos/cajuela/verificacion_voladizo/resultado.json",
+      "reporte": "elementos/cajuela/verificacion_voladizo/reporte.md",
+      "resultado_sha256": "333f4a26513881f26a4c07eed44d7660e6f9e09359db950ee1a5d38c164b4357"
+    }
+  }
+}

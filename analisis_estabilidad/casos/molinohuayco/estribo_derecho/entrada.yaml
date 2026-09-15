@@ -230,10 +230,12 @@ elementos:
       ancho_franja_m: 1.00
       recubrimiento_frontal_mm: 50.0
       recubrimiento_relleno_mm: 75.0
-      diametro_mm: 15.875
-      espaciamiento_vertical_mm: 230.0
-      espaciamiento_horizontal_mm: 230.0
-      peralte_efectivo_base_alternativo_mm: 1500.0
+      barras_verticales: ['5/8"', '3/4"', '1"']
+      barras_horizontales: ['1/2"']
+      espaciamiento_horizontal_adoptado_mm: 300.0
+      espaciamiento_minimo_mm: 100.0
+      espaciamiento_maximo_mm: 400.0
+      paso_espaciamiento_mm: 5.0
       fc_kgf_cm2: 280.0
       fy_kgf_cm2: 4200.0
       gamma_relleno_tf_m3: 1.80

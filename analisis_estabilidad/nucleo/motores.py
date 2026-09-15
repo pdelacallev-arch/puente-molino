@@ -251,6 +251,18 @@ def _cajuela(entrada: EntradaElemento, dependencias: dict[str, dict]) -> dict:
     if brazo_heredado is not None:
         datos.setdefault("brazo_br_m", brazo_heredado)
         datos.setdefault("brazo_eq_super_m", brazo_heredado)
+    barras_heredadas = datos.pop("barras_disponibles", None)
+    if barras_heredadas is not None:
+        datos.setdefault("barras_verticales", barras_heredadas)
+        datos.setdefault("barras_horizontales", barras_heredadas)
+        datos.setdefault("espaciamiento_horizontal_adoptado_mm", None)
+    for parametro_obsoleto in (
+        "diametro_mm",
+        "espaciamiento_vertical_mm",
+        "espaciamiento_horizontal_mm",
+        "peralte_efectivo_base_alternativo_mm",
+    ):
+        datos.pop(parametro_obsoleto, None)
     mat = comunes["materiales"]
     cargas = comunes["cargas_superestructura"]
     sismo = comunes["sismo"]

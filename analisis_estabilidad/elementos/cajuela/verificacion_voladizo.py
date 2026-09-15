@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Verificacion de la pared de cajuela como muro en voladizo.
+"""Diseño normativo de la pared de cajuela como muro en voladizo.
 
 El modelo corresponde a una franja de 1.00 m de la pared superior del estribo.
-La base del voladizo se ubica donde termina el contrafuerte y la corona esta
-la altura local por encima. Las cargas del puente y sus factores proceden de
+La seccion de analisis se ubica en la base, inmediatamente debajo de la mesa
+de apoyo, y la corona esta a la altura local por encima. Las cargas del puente y sus factores proceden de
 CALC-EST-2026-002-R00. El script no reparte cargas concentradas de apoyos en
 la direccion horizontal: para ello se necesitan posiciones y placas de apoyo.
 
@@ -36,6 +36,12 @@ KGF_CM2_A_MPA = 0.0980665
 MPA_A_KSI = 0.1450377377
 MM_POR_PULGADA = 25.4
 CM2_M_POR_IN2_FT = 6.4516 / 0.3048
+BARRAS_INGLESAS_MM = {
+    '1/2"': 12.700,
+    '5/8"': 15.875,
+    '3/4"': 19.050,
+    '1"': 25.400,
+}
 
 
 @dataclass(frozen=True)
@@ -48,12 +54,12 @@ class Parametros:
     ancho_franja_m: float = 1.00
     recubrimiento_frontal_mm: float = 50.0
     recubrimiento_relleno_mm: float = 75.0
-    diametro_mm: float = 15.875  # 5/8 pulg
-    espaciamiento_vertical_mm: float = 230.0
-    espaciamiento_horizontal_mm: float = 230.0
-    # Escenario complementario solicitado: sección engrosada solo en el
-    # arranque, definida directamente mediante su peralte efectivo.
-    peralte_efectivo_base_alternativo_mm: float = 1500.0
+    barras_verticales: tuple[str, ...] = ('5/8"', '3/4"', '1"')
+    barras_horizontales: tuple[str, ...] = ('1/2"',)
+    espaciamiento_horizontal_adoptado_mm: float | None = 300.0
+    espaciamiento_minimo_mm: float = 100.0
+    espaciamiento_maximo_mm: float = 400.0
+    paso_espaciamiento_mm: float = 5.0
 
     # Materiales de CALC-EST-2026-002-R00.
     fc_kgf_cm2: float = 280.0
@@ -92,10 +98,25 @@ class Parametros:
             raise ValueError("Los brazos de BR y EQ-super no pueden ser negativos")
         if self.altura_global_empuje_m < self.altura_m:
             raise ValueError("La altura global de empuje no puede ser menor que la altura local")
-        if min(self.espaciamiento_vertical_mm, self.espaciamiento_horizontal_mm) <= 0:
-            raise ValueError("Los espaciamientos deben ser positivos")
-        if self.peralte_efectivo_base_alternativo_mm <= 0:
-            raise ValueError("El peralte efectivo alternativo debe ser positivo")
+        if min(
+            self.espaciamiento_minimo_mm,
+            self.espaciamiento_maximo_mm,
+            self.paso_espaciamiento_mm,
+        ) <= 0:
+            raise ValueError("Los límites y el paso de espaciamiento deben ser positivos")
+        if self.espaciamiento_minimo_mm > self.espaciamiento_maximo_mm:
+            raise ValueError("El espaciamiento mínimo supera al máximo")
+        if not self.barras_verticales or not self.barras_horizontales:
+            raise ValueError("Debe existir al menos una barra vertical y una horizontal")
+        faltantes = (
+            set(self.barras_verticales) | set(self.barras_horizontales)
+        ) - set(BARRAS_INGLESAS_MM)
+        if faltantes:
+            raise ValueError(f"Barras desconocidas: {sorted(faltantes)}")
+        if self.espaciamiento_horizontal_adoptado_mm is not None:
+            s_h = self.espaciamiento_horizontal_adoptado_mm
+            if not self.espaciamiento_minimo_mm <= s_h <= self.espaciamiento_maximo_mm:
+                raise ValueError("El espaciamiento horizontal adoptado está fuera de límites")
         limite = self.espesor_m * 1000.0 / 2.0
         if not 0 < self.recubrimiento_frontal_mm < limite:
             raise ValueError("Recubrimiento frontal incompatible con el espesor")
@@ -426,6 +447,119 @@ def limite_fisuracion_mm(fs_mpa: float, recubrimiento_mm: float, db_mm: float, p
     return (700.0 / (beta_s * fs_ksi) - 2.0 * dc_in) * MM_POR_PULGADA
 
 
+def limite_espaciamiento_general_mm(p: Parametros) -> float:
+    e060 = min(3.0 * p.espesor_m * 1000.0, 400.0)
+    mtc = min(1.5 * p.espesor_m * 1000.0, 450.0)
+    return min(e060, mtc, p.espaciamiento_maximo_mm)
+
+
+def _redondear_abajo(valor: float, paso: float) -> float:
+    return math.floor((valor + 1e-9) / paso) * paso
+
+
+def _minimo_normativo(minimos: dict[str, float]) -> tuple[float, str]:
+    etiquetas = {
+        "temperatura_E060_cm2_m": "retracción y temperatura E.060",
+        "min_flexion_E060_cm2_m": "mínimo de flexión E.060",
+        "temperatura_MTC_cm2_m": "retracción y temperatura MTC",
+    }
+    clave = max(minimos, key=minimos.get)
+    return minimos[clave], etiquetas[clave]
+
+
+def seleccionar_refuerzo_vertical(
+    mu_tf_m: float,
+    ms_tf_m: float,
+    recubrimiento_mm: float,
+    p: Parametros,
+) -> dict:
+    limite_general = limite_espaciamiento_general_mm(p)
+    limite_fs = 0.60 * p.fy_kgf_cm2 * KGF_CM2_A_MPA
+    for barra in p.barras_verticales:
+        db = BARRAS_INGLESAS_MM[barra]
+        d = p.espesor_m * 1000.0 - recubrimiento_mm - db / 2.0
+        minimos = minimos_por_cara(p, d)
+        as_norm, control_norm = _minimo_normativo(minimos)
+        as_calc = acero_flexion_requerido_cm2_m(mu_tf_m, d, p)
+        as_req = max(as_calc, as_norm)
+        area_barra = area_barra_cm2(db)
+        s_teorico = area_barra * 1000.0 / as_req
+        s = _redondear_abajo(
+            min(s_teorico, limite_general), p.paso_espaciamiento_mm
+        )
+        while s >= p.espaciamiento_minimo_mm - 1e-9:
+            as_disp = acero_provisto_cm2_m(db, s)
+            phi_mn = capacidad_flexion_tf_m(as_disp, d, p)
+            fs = esfuerzo_acero_servicio_mpa(ms_tf_m, as_disp, d)
+            s_fis = limite_fisuracion_mm(fs, recubrimiento_mm, db, p)
+            cumple = (
+                as_disp + 1e-9 >= as_req
+                and phi_mn + 1e-9 >= mu_tf_m
+                and fs <= limite_fs + 1e-9
+                and s <= s_fis + 1e-9
+            )
+            if cumple:
+                return {
+                    "barra": barra,
+                    "diametro_mm": db,
+                    "espaciamiento_teorico_mm": s_teorico,
+                    "espaciamiento_adoptado_mm": s,
+                    "d_mm": d,
+                    "As_flexion_requerido_cm2_m": as_calc,
+                    **minimos,
+                    "As_normativo_cm2_m": as_norm,
+                    "control_normativo": control_norm,
+                    "As_requerido_cm2_m": as_req,
+                    "As_provisto_cm2_m": as_disp,
+                    "DCR_area": as_req / as_disp,
+                    "phi_Mn_tf_m_m": phi_mn,
+                    "DCR_flexion": mu_tf_m / phi_mn,
+                    "fs_servicio_MPa": fs,
+                    "limite_fs_MPa": limite_fs,
+                    "limite_separacion_fisuracion_mm": s_fis,
+                    "fisuracion_cumple": True,
+                    "cumple": True,
+                }
+            s -= p.paso_espaciamiento_mm
+    raise ValueError(
+        "Ninguna barra disponible satisface acero, flexión y fisuración vertical"
+    )
+
+
+def seleccionar_refuerzo_horizontal(as_req: float, p: Parametros) -> dict:
+    limite_general = limite_espaciamiento_general_mm(p)
+    for barra in p.barras_horizontales:
+        db = BARRAS_INGLESAS_MM[barra]
+        area_barra = area_barra_cm2(db)
+        s_teorico = area_barra * 1000.0 / as_req
+        if p.espaciamiento_horizontal_adoptado_mm is None:
+            s = _redondear_abajo(
+                min(s_teorico, limite_general), p.paso_espaciamiento_mm
+            )
+        else:
+            s = p.espaciamiento_horizontal_adoptado_mm
+        if s < p.espaciamiento_minimo_mm - 1e-9:
+            continue
+        as_disp = acero_provisto_cm2_m(db, s)
+        cumple = (
+            s <= limite_general + 1e-9
+            and as_disp + 1e-9 >= as_req
+        )
+        if not cumple:
+            continue
+        return {
+            "barra": barra,
+            "diametro_mm": db,
+            "espaciamiento_teorico_mm": s_teorico,
+            "espaciamiento_adoptado_mm": s,
+            "As_requerido_cm2_m": as_req,
+            "As_provisto_cm2_m": as_disp,
+            "DCR_area": as_req / as_disp,
+            "cumple": True,
+        }
+    raise ValueError("Ninguna barra disponible satisface el acero horizontal")
+
+
 def desplazamiento_servicio_mm(p: Parametros, c: dict[str, float]) -> dict[str, float]:
     h = p.altura_m
     q_tri_base = p.gamma_relleno_tf_m3 * c["Ka_normal"] * h
@@ -457,8 +591,6 @@ def evaluar(p: Parametros) -> dict:
     servicio = next(x for x in casos if x.nombre == "Servicio I")
     resistentes = [x for x in casos if x.nombre != "Servicio I"]
     gobernante = max(resistentes, key=lambda x: x.M_tf_m_m)
-    as_vertical = acero_provisto_cm2_m(p.diametro_mm, p.espaciamiento_vertical_mm)
-    as_horizontal = acero_provisto_cm2_m(p.diametro_mm, p.espaciamiento_horizontal_mm)
 
     # Sentido sísmico inverso: se revisan las dos concurrencias MTC, no una
     # suma ad hoc con 100% PAE y 100% PIR simultáneos.
@@ -477,7 +609,7 @@ def evaluar(p: Parametros) -> dict:
         "frontal/no relleno": "inverso (hacia el relleno)",
         "posterior/relleno": "directo (hacia el vacio)",
     }
-    M_base = max(demanda_por_cara.values())
+    momento_envolvente = max(demanda_por_cara.values())
     V_gobernante = max(
         max(abs(x.V_tf_m) for x in resistentes),
         max(abs(x.V_inverso_tf_m) for x in inversos),
@@ -488,37 +620,23 @@ def evaluar(p: Parametros) -> dict:
         ("frontal/no relleno", p.recubrimiento_frontal_mm),
         ("posterior/relleno", p.recubrimiento_relleno_mm),
     ):
-        d = p.espesor_m * 1000.0 - rec - p.diametro_mm / 2.0
-        mins = minimos_por_cara(p, d)
         mu_cara = demanda_por_cara[nombre]
-        as_flex = acero_flexion_requerido_cm2_m(mu_cara, d, p)
-        as_req = max(as_flex, *mins.values())
-        phi_mn = capacidad_flexion_tf_m(as_vertical, d, p)
-        fs = esfuerzo_acero_servicio_mpa(servicio.M_tf_m_m, as_vertical, d)
-        s_fis = limite_fisuracion_mm(fs, rec, p.diametro_mm, p)
+        diseno = seleccionar_refuerzo_vertical(
+            mu_cara, servicio.M_tf_m_m, rec, p
+        )
         caras.append({
             "cara": nombre,
             "recubrimiento_mm": rec,
-            "d_mm": d,
             "momento_demanda_tf_m_m": mu_cara,
             "direccion_demanda": direccion_por_cara[nombre],
-            "As_flexion_requerido_cm2_m": as_flex,
-            **mins,
-            "As_requerido_cm2_m": as_req,
-            "As_provisto_cm2_m": as_vertical,
-            "DCR_area": as_req / as_vertical,
-            "phi_Mn_tf_m_m": phi_mn,
-            "DCR_flexion": mu_cara / phi_mn,
-            "fs_servicio_MPa": fs,
-            "limite_fs_MPa": 0.60 * p.fy_kgf_cm2 * KGF_CM2_A_MPA,
-            "limite_separacion_fisuracion_mm": s_fis,
-            "fisuracion_cumple": p.espaciamiento_vertical_mm <= s_fis and fs <= 0.60 * p.fy_kgf_cm2 * KGF_CM2_A_MPA,
+            **diseno,
         })
 
     min_horizontal = max(
         minimos_por_cara(p, min(x["d_mm"] for x in caras))["temperatura_E060_cm2_m"],
         minimos_por_cara(p, min(x["d_mm"] for x in caras))["temperatura_MTC_cm2_m"],
     )
+    horizontal = seleccionar_refuerzo_horizontal(min_horizontal, p)
     vc = capacidades_cortante_tf(min(x["d_mm"] for x in caras), p)
     axial_mpa = gobernante.axial_tf_m * TF_A_KN * 1000.0 / (
         p.ancho_franja_m * 1000.0 * p.espesor_m * 1000.0
@@ -535,22 +653,18 @@ def evaluar(p: Parametros) -> dict:
             "concurrencia_I_B": "max(50% PAE, PA) + 100% PIR",
             "criterio": "Se adopta la envolvente mas desfavorable",
             "eq_super": (
-                "100% en ambas concurrencias; sujeto a confirmar la ruta de carga"
+                "100% en ambas concurrencias; aplicada en la mesa de apoyo, "
+                "a 0.70 m sobre la seccion de base"
             ),
         },
         "casos_inversos": [asdict(x) for x in inversos],
         "caso_inverso": asdict(inverso),
         "caso_gobernante": gobernante.nombre,
         "momento_gobernante_tf_m_m": gobernante.M_tf_m_m,
-        "momento_diseno_envolvente_tf_m_m": M_base,
+        "momento_diseno_envolvente_tf_m_m": momento_envolvente,
         "cortante_gobernante_tf_m": V_gobernante,
         "caras_verticales": caras,
-        "horizontal": {
-            "As_requerido_cm2_m": min_horizontal,
-            "As_provisto_cm2_m": as_horizontal,
-            "DCR_area": min_horizontal / as_horizontal,
-            "cumple": as_horizontal >= min_horizontal,
-        },
+        "horizontal": horizontal,
         "cortante": {
             **vc,
             "Vu_tf_m": V_gobernante,
@@ -564,76 +678,14 @@ def evaluar(p: Parametros) -> dict:
         },
         "desplazamiento_servicio": desplazamiento_servicio_mm(p, c),
     }
-
-    # Verificación complementaria de la sección crítica en la base. Se cambia
-    # únicamente el peralte efectivo; las demandas y el armado se conservan.
-    d_alt = p.peralte_efectivo_base_alternativo_mm
-    mins_alt = minimos_por_cara(p, d_alt)
-    as_flex_alt = acero_flexion_requerido_cm2_m(
-        M_base, d_alt, p
-    )
-    as_req_alt = max(as_flex_alt, *mins_alt.values())
-    phi_mn_alt = capacidad_flexion_tf_m(as_vertical, d_alt, p)
-    vc_alt = capacidades_cortante_tf(d_alt, p)
-    resultado["base_alternativa"] = {
-        "alcance": "Sección local en el arranque; demandas sin modificación.",
-        "d_mm": d_alt,
-        "As_flexion_requerido_cm2_m": as_flex_alt,
-        **mins_alt,
-        "control_normativo": "Acero mínimo a flexión E.060",
-        "As_requerido_cm2_m": as_req_alt,
-        "As_provisto_cm2_m": as_vertical,
-        "DCR_area": as_req_alt / as_vertical,
-        "phi_Mn_tf_m_m": phi_mn_alt,
-        "DCR_flexion": M_base / phi_mn_alt,
-        "cortante_capacidad_tf_m": vc_alt["adoptada_tf"],
-        "DCR_cortante": V_gobernante / vc_alt["adoptada_tf"],
-        "cumple_resistencia_flexion": M_base <= phi_mn_alt,
-        "cumple_area": as_vertical >= as_req_alt,
-        "cumple_cortante": V_gobernante <= vc_alt["adoptada_tf"],
-    }
-    resultado["base_alternativa"]["cumple"] = (
-        resultado["base_alternativa"]["cumple_resistencia_flexion"]
-        and resultado["base_alternativa"]["cumple_area"]
-        and resultado["base_alternativa"]["cumple_cortante"]
-    )
-    resultado["cumple_vertical"] = all(
-        x["DCR_area"] <= 1.0 and x["DCR_flexion"] <= 1.0 and x["fisuracion_cumple"]
-        for x in caras
-    )
+    resultado["cumple_vertical"] = all(x["cumple"] for x in caras)
     resultado["cumple_cortante"] = resultado["cortante"]["DCR"] <= 1.0
     resultado["cumple_global"] = (
         resultado["cumple_vertical"]
         and resultado["horizontal"]["cumple"]
         and resultado["cumple_cortante"]
     )
-    separaciones_ok = []
-    for s_mm in range(50, 401, 5):
-        as_s = acero_provisto_cm2_m(p.diametro_mm, float(s_mm))
-        cumple_s = True
-        for x in caras:
-            phi_mn_s = capacidad_flexion_tf_m(as_s, x["d_mm"], p)
-            fs_s = esfuerzo_acero_servicio_mpa(
-                servicio.M_tf_m_m, as_s, x["d_mm"]
-            )
-            s_fis_s = limite_fisuracion_mm(
-                fs_s, x["recubrimiento_mm"], p.diametro_mm, p
-            )
-            cumple_s = cumple_s and (
-                as_s >= x["As_requerido_cm2_m"]
-                and x["momento_demanda_tf_m_m"] <= phi_mn_s
-                and s_mm <= s_fis_s
-                and fs_s <= 0.60 * p.fy_kgf_cm2 * KGF_CM2_A_MPA
-            )
-        if cumple_s:
-            separaciones_ok.append(float(s_mm))
-    resultado["separacion_maxima_vertical_5_8_mm"] = (
-        max(separaciones_ok) if separaciones_ok else None
-    )
-    s_area_horizontal = area_barra_cm2(p.diametro_mm) * 1000.0 / min_horizontal
-    resultado["separacion_maxima_horizontal_5_8_mm"] = min(
-        400.0, math.floor(s_area_horizontal / 5.0) * 5.0
-    )
+    resultado["estado"] = "CUMPLE" if resultado["cumple_global"] else "NO_CUMPLE"
     return resultado
 
 
@@ -643,13 +695,20 @@ def _fmt(x: float, n: int = 3) -> str:
 
 def reporte_markdown(r: dict) -> str:
     p = r["parametros"]
+    if p["espaciamiento_horizontal_adoptado_mm"] is None:
+        criterio_horizontal = (
+            f"El acero horizontal se selecciona entre {', '.join(p['barras_horizontales'])}."
+        )
+    else:
+        criterio_horizontal = (
+            f"Para el acero horizontal se adopta {', '.join(p['barras_horizontales'])} "
+            f"@ {p['espaciamiento_horizontal_adoptado_mm']:.0f} mm."
+        )
     if p["porcentaje_sismico_superestructura"] > 0:
         nota_eq = (
-            "El resultado incluye la fuerza sismica de la superestructura "
-            "indicada por el modelo vigente. Si esa fuerza se transfiere por "
-            "otro elemento y no por la pared de cajuela, debe documentarse la "
-            "ruta de carga y volver a ejecutar el script con el caso "
-            "correspondiente; no debe eliminarse sin sustento."
+            "El resultado incluye la fuerza sismica de la superestructura al "
+            "100% en ambas concurrencias, aplicada en la mesa de apoyo a "
+            f"{p['brazo_eq_super_m']:.2f} m sobre la seccion de base analizada."
         )
     else:
         nota_eq = (
@@ -658,17 +717,24 @@ def reporte_markdown(r: dict) -> str:
             "demostrada mediante el detalle de apoyos, cajuela y contrafuertes."
         )
     lines = [
-        "# Verificacion de la pared de cajuela en voladizo",
+        "# Diseño normativo de la pared de cajuela en voladizo",
         "",
         "## Modelo",
         "",
         f"- Franja: 1.00 m; altura local: {p['altura_m']:.2f} m; altura global de empuje: {p['altura_global_empuje_m']:.2f} m; espesor: {p['espesor_m']:.2f} m.",
-        f"- Armado evaluado: Ø5/8\" @ {p['espaciamiento_vertical_mm']:.0f} mm vertical y @ {p['espaciamiento_horizontal_mm']:.0f} mm horizontal, en ambas caras.",
-        f"- Escenario complementario en la base: peralte efectivo local d = {p['peralte_efectivo_base_alternativo_mm'] / 1000.0:.2f} m, sin modificar las demandas del voladizo.",
-        f"- BR se aplica con brazo de {p['brazo_br_m']:.2f} m y EQ-super con brazo de {p['brazo_eq_super_m']:.2f} m, medidos desde el arranque local.",
+        f"- El acero vertical se selecciona entre {', '.join(p['barras_verticales'])}. {criterio_horizontal}",
+        f"- La sección de análisis está en la base, inmediatamente debajo de la mesa de apoyo. BR se aplica con brazo de {p['brazo_br_m']:.2f} m y EQ-super con brazo de {p['brazo_eq_super_m']:.2f} m, medidos desde dicha sección.",
         "- La compresion axial del puente se cuantifica, pero no se acredita para aumentar la capacidad a flexion.",
         "- Evento Extremo I aplica las dos concurrencias del MTC 2018, Art. 2.8.1.1.14.1; I-A e I-B son etiquetas internas del calculo.",
         "- EQ-super se conserva al 100% en ambas concurrencias mientras no se demuestre una ruta de carga alternativa.",
+        "",
+        "## Criterios de diseño",
+        "",
+        "El acero requerido por cara se obtiene como la envolvente entre el acero calculado por flexión, el mínimo de flexión E.060 y los mínimos de retracción y temperatura E.060 y MTC:",
+        "",
+        "$$A_{s,req}=\\max(A_{s,calc},A_{s,min,E.060},A_{s,rt,E.060},A_{s,rt,MTC})$$",
+        "",
+        "Para cada barra disponible se determina el espaciamiento por área, se redondea hacia abajo al paso constructivo y se comprueban $A_{s,disp}\\ge A_{s,req}$, $M_u\\le\\phi M_n$, esfuerzo del acero y separación por fisuración. Se adopta además el menor límite general de espaciamiento aplicable.",
         "",
         "## Demandas",
         "",
@@ -700,17 +766,16 @@ def reporte_markdown(r: dict) -> str:
         )
     lines += [
         "",
-        "## Acero vertical por cara",
+        "## Diseño del acero vertical por cara",
         "",
         "Cada cara se dimensiona para su demanda de tracción gobernante: la posterior/relleno con el caso directo y la frontal/no relleno con el caso inverso.",
         "",
-        "| Cara | d (mm) | M demanda (tf·m/m) | Dirección | As calc. | As norm. gobernante | As req. | As disp. | D/C acero | φMn | D/C flexión | Estado |",
-        "|---|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|---|",
+        "| Cara | Caso/dirección | M_u | A_s,calc | A_s,norm | Control normativo | A_s,req | Refuerzo dispuesto | A_s,disp | D/C acero | φM_n | D/C flexión | Estado |",
+        "|---|---|---:|---:|---:|---|---:|---|---:|---:|---:|---:|---|",
     ]
     for x in r["caras_verticales"]:
-        ok = x["DCR_area"] <= 1 and x["DCR_flexion"] <= 1 and x["fisuracion_cumple"]
         lines.append(
-            f"| {x['cara']} | {_fmt(x['d_mm'],1)} | {_fmt(x['momento_demanda_tf_m_m'])} | {x['direccion_demanda']} | {_fmt(x['As_flexion_requerido_cm2_m'])} cm²/m | {_fmt(max(x['temperatura_E060_cm2_m'], x['min_flexion_E060_cm2_m'], x['temperatura_MTC_cm2_m']))} cm²/m (mín. flexión) | {_fmt(x['As_requerido_cm2_m'])} cm²/m | {_fmt(x['As_provisto_cm2_m'])} cm²/m | {_fmt(x['DCR_area'])} | {_fmt(x['phi_Mn_tf_m_m'])} tf·m/m | {_fmt(x['DCR_flexion'])} | {'Cumple' if ok else 'No cumple'} |"
+            f"| {x['cara']} | {x['direccion_demanda']} | {_fmt(x['momento_demanda_tf_m_m'])} tf·m/m | {_fmt(x['As_flexion_requerido_cm2_m'])} cm²/m | {_fmt(x['As_normativo_cm2_m'])} cm²/m | {x['control_normativo']} | {_fmt(x['As_requerido_cm2_m'])} cm²/m | {x['barra']} @ {_fmt(x['espaciamiento_adoptado_mm'],0)} mm | {_fmt(x['As_provisto_cm2_m'])} cm²/m | {_fmt(x['DCR_area'])} | {_fmt(x['phi_Mn_tf_m_m'])} tf·m/m | {_fmt(x['DCR_flexion'])} | {'Cumple' if x['cumple'] else 'No cumple'} |"
         )
     lines += [
         "",
@@ -721,25 +786,11 @@ def reporte_markdown(r: dict) -> str:
     ]
     for x in r["caras_verticales"]:
         lines.append(
-            f"| {x['cara']} | {_fmt(x['fs_servicio_MPa'],1)} MPa | {_fmt(x['limite_fs_MPa'],1)} MPa | {p['espaciamiento_vertical_mm']:.0f} mm | {_fmt(x['limite_separacion_fisuracion_mm'],0)} mm | {'Cumple' if x['fisuracion_cumple'] else 'No cumple'} |"
+            f"| {x['cara']} | {_fmt(x['fs_servicio_MPa'],1)} MPa | {_fmt(x['limite_fs_MPa'],1)} MPa | {_fmt(x['espaciamiento_adoptado_mm'],0)} mm | {_fmt(x['limite_separacion_fisuracion_mm'],0)} mm | {'Cumple' if x['fisuracion_cumple'] else 'No cumple'} |"
         )
-    b_alt = r["base_alternativa"]
     lines += [
         "",
-        "La fisuración de la sección actual se verifica adicionalmente con el momento de Servicio I; no gobierna el resultado de las dos caras.",
-        "",
-        "## Verificación complementaria en la base con d = 1.50 m",
-        "",
-        "Esta comprobación representa únicamente una sección local engrosada en el arranque. Se mantienen el momento, el cortante y el armado Ø5/8\" @ 230 mm de la evaluación principal. El cambio no se extiende a la rigidez del fuste ni modifica la distribución de cargas. La geometría final deberá proporcionar efectivamente d = 1.50 m y permitir el desarrollo y anclaje del refuerzo.",
-        "",
-        "| Control | Demanda o requisito | Capacidad o disposición | D/C | Estado |",
-        "|---|---:|---:|---:|---|",
-        f"| Área por flexión calculada | {_fmt(b_alt['As_flexion_requerido_cm2_m'])} cm²/m | {_fmt(b_alt['As_provisto_cm2_m'])} cm²/m | {_fmt(b_alt['As_flexion_requerido_cm2_m'] / b_alt['As_provisto_cm2_m'])} | {'Cumple' if b_alt['As_provisto_cm2_m'] >= b_alt['As_flexion_requerido_cm2_m'] else 'No cumple'} |",
-        f"| Acero mínimo a flexión adoptado | {_fmt(b_alt['min_flexion_E060_cm2_m'])} cm²/m | {_fmt(b_alt['As_provisto_cm2_m'])} cm²/m | {_fmt(b_alt['DCR_area'])} | {'Cumple' if b_alt['cumple_area'] else 'No cumple'} |",
-        f"| Resistencia a flexión | M_u = {_fmt(r['momento_diseno_envolvente_tf_m_m'])} tf·m/m | φM_n = {_fmt(b_alt['phi_Mn_tf_m_m'])} tf·m/m | {_fmt(b_alt['DCR_flexion'])} | {'Cumple' if b_alt['cumple_resistencia_flexion'] else 'No cumple'} |",
-        f"| Cortante | V_u = {_fmt(r['cortante_gobernante_tf_m'])} tf/m | φV_n = {_fmt(b_alt['cortante_capacidad_tf_m'])} tf/m | {_fmt(b_alt['DCR_cortante'])} | {'Cumple' if b_alt['cumple_cortante'] else 'No cumple'} |",
-        "",
-        f"**Resultado de la sección local con d = 1.50 m: {'CUMPLE' if b_alt['cumple'] else 'NO CUMPLE'}.** La resistencia a flexión y a cortante es suficiente, pero el cumplimiento global exige además satisfacer el acero mínimo asociado al nuevo peralte.",
+        "La fisuración se verifica con Servicio I para el refuerzo finalmente dispuesto.",
     ]
     h = r["horizontal"]
     v = r["cortante"]
@@ -750,11 +801,17 @@ def reporte_markdown(r: dict) -> str:
         "",
         "| Control | Demanda/requisito | Capacidad/provision | D/C | Estado |",
         "|---|---:|---:|---:|---|",
-        f"| Acero horizontal por cara | {_fmt(h['As_requerido_cm2_m'])} cm²/m | {_fmt(h['As_provisto_cm2_m'])} cm²/m | {_fmt(h['DCR_area'])} | {'Cumple' if h['cumple'] else 'No cumple'} |",
+        f"| Acero horizontal por cara | {_fmt(h['As_requerido_cm2_m'])} cm²/m | {h['barra']} @ {_fmt(h['espaciamiento_adoptado_mm'],0)} mm = {_fmt(h['As_provisto_cm2_m'])} cm²/m | {_fmt(h['DCR_area'])} | {'Cumple' if h['cumple'] else 'No cumple'} |",
         f"| Cortante | {_fmt(v['Vu_tf_m'])} tf/m | {_fmt(v['adoptada_tf'])} tf/m | {_fmt(v['DCR'])} | {'Cumple' if v['DCR'] <= 1 else 'No cumple'} |",
         f"| Compresion axial media | {_fmt(a['esfuerzo_promedio_MPa'])} MPa | f'c = {_fmt(p['fc_kgf_cm2']*KGF_CM2_A_MPA)} MPa | {_fmt(a['relacion_P_Ag_fc'])} | Informativo |",
         "",
-        f"Con Ø5/8\", la separación vertical máxima que satisface la envolvente calculada es **{_fmt(r['separacion_maxima_vertical_5_8_mm'],0)} mm**. Para el acero horizontal por mínimos, el límite calculado es **{_fmt(r['separacion_maxima_horizontal_5_8_mm'],0)} mm** (además de los límites generales de espaciamiento).",
+        "## Armado normativo adoptado",
+        "",
+        *[
+            f"- Acero vertical, cara {x['cara']}: {x['barra']} @ {_fmt(x['espaciamiento_adoptado_mm'],0)} mm."
+            for x in r["caras_verticales"]
+        ],
+        f"- Acero horizontal, ambas caras: {h['barra']} @ {_fmt(h['espaciamiento_adoptado_mm'],0)} mm.",
         "",
         "## Resultado",
         "",
@@ -777,12 +834,12 @@ def main() -> None:
         help="Altura global H_g del diagrama de Delta Eas (m)",
     )
     parser.add_argument("--espesor", type=float, default=0.40)
-    parser.add_argument("--separacion-vertical", type=float, default=230.0)
-    parser.add_argument("--separacion-horizontal", type=float, default=230.0)
-    parser.add_argument(
-        "--peralte-efectivo-base", type=float, default=1500.0,
-        help="Peralte efectivo de la sección local alternativa en la base (mm)",
-    )
+    parser.add_argument("--barras-verticales", nargs="+", default=['5/8"', '3/4"', '1"'])
+    parser.add_argument("--barras-horizontales", nargs="+", default=['1/2"'])
+    parser.add_argument("--espaciamiento-horizontal", type=float, default=300.0)
+    parser.add_argument("--espaciamiento-minimo", type=float, default=100.0)
+    parser.add_argument("--espaciamiento-maximo", type=float, default=400.0)
+    parser.add_argument("--paso-espaciamiento", type=float, default=5.0)
     parser.add_argument("--brazo-br", type=float, default=None)
     parser.add_argument("--brazo-eq-super", type=float, default=None)
     parser.add_argument(
@@ -799,9 +856,12 @@ def main() -> None:
         altura_m=args.altura,
         altura_global_empuje_m=args.altura_global_empuje,
         espesor_m=args.espesor,
-        espaciamiento_vertical_mm=args.separacion_vertical,
-        espaciamiento_horizontal_mm=args.separacion_horizontal,
-        peralte_efectivo_base_alternativo_mm=args.peralte_efectivo_base,
+        barras_verticales=tuple(args.barras_verticales),
+        barras_horizontales=tuple(args.barras_horizontales),
+        espaciamiento_horizontal_adoptado_mm=args.espaciamiento_horizontal,
+        espaciamiento_minimo_mm=args.espaciamiento_minimo,
+        espaciamiento_maximo_mm=args.espaciamiento_maximo,
+        paso_espaciamiento_mm=args.paso_espaciamiento,
         brazo_br_m=(
             args.brazo_br if args.brazo_br is not None
             else args.altura_carga_puente if args.altura_carga_puente is not None

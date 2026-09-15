@@ -1,6 +1,10 @@
 import math
 
-from analisis_estabilidad.elementos.cajuela.verificacion_voladizo import Parametros, evaluar
+from analisis_estabilidad.elementos.cajuela.verificacion_voladizo import (
+    Parametros,
+    evaluar,
+    reporte_markdown,
+)
 
 
 def test_equilibrio_y_fuentes_de_carga():
@@ -39,6 +43,7 @@ def test_evento_extremo_aplica_concurrencias_mtc_2018():
     assert math.isclose(terreno_ib, max(0.50 * pae_ia, pa), rel_tol=1e-12)
     assert math.isclose(ib["E_uni_tf_m"], 2.0 * ia["E_uni_tf_m"], rel_tol=1e-12)
     assert r["criterio_evento_extremo"]["articulo"] == "2.8.1.1.14.1"
+    assert "mesa de apoyo" in r["criterio_evento_extremo"]["eq_super"]
 
 
 def test_evento_extremo_ib_respeta_el_piso_de_empuje_activo_estatico():
@@ -120,12 +125,21 @@ def test_armado_horizontal_y_cortante_cumplen():
     assert r["cumple_cortante"]
 
 
-def test_resultado_global_con_delta_eas_trapezoidal_no_cumple_a_230_mm():
+def test_diseno_normativo_selecciona_armado_que_cumple():
     r = evaluar(Parametros())
     assert r["caso_gobernante"].startswith("Evento Extremo")
-    assert not r["cumple_global"]
+    assert r["cumple_global"]
+    assert r["estado"] == "CUMPLE"
     assert r["cumple_cortante"]
-    assert r["separacion_maxima_vertical_5_8_mm"] == 190.0
+    caras = {x["cara"]: x for x in r["caras_verticales"]}
+    assert caras["frontal/no relleno"]["barra"] == '5/8"'
+    assert caras["frontal/no relleno"]["espaciamiento_adoptado_mm"] == 205.0
+    assert caras["posterior/relleno"]["barra"] == '5/8"'
+    assert caras["posterior/relleno"]["espaciamiento_adoptado_mm"] == 190.0
+    assert r["horizontal"]["barra"] == '1/2"'
+    assert r["horizontal"]["espaciamiento_adoptado_mm"] == 300.0
+    assert math.isclose(r["horizontal"]["As_provisto_cm2_m"], 4.222562, rel_tol=1e-6)
+    assert all(x["DCR_area"] <= 1.0 and x["DCR_flexion"] <= 1.0 for x in caras.values())
 
 
 def test_dimensionamiento_por_cara_usa_el_caso_inverso_en_la_frontal():
@@ -162,11 +176,11 @@ def test_dimensionamiento_por_cara_usa_el_caso_inverso_en_la_frontal():
     }
 
 
-def test_base_con_peralte_efectivo_1_50_m_cumple_resistencia_pero_no_minimo():
+def test_diseno_no_incluye_verificacion_complementaria_de_base():
     r = evaluar(Parametros())
-    base = r["base_alternativa"]
-    assert base["d_mm"] == 1500.0
-    assert base["cumple_resistencia_flexion"]
-    assert base["cumple_cortante"]
-    assert not base["cumple_area"]
-    assert not base["cumple"]
+    assert "base_alternativa" not in r
+    assert "peralte_efectivo_base_alternativo_mm" not in r["parametros"]
+    reporte = reporte_markdown(r)
+    assert reporte.startswith("# Diseño normativo de la pared de cajuela")
+    assert "Verificación complementaria en la base" not in reporte
+    assert "d = 1.50 m" not in reporte
