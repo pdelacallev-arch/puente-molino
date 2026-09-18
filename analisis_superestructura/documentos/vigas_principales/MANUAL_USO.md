@@ -281,6 +281,7 @@ analisis:
     puntos_integracion_carga_carril: 5
   tolerancia_equilibrio: 1.0e-8
   limite_deflexion_divisor: 800.0
+  limite_deflexion_vehicular_peatonal_divisor: 1000.0
   reportar_mks: false
   factores:
     resistencia_dc: 1.25
@@ -291,6 +292,8 @@ analisis:
     servicio_dw: 1.00
     servicio_ll: 1.30
     servicio_pl: 1.00
+    servicio_i_ll: 1.00
+    servicio_i_pl: 1.00
     fatiga_i: 1.75
     fatiga_ii: 0.80
 ```
@@ -303,6 +306,13 @@ viga para momento, reacción/corte y fatiga. El factor de presencia múltiple se
 aplica a momento y corte, pero no a fatiga.
 
 `numero_estaciones` debe ser al menos 21. Un paso menor mejora la resolución de la posición crítica y aumenta el tiempo de cálculo. En la parrilla, aumente `numero_tramos_longitudinales` hasta que los factores converjan; el notebook automatiza esta comparación. Los factores son entradas trazables y deben revisarse para las combinaciones contractuales aplicables.
+
+La deflexión se evalúa con la porción de carga viva de Servicio I. El motor
+compara el camión de diseño solo con el 25 % del camión más la carga de carril,
+ambos con el incremento dinámico aplicable. `limite_deflexion_divisor` controla
+el caso exclusivamente vehicular; cuando existe carga `PL`, se genera además
+el control conjunto vehicular y peatonal mediante
+`limite_deflexion_vehicular_peatonal_divisor`.
 
 ### 5.9 Búsqueda de secciones
 

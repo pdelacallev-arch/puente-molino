@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "ejecucion_id": "20260917T131146-0500",
+  "caso": "molinohuayco",
+  "revision": "MODIFICADO-R01",
+  "configuracion_sha256": "ae0a2268684cdcc23bb5f1305731254e424cffcac6693896371fa6a22aa205ac",
+  "codigo_sha256": "5c922ebde833e47513e40975c635994f53eea4f89c75ae9392cc5e56fe2c36b1",
+  "modulos": {
+    "vigas_principales.diseno": {
+      "estado": "NO_CUMPLE",
+      "entrada": "elementos/vigas_principales/diseno/entrada.json",
+      "resultado": "elementos/vigas_principales/diseno/resultado.json",
+      "reporte": "elementos/vigas_principales/diseno/reporte.md",
+      "resultado_sha256": "8169536c450ff5d65dfd33dc5ccde107e8231358fa586d9273ae047d8e7bc69d"
+    }
+  }
+}

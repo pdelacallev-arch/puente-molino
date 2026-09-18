@@ -7,6 +7,7 @@ import pytest
 
 from analisis_superestructura.elementos.vigas_principales.analisis.moviles import (
     analizar_hl93,
+    casos_deflexion_servicio_i,
     influencia_corte,
     influencia_momento,
 )
@@ -121,6 +122,41 @@ def test_maximo_hl93_no_depende_del_paso_longitudinal():
     maximo_grueso = float(np.max(analizar_hl93(grueso).momento_nmm))
     maximo_fino = float(np.max(analizar_hl93(fino).momento_nmm))
     assert maximo_grueso == pytest.approx(maximo_fino, rel=1e-12)
+
+
+def test_deflexion_servicio_i_usa_los_dos_casos_normativos():
+    ejemplo = RAIZ / "analisis_superestructura/casos/molinohuayco/MODIFICADO-R01/entrada.yaml"
+    config = validar_configuracion(ejemplo)
+    x = np.linspace(0.0, config.geometria.luz * 1000.0, 21)
+    casos = casos_deflexion_servicio_i(config, x)
+    primero = next(casos)
+    segundo = next(casos)
+    assert {primero["caso"], segundo["caso"]} == {
+        "camion_solo",
+        "25_camion_mas_carril",
+    }
+    assert primero["vehiculo"] != "tandem"
+    assert segundo["vehiculo"] != "tandem"
+    assert config.analisis.factores.servicio_i_ll == pytest.approx(1.0)
+
+
+def test_molinohuayco_verifica_deflexion_vehicular_y_peatonal_servicio_i():
+    ejemplo = RAIZ / "analisis_superestructura/casos/molinohuayco/MODIFICADO-R01/entrada.yaml"
+    config = validar_configuracion(ejemplo)
+    diseno = verificar(config)
+    exterior = {check.nombre: check for check in diseno.verificaciones["exterior"]}
+    vehicular = exterior["Deflexión vehicular - Servicio I"]
+    combinada = exterior["Deflexión vehicular y peatonal - Servicio I"]
+    assert vehicular.capacidad == pytest.approx(62.5)
+    assert combinada.capacidad == pytest.approx(50.0)
+    assert combinada.demanda > vehicular.demanda
+    assert vehicular.demanda == pytest.approx(32.9991, rel=2e-5)
+    assert combinada.demanda == pytest.approx(51.3573, rel=2e-5)
+    assert combinada.dcr == pytest.approx(1.02715, rel=2e-5)
+    assert not combinada.cumple
+    assert diseno.estado == "NO_CUMPLE"
+    assert "Servicio I" in vehicular.observacion
+    assert "Servicio I" in combinada.observacion
 
 
 def test_viga_prismatica_carga_uniforme_y_deflexion():
@@ -256,6 +292,7 @@ def test_exportacion_separa_acciones_envolventes_y_combinaciones(tmp_path):
     assert "M_LL_IM_interior_kNm" in encabezado
     assert "Vmax_resistencia_exterior_kN" in encabezado
     assert "Vmin_servicio_ii_interior_kN" in encabezado
+    assert "def_LL_PL_servicio_i_exterior_mm" in encabezado
 
 
 def test_integracion_bartra_equilibrio_y_estado_condicional_o_falla():

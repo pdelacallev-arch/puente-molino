@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "ejecucion_id": "20260917T123548-0500",
+  "caso": "molinohuayco",
+  "revision": "PROPUESTA-R00",
+  "configuracion_sha256": "f13d213d2449fadde22ca9cf44b991202332be44e4372e10dd2e8ed94dfb7949",
+  "codigo_sha256": "5c922ebde833e47513e40975c635994f53eea4f89c75ae9392cc5e56fe2c36b1",
+  "modulos": {
+    "vigas_principales.analisis": {
+      "estado": "ADVERTENCIA",
+      "entrada": "elementos/vigas_principales/analisis/entrada.json",
+      "resultado": "elementos/vigas_principales/analisis/resultado.json",
+      "reporte": "elementos/vigas_principales/analisis/reporte.md",
+      "resultado_sha256": "1df7ebc474394251d1b624c7803535f2ce53aa51919d3a7199d85d7fe38fa7e3"
+    },
+    "vigas_principales.parrilla": {
+      "estado": "ADVERTENCIA",
+      "entrada": "elementos/vigas_principales/parrilla/entrada.json",
+      "resultado": "elementos/vigas_principales/parrilla/resultado.json",
+      "reporte": "elementos/vigas_principales/parrilla/reporte.md",
+      "resultado_sha256": "cf6a1aaf54d61efcc8e2a203948706a39571716880e958650b606dfddf1cfda6"
+    },
+    "vigas_principales.diseno": {
+      "estado": "NO_CUMPLE",
+      "entrada": "elementos/vigas_principales/diseno/entrada.json",
+      "resultado": "elementos/vigas_principales/diseno/resultado.json",
+      "reporte": "elementos/vigas_principales/diseno/reporte.md",
+      "resultado_sha256": "d40acc9cf74cd1048f58cb9bb64e84ba9c66e4c30baeda1f47f8f1ade433e10b"
+    }
+  }
+}

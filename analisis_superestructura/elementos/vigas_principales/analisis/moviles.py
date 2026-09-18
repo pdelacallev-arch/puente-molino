@@ -197,6 +197,50 @@ def analizar_hl93(config: Configuracion) -> ResultadoMovil:
     )
 
 
+def casos_deflexion_servicio_i(
+    config: Configuracion,
+    x: np.ndarray,
+):
+    """Genera los casos móviles normativos para la deflexión de Servicio I.
+
+    MTC 2.4.3.2.3.2 y 2.9.1.4.4.5.1b requieren tomar el mayor
+    efecto entre el camión de diseño solo y 25 % del camión junto con la
+    carga de carril. El incremento dinámico se aplica a los ejes del camión.
+    """
+    L = config.geometria.luz * 1000.0
+    paso = config.analisis.paso_vehiculo * 1000.0
+    q = config.trafico.carga_carril  # kN/m == N/mm
+    m_carril = q * x * (L - x) / 2.0
+    for vehiculo, separacion, offsets, cargas in _vehiculos(config):
+        if vehiculo == "tandem":
+            continue
+        frente_min = -float(np.max(offsets))
+        frentes = np.arange(frente_min, L + paso / 2.0, paso)
+        frentes = np.unique(
+            np.round(
+                np.concatenate((frentes, -offsets, L - offsets)),
+                decimals=9,
+            )
+        )
+        frentes = frentes[(frentes >= frente_min) & (frentes <= L)]
+        for frente in frentes:
+            m_camion, _, _ = _respuesta_puntual(L, x, frente + offsets, cargas)
+            yield {
+                "caso": "camion_solo",
+                "vehiculo": vehiculo,
+                "posicion_frente_mm": float(frente),
+                "separacion_posterior_mm": float(separacion),
+                "momento_nmm": m_camion,
+            }
+            yield {
+                "caso": "25_camion_mas_carril",
+                "vehiculo": vehiculo,
+                "posicion_frente_mm": float(frente),
+                "separacion_posterior_mm": float(separacion),
+                "momento_nmm": 0.25 * m_camion + m_carril,
+            }
+
+
 def respuesta_vehiculo_critico_centro(
     config: Configuracion,
     x: np.ndarray,

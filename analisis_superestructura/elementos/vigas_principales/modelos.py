@@ -170,6 +170,8 @@ class FactoresCombinacion(Modelo):
     servicio_dw: float = 1.00
     servicio_ll: float = 1.30
     servicio_pl: float = 1.00
+    servicio_i_ll: float = 1.00
+    servicio_i_pl: float = 1.00
     fatiga_i: float = 1.75
     fatiga_ii: float = 0.80
 
@@ -206,7 +208,16 @@ class AnalisisConfig(Modelo):
     parrilla: ParrillaConfig = ParrillaConfig()
     factores: FactoresCombinacion = FactoresCombinacion()
     tolerancia_equilibrio: float = Field(default=1e-8, gt=0)
-    limite_deflexion_divisor: float = Field(default=800.0, gt=0)
+    limite_deflexion_divisor: float = Field(
+        default=800.0,
+        gt=0,
+        description="Divisor del limite para carga vehicular de Servicio I",
+    )
+    limite_deflexion_vehicular_peatonal_divisor: float = Field(
+        default=1000.0,
+        gt=0,
+        description="Divisor del limite para carga vehicular y peatonal de Servicio I",
+    )
     reportar_mks: bool = False
 
 

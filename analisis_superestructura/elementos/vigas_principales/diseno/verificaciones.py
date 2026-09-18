@@ -44,6 +44,13 @@ def _longitud_no_arriostrada(config, x_centro_m: float) -> float:
     return max(np.diff(posiciones)) * 1000.0
 
 
+def _hay_carga_peatonal(config) -> bool:
+    pl = config.cargas.pl
+    if isinstance(pl, (int, float)):
+        return float(pl) > 0.0
+    return pl.interior > 0.0 or pl.exterior > 0.0
+
+
 def verificar_analisis(analisis: ResultadoAnalisis) -> ResultadoDiseno:
     config = analisis.configuracion
     fy = config.materiales.acero_estructural.fy
@@ -139,13 +146,13 @@ def verificar_analisis(analisis: ResultadoAnalisis) -> ResultadoDiseno:
             momentos["DC_no_compuesta"] / s_acero_sup
             + (momentos["DC_compuesta"] + momentos["DW"]) / s_largo_sup
             + 1.30 * momentos["LL_IM"] / s_corto_sup
-            + momentos["PL"] / s_largo_sup
+            + momentos["PL"] / s_corto_sup
         )
         sigma_inf = (
             momentos["DC_no_compuesta"] / s_acero_inf
             + (momentos["DC_compuesta"] + momentos["DW"]) / s_largo_inf
             + 1.30 * momentos["LL_IM"] / s_corto_inf
-            + momentos["PL"] / s_largo_inf
+            + momentos["PL"] / s_corto_inf
         )
         sigma_serv = np.maximum(np.abs(sigma_sup), np.abs(sigma_inf))
         idx_s = int(np.argmax(sigma_serv))
@@ -198,18 +205,42 @@ def verificar_analisis(analisis: ResultadoAnalisis) -> ResultadoDiseno:
                 "Cribado elástico conservador con Cb=1.0; requiere confirmación del arriostramiento temporal.",
             )
         )
-        def_ll = datos["deflexiones_mm"]["LL_IM_critica"]
+        def_ll = datos["deflexiones_mm"]["servicio_i_vehicular"]
         idx_d = int(np.argmax(np.abs(def_ll)))
+        control_d = datos["control_deflexion_servicio_i"]["vehicular"]
         checks.append(
             _estado(
-                "Deflexión por carga viva",
+                "Deflexión vehicular - Servicio I",
                 float(abs(def_ll[idx_d])),
                 config.geometria.luz * 1000.0 / config.analisis.limite_deflexion_divisor,
                 "mm",
-                REFERENCIAS_MTC_2018["servicio"],
-                f"Límite configurable L/{config.analisis.limite_deflexion_divisor:g}.",
+                REFERENCIAS_MTC_2018["deflexion"],
+                (
+                    f"Porción LL+IM de Servicio I; controla {control_d.get('caso', 'caso móvil')}; "
+                    f"límite L/{config.analisis.limite_deflexion_divisor:g}."
+                ),
             )
         )
+        if _hay_carga_peatonal(config):
+            def_ll_pl = datos["deflexiones_mm"]["servicio_i_vehicular_peatonal"]
+            idx_dp = int(np.argmax(np.abs(def_ll_pl)))
+            control_dp = datos["control_deflexion_servicio_i"]["vehicular_peatonal"]
+            checks.append(
+                _estado(
+                    "Deflexión vehicular y peatonal - Servicio I",
+                    float(abs(def_ll_pl[idx_dp])),
+                    config.geometria.luz
+                    * 1000.0
+                    / config.analisis.limite_deflexion_vehicular_peatonal_divisor,
+                    "mm",
+                    REFERENCIAS_MTC_2018["deflexion"],
+                    (
+                        f"LL+IM y PL con factores de Servicio I; controla "
+                        f"{control_dp.get('caso', 'caso móvil')}; límite "
+                        f"L/{config.analisis.limite_deflexion_vehicular_peatonal_divisor:g}."
+                    ),
+                )
+            )
         verificaciones[tipo] = tuple(checks)
         todas.extend(checks)
     gobernante = max(todas, key=lambda c: c.dcr)

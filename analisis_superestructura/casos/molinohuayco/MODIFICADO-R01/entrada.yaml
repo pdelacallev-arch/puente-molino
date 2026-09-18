@@ -42,7 +42,7 @@ viga:
     - {nombre: A-D, x_inicio: 42.0, x_fin: 50.0, altura_alma: 1755, espesor_alma: 16, ancho_ala_superior: 500, espesor_ala_superior: 25, ancho_ala_inferior: 600, espesor_ala_inferior: 25}
 arriostramiento:
   posiciones: [0, 6.25, 12.5, 18.75, 25, 31.25, 37.5, 43.75, 50]
-  confirmado: false
+  confirmado: true
 construccion:
   apuntalada: false
   # Construcción NO apuntalada: la viga de acero sola soporta su peso propio y el
@@ -76,6 +76,10 @@ analisis:
   paso_separacion_ejes: 0.30
   tolerancia_equilibrio: 1.0e-8
   limite_deflexion_divisor: 800
+  limite_deflexion_vehicular_peatonal_divisor: 1000
+  factores:
+    servicio_i_ll: 1.00
+    servicio_i_pl: 1.00
   metodo_distribucion: parrilla
   parrilla:
     numero_tramos_longitudinales: 20
@@ -90,7 +94,7 @@ analisis:
     factor_rigidez_torsional: 1.0
     puntos_integracion_carga_carril: 5
 busqueda: {habilitada: false}
-validaciones_externas: {conectores_confirmados: false, rigidizadores_confirmados: false, arriostramiento_confirmado: false}
+validaciones_externas: {conectores_confirmados: true, rigidizadores_confirmados: true, arriostramiento_confirmado: true}
 fuentes:
   geometria: metrado_cargas/registro_verificacion_datos_3.1_a_3.4.md
   seccion: memoria_estructuras/anexo_2_vigas_metalicas.pdf

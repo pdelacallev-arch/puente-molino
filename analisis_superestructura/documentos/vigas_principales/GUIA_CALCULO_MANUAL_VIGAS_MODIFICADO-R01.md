@@ -660,6 +660,17 @@ $$
 \text{Servicio II} = (DC_{nc}+DC_{comp}) + DW + 1.30(LL+IM) + PL
 $$
 
+Para la verificación de deflexión se utiliza la porción de carga viva de
+Servicio I, con factores unitarios:
+
+$$
+\text{Servicio I, deflexión vehicular}=1.00(LL+IM)
+$$
+
+La respuesta vehicular se toma como el mayor efecto entre el camión de diseño
+solo y el 25 % del camión de diseño junto con la carga de carril. Cuando se
+evalúa el tránsito peatonal, se suma $1.00PL$ a la deformación vehicular.
+
 $$
 \text{Fatiga I} = 1.75\,\Delta(LL)
 $$
@@ -775,7 +786,7 @@ $$
 | Viga     | $\sigma$ (MPa) | Límite (MPa) |   DCR |
 | -------- | -------------: | -----------: | ----: |
 | Interior |          209.3 |        327.8 | 0.639 |
-| Exterior |          275.4 |        327.8 | 0.840 |
+| Exterior |          273.5 |        327.8 | 0.834 |
 
 ### 10.6 Fatiga (categoría C)
 
@@ -818,16 +829,38 @@ $$
 > sola). En R00 (apuntalada) valía $M_{nc}\approx1962$ kN·m y el $DCR$ era
 > 0.169. En R01 el concreto fresco entra en $M_{nc}$ y el $DCR$ sube a 0.442.
 
-### 10.8 Deflexión por carga viva
+### 10.8 Deflexión de Servicio I
+
+El caso vehicular se obtiene de:
 
 $$
-\delta_{LL} \le \frac{L}{800} = \frac{50\,000}{800} = 62.5\ \text{mm}
+\delta_{veh}=\max\left[\delta(\text{camión}),\
+\delta(0.25\,\text{camión}+\text{carril})\right]
 $$
 
-| Viga     | $\delta$ (mm) | Límite (mm) |   DCR |
-| -------- | ------------: | ----------: | ----: |
-| Interior |         48.63 |        62.5 | 0.778 |
-| Exterior |         55.82 |        62.5 | 0.893 |
+con incremento dinámico en los ejes del camión y factor de carga
+$\gamma_{LL}=1.00$. Para el puente con veredas se verifica adicionalmente:
+
+$$
+\delta_{veh+peat}=\delta_{veh}+\delta_{PL}
+$$
+
+$$
+\delta_{veh} \le \frac{L}{800} = 62.5\ \text{mm}
+$$
+
+$$
+\delta_{veh+peat} \le \frac{L}{1000} = 50.0\ \text{mm}
+$$
+
+| Viga | $\delta_{veh}$ (mm) | DCR $L/800$ | $\delta_{veh+peat}$ (mm) | DCR $L/1000$ | Estado gobernante |
+|---|---:|---:|---:|---:|---|
+| Interior | 28.76 | 0.460 | 28.76 | 0.575 | Cumple |
+| Exterior | 33.00 | 0.528 | 51.36 | **1.027** | **No cumple** |
+
+En ambos tipos de viga controla el camión de diseño solo. La viga exterior no
+cumple el límite conjunto vehicular y peatonal; se requiere ajustar la rigidez,
+el sistema estructural o el criterio contractual antes de cerrar el diseño.
 
 ### 10.9 Resumen de verificaciones
 
@@ -837,12 +870,14 @@ $$
 | **Ductilidad $D_p/D_t$**         |    **0.977** |    **0.977** |
 | Compacidad del alma              |        0.799 |        0.799 |
 | Corte del alma                   |        0.636 |        0.686 |
-| Servicio II                      |        0.639 |        0.840 |
+| Servicio II                      |        0.639 |        0.834 |
 | Fatiga cat. C                    |        0.683 |        0.752 |
 | Estabilidad en construcción      |        0.442 |        0.434 |
-| Deflexión por carga viva         |        0.778 |        0.893 |
+| Deflexión vehicular — Servicio I |        0.460 |        0.528 |
+| Deflexión vehicular + peatonal — Servicio I | 0.575 | **1.027** |
 
-**Gobernante:** Ductilidad $D_p/D_t$, $DCR = 0.977$.
+**Gobernante:** deflexión vehicular y peatonal de la viga exterior,
+$DCR = 1.027$; el estado global es **NO CUMPLE**.
 
 ---
 
@@ -850,10 +885,9 @@ $$
 
 **Archivos:** `reportes/exportar.py`, `nucleo/orquestador.py`.
 
-- El estado es **CONDICIONAL**: todas las verificaciones numéricas cumplen,
-  pero quedan **validaciones externas pendientes** (conectores, rigidizadores y
-  arriostramiento no confirmados). Si alguna validación faltante no existiera,
-  el estado sería `CUMPLE`; si algún $DCR>1$, sería `NO_CUMPLE`.
+- El estado es **NO_CUMPLE** porque la deflexión conjunta vehicular y peatonal
+  de Servicio I de la viga exterior alcanza $DCR=1.027$. Las validaciones
+  externas de conectores, rigidizadores y arriostramiento están confirmadas.
 - Cada ejecución guarda:
   - `entrada.json` (configuración resuelta),
   - `resultado.json` (contrato + verificaciones),

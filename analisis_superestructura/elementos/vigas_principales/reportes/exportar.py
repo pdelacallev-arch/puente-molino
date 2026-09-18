@@ -335,6 +335,7 @@ def _exportar_csv(resultado: ResultadoAnalisis, ruta: Path) -> None:
             # Alias conservado para archivos consumidores existentes.
             f"V_resistencia_{tipo}_kN",
             f"def_LL_{tipo}_mm",
+            f"def_LL_PL_servicio_i_{tipo}_mm",
         ]
     with ruta.open("w", newline="", encoding="utf-8") as archivo:
         escritor = csv.DictWriter(archivo, fieldnames=campos)
@@ -362,6 +363,9 @@ def _exportar_csv(resultado: ResultadoAnalisis, ruta: Path) -> None:
                 fila[f"Vabs_servicio_ii_{tipo}_kN"] = cortantes["servicio_ii_abs"][i] / 1000.0
                 fila[f"V_resistencia_{tipo}_kN"] = cortantes["resistencia_i_abs"][i] / 1000.0
                 fila[f"def_LL_{tipo}_mm"] = datos["deflexiones_mm"]["LL_IM_critica"][i]
+                fila[f"def_LL_PL_servicio_i_{tipo}_mm"] = datos["deflexiones_mm"][
+                    "servicio_i_vehicular_peatonal"
+                ][i]
             escritor.writerow(fila)
 
 

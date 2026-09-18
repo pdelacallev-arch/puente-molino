@@ -9,7 +9,7 @@ import numpy as np
 from ..modelos import Configuracion
 from ..normativa import REFERENCIAS_MTC_2018
 from .distribucion import calcular_factores_distribucion
-from .moviles import analizar_hl93, respuesta_vehiculo_critico_centro
+from .moviles import analizar_hl93, casos_deflexion_servicio_i, influencia_momento
 from .parrilla import analizar_parrilla
 from .respuesta import deformada_desde_momento, respuesta_distribuida, valor_segmentado
 from .secciones import propiedades_acero, propiedades_por_segmento
@@ -38,6 +38,89 @@ def _carga_por_tipo(valor, tipo: str) -> float:
     if isinstance(valor, (int, float)):
         return float(valor)
     return float(getattr(valor, tipo))
+
+
+def _control_deflexion_servicio_i(
+    config: Configuracion,
+    x: np.ndarray,
+    es: float,
+    i_corto: np.ndarray,
+    factor_distribucion: float,
+    deflexion_peatonal: np.ndarray,
+) -> tuple[dict[str, np.ndarray], dict[str, dict]]:
+    """Obtiene las curvas críticas de Servicio I vehicular y combinada.
+
+    La búsqueda usa trabajo virtual en el centro de luz, que es la sección de
+    máxima flecha para la viga simple y la configuración longitudinal simétrica
+    adoptada. Las curvas completas se calculan solo para los casos controlantes.
+    """
+    mejor_vehicular = np.zeros_like(x)
+    mejor_combinada = deflexion_peatonal.copy()
+    max_vehicular = -np.inf
+    max_combinada = -np.inf
+    control_vehicular: dict = {}
+    control_combinada: dict = {}
+    momento_control_vehicular = np.zeros_like(x)
+    momento_control_combinada = np.zeros_like(x)
+    gamma_ll = config.analisis.factores.servicio_i_ll
+    L = config.geometria.luz * 1000.0
+    momento_unitario_centro = influencia_momento(
+        L,
+        x,
+        np.array([L / 2.0]),
+    )[:, 0]
+    nucleo_trabajo_virtual = momento_unitario_centro / (es * i_corto)
+    deflexion_peatonal_centro = float(
+        np.interp(L / 2.0, x, deflexion_peatonal)
+    )
+
+    for caso in casos_deflexion_servicio_i(config, x):
+        momento = gamma_ll * factor_distribucion * caso["momento_nmm"]
+        flecha_centro = float(np.trapezoid(momento * nucleo_trabajo_virtual, x))
+        demanda_vehicular = abs(flecha_centro)
+        if demanda_vehicular > max_vehicular:
+            max_vehicular = demanda_vehicular
+            momento_control_vehicular = momento.copy()
+            control_vehicular = {
+                clave: valor for clave, valor in caso.items() if clave != "momento_nmm"
+            }
+
+        demanda_combinada = abs(flecha_centro) + abs(deflexion_peatonal_centro)
+        if demanda_combinada > max_combinada:
+            max_combinada = demanda_combinada
+            momento_control_combinada = momento.copy()
+            control_combinada = {
+                clave: valor for clave, valor in caso.items() if clave != "momento_nmm"
+            }
+
+    mejor_vehicular = deformada_desde_momento(
+        x,
+        momento_control_vehicular,
+        es,
+        i_corto,
+    )
+    mejor_combinada = (
+        deformada_desde_momento(
+            x,
+            momento_control_combinada,
+            es,
+            i_corto,
+        )
+        + deflexion_peatonal
+    )
+    control_vehicular["demanda_mm"] = float(np.max(np.abs(mejor_vehicular)))
+    control_combinada["demanda_mm"] = float(np.max(np.abs(mejor_combinada)))
+
+    return (
+        {
+            "servicio_i_vehicular": mejor_vehicular,
+            "servicio_i_vehicular_peatonal": mejor_combinada,
+        },
+        {
+            "vehicular": control_vehicular,
+            "vehicular_peatonal": control_combinada,
+        },
+    )
 
 
 def _analizar_tipo(
@@ -124,18 +207,24 @@ def _analizar_tipo(
     v_serv_pos = v_serv_permanente + f.servicio_ll * v_ll_pos
     v_serv_neg = v_serv_permanente + f.servicio_ll * v_ll_neg
     v_serv_abs = np.maximum(np.abs(v_serv_pos), np.abs(v_serv_neg))
-    m_vehiculo_critico, _ = respuesta_vehiculo_critico_centro(
-        config,
-        x,
-        movil.posicion_critica_centro_mm,
-        movil.separacion_critica_centro_mm,
-        movil.vehiculo_control_momento[len(x) // 2],
-    )
-    m_vehiculo_critico *= gm
     es = config.materiales.acero_estructural.es
     def_nc = deformada_desde_momento(x, m_nc, es, i_acero)
     def_dc = deformada_desde_momento(x, m_dc + m_dw, es, i_largo)
-    def_ll = deformada_desde_momento(x, m_vehiculo_critico, es, i_corto)
+    def_pl = deformada_desde_momento(
+        x,
+        config.analisis.factores.servicio_i_pl * m_pl,
+        es,
+        i_corto,
+    )
+    deflexiones_servicio_i, control_deflexion = _control_deflexion_servicio_i(
+        config,
+        x,
+        es,
+        i_corto,
+        gm,
+        def_pl,
+    )
+    def_ll = deflexiones_servicio_i["servicio_i_vehicular"]
     error_reacciones = abs(
         (r1_nc + r2_nc + r1_dc + r2_dc + r1_dw + r2_dw + r1_pl + r2_pl)
         - float(np.trapezoid(w_nc + w_dc + w_dw + w_pl, x))
@@ -170,12 +259,19 @@ def _analizar_tipo(
         "deflexiones_mm": {
             "DC_no_compuesta": def_nc,
             "DC_compuesta_DW": def_dc,
+            "PL_servicio_i": def_pl,
+            "servicio_i_vehicular": def_ll,
+            "servicio_i_vehicular_peatonal": deflexiones_servicio_i[
+                "servicio_i_vehicular_peatonal"
+            ],
+            # Alias conservado para archivos consumidores existentes.
             "LL_IM_critica": def_ll,
             "permanente_total": def_nc + def_dc,
         },
+        "control_deflexion_servicio_i": control_deflexion,
         "reacciones_n": {
-            "izquierda_permanente": r1_nc + r1_dc + r1_dw + r1_pl,
-            "derecha_permanente": r2_nc + r2_dc + r2_dw + r2_pl,
+            "izquierda_permanente": r1_nc + r1_dc + r1_dw,
+            "derecha_permanente": r2_nc + r2_dc + r2_dw,
         },
         "factor_momento": gm,
         "factor_corte": gv,

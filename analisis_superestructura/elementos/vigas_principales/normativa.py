@@ -13,6 +13,7 @@ REFERENCIAS_MTC_2018 = {
     "seccion_compuesta": "MTC 2018, 2.9.5.0.1.1, pp. 432-434",
     "construibilidad": "MTC 2018, 2.9.5.0.3, pp. 441-443",
     "servicio": "MTC 2018, 2.9.5.0.4, pp. 443-445",
+    "deflexion": "MTC 2018, 2.4.3.2.3.2 y 2.9.1.4.4.5.1b, pp. 94 y 336-337",
     "fatiga": "MTC 2018, 2.9.4.6 y 2.9.5.0.5, pp. 397-403 y 445",
     "flexion": "MTC 2018, 2.9.5.0.6-2.9.5.0.8, pp. 446-454",
     "corte": "MTC 2018, 2.9.5.0.9, pp. 454-457",
