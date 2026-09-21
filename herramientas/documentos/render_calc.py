@@ -196,13 +196,13 @@ def page_break_before(p):
 
 def is_numeric(val):
     """Check if a value is numeric (for right-alignment)."""
-    v = val.strip().replace(',', '').replace('.', '').replace('-', '').replace('−', '').replace('+', '').replace('%', '').replace(' ', '')
+    v = val.strip().replace('*', '').replace(',', '').replace('.', '').replace('-', '').replace('−', '').replace('+', '').replace('%', '').replace(' ', '')
     if not v:
         return False
     # Check for common numeric patterns
     if re.match(r'^[\d]+$', v):
         return True
-    if re.match(r'^[\d.]+$', val.strip().replace(',', '.').replace('−', '-').replace('+', '').replace('%', '').replace(' ', '').replace('—', '')):
+    if re.match(r'^[\d.]+$', val.strip().replace('*', '').replace(',', '.').replace('−', '-').replace('+', '').replace('%', '').replace(' ', '').replace('—', '')):
         return True
     # Units
     if any(kw in val for kw in ['tf', 'm', 'cm', 'mm', 'kgf', 'MPa', '%', '°', 'tf/m', 'tf·m']):
@@ -268,8 +268,8 @@ def latex_to_image(math_lines, fontsize=11, dpi=150):
         return None
 
 
-def add_inline_latex(paragraph, text, size=Pt(11), bold=False):
-    """Agrega texto y expresiones $...$ como imágenes matemáticas en línea."""
+def add_inline_latex(paragraph, text, size=Pt(11), bold=False, italic=False):
+    """Agrega texto y expresiones $...$ como ecuaciones OMML y texto formateado."""
     parts = re.split(r'(\$[^$]+\$)', text)
     for part in parts:
         if not part:
@@ -277,11 +277,24 @@ def add_inline_latex(paragraph, text, size=Pt(11), bold=False):
         if part.startswith('$') and part.endswith('$'):
             add_omml(paragraph, part[1:-1])
             continue
-        run = paragraph.add_run(part)
-        run.bold = bold
-        run.font.size = size
-        run.font.name = FONT
-        run.font.color.rgb = BLACK
+        subparts = re.split(r'(\*\*.*?\*\*|`[^`]+`)', part)
+        for sub in subparts:
+            if not sub:
+                continue
+            sub_bold = bold
+            sub_italic = italic
+            content = sub
+            if sub.startswith('**') and sub.endswith('**') and len(sub) >= 4:
+                content = sub[2:-2]
+                sub_bold = True
+            elif sub.startswith('`') and sub.endswith('`') and len(sub) >= 2:
+                content = sub[1:-1]
+            run = paragraph.add_run(content)
+            run.bold = sub_bold
+            run.italic = sub_italic
+            run.font.size = size
+            run.font.name = FONT
+            run.font.color.rgb = BLACK
 
 
 def render(markdown=None, output=None, template=None):
@@ -436,19 +449,15 @@ def render(markdown=None, output=None, template=None):
                 i += 1
                 continue
 
-        # ── figure captions (italic lines like *Figura A3-5 ...*) ──
-        if s.startswith("*") and s.endswith("*") and ("Figura" in s or "figura" in s):
-            text = s[1:-1]
+        # ── figure captions (italic lines like *Figura A3-5 ...* or **Figura 1.** ...) ──
+        if (s.startswith("*") and s.endswith("*") and ("Figura" in s or "figura" in s)) or (
+            s.startswith("**Figura") or s.startswith("**figura")
+        ):
             p = doc.add_paragraph(style="Normal")
-            run = p.add_run(text)
-            run.italic = True
-            run.bold = True
-            run.font.size = Pt(10)
-            run.font.name = FONT
-            run.font.color.rgb = BLACK
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             p.paragraph_format.space_before = Pt(2)
             p.paragraph_format.space_after = Pt(8)
+            add_inline_latex(p, s, size=Pt(10), italic=True)
             keep_next(p)
             i += 1
             continue
@@ -536,11 +545,6 @@ def render(markdown=None, output=None, template=None):
         if s.startswith(">"):
             text = s[1:].strip()
             p = doc.add_paragraph(style="Normal")
-            run = p.add_run(text)
-            run.italic = True
-            run.font.size = Pt(10)
-            run.font.name = FONT
-            run.font.color.rgb = BLACK
             pPr = p._element.get_or_add_pPr()
             pPr.append(parse_xml(f'<w:ind {nsdecls("w")} w:left="567" w:right="567"/>'))
             pPr.append(parse_xml(
@@ -548,6 +552,7 @@ def render(markdown=None, output=None, template=None):
                 f'  <w:left w:val="single" w:sz="8" w:space="6" w:color="C0C0C0"/>'
                 f'</w:pBdr>'
             ))
+            add_inline_latex(p, text, size=Pt(10), italic=True)
             keep_lines(p)
             i += 1
             continue
@@ -570,6 +575,10 @@ def render(markdown=None, output=None, template=None):
         p = doc.add_paragraph(style="Normal")
         p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
+        is_list_item = bool(re.match(r'^\s*(\d+\.|\-|\*)\s', s))
+        if is_list_item:
+            p.paragraph_format.space_after = Pt(3)
+
         # Handle inline bold, code spans and LaTeX in inline math delimiters.
         parts = re.split(r'(\*\*.*?\*\*|`[^`]+`)', s)
         for part in parts:
@@ -580,7 +589,7 @@ def render(markdown=None, output=None, template=None):
             else:
                 add_inline_latex(p, part, size=Pt(11), bold=False)
 
-        if len(s) < 150:
+        if len(s) < 150 and not is_list_item:
             keep_next(p)
 
         i += 1
