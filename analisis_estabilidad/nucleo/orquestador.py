@@ -11,7 +11,12 @@ from typing import Any
 
 import yaml
 
-from .configuracion import ConfiguracionCaso, cargar_configuracion, mezclar
+from .configuracion import (
+    ConfiguracionCaso,
+    cargar_configuracion,
+    mezclar,
+    validar_coherencia_geometrica,
+)
 from .contratos import (
     DependenciaEntrada,
     EntradaElemento,
@@ -169,6 +174,21 @@ def preparar(
         objetivo,
         parametros,
     )
+    if huella_override is not None:
+        # Un override puede modificar una cota que también participa en otro
+        # módulo. Se recompone el caso completo para verificar las mismas
+        # relaciones geométricas que se revisan en el YAML maestro.
+        datos_resueltos = config.model_dump(mode="python")
+        elemento_override, calculo_override = objetivo.split(".", 1)
+        if objetivo == "estribo.estabilidad_global":
+            datos_resueltos["elementos"][elemento_override] = parametros
+        else:
+            datos_resueltos["elementos"][elemento_override][calculo_override] = (
+                parametros["elemento"]
+            )
+        validar_coherencia_geometrica(
+            ConfiguracionCaso.model_validate(datos_resueltos)
+        )
     elemento, calculo = objetivo.split(".", 1)
     carpeta = asegurar_interna(ejecucion / "elementos" / elemento / calculo)
     carpeta.mkdir(parents=True, exist_ok=True)
