@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "ejecucion_id": "20261001T154820-0500",
+  "caso": "molinohuayco",
+  "revision": "ESTRIBO_IZQUIERDO",
+  "configuracion_sha256": "69c46e247287bb72e51865765b5739583a039c94b3a3d3cb03b096cde9b306ca",
+  "overrides_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "codigo_sha256": "e50e0da8b5f85360e955d05d0f3bad8355540f65066f0b8165adae9e4f7251e0",
+  "modulos": {
+    "estribo.estabilidad_global": {
+      "estado": "OK",
+      "entrada": "elementos/estribo/estabilidad_global/entrada.json",
+      "resultado": "elementos/estribo/estabilidad_global/resultado.json",
+      "reporte": "elementos/estribo/estabilidad_global/reporte.md",
+      "resultado_sha256": "1e4a5ec8369ccc1c3132016c939b9e1458fa814c5799ba58ef11322c3aafee5e"
+    },
+    "zapata.diseno_longitudinal_e060": {
+      "estado": "ADVERTENCIA",
+      "entrada": "elementos/zapata/diseno_longitudinal_e060/entrada.json",
+      "resultado": "elementos/zapata/diseno_longitudinal_e060/resultado.json",
+      "reporte": "elementos/zapata/diseno_longitudinal_e060/reporte.md",
+      "resultado_sha256": "3ea8982a22cb46d60316049ae7a8149be990916f97a5fbc116fd106c61f52cdb"
+    },
+    "zapata.diseno_transversal_e060_mtc": {
+      "estado": "OK",
+      "entrada": "elementos/zapata/diseno_transversal_e060_mtc/entrada.json",
+      "resultado": "elementos/zapata/diseno_transversal_e060_mtc/resultado.json",
+      "reporte": "elementos/zapata/diseno_transversal_e060_mtc/reporte.md",
+      "resultado_sha256": "50144e3c18272b803830f4e3100019f94a30b7ce805acc2036bb934b87467ab8"
+    }
+  }
+}

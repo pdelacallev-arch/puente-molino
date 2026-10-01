@@ -1,0 +1,49 @@
+{
+  "version_esquema": "1.0",
+  "ejecucion_id": "20261001T113828-0500",
+  "elemento": "pantalla",
+  "calculo": "analisis_shell_3d",
+  "unidades": "MKS",
+  "parametros": {
+    "elemento": {
+      "altura_total_m": 11.32,
+      "altura_modelada_m": 8.28,
+      "espesor_m": 0.4,
+      "recubrimiento_exterior_mm": 100.0,
+      "recubrimiento_interior_mm": 75.0,
+      "poisson": 0.2,
+      "tamano_malla_m": 0.5,
+      "factor_cortante": 0.8333333333333334,
+      "estabilizacion_drilling": 1e-07,
+      "barras": [
+        "5/8\"",
+        "5/8\"",
+        "3/4\"",
+        "1\""
+      ],
+      "espaciamiento_minimo_mm": 100.0,
+      "paso_espaciamiento_mm": 5.0,
+      "phi_flexion": 0.9,
+      "phi_cortante_e060": 0.85,
+      "phi_cortante_mtc": 0.9
+    }
+  },
+  "dependencias": [
+    {
+      "elemento": "estribo",
+      "calculo": "estabilidad_global",
+      "resultado": "../../estribo/estabilidad_global/resultado.json",
+      "sha256": "17118dfb552621a1756cde7b6cfac3d43397815c6782afb5c10dbf21e1a5b575"
+    }
+  ],
+  "trazabilidad": {
+    "configuracion_sha256": "c6ac385cf2b064a476cb2523f2921c67030fd35b475add8c02ec00dce0d56c60",
+    "fuentes_por_parametro": {
+      "geometria": "memoria_estructuras/expediente_tecnico",
+      "cargas": "metrado_cargas",
+      "suelo": "estudio_suelos",
+      "normativa": "normativa"
+    },
+    "override_sha256": null
+  }
+}

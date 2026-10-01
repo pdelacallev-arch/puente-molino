@@ -1,0 +1,36 @@
+{
+  "version_esquema": "1.0",
+  "ejecucion_id": "20261001T113828-0500",
+  "elemento": "contrafuertes",
+  "calculo": "analisis_2d",
+  "unidades": "MKS",
+  "parametros": {
+    "elemento": {
+      "altura_m": 8.28,
+      "longitud_base_m": 6.5,
+      "longitud_corona_m": 0.4,
+      "espesor_m": 0.4,
+      "poisson": 0.2,
+      "divisiones_horizontales": 14,
+      "tamano_malla_shell_m": 0.4
+    }
+  },
+  "dependencias": [
+    {
+      "elemento": "pantalla",
+      "calculo": "reacciones_contrafuertes",
+      "resultado": "../../pantalla/reacciones_contrafuertes/resultado.json",
+      "sha256": "59c7d25406bf25523360eab81201328a2b829ec231717409802220d93070620a"
+    }
+  ],
+  "trazabilidad": {
+    "configuracion_sha256": "c6ac385cf2b064a476cb2523f2921c67030fd35b475add8c02ec00dce0d56c60",
+    "fuentes_por_parametro": {
+      "geometria": "memoria_estructuras/expediente_tecnico",
+      "cargas": "metrado_cargas",
+      "suelo": "estudio_suelos",
+      "normativa": "normativa"
+    },
+    "override_sha256": null
+  }
+}
