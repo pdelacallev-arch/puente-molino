@@ -1,0 +1,56 @@
+{
+  "version_esquema": "1.0",
+  "ejecucion_id": "20261005T144943-0500",
+  "elemento": "zapata",
+  "calculo": "diseno_transversal_e060_mtc",
+  "unidades": "MKS",
+  "parametros": {
+    "elemento": {
+      "vanos_m": [
+        3.0,
+        3.0,
+        4.77,
+        2.8,
+        2.8,
+        4.77,
+        3.0,
+        3.0
+      ],
+      "ancho_franja_m": 1.0,
+      "espesor_m": 1.2,
+      "recubrimiento_superior_mm": 100.0,
+      "recubrimiento_inferior_mm": 100.0,
+      "barras_disponibles": [
+        "5/8\"",
+        "3/4\"",
+        "1\""
+      ],
+      "espaciamiento_minimo_mm": 75.0,
+      "espaciamiento_maximo_mm": 400.0,
+      "paso_espaciamiento_mm": 10.0,
+      "phi_flexion_e060": 0.9,
+      "phi_cortante_e060": 0.85,
+      "phi_flexion_mtc": 0.9,
+      "phi_cortante_mtc": 0.9,
+      "factor_exposicion_fisuracion": 1.0
+    }
+  },
+  "dependencias": [
+    {
+      "elemento": "estribo",
+      "calculo": "estabilidad_global",
+      "resultado": "../../estribo/estabilidad_global/resultado.json",
+      "sha256": "e446d2deda930f2f92cc95ce4e40e41c709d19e1663f101e85d55d4a06bc312e"
+    }
+  ],
+  "trazabilidad": {
+    "configuracion_sha256": "aada3657c06c0e73f36bb4203849ad0fcb31262509a56e5390291d6a9424cace",
+    "fuentes_por_parametro": {
+      "geometria": "memoria_estructuras/expediente_tecnico",
+      "cargas": "metrado_cargas",
+      "suelo": "estudio_suelos",
+      "normativa": "normativa"
+    },
+    "override_sha256": null
+  }
+}

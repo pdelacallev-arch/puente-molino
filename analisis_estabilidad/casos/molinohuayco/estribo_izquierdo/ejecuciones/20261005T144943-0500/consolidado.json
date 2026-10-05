@@ -1,0 +1,38 @@
+{
+  "ejecucion_id": "20261005T144943-0500",
+  "configuracion_sha256": "aada3657c06c0e73f36bb4203849ad0fcb31262509a56e5390291d6a9424cace",
+  "modulos": [
+    {
+      "objetivo": "estribo.estabilidad_global",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/estribo/estabilidad_global/resultado.json",
+      "reporte": "elementos/estribo/estabilidad_global/reporte.md"
+    },
+    {
+      "objetivo": "zapata.diseno_longitudinal_e060",
+      "estado": "ADVERTENCIA",
+      "advertencias": [
+        "Las combinaciones de carga factorizadas proceden del análisis de puente; E.060 se usa para la resistencia de la sección de concreto armado.",
+        "El acero mínimo se reparte conservadoramente en ambas caras: rho=0.0012 por cara; la suma supera rho=0.0018 total.",
+        "El peralte efectivo se calculó conservadoramente con una distancia de 137.900 mm desde la cara de tracción hasta el centroide del arreglo longitudinal de control.",
+        "La selección automática adopta el primer arreglo del catálogo que permite cumplir As sin bajar del espaciamiento mínimo constructivo configurado.",
+        "Los arreglos de dos barras se disponen en dos capas con 25 mm de separación libre vertical; el peralte efectivo usa el centroide conjunto.",
+        "Las longitudes de desarrollo suponen barras sin recubrimiento epóxico, concreto normal y separaciones favorables según la Tabla 12.1.",
+        "Los empalmes por traslape se calcularon a tracción según E.060 12.15 y Tabla 12.3, suponiendo como máximo 50% de barras empalmadas dentro de la longitud de traslape requerida.",
+        "La ubicación exacta de los empalmes debe definirse en planos fuera de las secciones de máximo momento y coordinarse con cortes, ganchos y juntas de construcción.",
+        "Confirmar en planos la longitud ingresada del estribo (6.00 m) y la compatibilidad de los ganchos con las demás armaduras.",
+        "Punzonamiento no aplica al modelo de pantalla continua; comprobarlo por separado si existen cargas concentradas o contrafuertes."
+      ],
+      "resultado": "elementos/zapata/diseno_longitudinal_e060/resultado.json",
+      "reporte": "elementos/zapata/diseno_longitudinal_e060/reporte.md"
+    },
+    {
+      "objetivo": "zapata.diseno_transversal_e060_mtc",
+      "estado": "OK",
+      "advertencias": [],
+      "resultado": "elementos/zapata/diseno_transversal_e060_mtc/resultado.json",
+      "reporte": "elementos/zapata/diseno_transversal_e060_mtc/reporte.md"
+    }
+  ]
+}
