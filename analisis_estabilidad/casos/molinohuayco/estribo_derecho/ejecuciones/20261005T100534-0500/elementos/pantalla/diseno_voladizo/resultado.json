@@ -1,0 +1,384 @@
+{
+  "version_esquema": "1.0",
+  "ejecucion_id": "20261005T100534-0500",
+  "elemento": "pantalla",
+  "calculo": "diseno_voladizo",
+  "entrada_sha256": "3f64f8b0b5ae5a3aecd9dce58a231cf2e99578446e8b12df8658651c3a7561f8",
+  "dependencias_consumidas": [
+    {
+      "elemento": "estribo",
+      "calculo": "estabilidad_global",
+      "sha256": "97e2d654eaa78c01d80b9ae4da5838cd33acaa62dd4ae14dcd3a5642ac740a4b"
+    }
+  ],
+  "estado": "OK",
+  "resultados": {
+    "elemento": "pantalla",
+    "calculo": "diseno_voladizo",
+    "parametros": {
+      "altura_total_hp_m": 8.37,
+      "altura_efectiva_m": 5.33,
+      "altura_global_h_m": 9.87,
+      "espesor_sup1_m": 0.4,
+      "espesor_sup2_m": 0.4,
+      "espesor_inf_m": 0.987,
+      "ancho_franja_m": 1.0,
+      "recubrimiento_terreno_mm": 50.0,
+      "recubrimiento_libre_mm": 50.0,
+      "barras_verticales": [
+        "5/8\"",
+        "3/4\"",
+        "1\""
+      ],
+      "barras_temperatura": [
+        "1/2\"",
+        "5/8\""
+      ],
+      "espaciamiento_minimo_mm": 100.0,
+      "espaciamiento_maximo_mm": 400.0,
+      "paso_espaciamiento_mm": 5.0,
+      "barra_vertical_adoptada": null,
+      "espaciamiento_vertical_adoptado_mm": null,
+      "barra_temp_adoptada": null,
+      "espaciamiento_temp_adoptado_mm": null,
+      "fc_kgf_cm2": 280.0,
+      "fy_kgf_cm2": 4200.0,
+      "gamma_relleno_tf_m3": 1.8,
+      "gamma_concreto_tf_m3": 2.4,
+      "phi_relleno_grados": 39.8,
+      "delta_grados": 19.9,
+      "es_mpa": 200000.0,
+      "tamano_agregado_pulgadas": 0.75,
+      "dc_tf_m": 25.98,
+      "dw_tf_m": 2.88,
+      "pl_tf_m": 3.08,
+      "ll_im_tf_m": 12.95,
+      "br_tf_m": 1.63,
+      "h_sobrecarga_m": 0.61,
+      "kh": 0.125,
+      "kv": 0.05,
+      "porcentaje_sismico_superestructura": 0.24,
+      "brazo_br_m": null,
+      "brazo_eq_super_m": null,
+      "factor_modificacion_eta": 1.0,
+      "phi_flexion_resistencia": 0.9,
+      "phi_flexion_extremo": 1.0,
+      "phi_cortante": 0.9,
+      "factor_exposicion_fisuracion_gamma_e": 0.75,
+      "usar_componente_normal_empuje": false
+    },
+    "geometria_y_peso": {
+      "h_cajuela_m": 3.039999999999999,
+      "h_fuste_m": 5.33,
+      "area1_m2": 1.2159999999999997,
+      "area2_m2": 3.696355,
+      "peso1_tf_m": 2.918399999999999,
+      "peso2_tf_m": 8.871252,
+      "peso_pantalla_total_tf_m": 11.789652,
+      "y_cg_pantalla_m": 3.4180586263275625
+    },
+    "coeficientes_empuje": {
+      "Ka": 0.20113013886289738,
+      "Kae": 0.27404422957199676,
+      "Ka_calculo": 0.20113013886289738,
+      "Kae_calculo": 0.27404422957199676,
+      "psi_deg": 7.49585763972986,
+      "cos_delta": 0.9402881270104189
+    },
+    "cargas": {
+      "LS": {
+        "codigo": "LS",
+        "nombre": "Sobrecarga viva de terreno",
+        "tipo": "uniforme",
+        "intensidad_o_valor": 0.22084089247146133,
+        "fuerza_tf_m": 1.848438269986131,
+        "brazo_yp_m": 4.185,
+        "momento_tf_m_m": 7.735714159891957,
+        "descripcion": "p'' = 0.2208 tf/m2 sobre h=8.37 m"
+      },
+      "EH": {
+        "codigo": "EH",
+        "nombre": "Empuje activo estático",
+        "tipo": "triangular_max_base",
+        "intensidad_o_valor": 3.030226672108412,
+        "fuerza_tf_m": 12.681498622773702,
+        "brazo_yp_m": 2.7899999999999996,
+        "momento_tf_m_m": 35.38138115753863,
+        "descripcion": "p = 3.0302 tf/m2 en base, resultante a h/3"
+      },
+      "EQterr": {
+        "codigo": "EQterr",
+        "nombre": "Empuje sísmico del suelo",
+        "tipo": "uniforme_equivalente",
+        "intensidad_o_valor": 0.5492618453116456,
+        "fuerza_tf_m": 4.597321645258473,
+        "brazo_yp_m": 4.185,
+        "momento_tf_m_m": 19.239791085406708,
+        "descripcion": "p' = 0.5*(Kae-Ka)*h*gamma = 0.5493 tf/m2"
+      },
+      "PIR_half": {
+        "codigo": "0.5PIR",
+        "nombre": "Inercia pantalla (50%)",
+        "tipo": "inercial",
+        "intensidad_o_valor": 1.4737065,
+        "fuerza_tf_m": 0.73685325,
+        "brazo_yp_m": 3.4180586263275625,
+        "momento_tf_m_m": 2.5186076075,
+        "descripcion": "0.5 * Kh * West = 0.5 * 0.125 * 11.79 tf/m"
+      },
+      "PEQi": {
+        "codigo": "PEQi",
+        "nombre": "Inercia superestructura",
+        "tipo": "concentrada_apoyo",
+        "intensidad_o_valor": 6.926399999999999,
+        "fuerza_tf_m": 6.926399999999999,
+        "brazo_yp_m": 5.68,
+        "momento_tf_m_m": 39.34195199999999,
+        "descripcion": "24.0% * (DC+DW) en apoyo"
+      },
+      "BR": {
+        "codigo": "BR",
+        "nombre": "Fuerza de frenado",
+        "tipo": "concentrada_cima",
+        "intensidad_o_valor": 1.63,
+        "fuerza_tf_m": 1.63,
+        "brazo_yp_m": 9.27,
+        "momento_tf_m_m": 15.1101,
+        "descripcion": "BR = 1.63 tf/m aplicado a hp+0.90=9.27 m"
+      }
+    },
+    "combinaciones": {
+      "Resistencia_I": {
+        "nombre": "Resistencia I",
+        "M_u_tf_m_m": 93.05224651611886,
+        "V_u_tf_m": 25.10951490663628,
+        "phi_flexion": 0.9,
+        "phi_cortante": 0.9,
+        "M_u_sobre_phi": 103.39138501790984,
+        "detalle_factores": {
+          "LS": 1.75,
+          "EH": 1.5,
+          "BR": 1.75
+        }
+      },
+      "Evento_Extremo_I": {
+        "nombre": "Evento Extremo I",
+        "M_u_tf_m_m": 107.9046389303913,
+        "V_u_tf_m": 26.681292653025242,
+        "phi_flexion": 1.0,
+        "phi_cortante": 1.0,
+        "M_u_sobre_phi": 107.9046389303913,
+        "detalle_factores": {
+          "LS": 0.5,
+          "EH": 1.0,
+          "EQ": 1.0,
+          "BR": 0.5
+        }
+      },
+      "Servicio_I": {
+        "nombre": "Servicio I",
+        "M_u_tf_m_m": 58.227195317430585,
+        "V_u_tf_m": 16.159936892759834,
+        "phi_flexion": 1.0,
+        "phi_cortante": 1.0,
+        "M_u_sobre_phi": 58.227195317430585,
+        "detalle_factores": {
+          "LS": 1.0,
+          "EH": 1.0,
+          "BR": 1.0
+        }
+      }
+    },
+    "diseno_flexion": {
+      "candidatos": [
+        {
+          "barra": "5/8\"",
+          "db_mm": 15.875,
+          "dc_cm": 5.79375,
+          "d_cm": 92.90625,
+          "As_req_ResI_cm2_m": 27.199201456648456,
+          "As_req_ExtI_cm2_m": 28.420338762877417,
+          "As_requerido_cm2_m": 28.420338762877417,
+          "estado_gobernante": "Evento Extremo I",
+          "s_calculado_cm": 6.9644704334418135,
+          "s_adoptado_cm": 10.0,
+          "s_adoptado_mm": 100.0,
+          "As_provisto_cm2_m": 19.793260902246004,
+          "a_real_cm": 3.4929283945140006,
+          "Mn_tf_m_m": 75.78267581583525,
+          "phi_Mn_ResI_tf_m_m": 68.20440823425173,
+          "phi_Mn_ExtI_tf_m_m": 75.78267581583525,
+          "DCR_ResI": 1.3643142565877249,
+          "DCR_ExtI": 1.423869476351269,
+          "DCR_flexion": 1.423869476351269,
+          "cumple": false
+        },
+        {
+          "barra": "3/4\"",
+          "db_mm": 19.05,
+          "dc_cm": 5.9525,
+          "d_cm": 92.7475,
+          "As_req_ResI_cm2_m": 27.248299828026212,
+          "As_req_ExtI_cm2_m": 28.471767598884426,
+          "As_requerido_cm2_m": 28.471767598884426,
+          "estado_gobernante": "Evento Extremo I",
+          "s_calculado_cm": 10.010722235717818,
+          "s_adoptado_cm": 10.0,
+          "s_adoptado_mm": 100.0,
+          "As_provisto_cm2_m": 28.502295699234246,
+          "a_real_cm": 5.029816888100162,
+          "Mn_tf_m_m": 108.01711226190831,
+          "phi_Mn_ResI_tf_m_m": 97.21540103571748,
+          "phi_Mn_ExtI_tf_m_m": 108.01711226190831,
+          "DCR_ResI": 0.957175977517502,
+          "DCR_ExtI": 0.9989587452472873,
+          "DCR_flexion": 0.9989587452472873,
+          "cumple": true
+        },
+        {
+          "barra": "1\"",
+          "db_mm": 25.4,
+          "dc_cm": 6.27,
+          "d_cm": 92.43,
+          "As_req_ResI_cm2_m": 27.347044974630933,
+          "As_req_ExtI_cm2_m": 28.57520185561368,
+          "As_requerido_cm2_m": 28.57520185561368,
+          "estado_gobernante": "Evento Extremo I",
+          "s_calculado_cm": 17.732419937322458,
+          "s_adoptado_cm": 17.5,
+          "s_adoptado_mm": 175.0,
+          "As_provisto_cm2_m": 28.954713091285583,
+          "a_real_cm": 5.109655251403338,
+          "Mn_tf_m_m": 109.29701286536108,
+          "phi_Mn_ResI_tf_m_m": 98.36731157882498,
+          "phi_Mn_ExtI_tf_m_m": 109.29701286536108,
+          "DCR_ResI": 0.945967161474704,
+          "DCR_ExtI": 0.9872606405384107,
+          "DCR_flexion": 0.9872606405384107,
+          "cumple": true
+        }
+      ],
+      "adoptado": {
+        "barra": "1\"",
+        "db_mm": 25.4,
+        "dc_cm": 6.27,
+        "d_cm": 92.43,
+        "As_req_ResI_cm2_m": 27.347044974630933,
+        "As_req_ExtI_cm2_m": 28.57520185561368,
+        "As_requerido_cm2_m": 28.57520185561368,
+        "estado_gobernante": "Evento Extremo I",
+        "s_calculado_cm": 17.732419937322458,
+        "s_adoptado_cm": 17.5,
+        "s_adoptado_mm": 175.0,
+        "As_provisto_cm2_m": 28.954713091285583,
+        "a_real_cm": 5.109655251403338,
+        "Mn_tf_m_m": 109.29701286536108,
+        "phi_Mn_ResI_tf_m_m": 98.36731157882498,
+        "phi_Mn_ExtI_tf_m_m": 109.29701286536108,
+        "DCR_ResI": 0.945967161474704,
+        "DCR_ExtI": 0.9872606405384107,
+        "DCR_flexion": 0.9872606405384107,
+        "cumple": true
+      }
+    },
+    "acero_minimo": {
+      "fc_MPa": 27.45862,
+      "fr_MPa": 3.3012613162244517,
+      "fr_kgf_cm2": 33.66349687430929,
+      "S_cm3": 162361.5,
+      "Mcr_tf_m_m": 60.122214325339854,
+      "limite_133_Mu_tf_m_m": 143.51316977742044,
+      "M_minimo_exigido_tf_m_m": 60.122214325339854,
+      "Mn_provisto_tf_m_m": 109.29701286536108,
+      "criterio_gobernante": "Mcr",
+      "cumple": true
+    },
+    "acero_temperatura": {
+      "t_prom_cm": 69.35,
+      "h_temp_cm": 586.9999999999999,
+      "As_temp_calculado_cm2_m": 5.582022548944922,
+      "As_temp_normativo_cm2_m": 5.582022548944922,
+      "candidatos": [
+        {
+          "barra": "1/2\"",
+          "db_mm": 12.7,
+          "s_calculado_cm": 22.693722331579988,
+          "s_max_normativo_cm": 45.0,
+          "s_adoptado_cm": 22.5,
+          "s_adoptado_mm": 225.0,
+          "As_provisto_cm2_m": 5.630083101083308,
+          "cumple": true
+        },
+        {
+          "barra": "5/8\"",
+          "db_mm": 15.875,
+          "s_calculado_cm": 35.45894114309373,
+          "s_max_normativo_cm": 45.0,
+          "s_adoptado_cm": 35.0,
+          "s_adoptado_mm": 350.0,
+          "As_provisto_cm2_m": 5.655217400641716,
+          "cumple": true
+        }
+      ],
+      "adoptado": {
+        "barra": "1/2\"",
+        "db_mm": 12.7,
+        "s_calculado_cm": 22.693722331579988,
+        "s_max_normativo_cm": 45.0,
+        "s_adoptado_cm": 22.5,
+        "s_adoptado_mm": 225.0,
+        "As_provisto_cm2_m": 5.630083101083308,
+        "cumple": true
+      }
+    },
+    "fisuracion_servicio": {
+      "Ms_tf_m_m": 58.227195317430585,
+      "n": 7.965973798387867,
+      "Es_kgf_cm2": 2039432.4259558567,
+      "Ec_kgf_cm2": 256017.96811942713,
+      "y_cr_cm": 18.47096878794921,
+      "jd_cm": 86.27301040401693,
+      "fs_kgf_cm2": 2330.942997390193,
+      "limite_fs_kgf_cm2": 2520.0,
+      "fs_MPa": 228.58742145356536,
+      "beta_s": 1.0969073120971855,
+      "gamma_e": 0.75,
+      "s_max_fisuracion_cm": 24.126519873985842,
+      "s_max_fisuracion_mm": 241.26519873985842,
+      "s_adoptado_cm": 17.5,
+      "s_adoptado_mm": 175.0,
+      "cumple_esfuerzo": true,
+      "cumple_espaciamiento": true,
+      "cumple": true
+    },
+    "cortante": {
+      "dv_cm": 89.87517237429834,
+      "limite_090_d_cm": 83.18700000000001,
+      "limite_072_h_cm": 71.064,
+      "Vu_tf_m": 26.681292653025242,
+      "Mu_asociado_tf_m_m": 107.9046389303913,
+      "eps_s": 0.0024849944547930044,
+      "sx_in": 35.38392613161352,
+      "sxe_in": 35.38392613161352,
+      "beta": 1.1492058932387001,
+      "Vc_tf_m": 45.80726381452194,
+      "Vn_max_tf_m": 629.1262066200884,
+      "Vn_tf_m": 45.80726381452194,
+      "phi_v": 0.9,
+      "Vr_tf_m": 41.226537433069744,
+      "DCR_cortante": 0.6471873291891578,
+      "requiere_estribos": false,
+      "cumple": true
+    },
+    "cumple_global": true,
+    "estado": "OK",
+    "advertencias": []
+  },
+  "validaciones": [],
+  "advertencias": [],
+  "archivos_generados": [
+    "figuras/cargas_pantalla_voladizo.png",
+    "figuras/esfuerzos_armado_pantalla.png"
+  ],
+  "generado_en": "2026-10-05T10:05:50.414277-05:00"
+}

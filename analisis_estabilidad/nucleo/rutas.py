@@ -35,6 +35,12 @@ def asegurar_interna(ruta: str | Path) -> Path:
 
 
 def carpeta_caso(caso: str, revision: str) -> Path:
-    if not caso or not revision or any(x in caso + revision for x in ("/", "\\", "..")):
-        raise ValueError("Caso y revisión deben ser identificadores simples")
-    return asegurar_interna(RAIZ_CASOS / caso / revision.upper())
+    if not caso or not revision or ".." in caso or ".." in revision:
+        raise ValueError("Caso y revisión deben ser identificadores válidos")
+    candidata_rev = RAIZ_CASOS / Path(caso) / revision.upper()
+    if (candidata_rev / "entrada.yaml").exists():
+        return asegurar_interna(candidata_rev)
+    candidata_sin_rev = RAIZ_CASOS / Path(caso)
+    if (candidata_sin_rev / "entrada.yaml").exists():
+        return asegurar_interna(candidata_sin_rev)
+    return asegurar_interna(candidata_rev)

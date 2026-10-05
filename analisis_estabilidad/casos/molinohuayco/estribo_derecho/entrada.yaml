@@ -45,8 +45,8 @@ datos_comunes:
 elementos:
   estribo:
     geometria:
-      H: 14.65
-      hp: 13.15
+      H: 9.87
+      hp: 8.37
       hz: 1.50
       B: 12.65
       B1: 6.10
@@ -75,8 +75,8 @@ elementos:
 
   pantalla:
     analisis_shell_3d:
-      altura_total_m: 13.15
-      altura_modelada_m: 10.11
+      altura_total_m: 8.37
+      altura_modelada_m: 5.33
       espesor_m: 0.40
       recubrimiento_exterior_mm: 100.0
       recubrimiento_interior_mm: 75.0
@@ -92,8 +92,8 @@ elementos:
       phi_cortante_mtc: 0.90
     diseno_e060_mtc:
       vanos_m: [3.00, 3.00, 4.77, 2.80, 2.80, 4.77, 3.00, 3.00]
-      altura_total_m: 13.15
-      altura_efectiva_m: 10.11
+      altura_total_m: 8.37
+      altura_efectiva_m: 5.33
       espesor_m: 0.40
       ancho_franja_m: 1.00
       recubrimiento_exterior_mm: 100.0
@@ -106,10 +106,30 @@ elementos:
       phi_flexion_mtc: 0.90
       phi_cortante_mtc: 0.90
       factor_exposicion_fisuracion: 1.00
+    diseno_voladizo:
+      altura_total_hp_m: 8.37
+      altura_efectiva_m: 5.33
+      altura_global_h_m: 9.87
+      espesor_sup1_m: 0.40
+      espesor_sup2_m: 0.40
+      espesor_inf_m: 0.987
+      ancho_franja_m: 1.00
+      recubrimiento_terreno_mm: 50.0
+      recubrimiento_libre_mm: 50.0
+      barras_verticales: ['5/8"', '3/4"', '1"']
+      barras_temperatura: ['1/2"', '5/8"']
+      espaciamiento_minimo_mm: 100.0
+      espaciamiento_maximo_mm: 400.0
+      paso_espaciamiento_mm: 5.0
+      factor_modificacion_eta: 1.00
+      phi_flexion_resistencia: 0.90
+      phi_flexion_extremo: 1.00
+      phi_cortante: 0.90
+      factor_exposicion_fisuracion_gamma_e: 0.75
 
   contrafuertes:
     analisis_2d:
-      altura_m: 10.11
+      altura_m: 5.33
       longitud_base_m: 6.50
       longitud_corona_m: 0.40
       espesor_m: 0.40
@@ -117,7 +137,7 @@ elementos:
       divisiones_horizontales: 14
       tamano_malla_shell_m: 0.40
     diseno_stm:
-      altura_m: 10.11
+      altura_m: 5.33
       longitud_base_m: 6.50
       longitud_corona_m: 0.40
       espesor_m: 0.40
@@ -225,7 +245,7 @@ elementos:
   cajuela:
     verificacion_voladizo:
       altura_m: 3.04
-      altura_global_empuje_m: 14.65
+      altura_global_empuje_m: 9.87
       espesor_m: 0.40
       ancho_franja_m: 1.00
       recubrimiento_frontal_mm: 50.0

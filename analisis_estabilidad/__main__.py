@@ -23,6 +23,7 @@ ALIAS = {
     "pantalla.shell": "pantalla.analisis_shell_3d",
     "pantalla.reacciones": "pantalla.reacciones_contrafuertes",
     "pantalla.diseno": "pantalla.diseno_e060_mtc",
+    "pantalla.voladizo": "pantalla.diseno_voladizo",
     "contrafuertes.analisis": "contrafuertes.analisis_2d",
     "contrafuertes.diseno": "contrafuertes.diseno_stm",
     "zapata.longitudinal": "zapata.diseno_longitudinal_e060",

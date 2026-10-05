@@ -285,11 +285,49 @@ def _cajuela(entrada: EntradaElemento, dependencias: dict[str, dict]) -> dict:
     return m.evaluar(parametros)
 
 
+def _pantalla_voladizo(entrada: EntradaElemento, dependencias: dict[str, dict]) -> dict:
+    from analisis_estabilidad.elementos.pantalla import diseno_voladizo as m
+
+    comunes = _comunes_desde_estabilidad(dependencias)
+    datos = dict(entrada.parametros["elemento"])
+    mat = comunes["materiales"]
+    cargas = comunes["cargas_superestructura"]
+    sismo = comunes["sismo"]
+    geom = comunes["geometria"]
+    datos.setdefault("altura_global_h_m", geom["H"])
+    datos.setdefault("altura_total_hp_m", geom["hp"])
+    datos.setdefault(
+        "altura_efectiva_m",
+        geom["hp"] - geom["c_cajuela"] - geom["d_cajuela"],
+    )
+    datos.setdefault("espesor_inf_m", 0.10 * geom["H"])
+    datos.update({
+        "fc_kgf_cm2": mat["f_c"],
+        "fy_kgf_cm2": mat["fy"],
+        "gamma_relleno_tf_m3": mat["gamma_r"],
+        "gamma_concreto_tf_m3": mat["gamma_c"],
+        "phi_relleno_grados": mat["phi_relleno"],
+        "delta_grados": mat["delta"],
+        "dc_tf_m": cargas["DC"],
+        "dw_tf_m": cargas["DW"],
+        "pl_tf_m": cargas["PL"],
+        "ll_im_tf_m": cargas["LL_IM"],
+        "br_tf_m": cargas["BR"],
+        "kh": sismo["Kh"],
+        "kv": sismo["Kv"],
+    })
+    parametros = m.ParametrosPantallaVoladizo(
+        **_argumentos_dataclass(m.ParametrosPantallaVoladizo, datos)
+    )
+    return m.evaluar(parametros)
+
+
 MOTORES: dict[str, Callable[[EntradaElemento, dict[str, dict]], dict]] = {
     "estribo.estabilidad_global": _estribo_estabilidad,
     "pantalla.analisis_shell_3d": _pantalla_shell,
     "pantalla.reacciones_contrafuertes": _pantalla_reacciones,
     "pantalla.diseno_e060_mtc": _pantalla_diseno,
+    "pantalla.diseno_voladizo": _pantalla_voladizo,
     "contrafuertes.analisis_2d": _contrafuertes_analisis,
     "contrafuertes.diseno_stm": _contrafuertes_diseno,
     "zapata.diseno_longitudinal_e060": _zapata_longitudinal,
@@ -485,6 +523,20 @@ def _generar_figuras(
             dibujar_caso(Caso(**caso_datos), parametros, ruta, dpi=220)
             rutas.append(ruta)
 
+    elif objetivo == "pantalla.diseno_voladizo":
+        from analisis_estabilidad.elementos.pantalla.diagrama_voladizo import (
+            generar_diagrama_cargas,
+            generar_diagramas_esfuerzos_y_armado,
+        )
+
+        r1 = figuras / "cargas_pantalla_voladizo.png"
+        generar_diagrama_cargas(resultado, r1)
+        rutas.append(r1)
+
+        r2 = figuras / "esfuerzos_armado_pantalla.png"
+        generar_diagramas_esfuerzos_y_armado(resultado, r2)
+        rutas.append(r2)
+
     return rutas
 
 
@@ -518,6 +570,9 @@ def _escribir_reporte(objetivo: str, resultado: dict, ruta: Path) -> None:
         generadores[objetivo] = generar_markdown
     elif objetivo == "cajuela.verificacion_voladizo":
         from analisis_estabilidad.elementos.cajuela.verificacion_voladizo import reporte_markdown
+        generadores[objetivo] = reporte_markdown
+    elif objetivo == "pantalla.diseno_voladizo":
+        from analisis_estabilidad.elementos.pantalla.diseno_voladizo import reporte_markdown
         generadores[objetivo] = reporte_markdown
     generador = generadores.get(objetivo)
     if generador:

@@ -1,0 +1,508 @@
+--- Page 270 ---
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  270 
+Ltalón puntas°N
+Ltinfsuptt2t2eeparaph   =1.50parapb
+H=7.00m
+Dh=1.50m
+B0.751.80mBR=1.99T/m
+EQ
+f
+t  = 1925 kg/m³õ = 0°Ø = 30°Prop. de terreno:
+  q  = 2.67 kg/cm²adm
+  PGA  = 0.30.75
+11P   =12T/mDC
+P   =1.80T/mDW
+LL+IMP   =9.494T/m
+P
+  F  = 1.2pga
+PROBLEMA 5.3  Diseñar el estribo de concreto armado mostrado para un puente simplemente 
+apoyado de una sola vía. Las cargas verticales provenientes de la superestructura que in ciden 
+sobre el estribo son: PDC=12 Ton/m , PDW=1.8 Ton/m  y PLL+IM= 9.494 Ton/m.  La fuerza de 
+frenado  es BR=1.99 ton/m. El relleno es de 7.00m de altura, el suelo es no cohesivo de peso 
+unitario γt=1925 kg/m³, capacidad admisible qadm=2.67 kg/cm² (FS=3), á ngulo de fricción interna 
+Øf=30° . Considerar un coeficiente sísmico de aceleración horizontal PGA=0.3 y coeficiente de 
+sitio Fpga=1.2.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5 .15  Estribo en voladizo a diseñar  
+ 
+Solución. - 
+ 
+PRE-DIMENSIONADO  
+ 
+Para la altura H=7.0 0m, probamos una sección preliminar de estribo con:  
+ 
+B= ancho del cimiento = ½H ~ 2/3H = 3.50m~4.67m (adoptado B= 4.70m) 
+ 
+D = altura del cimiento = 0.1H = 0.70m (adoptado D=1.10m)  
+ 
+Lpunta = longitud de punta  = B/3 = 1. 57m (adoptado Lpunta=1.10m) 
+ 
+tsup=grosor menor de pantalla = H/24 = 0.29m (adoptado tsup mín=0.30m  
+tinf =grosor mayor de pantalla = 0.1H = 0.70m (adoptado tinf=0.90m) 
+--- Pages 282-288 ---
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  282 
+P5.900.60
+0.751.80m
+Terreno equiv. por s/c
+PBR
+EHEQEQ
+1.97
+pp' p''LS
+2.950.75
+2.47PIRterr
+CÁLCULO DEL ACERO  
+ 
+1) DISEÑO DE PANTALLA  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5.19  Cargas con sideradas para el diseño de la pantalla  
+ 
+ 
+CARGAS EN BASE DE PANTALLA  
+CARGA  CARGA DISTRIBUIDA (Ton/m)  Carga(Ton)  YP(m) M(T-m) 
+LS p”=0.333x0.60x1.925=0.385  0.385x5. 90    =2.27 2.95 6.70 
+EH p=0.333x 5.90x1.925=3. 786 0.5x5.90x3. 786 =11. 17 1.97 22.00 
+EQterr p’=0.5(0.4 57-0.333)5.9x1.925=0. 704 0.704x5.90    =4.15 2.95 12.25  
+0.5PIR - 0.68 2.47 1.68 
+PEQi - 4.97 5.15 25.60  
+BR - 1.99 7.70 15.32 
+ 
+Para el diseño estructural ca lculamos PIR sin incluir la masa del suelo sobre el talón (C11.6.5.1):  
+ 
+West = peso pantalla =7.61T/m   
+Kh      = 0.18  
+PIR     = Kh.West =0.1 8x7.61T/m = 1.37T/m  (11.6.5.1 -1) 
+YP  = C.G. de  la pantalla  desde el punto P = 2. 47m 
+ 
+Carga del terreno más su acción dinámica:  
+ 
+PAE = EH + EQterr =11.17+4.15=15.32T/m  
+ 
+ 
+ 
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  283 
+90cmzd
+De acuerdo a l Art. 11.6.5.1  debem os tomar el resultado más conservador de : 
+  
+ PAE+0.5PIR   = 16.01 T/m        
+ 
+ (0.5PAE>EH)+PIR = 12.54 T/m 
+ 
+Consideraremos la primera expresión que por simple inspección es crítica tanto en c orte como en 
+momento. Al valor de PAE le descontamos la presión estát ica del terreno (EH) para tratarla por 
+separado, utilizando en las combinaciones de carga:   
+ 
+EQterr  = PAE - EH = 4.15T/m 
+ 
+0.5PIR = 0.68T/m 
+ 
+a) Acero Por Flexión  
+ 
+Momento de diseño en la base de la pantalla:  
+ 
+Estado límite de Resistencia I, con n= nDnRnI=1: 
+ 
+Mu = n[1.75MLS + 1.50MEH + 1.75MBR]    (Tabla 3.4.1 -1) 
+ 
+    = 1.00[1.75(6. 70T-m)+1.50(2 2.00T-m)+1.75(15.32T -m)]  
+ 
+    = 71.54T-m 
+ 
+Estado límite de Evento Extremo I, con n= nDnRnI=1: 
+ 
+Mu = n[0.50MLS + 1.00MEH + 1.00MEQ + 0.50MBR]    (Tabla 3.4.1 -1 y  
+           Fig. C11.5.6 -4) 
+ 
+   =1.00[0.50(6.70T -m)+1.0(2 2.00T-m)+1.0( 12.25+1.68+25.60 )T-m  
+  
+      +0.50(15. 32T-m)] = 72.54T-m 
+   
+Con Mu= 72.54T-m, As= 13/4”, recubrimiento r= 5 .0cm  (Tabla 5.1 0.1-1) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5 .20  Peralte efectivo considerado  
+ 
+cm95.52905.10.5z 
+  
+d= 90cm – 5.95cm =84.05cm 
+ 
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  284 
+cm98.4100x210x85.04200xA
+bf85.0fAas
+'
+cys  
+ 
+ 
+m13.017.2184.2s²,cm17.21
+)2a05.84( 4200x0.110x54.72
+)2ad(fØMA"4/3Ø5
+yfu
+s   
+
+
+Øf=1.0 
+para estado límite de Evento Extremo    (Art. 11.5.8)  
+ 
+As máximo          
+Las actuales disposiciones AASHTO LRFD eliminan este límite.  
+ 
+As mínimo        (Art. 5.6.3.3) 
+La cantidad de acero proporcionado debe ser capaz  de resistir el menor valor de Mcr y 
+1.33Mu: 
+ 
+a) Mcr  = 1.1fr S = 1. 1(29.13 kg/cm2)(135,000 cm3) = 43.26T-m  
+ 
+Siendo:  
+2 2 '
+c'
+c r cm/kg13.29 21001.2 cm/kgf01.2 MPaf63.0f    
+ 
+S = bh2/6 = 100( 90)2/6 = 1 35,000 cm3  
+ 
+b) 1.33 Mu= 1.33( 72.54T-m) = 96.48T-m 
+ 
+El menor valor es 43.26T-m y la cantidad de acero calculada (2 1.17cm2) resiste 
+Mu=72.54T-m >43.26T-m OK!  
+ 
+USAR 1 Ø3/4” @ 0. 13m 
+ 
+b) As de temperatura  
+ 
+m/cm)h+b(2bh18.0= A2
+temps
+    (5.10. 6-1) 
+ 
+Tomando un espesor promedio de pantalla: ½(0.90m+0.30m) = 0.60m , y una altura: 
+5.90m -2.50m=3.40m:  
+ 
+m/cm59.4)60 340(2)60x340(18.0A2
+temps 
+ (en cada cara)  
+ 
+Además: 
+m/cm70.12≤ A≤m/cm33.22
+temps2  (5.10. 6-2) 
+Usando Ø1/2” (1.29cm²) , la separación será: 
+m28.059.429.1s   
+m45.0 sym80.1)60.0(3t3 smáx máx   
+  (Art.5.10. 6) 
+ 
+USAR 1Ø1/2” @ 0.28M  
+ 
+Nota.- El acero de temperatura  se colocará  por no contar con ningún tipo de acero  en el 
+sentido perpendicular al acero principal de la pantalla y también en la cara de la pantalla 
+opuesta al relleno, en ambos sentidos.  
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  285 
+90 cm
+13 cmd  =5.95cmc1Ø3/4"@0.13
+1Ø3/4"@0.13
+Ast=9x2.84cm²=25.56cm²90 cm13 cm
+(+)(-)
+(fs/n)y
+d=84.05
+5.9584.05-yfc
+y/3
+jdC
+T
+c) Revisión de fisuración por distribución  de armadura  (Art. 5. 6.7) 
+ 
+Momento actuante  
+Usando la sección agrietada  y una franja de 0. 13m de ancho , para el d iseño por Estado Límite 
+de Servicio I, con n= nDnRnI=1: 
+ 
+)M0.1M0.1M0.1(nMBR EH LS s  
+   (Tabla 3.4.1 -1) 
+ 
+Ms = 1.0[ 1.0x(6.70)+1.0x (22.00)+1.0x (15.32 )] 
+ 
+Ms = 44.02 T-m/m 
+ 
+Para un ancho tributario de 0. 13m:  
+ 
+Ms = 44.02T-m/m x 0. 13m = 5.72T-m 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5 .21  Franja de pantalla para el cálculo  
+ 
+Ubicación del eje neutro:  
+ 
+Es =2.04X106 kg/cm2      (5.4.3.2)  
+ 
+2 '
+c c cm/kg718,221 210300,15f 300,15E   
+ (C5.4.2.4 -3)    
+ 
+9
+cm/kg718,221cm/kg10X04.2
+EEn22 6
+cs 
+ 
+2Ørecubdc 
+ 
+cm95.52cm905.1cm0.5dc  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5 .22  Determinación de la posición de eje neutro  
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  286 
+Área de acero transformada:  
+ 
+Ast = rela ción modular x área de acero = 9 (2.84 cm2) = 25.56 cm2 
+ 
+Momentos respecto del eje  neutro para determinar y:  
+ 
+13y (y/2) = 25.56 (84.05-y) 
+ 
+ y = 1 6.32cm 
+ 
+Esfuerzo del acero principal bajo cargas de servicio  
+ 
+El brazo jd entre las cargas es:  
+ 
+cm61.783cm32.16cm05.843ydjd   
+  
+ 
+Luego, el esfuerzo del acero será:  
+ 
+2
+y25
+ss
+ss cm/kg520,2F6.0 cm/kg562,2)84.2)(61.78(10X72.5
+A)jd(Mf   
+ 
+2
+ss cm/kg520,2f
+ 
+ 
+Separación máxima de la armadura  
+c
+ssse
+máx d2f000,125=sβγ
+  (5.6.7-1) 
+ 
+10.1)95.590(7.095.51)dh(7.0d1
+cc
+s 
+  (5.6.7-2) 
+ 
+Para condición de  exposición severa,  con ge=0.75: 
+ 
+cm13cm9.21)95.5(2)520,2(10.1)75.0(000,125d2f000,125sc
+ssse
+máx    
+ OK! 
+ 
+d) Revisión por cort e 
+Típicamente el corte no gobi erna el diseño de un muro de contención; sin embargo 
+revisaremos el grosor de la pantalla para confirmar que no se requiere armadura transversal.  
+Por simplicidad tomaremos la sección crítica en la base de la pantalla aunque puede ser 
+tomada a una distancia  igual al peralte efectivo desde la base.  
+ 
+El cortante actuante en la base de la pantalla para el estado límite de Resistencia I, con n= 
+nDnRnI=1, tomando una franja de estribo de 1.0m  es: 
+ 
+Vu = n[1.75 VLS+1.50 VEH +1.75 VBR]           (Tabla 3.4.1 -1) 
+ 
+     = 1.00[1. 75(2.27T ) + 1. 50(11.17T )+1.75(1.99T) ]  
+     = 24.21 T 
+ 
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  287 
+vv'
+c c dbf 265.0V 
+El cortante actuante en la base de la pantalla para el estado límite de Evento Extremo I, con 
+n= nDnRnI=1, es:  
+ 
+Vu = n[0.5 VLS+1.00 VEH +1.00  VEQ +0.5 VBR]  (Tabla 3.4.1 -1 y 
+Fig. C11.5.6 -4) 
+ 
+     =1.00[0.5(2.27T)+1.0(11.17T)+1.0( 4.15T+0.68T+4.97T )+0.5(1.99T)]  
+     = 23.10T  
+ 
+Tomamos Vu = 24.21T que corresponde al estado límite de Resistencia I  
+El cortante resistente del concreto es:  
+ 
+Vr = Ø Vn     (5.7.2.1-1) 
+        Ø = 0.90              (5.5.4.2 ) 
+ 
+          Vn = Vc+Vs+ Vp  (5.7.3.3.-1) 
+ siendo Vn el menor de:  
+Vn = 0.25f’cbvdv + Vp  (5.7.3.3-2) 
+ 
+con β=1.17*:        (5.7.3.3-3) 
+ 
+T65.36)56.81x100(210)17.1(265.0Vc  
+ 
+ 
+donde:   
+bv  = ancho de diseño de pantalla= 100 cm  
+de = 84.05cm 
+2ad efectivocortede peraltede v  
+   (Art. 5. 7.2.8 ) 
+cm56.81298.405.84dv 
+ 
+ 
+no menor que el  0.90de= 0.90( 84.05 cm) = 75.64cm  OK!  
+mayor valor de  0.72h = 0.72( 90 cm) = 64.80 cm 
+ 
+ 
+Con Vp=0 y Vs=0   Vn = 36.65T 
+el menor valor de     Vn = 0.25 x 210 x 100 x 81.56  = 428.19 T   
+    
+es:  Vn = 36.65 T 
+ 
+La resistencia del concreto al corte es:  
+ 
+Vr = ØVn = 0.9(36.65T) = 32.99T > 24.21T   OK! 
+ 
+ 
+*Cálculo de ß:  
+Como  lpant=5.90m>0.40m, no es aplicable el procedimiento simplificado (5.8.3.4.1) . 
+Utilizando el procedimiento general:  
+ 
+)s39(51
+) 7501(8.4
+xe s
+     (5.7.3.4.2 -2) 
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén  288 
+ssu
+vu
+sAEVdM
+
+      (5.7.3.4.2 -4) 
+ 
+Siendo:  
+Vu = 24.21T 
+Mu = 71. 54Tm 
+ 
+Mu > Vu.dv      (Art. 5.7.3.4.2)  
+ 
+71.54Tm > (2 4.21T)(0.8156m)=1 9.75Tm OK! 
+ 
+002592.0
+²)cm17.21²)(cm/kg10x04.2(kg210,24cm56.81cmkg10x54.71
+65
+s 
+
+ 
+ 
+63.0a38.1ss
+gx xe
+  (pulg.)     (5.7.3.4.2 -7) 
+ 
+Siendo:  
+sx  = dv = 81.56cm = 32.11”  
+ag = tamaño máximo del agregado = ¾”  
+ 
+"11.32ds63.075.038.1ssv x x xe 
+ 
+ 
+También:  
+"80)"11.32s("12xe  
+ OK!   (Art. 5. 7.3.4.2)  
+ 
+Luego:  
+ 
+17.1)11.3239(51
+) 002592.0x7501(8.4
+)s39(51
+) 7501(8.4
+xe s 
+ 
+ 
+ 
+ 
+2) DISEÑO DE CIMENTACIÓN  
+ 
+a)  Acero parte superior de zapata  
+ 
+Momento de diseño en cara vertical de pantalla, estado límite de Resistencia Ib, con n= 
+nDnRnI=1, despreciando del lado conservado r la reacción del suelo:  
+ 
+Mu = n[1.25 MDC +1.35 MEV +1.75 MLS]  (Tabla 3.4.1 -1) 
+ 
+    = 1.00[1.25( 7.128 T x 1. 35m) + 1.35( 29.18 T x 1. 41m)  
++ 1.75( 2.71T x 1. 525m)]  
+    = 74.80 T-m 
+ 
+Omitimos el estado de Evento Extremo I, pues no es  crítico en este caso.  

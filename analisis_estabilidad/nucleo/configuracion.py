@@ -103,6 +103,15 @@ def validar_coherencia_geometrica(config: ConfiguracionCaso) -> None:
     exigir("elementos.pantalla.diseno_e060_mtc.altura_total_m", diseno_pantalla["altura_total_m"], float(g["hp"]))
     exigir("elementos.pantalla.diseno_e060_mtc.altura_efectiva_m", diseno_pantalla["altura_efectiva_m"], h_efectiva)
 
+    if "diseno_voladizo" in elementos.pantalla:
+        vol = elementos.pantalla["diseno_voladizo"]
+        if "altura_total_hp_m" in vol:
+            exigir("elementos.pantalla.diseno_voladizo.altura_total_hp_m", vol["altura_total_hp_m"], float(g["hp"]))
+        if "altura_efectiva_m" in vol:
+            exigir("elementos.pantalla.diseno_voladizo.altura_efectiva_m", vol["altura_efectiva_m"], h_efectiva)
+        if "altura_global_h_m" in vol:
+            exigir("elementos.pantalla.diseno_voladizo.altura_global_h_m", vol["altura_global_h_m"], h_total)
+
     for calculo in ("analisis_2d", "diseno_stm"):
         exigir(
             f"elementos.contrafuertes.{calculo}.altura_m",

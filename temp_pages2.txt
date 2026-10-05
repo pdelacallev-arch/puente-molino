@@ -1,0 +1,2114 @@
+=== PAGE 288 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+288
+s
+s
+u
+v
+u
+s
+A
+E
+V
+d
+M
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+(5.7.3.4.2-4) 
+ 
+Siendo: 
+Vu = 24.21T 
+Mu = 71.54Tm 
+ 
+Mu > Vu.dv  
+ 
+ 
+ 
+ 
+(Art. 5.7.3.4.2) 
+ 
+71.54Tm > (24.21T)(0.8156m)=19.75Tm 
+OK! 
+ 
+002592
+.
+0
+²)
+cm
+17
+.
+21
+²)(
+cm
+/
+kg
+10
+x
+04
+.
+2
+(
+kg
+210
+,
+24
+cm
+56
+.
+81
+cm
+kg
+10
+x
+54
+.
+71
+6
+5
+s
+
+
+
+
+
+ 
+ 
+63
+.
+0
+a
+38
+.
+1
+s
+s
+g
+x
+xe
+
+
+  (pulg.)  
+ 
+ 
+(5.7.3.4.2-7) 
+ 
+Siendo: 
+sx  = dv = 81.56cm = 32.11” 
+ag = tamaño máximo del agregado = ¾” 
+ 
+"
+11
+.
+32
+d
+s
+63
+.
+0
+75
+.
+0
+38
+.
+1
+s
+s
+v
+x
+x
+xe
+
+
+
+
+
+ 
+ 
+También: 
+"
+80
+)"
+11
+.
+32
+s
+(
+"
+12
+xe
+
+
+
+ OK! 
+ 
+ 
+(Art. 5.7.3.4.2) 
+ 
+Luego: 
+ 
+17
+.
+1
+)
+11
+.
+32
+39
+(
+51
+)
+002592
+.
+0
+x
+750
+1(
+8
+.
+4
+)
+s
+39
+(
+51
+)
+750
+1(
+8
+.
+4
+xe
+s
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+2) DISEÑO DE CIMENTACIÓN 
+ 
+a)  Acero parte superior de zapata 
+ 
+Momento de diseño en cara vertical de pantalla, estado límite de Resistencia Ib, con n= 
+nDnRnI=1, despreciando del lado conservador la reacción del suelo: 
+ 
+Mu = n[1.25 MDC +1.35 MEV +1.75 MLS]  
+(Tabla 3.4.1-1) 
+ 
+    = 1.00[1.25(7.128T x 1.35m) + 1.35(29.18T x 1.41m)  
++ 1.75(2.71T x 1.525m)]  
+    = 74.80T-m 
+ 
+Omitimos el estado de Evento Extremo I, pues no es crítico en este caso. 
+
+
+=== PAGE 289 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+289
+Talón
+h'=0.60
+Terreno equiv. por s/c
+EV=29.18T
+y
+LS =2.35mx0.60mx1.0mx1.925T/m
+.35
+5.90
+1.10
+2.70
+2.35
+1.41
+1.90
+0.60
+=2.71T
+3
+DC =2.70mx1.0mx1.10mx2.4T/m3=7.128T
+B=4.70
+q
+As superior
+1.525
+Sección crítica
+q
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5.23  Cargas actuantes en el talón del estribo 
+ 
+ 
+Utilizando acero 3/4” y recubrimiento r= 7.5cm (Tabla 5.10.1-1) 
+ 
+cm
+45
+.
+8
+2
+905
+.
+1
+5
+.
+7
+2
+Ø
+recub
+z
+
+
+
+
+
+  
+d= 110cm – 8.45cm = 101.55cm 
+ 
+2
+y
+u
+s
+cm
+95
+.
+19
+)
+2
+a
+d
+(
+Øf
+M
+A
+
+
+
+ , con Ø=0.9 
+cm
+69
+.
+4
+b
+f
+85
+.
+0
+f
+A
+a
+'
+c
+y
+s
+
+
+ 
+Utilizando varillas Ø3/4”, la separación será: 
+m
+14
+.
+0
+95
+.
+19
+84
+.
+2
+s
+
+
+ 
+ 
+Ahora, como c=a/1=4.69cm/0.85=5.52cm 
+ 
+90
+.
+0
+1
+c
+d
+15
+.
+0
+65
+.
+0
+Ø
+t
+
+
+
+
+
+
+
+
+  
+(5.5.4.2-2 y Fig. C5.5.4.2-1) 
+ 
+
+
+=== PAGE 290 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+290
+9
+.
+0
+26
+.
+3
+1
+cm
+52
+.
+5
+cm
+55
+.
+101
+15
+.
+0
+65
+.
+0
+Ø
+
+
+
+
+
+
+
+
+
+ 
+Luego, Ø=0.9 como lo supuesto. 
+ 
+As máximo  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Las actuales disposiciones AASHTO LRFD eliminan este límite. 
+ 
+As mínimo  
+ 
+ 
+ 
+ 
+ 
+(Art. 5.6.3.3) 
+La cantidad de acero proporcionado debe ser capaz de resistir el menor valor de Mcr y 
+1.33Mu: 
+ 
+a) Mcr  = 1.1fr S = 1.1(29.13kg/cm2)(201,667cm3) = 64.62T-m  
+Siendo: 
+2
+2
+'
+c
+'
+c
+r
+cm
+/
+kg
+13
+.
+29
+210
+01
+.
+2
+cm
+/
+kg
+f
+01
+.
+2
+MPa
+f
+63
+.
+0
+f
+
+
+
+
+ 
+S = bh2/6 = 100(110)2/6 = 201,667cm3  
+ 
+b) 1.33 Mu= 1.33(74.80T-m) = 99.48T-m 
+ 
+El menor valor es 64.62T-m y la cantidad de acero calculada (19.95cm2) resiste 
+Mu=74.80T-m >64.62T-m  OK! 
+ 
+USAR 1Ø3/4” @ 0.14m 
+ 
+b) As de temperatura 
+m
+/
+cm
+)h
++
+b
+(
+2
+bh
+18
+.
+0
+=
+A
+2
+temp
+s
+  
+ 
+ 
+(5.10.6-1) 
+ 
+m
+/
+cm
+02
+.
+8
+)
+110
+470
+(
+2
+)
+110
+x
+470
+(
+18
+.
+0
+A
+2
+temp
+s
+
+
+
+ (en cada cara) 
+ 
+Además: 
+m
+/
+cm
+70
+.
+12
+≤
+A
+≤
+m
+/
+cm
+33
+.
+2
+2
+temp
+s
+2
+ (5.10.8.2-2) 
+Usando Ø1/2” (1.29cm²), la separación será: 
+m
+16
+.
+0
+02
+.
+8
+29
+.
+1
+s
+
+
+ 
+ 
+smáx = 0.30m  OK!  
+ 
+ 
+ 
+(Art. 5.10.6) 
+ 
+USAR 1Ø1/2” @ 0.16 m 
+ 
+Nota.- El acero de temperatura se colocará por no contar con ningún tipo de acero, 
+perpendicular al acero de flexión, tanto en el talón como en la punta del cimiento. 
+ 
+c) Revisión del talón por corte 
+ 
+Cortante actuante en el talón para el estado límite de Resistencia I, con n= nDnRnI=1, 
+para franjas de diseño de 1.0m: 
+ 
+Vu = n[1.25 VDC + 1.35 VEV +1.75 VLS]   
+(Tabla 3.4.1-1) 
+ 
+     = 1.00[1.25(7.128T) + 1.35(29.18T) +1.75(2.71T)]  
+     = 53.05T 
+
+
+=== PAGE 291 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+291
+v
+v
+'
+c
+c
+d
+b
+f
+265
+.
+0
+V
+
+
+v
+v
+'
+c
+c
+d
+b
+f
+53
+.
+0
+V 
+Se omite el estado de Evento Extremo I, pues no gobierna el diseño. 
+El cortante resistente del concreto es:  
+ 
+Vr = Ø Vn 
+ 
+ 
+ 
+ 
+(5.7.2.1-2) 
+        Ø = 0.9 
+ 
+ 
+           
+(5.5.4.2) 
+ 
+ 
+    
+ 
+    
+Vn = Vc+Vs+ Vp 
+ 
+(5.7.3.3.-1) 
+ siendo Vn el menor de: 
+Vn = 0.25f’cbvdv + Vp  
+(5.7.3.3-2) 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+(5.7.3.3-3) 
+ 
+En este caso, como 
+m
+98
+.
+2
+)
+m
+9921
+.
+0
+(
+3
+d
+3
+m
+70
+.
+2
+v
+talón
+
+
+
+
+
+, usaremos  
+el método simplificado con ß=2.0 
+ 
+ 
+(5.7.3.4.1) 
+ 
+ 
+ 
+T
+20
+.
+76
+)
+21
+.
+99
+x
+100
+(
+210
+53
+.
+0
+Vc
+
+
+ 
+ 
+donde:  
+bv  = ancho de diseño de pantalla= 100 cm 
+de = 101.55cm 
+2
+a
+d
+efectivo
+corte
+de
+peralte
+d
+e
+v
+
+
+
+ 
+ 
+ 
+(Art. 5.7.2.8) 
+cm
+21
+.
+99
+2
+69
+.
+4
+55
+.
+101
+dv
+
+
+
+ 
+ 
+no menor que el 
+0.90de= 0.90(101.55 cm) = 91.40cm  OK! 
+mayor valor de 
+0.72h = 0.72(110 cm) = 79.20cm 
+ 
+ 
+Con Vp=0 y Vs=0   Vn = 76.20T 
+el menor valor de     Vn = 0.25 x 210 x 100 x 99.21 = 520.85T   
+ 
+ 
+  
+es:  Vn = 76.20T 
+ 
+La resistencia del concreto al corte es: 
+ 
+Vr = ØVn = 0.9(76.20T) = 68.58T > 53.05T   OK! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PAGE 292 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+292
+B=4.70m
+=44.73T/m
+
+q
+DC
+As parte inferior zapata
+EV
+d =1.01m
+flexión
+corte
+Talón
+punta
+=-0.1895T/m
+
+q
+L     =1.10m
+=34.22T/m
+
+q
+=43.68T/m
+
+q
+d) Acero en fondo de zapata 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5.24  Cargas actuantes en la punta del estribo 
+ 
+Para el diseño estructural del cimiento cargado excéntricamente se considera utilizando 
+cargas factoradas, sea el suelo rocoso o no rocoso, una distribución de esfuerzos de 
+contacto triangular o trapezoidal (Art. 10.6.5).   
+Siendo crítico el estado límite de Resistencia Ib, con Vu=104.66T y e=0.79m (ver tabla 
+de presiones actuantes en la base del estribo), calculamos las presiones sobre el terreno: 
+ 
+
+
+
+
+
+
+
+
+
+
+70
+.
+4
+79
+.
+0
+x
+6
+1
+70
+.
+4
+66
+.
+104
+B
+e
+6
+1
+B
+V
+q
+u
+u
+ 
+ 
+q1,u = 44.73T/m y q2,u = -0.1895T/m 
+ 
+Despreciando del lado conservador el peso del terreno (EV) y de la punta de zapata (DC), 
+el momento actuante en la sección crítica por flexión es: 
+ 
+m
+T
+94
+.
+24
+)
+73
+.
+44
+x
+2
+22
+.
+34
+(
+6
+10
+.
+1
+)
+q
+2
+q
+(
+6
+L
+M
+2
+1,u
+3
+,u
+2
+u
+
+
+
+
+
+
+ 
+ 
+Siendo este momento pequeño, utilizamos 11/2”@0.14m (As=1.29cm² / 0.14m = 
+9.21cm²/m), que corresponde al As mínimo: 
+ 
+recubrimiento = 7.5cm  
+ 
+ 
+ 
+(Tabla 5.10.1-1) 
+cm
+14
+.
+8
+2
+27
+.
+1
+5
+.
+7
+2
+Ø
+recub
+z
+
+
+
+
+
+  
+d= 110cm – 8.14cm = 101.86cm 
+ 
+cm
+17
+.
+2
+100
+x
+210
+x
+85
+.
+0
+)
+4200
+(
+21
+.
+9
+b
+f
+85
+.
+0
+f
+A
+a
+'
+c
+y
+s
+
+
+
+ 
+ 
+Øf=0.90 (Art. 5.5.4.2) 
+ 
+)
+2
+17
+.
+2
+86
+.
+101
+(
+21
+.
+9
+x
+4200
+x
+90
+.
+0
+)
+2
+a
+d
+(
+A
+Øf
+M
+s
+y
+u
+
+
+
+
+Tm
+94
+.
+24
+Tm
+08
+.
+35
+Mu
+
+
+ OK! 
+
+
+=== PAGE 293 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+293
+v
+v
+'
+c
+c
+d
+b
+f
+53
+.
+0
+V 
+v
+v
+'
+c
+c
+d
+b
+f
+265
+.
+0
+V
+
+
+As máximo  
+ 
+ 
+ 
+ 
+ 
+ 
+Las actuales disposiciones AASHTO LRFD eliminan este límite. 
+ 
+As mínimo  
+ 
+ 
+ 
+ 
+ 
+(Art. 5.6.3.3) 
+La cantidad de acero proporcionado debe ser capaz de resistir el menor valor de Mcr y 
+1.33Mu: 
+ 
+a) Mcr  = 1.1fr S = 1.1(29.13kg/cm2)(201,667 cm3) = 64.62T-m  
+ 
+Siendo: 
+2
+2
+'
+c
+'
+c
+r
+cm
+/
+kg
+13
+.
+29
+210
+01
+.
+2
+cm
+/
+kg
+f
+01
+.
+2
+MPa
+f
+63
+.
+0
+f
+
+
+
+
+ 
+S = bh2/6 = 100(110)2/6 = 201,667cm3  
+ 
+b) 1.33 Mu= 1.33(24.94T-m) = 33.17T-m 
+ 
+El menor valor es 33.17T-m y la cantidad de acero propuesta (9.21cm2) resiste 
+Mu=35.08T-m >33.17T-m OK! 
+ 
+USAR 1Ø1/2”@0.14 
+ 
+e) Revisión de la punta por corte 
+ 
+Cálculo de dv:  
+ 
+ 
+ 
+ 
+ 
+(Art. 5.7.2.8) 
+m
+01
+.
+1
+cm
+78
+.
+100
+2
+17
+.
+2
+86
+.
+101
+2
+a
+d
+efectivo
+corte
+de
+peralte
+d
+e
+v
+
+
+
+
+
+
+
+ 
+no menor que el 
+0.90de= 0.90(101.86cm) = 91.67cm  OK! 
+mayor valor de 
+0.72h = 0.72(110cm) = 79.20cm 
+ 
+Debiendo tomar el cortante actuante a una distancia dv de la cara de la pantalla, el 
+cortante actuante es: 
+ 
+Ton
+98
+.
+3
+)
+m
+01
+.
+1
+m
+10
+.
+1(x)
+m
+/
+T
+69
+.
+43
+m
+/
+T
+73
+.
+44
+½(
+Vu
+
+
+
+
+ 
+ 
+El cortante resistente del concreto es:  
+ 
+Vr = Ø Vn 
+ 
+ 
+ 
+ 
+(5.7.2.1-2) 
+        Ø = 0.90 
+ 
+ 
+           
+(5.5.4.2) 
+ 
+ 
+    
+ 
+    
+Vn = Vc+Vs+ Vp 
+ 
+(5.7.3.3.-1) 
+ siendo Vn el menor de: 
+Vn = 0.25f’cbvdv + Vp  
+(5.7.3.3-2) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(5.7.3.3-3) 
+ 
+En este caso, como 
+m
+03
+.
+3
+)
+m
+01
+.
+1(
+3
+d
+3
+m
+10
+.
+1
+v
+punta
+
+
+
+
+
+, usaremos  
+el método simplificado con ß=2.0 
+ 
+ 
+(5.7.3.4.1) 
+ 
+Es decir:  
+ 
+ 
+ 
+ 
+ 
+T
+40
+.
+77
+)
+78
+.
+100
+x
+100
+(
+210
+53
+.
+0
+Vc
+
+
+ 
+ 
+
+
+=== PAGE 294 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+294
+13/4"@0.13
+11/2"@0.28
+11/2"@0.28
+13/4"@0.14
+11/2"@0.16
+11/2"@0.14
+11/2"@0.16
+Con Vp=0 y Vs=0   Vn = 77.40T 
+el menor valor de     Vn = 0.25 x 210 x 100 x 100.85 = 529.46T   
+ 
+ 
+  
+es:  Vn = 77.40T 
+ 
+La resistencia del concreto al corte es: 
+ 
+Vr = ØVn = 0.90(77.40T) = 69.66T > 3.98T   OK! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 5.25  Distribución de la armadura en el estribo 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PAGE 295 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+295 
+CAPÍTULO 6: PILARES 
+ 
+6.1  REFUERZO MÁXIMO Y MÍNIMO EN MIEMBROS A COMPRESIÓN (Art. 5.7.4.2) 
+ 
+La máxima sección de armadura longitudinal pretensada y no pretensada deberá ser 
+tal que: 
+ 
+08
+.
+0
+f
+A
+f
+A
+A
+A
+y
+g
+pu
+ps
+g
+s
+
+
+  
+ 
+ 
+(5.6.4.2-1) 
+30
+.
+0
+f
+A
+f
+A
+'
+c
+g
+pe
+ps
+
+ 
+ 
+ 
+ 
+(5.6.4.2-2) 
+ 
+La mínima sección de armadura longitudinal pretensada y no pretensada deberá ser 
+tal que: 
+ 
+135
+.
+0
+f
+A
+f
+A
+f
+A
+f
+A
+'
+c
+g
+pu
+ps
+'
+c
+g
+y
+s
+
+
+ 
+ 
+ 
+(5.6.4.2-3) 
+ 
+donde: 
+ 
+Aps =   área de acero del pretensado 
+As  =   área de la armadura de tracción no pretensada 
+Ag  =   área bruta de la sección 
+fpu  =   resistencia a la tracción especificada del acero de pretensado 
+fy   =   tensión de fluencia especificada de las barras de armadura 
+f’c  =   resistencia a la compresión especificada del hormigón a 28 días 
+fpe  =   tensión de pretensado efectiva 
+ 
+El mínimo número de barras de armadura longitudinal deberá ser seis para 
+disposiciones circulares y cuatro para disposiciones rectangulares. El diámetro mínimo 
+de las barras será Ø5/8” 
+Para puentes en la Zona Sísmica 1 se puede utilizar una sección efectiva reducida si 
+la sección transversal es mayor que la requerida para resistir las cargas aplicadas. El 
+mínimo porcentaje de armadura longitudinal total (pretensada y no pretensada) del área 
+efectiva reducida será uno por ciento o el valor obtenido de la Ecuación 3, cualquiera 
+sea el valor que resulte mayor. 
+ 
+6.2  EVALUACIÓN APROXIMADA DE LOS EFECTOS DE ESBELTEZ (Art. 5.6.4.3) 
+ 
+Para los elementos desplazables, los efectos de la esbeltez se pueden despreciar 
+si:  
+ 
+22
+r
+KLu 
+ 
+Para los elementos que no se desplazan, los efectos de la esbeltez se pueden 
+despreciar si:  
+2
+1
+u
+M
+M
+12
+34
+r
+KL
+
+
+ 
+
+
+=== PAGE 296 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+296 
+siendo M1 y M2 el menor y mayor momento de extremo respectivamente, y el término 
+(M1/M2) positivo para flexión de curvatura única. 
+ 
+Para el diseño de elementos comprimidos no pretensados con Klu /r<100, se 
+puede utilizar el siguiente procedimiento aproximado: 
+ 
+- 
+El diseño se basa en una carga axial mayorada Pu, determinada mediante análisis 
+elástico y un momento mayorado amplificado Mc, como se especifica en el Art. 
+4.5.3.2.2b. 
+- 
+La longitud sin apoyo lateral Lu de un elemento comprimido se toma como la 
+distancia libre entre elementos capaces de proveer apoyo lateral a los elementos 
+comprimidos. Si hay acartelamientos, la longitud sin apoyo lateral se toma hasta el 
+extremo de cualquier acartelamiento en el plano considerado. 
+- 
+El radio de giro r se calcula para la sección bruta del hormigón. 
+- 
+Para los elementos sin desplazamiento, a menos que mediante un análisis se 
+demuestre que es posible utilizar un valor menor, K = 1.0. 
+- 
+Para los elementos que se desplazan, K se determina considerando debidamente 
+los efectos de la fisuración y las armaduras sobre la rigidez relativa, y nunca se 
+tomará menor que 1.0. 
+ 
+En ausencia de cálculos más precisos, el valor EI para determinar Pe se toma como 
+el valor mayor entre: 
+ 
+d
+s
+s
+g
+c
+1
+I
+E
+5
+I
+E
+EI
+
+
+
+
+ 
+ 
+(5.6.4.3-1) 
+ 
+d
+g
+c
+1
+5
+.
+2
+I
+E
+EI
+
+
+
+ 
+ 
+ 
+(5.6.4.3-2) 
+ 
+donde: 
+ 
+Ec =  módulo de elasticidad del hormigón 
+Ig =  
+momento de inercia de la sección bruta de hormigón respecto del eje 
+baricéntrico 
+Es =  módulo de elasticidad del acero longitudinal 
+Is =  
+momento de inercia del acero longitudinal respecto del eje baricéntrico 
+d =  relación entre los máximos momentos debidos a la carga permanente mayorados 
+y el máximo momento debido a la carga total mayorado; siempre positivo. 
+ 
+6.3  RESISTENCIA AXIAL  
+ 
+ 
+ 
+ 
+(Art. 5.6.4.4) 
+La resistencia axial mayorada de los elementos comprimidos de hormigón armado 
+simétricos respecto de ambos ejes principales se deberá tomar como: 
+ 
+Pr = Ø Pn 
+ 
+ 
+(5.6.4.4-1) 
+ 
+- 
+Para elementos con armadura en espiral: 
+ 
+
+)
+E
+f(
+A
+A
+f
+)
+A
+A
+A
+(
+k
+85
+.
+0
+P
+cu
+p
+pe
+ps
+st
+y
+ps
+st
+g
+c
+n
+
+
+
+
+
+
+
+ 
+(5.6.4.4-2) 
+
+
+=== PAGE 297 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+297 
+- 
+Para elementos zunchados: 
+ 
+
+)
+E
+f(
+A
+A
+f
+)
+A
+A
+A
+(
+f
+k
+80
+.
+0
+P
+cu
+p
+pe
+ps
+st
+y
+ps
+st
+g
+'
+c
+c
+n
+
+
+
+
+
+
+
+ 
+(5.6.4.4-3) 
+ 
+El valor de kc es 0.85 siempre que f’c 700kg/cm². Para valores mayores disminuir 
+kc en razón de 0.02 por cada 70kg/cm² de exceso, excepto que kc  0.75  
+ 
+donde: 
+Pr = resistencia axial mayorada, con o sin flexión 
+Pn = resistencia axial nominal, con o sin flexión 
+f’c = resistencia especificada del hormigón a 28 días 
+Ag = área bruta de la sección 
+Aps= área del acero de presfuerzo 
+Ast = área total de la armadura longitudinal 
+fpe = esfuerzo efectivo del acero de presfuerzo después de las pérdidas  
+fy  = tensión de fluencia especificada de la armadura 
+cu = deformación en la falla del concreto comprimido  
+Ep = módulo de elasticidad de los tendones de presfuerzo  
+Ø  = factor de resistencia (Art. 5.5.4.2) 
+ 
+6.4  FLEXIÓN BIAXIAL  
+ 
+ 
+ 
+ 
+(Art. 5.6.4.5) 
+ 
+En vez de realizar un análisis en base a condiciones de equilibrio y compatibilidad de 
+deformaciones para flexión biaxial, los elementos no circulares solicitados a flexión 
+biaxial y compresión se pueden dimensionar utilizando las siguientes expresiones 
+aproximadas: 
+ 
+- 
+Si la carga axial mayorada es mayor o igual que 0.10 Ø f’cAg : 
+ 
+o
+ry
+rx
+rsy
+P
+Ø
+1
+P
+1
+P
+1
+P
+1
+
+
+
+  
+ 
+ 
+ 
+(5.6.4.5-1) 
+ 
+siendo: 
+ 
+)
+E
+f(
+A
+f
+A
+)
+A
+A
+A
+(
+k
+P
+cu
+p
+pe
+ps
+y
+st
+ps
+st
+g
+c
+o
+
+
+
+
+
+
+
+  
+(5.6.4.5-2) 
+ 
+- 
+Si la carga axial mayorada es menor que 0.10 Ø f’cAg : 
+ 
+0
+.
+1
+M
+M
+M
+M
+ry
+uy
+rx
+ux
+
+
+ 
+ 
+ 
+(5.6.4.5-3) 
+donde: 
+Ø   =  factor de resistencia para elementos solicitados a compresión axial 
+Prxy =  resistencia axial mayorada en flexión biaxial 
+Prx  =  resistencia axial mayorada determinada sobre la base de que la excentricidad ey 
+es la única presente 
+Pry  =  resistencia axial mayorada determinada sobre la base de que la excentricidad ex 
+es la única presente 
+Pu  =  fuerza axial mayorada aplicada 
+Mux =  momento mayorado aplicado respecto del eje X  
+Muy =  momento mayorado aplicado respecto del eje Y 
+kc  =  relación entre el esfuerzo máximo en compresión del concreto y el de diseño 
+
+
+=== PAGE 298 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+298 
+ex  =  excentricidad de la fuerza axial mayorada aplicada en la dirección X, es decir = 
+Muy / Pu 
+ey  =  excentricidad de la fuerza axial mayorada aplicada en la dirección Y, es decir = 
+Mux / Pu 
+ 
+La resistencia axial mayorada Prx y Pry no se deberá tomar mayor que el producto 
+entre el factor de resistencia Ø y la máxima resistencia nominal a la compresión dada 
+por las Ecuaciones 5.6.4.4-2 ó 5.6.4.4-3, según corresponda. 
+ 
+6.5  ESPIRALES Y ZUNCHOS  
+ 
+ 
+ 
+ 
+(Art. 5.6.4.6) 
+ 
+El área de acero de los espirales y zunchos en puentes ubicados en Zonas Sísmicas 
+2, 3 ó 4 deberá satisfacer los requisitos especificados en el Art. 5.11. 
+Si el área de armadura en espiral y zunchos no está determinada por: requisitos de 
+diseño sismorresistente, corte o torsión según Art. 5.7, ni requisitos mínimos según 
+Art. 5.10.4, la relación entre la armadura en espiral y el volumen total del núcleo de 
+hormigón, medido entre las partes exteriores de los espirales, deberá satisfacer: 
+ 
+yh
+'
+c
+c
+g
+c
+sp
+s
+f
+f
+)1
+A
+A
+(
+45
+.
+0
+s
+d
+A
+4
+
+
+
+
+  
+(5.6.4.6-1) 
+donde: 
+Asp = área de la sección transversal de la espiral o zuncho 
+dc =  diámetro del núcleo de la columna medido hacia el diámetro exterior de la espiral 
+o zuncho 
+s   = paso de la espiral o espaciamiento vertical del zuncho 
+Ag = área bruta de la sección de hormigón 
+Ac = área del núcleo medida hasta el diámetro exterior del espiral 
+f’c = resistencia especificada del hormigón a 28 días 
+fyh  = tensión de fluencia especificada de la armadura espiral 
+ 
+6.6  ARMADURA TRANSVERSAL PARA ELEMENTOS SOMETIDOS A COMPRESIÓN  
+     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(Art. 5.10.4) 
+La armadura transversal de los elementos comprimidos puede consistir en zunchos 
+o en estribos cerrados: 
+ 
+Zunchos  
+ 
+ 
+ 
+ 
+ 
+ 
+(Art. 5.10.4.2) 
+Para elementos que no sean pilotes pueden ser de barras o de alambre liso o 
+conformado de un diámetro mínimo de 9.5 mm. La separación libre entre las barras del 
+zuncho no deberá ser menor que 25 mm ó 1.33 veces el tamaño máximo del agregado. 
+La separación entre centros no deberá ser mayor que 6 veces el diámetro de las 
+barras longitudinales ó 150 mm.  
+El anclaje de las armaduras en forma de zuncho se provee mediante 1.5 vueltas 
+adicionales de barra o alambre en cada uno de los extremos del zuncho. Para las Zonas 
+Sísmicas 2, 3 y 4 la prolongación de la armadura transversal hacia los elementos con 
+que se conecta deberá satisfacer los requisitos del Art. 5.11.4.3. 
+Estribos cerrados    
+ 
+ 
+ 
+ 
+(Art. 5.10.4.3) 
+Estarán constituidos por: 
+ 
+-  Barras Ø3/8” para Barras Ø1-1/4” o menores, 
+-  Barras Ø1/2” para Barras Ø1-3/8” o mayores, y 
+-  Barras Ø1/2” para paquetes de barras. 
+
+
+=== PAGE 299 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+299 
+La separación de los estribos cerrados no deberá ser mayor que la menor 
+dimensión del elemento comprimido ó 30 cm para barras de Ø1-1/8” o menores. Si 
+hay dos o más barras mayores que una barra Ø1-1/4” dispuestas de modo que forman 
+un paquete, la separación no deberá ser mayor que la mitad de la menor dimensión del 
+elemento ó 15 cm.  
+En lugar de barras se puede utilizar alambre conformado o malla de alambre soldado 
+de área equivalente. 
+Cada barra longitudinal de esquina tendrá un apoyo lateral provisto por la esquina 
+de un estribo con un ángulo interno no mayor de 135°. En columnas no diseñadas por 
+rotulación plástica ninguna barra deberá estar a una distancia mayor que 61 cm de una 
+de estas barras con apoyo lateral. Estribos que se cruzan con un gancho de 135° en 
+un extremo y un gancho de 90° en el otro, deben estar alternados de modo que los 
+ganchos de 90° no queden adyacentes tanto vertical como horizontalmente. Si el 
+diseño de la columna se basa en la capacidad de rotulación plástica, ninguna barra 
+longitudinal estará a una distancia mayor que 15 cm de una de estas barras con apoyo 
+lateral.  
+La distancia vertical entre el estribo cerrado inferior y la zapata u otro apoyo y la 
+distancia vertical entre el estribo cerrado superior y la armadura horizontal más baja del 
+elemento soportado no deberán ser mayores que la mitad de la separación entre 
+estribos. 
+ 
+6.7  AMPLIFICACIÓN DE MOMENTOS VIGAS – COLUMNA (Art. 4.5.3.2.2b) 
+ 
+Los momentos o tensiones mayorados se pueden incrementar para que reflejen los 
+efectos de las deformaciones de la siguiente manera: 
+ 
+s
+2
+s
+b
+2
+b
+c
+M
+M
+M
+
+
+
+
+  
+ 
+(4.5.3.2.2b-1) 
+ 
+s
+2
+s
+b
+2
+b
+c
+f
+f
+f
+
+
+
+
+ 
+ 
+ 
+(4.5.3.2.2b-2) 
+ 
+siendo: 
+0
+.
+1
+P
+Ø
+P
+1
+C
+e
+K
+u
+m
+b
+
+
+
+
+  
+ 
+(4.5.3.2.2b-3) 
+e
+K
+u
+s
+P
+Ø
+P
+1
+1
+=
+
+
+
+-
+ 
+ 
+ 
+(4.5.3.2.2b-4) 
+donde: 
+Pu = carga axial mayorada 
+Pe = carga de pandeo de Euler 
+ØK = factor de reducción de rigidez; 0.75 para elementos de concreto y 1.0 para 
+elementos de acero, tubos de acero rellenos de concreto y aluminio 
+M2b= momento en el elemento comprimido debido a las cargas gravitatorias mayoradas 
+que no provoca desplazamiento lateral apreciable calculado mediante un análisis 
+de pórtico elástico convencional de primer orden, siempre positivo 
+f2b = tensión correspondiente a M2b 
+M2s= momento en un elemento comprimido debido a cargas laterales o gravitatorias 
+mayoradas que provocan un desplazamiento lateral, , mayor que Lu /1500,  
+calculado mediante un análisis de pórtico elástico convencional de primer orden, 
+siempre positivo 
+f2s = tensión correspondiente a M2s 
+
+
+=== PAGE 300 ===
+ 
+PUENTES                                                              MSc. Ing. Arturo Rodríguez Serquén 
+300 
+Para columnas compuestas de acero/hormigón la carga de pandeo de Euler, Pe , se 
+deberá determinar como se especifica en Art. 6.9.5.1. Para todos los demás casos Pe  
+se deberá tomar como: 
+2
+u
+2
+e
+)
+KL
+(
+EI
+P
+
+
+  
+ 
+(4.5.3.2.2b-5) 
+ 
+donde: 
+Lu = longitud no apoyada de un elemento comprimido 
+K  = factor de longitud efectiva como se especifica en Art. 4.6.2.5 
+E  = módulo de elasticidad 
+I   = momento de inercia respecto del eje considerado 
+ 
+Para los elementos comprimidos de hormigón también se deberá aplicar los 
+requisitos del Art. 5.6.4.3. 
+Para los elementos arriostrados contra el desplazamiento lateral, s se deberá 
+tomar como 1.0 a menos que un análisis indique que se puede utilizar un valor menor. 
+Para los elementos no arriostrados contra el desplazamiento lateral, b se deberá 
+determinar como para un elemento arriostrado y s como para un elemento no 
+arriostrado. 
+Para los elementos arriostrados contra el desplazamiento lateral y sin cargas 
+transversales entre apoyos, Cm se puede tomar como: 
+ 
+4
+.
+0
+M
+M
+4
+.
+0
+6
+.
+0
+C
+b
+2
+b
+1
+m
+
+
+
+ 
+ 
+(4.5.3.2.2b-6) 
+donde: 
+M1b = menor momento de extremo 
+M2b = mayor momento de extremo 
+ 
+La relación M1b / M2b se considera positiva si el componente se flexiona con una 
+única curvatura y negativo si se flexiona en doble curvatura. 
+Para todos los demás casos Cm se deberá tomar como 1.0. 
+En las estructuras que no están arriostradas contra el desplazamiento lateral, los 
+elementos flexionados y unidades de la fundación que forman pórticos con el elemento 
+comprimido se deberán diseñar para la sumatoria de los momentos de extremo del 
+elemento comprimido en la unión. 
+Si los elementos comprimidos están sujetos a flexión respecto de ambos ejes 
+principales, el momento respecto de cada eje se deberá amplificar aplicando , 
+determinado a partir de las correspondientes condiciones de restricción respecto de 
+dicho eje. 
+Si un grupo de elementos comprimidos en un nivel comprende un caballete, o si 
+están conectados de manera integral a la misma superestructura, y resisten el 
+desplazamiento lateral de la estructura colectivamente, el valor de s se deberá calcular 
+para el grupo de elementos con Pu y Pe igual a las sumatorias para todas las 
+columnas del grupo. 
+ 
+ 
+6.8  FACTOR DE LONGITUD EFECTIVA, K   
+ 
+(Art. 4.6.2.5) 
+ 
+Las longitudes físicas de las columnas se deberán multiplicar por un factor de 
+longitud efectiva, K, para tomar en cuenta condiciones de borde rotacionales y 
+traslacionales diferentes a las correspondientes a extremos articulados. 
+
+

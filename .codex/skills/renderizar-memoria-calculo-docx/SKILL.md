@@ -28,7 +28,7 @@ Exigir coincidencia exacta entre las imágenes del Markdown y los dibujos del cu
 
 4. Renderizar el DOCX a PNG con el skill `documents` y `render_docx.py --emit_pdf`. Localizar el script si cambió la ruta versionada. Si LibreOffice no está disponible, usar Word en segundo plano para exportar a PDF y convertir todas las páginas a PNG; declarar el impedimento si tampoco está disponible.
 5. Inspeccionar todas las páginas al 100 %. Verificar imágenes nítidas y sin recortes, ecuaciones completas, tablas sin desborde, títulos junto a su contenido y encabezados/pies dentro de los márgenes.
-6. Corregir y repetir las verificaciones estructural y visual hasta eliminar los defectos. Entregar el DOCX además del Markdown cuando el usuario haya solicitado ambos; si solicitó únicamente el DOCX, entregar únicamente el DOCX salvo que pida los archivos de QA.
+6. Corregir y repetir las verificaciones estructural y visual hasta eliminar los defectos. **IMPORTANTE: Borrar silenciosamente el PDF intermedio y las imágenes PNG generadas para inspección.** Entregar el DOCX además del Markdown cuando el usuario haya solicitado ambos; si solicitó únicamente el DOCX, entregar únicamente el DOCX (sin presentar ni mencionar los archivos temporales de QA).
 
 ## Reglas fijas
 

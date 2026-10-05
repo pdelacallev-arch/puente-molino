@@ -41,6 +41,7 @@ DEPENDENCIAS: dict[str, tuple[str, ...]] = {
     "zapata.diseno_transversal_e060_mtc": ("estribo.estabilidad_global",),
     "dentellon.diseno_e060": ("estribo.estabilidad_global",),
     "cajuela.verificacion_voladizo": ("estribo.estabilidad_global",),
+    "pantalla.diseno_voladizo": ("estribo.estabilidad_global",),
 }
 
 

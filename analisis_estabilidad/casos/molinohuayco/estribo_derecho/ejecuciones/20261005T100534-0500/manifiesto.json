@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "ejecucion_id": "20261005T100534-0500",
+  "caso": "molinohuayco/estribo_derecho",
+  "revision": "R01",
+  "configuracion_sha256": "95d7f0e617795744fbe39e93491b3ab830bc28ffa39959d9f90d690947d82446",
+  "overrides_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "codigo_sha256": "62df81ad1708c5ba3556e1e59f9a4d79298f1f977a634fc7ccd235d0f4ad5f31",
+  "modulos": {
+    "estribo.estabilidad_global": {
+      "estado": "OK",
+      "entrada": "elementos/estribo/estabilidad_global/entrada.json",
+      "resultado": "elementos/estribo/estabilidad_global/resultado.json",
+      "reporte": "elementos/estribo/estabilidad_global/reporte.md",
+      "resultado_sha256": "97e2d654eaa78c01d80b9ae4da5838cd33acaa62dd4ae14dcd3a5642ac740a4b"
+    },
+    "pantalla.diseno_voladizo": {
+      "estado": "OK",
+      "entrada": "elementos/pantalla/diseno_voladizo/entrada.json",
+      "resultado": "elementos/pantalla/diseno_voladizo/resultado.json",
+      "reporte": "elementos/pantalla/diseno_voladizo/reporte.md",
+      "resultado_sha256": "9e3609a43066e4ee842a7c9da642d04cbbf37dc37ebf24da02f8ffe8b745f01e"
+    }
+  }
+}
